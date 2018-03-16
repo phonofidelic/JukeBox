@@ -1,4 +1,5 @@
 .DS_Strore
+.log
 notes.md
 sandbox
 node_modules
