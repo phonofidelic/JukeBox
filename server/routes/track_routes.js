@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
 	},
 	filename: (req, file, cb) => {
 		// Set file system name in request object
-		req.fsName = `${uuidv4()}${path.extname(file.originalname)}`;
-		cb(null, req.fsName);
+		newName = `${uuidv4()}${path.extname(file.originalname)}`;
+		cb(null, newName);
 	}
 });
 // Ctreate multer instance that will be used to upload/save the file
@@ -36,7 +36,7 @@ module.exports = (app, db) => {
 	app.get('/tracks/:trackId', (req, res, next) => {
 		const trackId = req.params.trackId;
 		Track.findById(trackId)
-		.select('name fsName')
+		.select('name file')
 		.exec((err, track) => {
 			if (err) return next(err);
 			res.json(track);
@@ -49,7 +49,6 @@ module.exports = (app, db) => {
 		// TODO: validate data before creating new track
 		const track = new Track({
 			name: req.body.trackName,
-			fsName: req.fsName,
 			file: {
 				originalname: req.file.originalname,
 				path: req.file.path,

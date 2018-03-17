@@ -5,7 +5,6 @@ const TrackModel = mongoose.model(
 	'Track', 
 	Schema({
 		name: String,
-		fsName: { type: String, required: true },
 		file: {
 			path: { type: String, required: true },
 			originalname: String,
