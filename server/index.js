@@ -30,8 +30,7 @@ app.use((req, res, next) => {
 });
 
 // Serve static client files
-// app.use(express.static('../client/build'));
-app.use(express.static('../sandbox/static_form'));
+app.use(express.static('../client/build'));
 
 routes(app, db);
 
