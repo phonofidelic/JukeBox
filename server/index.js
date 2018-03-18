@@ -5,7 +5,7 @@ const express = require('express'),
 			mongoose = require('mongoose'),
 			multer = require('multer'),
 			uuidv4 = require('uuid/v4'),
-			routes = require('./routes'),
+			routes = require('./app/routes'),
 			config = require('./config');
 
 const PORT = config.port;
