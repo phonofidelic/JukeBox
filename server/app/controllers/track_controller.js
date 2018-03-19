@@ -54,7 +54,10 @@ const postTrack = (req, res, next) => {
 		}
 	});
 	track.save((err, savedTrack) => {
-		if (err) return next(err);
+		if (err) {
+			console.error('postTrack error:', err);
+			return next(err);
+		};
 		console.log('POST /tracks response:\n', savedTrack);
 		res.json({message: 'Track saved', data: savedTrack });
 	});

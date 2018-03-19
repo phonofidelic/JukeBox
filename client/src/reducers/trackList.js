@@ -1,7 +1,8 @@
 import {
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
-	FETCH_TRACKS_FAILURE
+	FETCH_TRACKS_FAILURE,
+	UPLOAD_SUCCESS
 } from '../actiontypes';
 
 const INITIAL_STATE = {};
@@ -25,6 +26,12 @@ const trackList = (state = INITIAL_STATE, action) => {
 				...state,
 				fetchingTracks: false,
 				error: action.error
+			}
+
+		case UPLOAD_SUCCESS:
+			return {
+				...state,
+				tracks: [...state.tracks, action.uploadedTrack]
 			}
 
 		default:
