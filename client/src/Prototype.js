@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 const getTracks = () => {
-	axios.get('/tracks')
+	return axios.get('/tracks')
 	.then(response => {
 		console.log('getTracks, response:', response.data);
-		return response.data;
+		return response.data.data;
 	})
 	.catch(err => console.error('getTracks error:', err));
 }
@@ -13,14 +13,14 @@ const getTracks = () => {
 class Prototype extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {...props, tracks: []}
+		// axios.get('/tracks')
+		// .then(response => {
+		// 	console.log('getTracks, response:', response.data);
+		// 	this.setState({tracks: response.data.data});
+		// })
+		// .catch(err => console.error('getTracks error:', err));
 	}
 
-	componentDidMount() {
-		// console.log('state:', this.state)
-		const tracks = getTracks();
-		this.setState(...this.state, tracks: tracks)
-	}
 
 	render() {
 		console.log('state:', this.state)

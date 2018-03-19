@@ -34,4 +34,8 @@ app.use(express.static('../client/build'));
 
 routes(app, db);
 
+app.use('/*', (req, res) => {
+	res.status(404).json({message: 'Recource not found'});
+})
+
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

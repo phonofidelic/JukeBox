@@ -1,0 +1,10 @@
+export const UPLOAD_TRACK = 'upload_track',
+						 UPLOAD_SUCCESS = 'upload_success',
+						 UPLOAD_FAILURE = 'upload_failure',
+						 FETCH_TRACKS = 'fetch_tracks',
+						 FETCH_TRACKS_SUCCESS = 'fetch_tracks_success',
+						 FETCH_TRACKS_FAILURE = 'fetch_tracks_failure',
+						 SELECT_TRACK = 'select_track',
+						 PLAY_TRACK = 'play_track',
+						 PAUSE_TRACK = 'pause_track',
+						 STOP_TRACK = 'stop_track';
