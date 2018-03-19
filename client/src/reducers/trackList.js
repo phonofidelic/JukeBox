@@ -2,10 +2,15 @@ import {
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
-	UPLOAD_SUCCESS
+	UPLOAD_SUCCESS,
+	SELECT_TRACK
 } from '../actiontypes';
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+	tracks: [],
+	selectedTrack: null
+};
+
 const trackList = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case FETCH_TRACKS:
@@ -32,6 +37,12 @@ const trackList = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				tracks: [...state.tracks, action.uploadedTrack]
+			}
+
+		case SELECT_TRACK:
+			return {
+				...state,
+				selectedTrack: action.selectedTrack
 			}
 
 		default:

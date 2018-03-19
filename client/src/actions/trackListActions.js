@@ -1,7 +1,8 @@
 import {
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
-	FETCH_TRACKS_FAILURE
+	FETCH_TRACKS_FAILURE,
+	SELECT_TRACK
 } from '../actiontypes';
 import axios from 'axios';
 import config from '../config';
@@ -29,6 +30,15 @@ export const getTracks = () => {
 				type: FETCH_TRACKS_FAILURE,
 				error: {message: 'Could not fetch tracks'}
 			});
+		});
+	}
+}
+
+export const selectTrack = track => {
+	return dispatch => {
+		dispatch({
+			type: SELECT_TRACK,
+			selectedTrack: track
 		});
 	}
 }
