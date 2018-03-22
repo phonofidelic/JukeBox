@@ -1,3 +1,5 @@
-import * as trackListActions from './trackListActions';
+import * as trackListActions from './trackList';
+import * as playerActions from './player';
 
-export default {trackListActions};
+export { trackListActions };
+export { playerActions }

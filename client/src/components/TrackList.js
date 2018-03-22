@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
+import TrackListItem from './TrackListItem';
 
 class TrackList extends Component {
 	render() {
-		const { tracks, handleSelectTrack, selectedTrack } = this.props;
+		const { 
+			tracks,
+			selectedTrack,
+			handleSelectTrack,
+			handleStartNewQue,
+			handleAddToQue
+		} = this.props;
 
-		const selected = {
-			background: '#ccc'
-		}
 		return (
 			<ul>
-				{tracks ? tracks.map((track, i) => (
-					<li 
-						key={i} 
-						onClick={() => handleSelectTrack(track)}
-						style={
-							selectedTrack && track._id === selectedTrack._id ? 
-							selected 
-							: 
-							{}
-						}
-					>
-						{track.name}
-					</li>
-				)) : null}
+				{tracks && tracks.map(track => (
+					<TrackListItem 
+						key={track._id} 
+						track={track} 
+						selectedTrack={selectedTrack}
+						handleSelectTrack={handleSelectTrack}
+						handleStartNewQue={handleStartNewQue}
+						handleAddToQue={handleAddToQue}
+					/>
+				))}
 			</ul>
-		)
+		);
 	}
 }
 

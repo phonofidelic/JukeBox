@@ -1,36 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/trackListActions';
+import { trackListActions, playerActions } from '../actions';
 import TrackList from '../components/TrackList';
+
+const actions = { ...trackListActions, ...playerActions };
 
 class TrackListContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.props.getTracks();
+
 	}
 
 	handleSelectTrack(track) {
 		this.props.selectTrack(track);
 	}
 
+	handleStartNewQue(track) {
+		this.props.startNewQue(track);
+	}
+
+	handleAddToQue(track) {
+		this.props.addToQue(track);
+	}
+
 	render() {
-		const { tracks, error, selectedTrack } = this.props.trackList;
+		// const { tracks, error, selectedTrack } = this.props.trackList;
+		console.log(this.props)
+		const { trackList } = this.props;
 		return(
-			!error ? 
 			<TrackList 
-				tracks={tracks} 
-				handleSelectTrack={this.handleSelectTrack.bind(this)}
-				selectedTrack={selectedTrack} 
+				tracks={trackList.tracks}
+				selectedTrack={trackList.selectedTrack}
+				handleSelectTrack={ this.handleSelectTrack.bind(this) }
+				handleStartNewQue={ this.handleStartNewQue.bind(this) }
+				handleAddToQue={ this.handleAddToQue.bind(this) }
 			/> 
-			: 
-			<div>There was an error: {error.message}</div>
 		)
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		trackList: state.trackList
+		trackList: state.trackList,
+		// trackData: state.trackData
 	}
 }
 

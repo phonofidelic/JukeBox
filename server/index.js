@@ -29,13 +29,31 @@ app.use((req, res, next) => {
   next();
 });
 
+// TODO: this is not secure. Create /play rout to 
+// handle streaming of uploaded resources:
+// app.get('/play/:trackId', (req, res) => {
+// 	console.log('params:', req.params)
+// 	// const trackId = '6bcd87a2-dd97-4a0e-bc2e-1f29a9d4160c';
+// 	const file = `${__dirname}/uploads/${req.params.trackId}`;
+// 	fs.exists(file, exists => {
+// 		if (exists) {
+// 			const readstream = fs.createReadStream(file);
+// 			readstream.pipe(res);
+// 		} else {
+// 			res.send('404 not found');
+// 			res.end();
+// 		}
+// 	});
+// });
+app.use('/uploads', express.static('./uploads'));
+
 // Serve static client files
 app.use(express.static('../client/build'));
 
 routes(app, db);
 
-app.use('/*', (req, res) => {
-	res.status(404).json({message: 'Recource not found'});
-})
+// app.use('/*', (req, res) => {
+// 	res.status(404).json({message: 'Recource not found'});
+// })
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

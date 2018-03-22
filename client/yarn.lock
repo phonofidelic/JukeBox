@@ -3162,6 +3162,10 @@ hosted-git-info@^2.1.4:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
 
+howler@2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/howler/-/howler-2.0.8.tgz#7eb9128039590fd5f62462ed40882110940a8756"
+
 howler@^2.0.9:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/howler/-/howler-2.0.9.tgz#74f08191f857e26dc8a5dc6cba195bd1cdd97e5d"
@@ -5349,7 +5353,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -5508,6 +5512,13 @@ react-dom@^16.2.0:
 react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
+
+react-howler@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/react-howler/-/react-howler-3.7.1.tgz#972a77c2e33d9168c185780399aefb874dc18ee9"
+  dependencies:
+    howler "2.0.8"
+    prop-types "^15.5.6"
 
 react-redux@^5.0.7:
   version "5.0.7"

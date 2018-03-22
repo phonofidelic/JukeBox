@@ -2,7 +2,9 @@ import {
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
-	SELECT_TRACK
+	SELECT_TRACK,
+	START_NEW_QUE,
+	ADD_TRACK_TO_QUE
 } from '../actiontypes';
 import axios from 'axios';
 import config from '../config';
@@ -28,7 +30,7 @@ export const getTracks = () => {
 			console.error(err);
 			dispatch({
 				type: FETCH_TRACKS_FAILURE,
-				error: {message: 'Could not fetch tracks'}
+				error: {message: 'Could not fetch tracks'} // TODO: get message from server response
 			});
 		});
 	}
@@ -41,4 +43,24 @@ export const selectTrack = track => {
 			selectedTrack: track
 		});
 	}
+}
+
+export const startNewQue = track => {
+	console.log('startNewQue, track:', track.file.path)
+	return dispatch => {
+		dispatch({
+			type: START_NEW_QUE,
+			trackUrl: track.file.path
+		});
+	};
+}
+
+
+export const addToQue = track => {
+	return dispatch => {
+		dispatch({
+			type: ADD_TRACK_TO_QUE,
+			trackUrl: track.file.path
+		});
+	};
 }

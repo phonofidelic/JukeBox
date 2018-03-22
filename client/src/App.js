@@ -3,6 +3,7 @@ import './App.css';
 import Prototype from './Prototype';
 import UploaderContainer from './containers/UploaderContainer';
 import TrackListContainer from './containers/TrackListContainer';
+import PLayerContainer from './containers/PlayerContainer';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
         {/*<Prototype />*/}
         <UploaderContainer />
         <TrackListContainer />
+        <PLayerContainer />
       </div>
     );
   }
