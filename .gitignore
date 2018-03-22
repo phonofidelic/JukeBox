@@ -5,4 +5,4 @@ sandbox
 mock_assets
 node_modules
 dist
-**/notes.txt
+**/notes.*
