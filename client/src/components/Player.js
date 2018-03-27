@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 
 class Player extends Component {
-	getHowler() {
-		this.player.howler
-	}
-
-	componentDidMount() {
-		console.log('player:', this)
-	}
-
 	renderControlls() {
 		const {
 			queue,
@@ -43,7 +35,7 @@ class Player extends Component {
 	}
 
 	render() {
-		const { queue, playing, tracks, selectedTrack } = this.props;
+		const { queue } = this.props;
 		return (
 			<div>
 				{queue.length > 0 && (

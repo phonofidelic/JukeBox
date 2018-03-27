@@ -7,7 +7,7 @@ import {
 	ADD_TRACK_TO_QUEUE
 } from '../actiontypes';
 import axios from 'axios';
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 import config from '../config';
 
 const TRACKS_URL = config.TRACKS_URL

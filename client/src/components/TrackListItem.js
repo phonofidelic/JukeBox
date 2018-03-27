@@ -5,8 +5,6 @@ class TrackListItem extends Component {
 		// TODO: onClick = addToQue (?)
 		const { 
 			track,
-			selectedTrack,
-			playing,
 			currentTrack,
 			handleStartNewQueue,
 			handleAddToQueue
@@ -24,8 +22,7 @@ class TrackListItem extends Component {
 		const { 
 			track,
 			handleSelectTrack,
-			selectedTrack,
-			playing
+			selectedTrack
 		} = this.props;
 
 		const selected = {
