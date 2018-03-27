@@ -55,7 +55,7 @@ const player = (state = INITIAL_STATE, action) => {
 		return {
 			...state,
 			playing: true,
-			queueIndex: state.queueIndex += 1
+			queueIndex: state.queueIndex + 1
 		}
 
 		case PLAY_PREV:

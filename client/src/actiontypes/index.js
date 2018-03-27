@@ -14,4 +14,4 @@ export const // uploaderActionTypes
 						 START_NEW_QUEUE = 'start_new_queue',
 						 ADD_TRACK_TO_QUEUE = 'add_track_to_queue',
 						 PLAY_NEXT = 'play_next',
-						 PLAY_PREV = 'play_next';
+						 PLAY_PREV = 'play_prev';

@@ -24,8 +24,6 @@ class TrackListContainer extends Component {
 	}
 
 	render() {
-		// const { tracks, error, selectedTrack } = this.props.trackList;
-		console.log(this.props)
 		const { trackList, player } = this.props;
 		return(
 			<TrackList 
