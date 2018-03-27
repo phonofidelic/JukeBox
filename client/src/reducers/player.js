@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 	howl: null,
 	playing: false,
 	queueIndex: null,
-	track: null
+	currentTrack: null
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -22,7 +22,7 @@ const player = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				playing: true,
-				track: action.track,
+				currentTrack: action.track,
 				queue: [action.track],
 				queueIndex: 0
 			}
@@ -55,14 +55,16 @@ const player = (state = INITIAL_STATE, action) => {
 		return {
 			...state,
 			playing: true,
-			queueIndex: state.queueIndex + 1
+			queueIndex: state.queueIndex + 1,
+			currentTrack: state.queue[state.queueIndex + 1]
 		}
 
 		case PLAY_PREV:
 		return {
 			...state,
 			playing: true,
-			queueIndex: state.queueIndex - 1
+			queueIndex: state.queueIndex - 1,
+			currentTrack: state.queue[state.queueIndex - 1]
 		}
 
 		default: return state;

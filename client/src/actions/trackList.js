@@ -46,14 +46,16 @@ export const selectTrack = track => {
 	}
 }
 
+// TODO: startNewQueue and addToQueue are player actions.
+// 			 Refactor to make this less confusing?
 export const startNewQueue = (track, currentTrack) => {
 	// Unload and destroy the Howl object. This will immediately stop 
 	// all sounds attached to this sound and remove it from the cache.
-	if (currentTrack) { currentTrack.unload() };
+	console.log('startNewQueue, currentTrack', currentTrack);
+	if (currentTrack) { currentTrack.howl.unload() };
 	return dispatch => {
 		dispatch({
 			type: START_NEW_QUEUE,
-			trackUrl: track.file.path, // REMOVE
 			track: { 
 				...track, 
 				howl: new Howl({ src: [track.file.path], autoplay: true })
@@ -67,7 +69,6 @@ export const addToQueue = track => {
 	return dispatch => {
 		dispatch({
 			type: ADD_TRACK_TO_QUEUE,
-			trackUrl: track.file.path, // REMOVE
 			track:{ 
 				...track,
 				howl: new Howl({src: [track.file.path]}) 

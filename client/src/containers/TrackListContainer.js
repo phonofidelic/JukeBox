@@ -30,7 +30,7 @@ class TrackListContainer extends Component {
 				tracks={trackList.tracks}
 				selectedTrack={trackList.selectedTrack}
 				playing={ player.playing }
-				currentTrack={player.howl}
+				currentTrack={player.currentTrack}
 				handleSelectTrack={ this.handleSelectTrack.bind(this) }
 				handleStartNewQueue={ this.handleStartNewQueue.bind(this) }
 				handleAddToQueue={ this.handleAddToQueue.bind(this) }
