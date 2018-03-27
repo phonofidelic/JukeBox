@@ -5,15 +5,29 @@ import Player from '../components/Player';
 
 class PlayerContainer extends Component {
 	handlePlayTrack() {
-		this.props.playTrack();
+		const { player } = this.props;
+		this.props.playTrack(player.queue, player.queueIndex);
 	}
 
 	handlePauseTrack() {
-		this.props.pauseTrack();
+		const { player } = this.props;
+		console.log('handlePauseTrack, track:', player.howl)
+		this.props.pauseTrack(player.queue, player.queueIndex);
 	}
 
 	handleStopTrack() {
-		this.props.stopTrack();
+		const { player } = this.props;
+		this.props.stopTrack(player.queue, player.queueIndex);
+	}
+
+	handlePlayNext() {
+		const { player } = this.props;
+		this.props.playNext(player.queue, player.queueIndex);
+	}
+
+	handlePlayPrev() {
+		const { player } = this.props;
+		this.props.playPrev(player.queue, player.queueIndex);
 	}
 
 	render() {
@@ -21,11 +35,13 @@ class PlayerContainer extends Component {
 		// console.log('PlayerContainer, playing:', playing)
 		return (
 			<Player 
-				que={ player.que } 
+				queue={ player.queue } 
 				playing={ player.playing }
+				queuIndex={ player.queuIndex }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }
 				handleStopTrack={ this.handleStopTrack.bind(this) }
+				handlePlayNext={ this.handlePlayNext.bind(this) }
 				tracks={ trackList.tracks }
 				selectedTrack={ trackList.selectedTrack }
 			/>

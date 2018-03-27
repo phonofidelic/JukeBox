@@ -6,9 +6,11 @@ class TrackList extends Component {
 		const { 
 			tracks,
 			selectedTrack,
+			playing,
+			currentTrack,
 			handleSelectTrack,
-			handleStartNewQue,
-			handleAddToQue
+			handleStartNewQueue,
+			handleAddToQueue
 		} = this.props;
 
 		return (
@@ -18,9 +20,11 @@ class TrackList extends Component {
 						key={track._id} 
 						track={track} 
 						selectedTrack={selectedTrack}
+						playing={playing}
+						currentTrack={currentTrack}
 						handleSelectTrack={handleSelectTrack}
-						handleStartNewQue={handleStartNewQue}
-						handleAddToQue={handleAddToQue}
+						handleStartNewQueue={handleStartNewQueue}
+						handleAddToQueue={handleAddToQueue}
 					/>
 				))}
 			</ul>

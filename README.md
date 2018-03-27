@@ -1,4 +1,4 @@
 # What this is:
-An app for uploading/streaming audio files.
+A web-app for uploading and streaming audio files.
 
 readme comming soon...

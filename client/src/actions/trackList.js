@@ -3,10 +3,11 @@ import {
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
 	SELECT_TRACK,
-	START_NEW_QUE,
-	ADD_TRACK_TO_QUE
+	START_NEW_QUEUE,
+	ADD_TRACK_TO_QUEUE
 } from '../actiontypes';
 import axios from 'axios';
+import { Howl, Howler } from 'howler';
 import config from '../config';
 
 const TRACKS_URL = config.TRACKS_URL
@@ -45,22 +46,33 @@ export const selectTrack = track => {
 	}
 }
 
-export const startNewQue = track => {
-	console.log('startNewQue, track:', track.file.path)
+export const startNewQueue = (track, currentTrack) => {
+	// Unload and destroy the Howl object. This will immediately stop 
+	// all sounds attached to this sound and remove it from the cache.
+	if (currentTrack) { currentTrack.unload() };
 	return dispatch => {
 		dispatch({
-			type: START_NEW_QUE,
-			trackUrl: track.file.path
+			type: START_NEW_QUEUE,
+			trackUrl: track.file.path, // REMOVE
+			track: { 
+				...track, 
+				howl: new Howl({ src: [track.file.path], autoplay: true })
+			}
 		});
 	};
 }
 
 
-export const addToQue = track => {
+export const addToQueue = track => {
 	return dispatch => {
 		dispatch({
-			type: ADD_TRACK_TO_QUE,
-			trackUrl: track.file.path
+			type: ADD_TRACK_TO_QUEUE,
+			trackUrl: track.file.path, // REMOVE
+			track:{ 
+				...track,
+				howl: new Howl({src: [track.file.path]}) 
+			}
 		});
 	};
 }
+

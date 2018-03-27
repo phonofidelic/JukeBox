@@ -11,5 +11,7 @@ export const // uploaderActionTypes
 						 PLAY_TRACK = 'play_track',
 						 PAUSE_TRACK = 'pause_track',
 						 STOP_TRACK = 'stop_track',
-						 START_NEW_QUE = 'start_new_que',
-						 ADD_TRACK_TO_QUE = 'add_track_to_que';
+						 START_NEW_QUEUE = 'start_new_queue',
+						 ADD_TRACK_TO_QUEUE = 'add_track_to_queue',
+						 PLAY_NEXT = 'play_next',
+						 PLAY_PREV = 'play_next';

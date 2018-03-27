@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 
 class TrackListItem extends Component {
-	renderPlayButton() {
+	renderControlls() {
 		// TODO: onClick = addToQue (?)
 		const { 
 			track,
-			selectedTrack, 
-			handleStartNewQue,
-			handleAddToQue
+			selectedTrack,
+			playing,
+			currentTrack,
+			handleStartNewQueue,
+			handleAddToQueue
 		} = this.props;
 
 		return (
 			<span>
-				<button onClick={ () => { handleStartNewQue(track) } }>start new que</button>
-				<button onClick={ () => { handleAddToQue(track) } }>add to que</button>
+				<button onClick={ () => { handleStartNewQueue(track, currentTrack) } }>start new queue</button>
+				<button onClick={ () => { handleAddToQueue(track) } }>add to queue</button>
 			</span>
 		);
 	}
@@ -22,7 +24,8 @@ class TrackListItem extends Component {
 		const { 
 			track,
 			handleSelectTrack,
-			selectedTrack
+			selectedTrack,
+			playing
 		} = this.props;
 
 		const selected = {
@@ -40,7 +43,7 @@ class TrackListItem extends Component {
 				}
 			>
 			{ track.name }
-			{ selectedTrack && track._id === selectedTrack._id ? this.renderPlayButton() : null }
+			{ selectedTrack && track._id === selectedTrack._id ? this.renderControlls() : null }
 			</li>
 		);
 	}

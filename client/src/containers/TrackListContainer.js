@@ -9,32 +9,33 @@ class TrackListContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.props.getTracks();
-
 	}
 
 	handleSelectTrack(track) {
 		this.props.selectTrack(track);
 	}
 
-	handleStartNewQue(track) {
-		this.props.startNewQue(track);
+	handleStartNewQueue(track, currentTrack) {
+		this.props.startNewQueue(track, currentTrack);
 	}
 
-	handleAddToQue(track) {
-		this.props.addToQue(track);
+	handleAddToQueue(track) {
+		this.props.addToQueue(track);
 	}
 
 	render() {
 		// const { tracks, error, selectedTrack } = this.props.trackList;
 		console.log(this.props)
-		const { trackList } = this.props;
+		const { trackList, player } = this.props;
 		return(
 			<TrackList 
 				tracks={trackList.tracks}
 				selectedTrack={trackList.selectedTrack}
+				playing={ player.playing }
+				currentTrack={player.howl}
 				handleSelectTrack={ this.handleSelectTrack.bind(this) }
-				handleStartNewQue={ this.handleStartNewQue.bind(this) }
-				handleAddToQue={ this.handleAddToQue.bind(this) }
+				handleStartNewQueue={ this.handleStartNewQueue.bind(this) }
+				handleAddToQueue={ this.handleAddToQueue.bind(this) }
 			/> 
 		)
 	}
@@ -43,7 +44,7 @@ class TrackListContainer extends Component {
 const mapStateToProps = state => {
 	return {
 		trackList: state.trackList,
-		// trackData: state.trackData
+		player: state.player
 	}
 }
 
