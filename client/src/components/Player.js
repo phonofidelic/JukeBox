@@ -18,7 +18,7 @@ export class Player extends Component {
 				<button disabled={queue.length < 1} onClick={ handlePlayPrev }>{'|<'}</button>
 				{!playing ? <button onClick={ handlePlayTrack }>play</button> : <button onClick={ handlePauseTrack }>pause</button>}
 				<button onClick={ handleStopTrack }>stop</button>
-				<button disabled={queue.length <= 1 & queuIndex !== queue.length+1} onClick={ handlePlayNext }>>|</button>
+				<button disabled={queue.length <= 1 && queuIndex !== queue.length-1} onClick={ handlePlayNext }>>|</button>
 			</div>
 		);
 	}
@@ -26,7 +26,7 @@ export class Player extends Component {
 	renderQueue() {
 		const { queue, queuIndex } = this.props;
 		return (
-			<ul>
+			<ul className="Queue">
 				{ queue.map((track, i) => (
 					<li key={i}>{track.name}{i === queuIndex ? <span>*</span> : null}</li>
 				)) }
@@ -36,13 +36,13 @@ export class Player extends Component {
 
 	render() {
 		const { queue } = this.props;
+
 		return (
-			<div>
+			<div className="Player">
 				{queue.length > 0 && (
 					<div>
-						Player
-						{this.renderControlls()}
-						{this.renderQueue()}
+						{ this.renderControlls() }
+						{ this.renderQueue() }
 					</div>
 				)}
 			</div>

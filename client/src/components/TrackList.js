@@ -14,7 +14,7 @@ export class TrackList extends Component {
 		} = this.props;
 
 		return (
-			<ul>
+			<ul className="TrackList">
 				{tracks && tracks.map(track => (
 					<TrackListItem 
 						key={track._id} 

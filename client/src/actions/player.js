@@ -34,7 +34,7 @@ export const stopTrack = (queue, queueIndex) => {
 }
 
 export const playNext = (queue, queueIndex) => {
-	console.log('playNext, queueIndex:', queueIndex);
+	console.log('playNext, queueIndex:', queueIndex+1);
 	queue[queueIndex].howl.stop();
 	queue[queueIndex+1].howl.play();
 	return dispatch => {
@@ -45,7 +45,7 @@ export const playNext = (queue, queueIndex) => {
 }
 
 export const playPrev = (queue, queueIndex) => {
-	console.log('playPrev, queueIndex:', queueIndex);
+	console.log('playPrev, queueIndex:', queueIndex-1);
 	queue[queueIndex].howl.stop();
 	queue[queueIndex-1].howl.play();
 	return dispatch => {

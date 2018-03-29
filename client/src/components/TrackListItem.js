@@ -26,11 +26,14 @@ class TrackListItem extends Component {
 		} = this.props;
 
 		const selected = {
-			background: '#ccc'
+			background: '#ccc',
+			height: '50px',
+			lineHeight: '50px'
 		};
 
 		return (
 			<li 
+				className="TrackListItem"
 				onClick={() => handleSelectTrack(track)}
 				style={
 					selectedTrack && track._id === selectedTrack._id ? 
