@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Player extends Component {
+export class Player extends Component {
 	renderControlls() {
 		const {
 			queue,

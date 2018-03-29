@@ -32,7 +32,7 @@ const FileInput = ({
 	/>
 );
 
-class Uploader extends Component {
+export class Uploader extends Component {
 	render() {
 		const { 
 			trackName, 

@@ -5,7 +5,7 @@ import TrackList from '../components/TrackList';
 
 const actions = { ...trackListActions, ...playerActions };
 
-class TrackListContainer extends Component {
+export class TrackListContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.props.getTracks();
@@ -25,6 +25,9 @@ class TrackListContainer extends Component {
 
 	render() {
 		const { trackList, player } = this.props;
+
+		// TODO: simplify props
+		// {...this.props} ?
 		return(
 			<TrackList 
 				tracks={trackList.tracks}

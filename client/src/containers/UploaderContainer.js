@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/uploaderActions';
 import Uploader from '../components/Uploader';
 
-class UploaderContainer extends Component {
+export class UploaderContainer extends Component {
 	handleUploadTrack(data) {
 		let formData = new FormData();
 		formData.append('trackName', data.trackName);

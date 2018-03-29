@@ -43,7 +43,6 @@ class PlayerContainer extends Component {
 				handleStopTrack={ this.handleStopTrack.bind(this) }
 				handlePlayNext={ this.handlePlayNext.bind(this) }
 				handlePlayPrev={ this.handlePlayPrev.bind(this) }
-				tracks={ trackList.tracks }
 				selectedTrack={ trackList.selectedTrack }
 			/>
 		);

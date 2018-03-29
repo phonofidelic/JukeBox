@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TrackListItem from './TrackListItem';
 
-class TrackList extends Component {
+export class TrackList extends Component {
 	render() {
 		const { 
 			tracks,

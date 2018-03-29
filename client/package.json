@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "howler": "^2.0.9",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -20,5 +22,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "redux-mock-store": "^1.5.1",
+    "to-regex": "^3.0.2"
+  }
 }
