@@ -29,3 +29,10 @@
   list-style: none;
   padding: 0;
 }
+
+.Button {
+  /*background: green;*/
+  height: 30px;
+  border: 1px solid black;
+  min-width: 80px;
+}

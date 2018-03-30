@@ -25,7 +25,7 @@ export class Player extends Component {
 	}
 
 	render() {
-		const { queue, queueIndex, currentTrack } = this.props;
+		const { queue, currentTrack } = this.props;
 
 		return (
 			<div className="Player">
