@@ -30,10 +30,11 @@ export class TrackListContainer extends Component {
 		// {...this.props} ?
 		return(
 			<TrackList 
-				tracks={trackList.tracks}
-				selectedTrack={trackList.selectedTrack}
+				tracks={ trackList.tracks }
+				queue={ player.queue }
+				selectedTrack={ trackList.selectedTrack }
 				playing={ player.playing }
-				currentTrack={player.currentTrack}
+				currentTrack={ player.currentTrack }
 				handleSelectTrack={ this.handleSelectTrack.bind(this) }
 				handleStartNewQueue={ this.handleStartNewQueue.bind(this) }
 				handleAddToQueue={ this.handleAddToQueue.bind(this) }

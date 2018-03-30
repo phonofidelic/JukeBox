@@ -7,6 +7,7 @@ export class TrackList extends Component {
 			tracks,
 			selectedTrack,
 			playing,
+			queue,
 			currentTrack,
 			handleSelectTrack,
 			handleStartNewQueue,
@@ -20,6 +21,7 @@ export class TrackList extends Component {
 						key={track._id} 
 						track={track} 
 						selectedTrack={selectedTrack}
+						queue={queue}
 						playing={playing}
 						currentTrack={currentTrack}
 						handleSelectTrack={handleSelectTrack}

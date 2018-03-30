@@ -6,6 +6,7 @@ class TrackListItem extends Component {
 		const { 
 			track,
 			currentTrack,
+			queue,
 			handleStartNewQueue,
 			handleAddToQueue
 		} = this.props;
@@ -13,7 +14,7 @@ class TrackListItem extends Component {
 		return (
 			<span>
 				<button onClick={ () => { handleStartNewQueue(track, currentTrack) } }>start new queue</button>
-				<button onClick={ () => { handleAddToQueue(track) } }>add to queue</button>
+				{queue.length ? <button onClick={ () => { handleAddToQueue(track) } }>add to queue</button> : null}
 			</span>
 		);
 	}
