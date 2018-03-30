@@ -9,17 +9,24 @@ describe('TrackList Component', () => {
 	});
 
 	it('renders \'controlls\' child component if selected', () => {
-		const wrapper = shallow(<TrackListItem track={{_id: 1}} selectedTrack={{_id: 1}} />)
-		expect(wrapper.children().length).toBe(1)
-	})
+		const wrapper = shallow(
+			<TrackListItem 
+				track={{_id: 1}} 
+				selectedTrack={{_id: 1}} 
+				queue={[{}]}
+			/>
+		);
+		expect(wrapper.children().length).toBe(1);
+	});
 
-	it('calls handler functions when controll buttons are clicked', () => {
+	it('calls handler functions when controll buttons are clicked and queue is not empty', () => {
 		const mockHandleStartNewQueue = jest.fn();
 		const mockHandleAddToQueue = jest.fn();
 		const wrapper = mount(
 			<TrackListItem 
 				track={{_id: 1}} 
 				selectedTrack={{_id: 1}}
+				queue={[{}]}
 				handleSelectTrack={jest.fn()}
 				handleStartNewQueue={mockHandleStartNewQueue}
 				handleAddToQueue={mockHandleAddToQueue}
@@ -29,7 +36,7 @@ describe('TrackList Component', () => {
 			button.simulate('click');
 		});
 		expect(mockHandleStartNewQueue.mock.calls.length).toBe(1);
-		expect(mockHandleAddToQueue.mock.calls.length).toBe(1)
+		expect(mockHandleAddToQueue.mock.calls.length).toBe(1);
 		wrapper.unmount();
 	});
 });
