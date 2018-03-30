@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import QueueList from './QueueList';
 
 export class Player extends Component {
 	renderControlls() {
@@ -23,26 +24,18 @@ export class Player extends Component {
 		);
 	}
 
-	renderQueue() {
-		const { queue, queuIndex } = this.props;
-		return (
-			<ul className="Queue">
-				{ queue.map((track, i) => (
-					<li key={i}>{track.name}{i === queuIndex ? <span>*</span> : null}</li>
-				)) }
-			</ul>
-		);
-	}
-
 	render() {
-		const { queue } = this.props;
+		const { queue, queueIndex, currentTrack } = this.props;
 
 		return (
 			<div className="Player">
 				{queue.length > 0 && (
 					<div>
 						{ this.renderControlls() }
-						{ this.renderQueue() }
+						<QueueList 
+							queue={queue}
+							currentTrack={currentTrack}
+						/>
 					</div>
 				)}
 			</div>

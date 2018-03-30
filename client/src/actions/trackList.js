@@ -51,7 +51,7 @@ export const selectTrack = track => {
 export const startNewQueue = (track, currentTrack) => {
 	// Unload and destroy the Howl object. This will immediately stop 
 	// all sounds attached to this sound and remove it from the cache.
-	console.log('startNewQueue, currentTrack', currentTrack);
+	console.log('startNewQueue, track', track);
 	if (currentTrack) { currentTrack.howl.unload() };
 	return dispatch => {
 		dispatch({

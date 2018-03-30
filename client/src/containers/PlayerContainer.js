@@ -38,6 +38,7 @@ class PlayerContainer extends Component {
 				queue={ player.queue } 
 				playing={ player.playing }
 				queuIndex={ player.queuIndex }
+				currentTrack={ player.currentTrack }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }
 				handleStopTrack={ this.handleStopTrack.bind(this) }
