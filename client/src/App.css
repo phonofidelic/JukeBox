@@ -6,11 +6,12 @@
   /*height: 1000px;*/
   list-style: none;
   padding: 0;
+  border-top: 1px solid #ccc;
 }
 
 .TrackListItem {
   height: 45px;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   line-height: 45px;
 }
 
