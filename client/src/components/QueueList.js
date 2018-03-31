@@ -11,7 +11,7 @@ class QueuList extends Component {
 		};
 
 		return (
-			<List className="QueueList">
+			<List className="QueueList" style={{padding: '0'}}>
 				{
 					queue.map((track, i) => (
 						<ListItem 

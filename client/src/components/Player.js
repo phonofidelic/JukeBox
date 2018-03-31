@@ -4,6 +4,7 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
+import Collapse from 'material-ui/transitions/Collapse';
 import { 
 	Pause, 
 	PlayArrow, 
@@ -62,21 +63,16 @@ export class Player extends Component {
 
 		return (
 			<div className="Player">
-				{player.queue.length > 0 && (
+				{	player.queue.length > 0 &&
 					<div>
-						<Grid container>
-							{ this.renderControlls() }
-						</Grid>
-						{player.showQueue ?
-							(<QueueList 
-								queue={player.queue}
-								currentTrack={player.currentTrack}
-							/>)
-							:
-							null
-						}
+					<Grid container>
+						{ this.renderControlls() }
+					</Grid>
+					<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
+						<QueueList queue={player.queue} currentTrack={player.currentTrack} />
+					</Collapse>
 					</div>
-				)}
+				}
 			</div>
 		);
 	}
