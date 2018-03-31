@@ -10,9 +10,9 @@
 }
 
 .TrackListItem {
-  height: 45px;
-  border-bottom: 1px solid #ccc;
-  line-height: 45px;
+  /*height: 45px;*/
+  /*border-bottom: 1px solid #ccc;*/
+  /*line-height: 45px;*/
 }
 
 .Player {
@@ -25,6 +25,14 @@
   padding: 10px 0;
 }
 
+.PlayerHeader {
+  display: flex;
+}
+
+.PlayerControlls {
+  flex: 1;
+}
+
 .QueueList {
   list-style: none;
   padding: 0;
@@ -34,5 +42,5 @@
   /*background: green;*/
   height: 30px;
   border: 1px solid black;
-  min-width: 80px;
+  /*min-width: 80px;*/
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import List, { ListItem } from 'material-ui/List';
+import Typography from 'material-ui/Typography';
 
 class QueuList extends Component {
 	render() {
@@ -9,18 +11,20 @@ class QueuList extends Component {
 		};
 
 		return (
-			<ul className="QueueList">
+			<List className="QueueList">
 				{
-					queue.map(track => (
-						<li 
-							key={ track._id } 
-							style={ currentTrack._id === track._id ? playingStyle : null }
+					queue.map((track, i) => (
+						<ListItem 
+							key={ track.queueId }
+							style={ currentTrack.queueId === track.queueId ? playingStyle : null }
 						>
-							{ track.name }
-						</li>
+							<Typography>
+								{ track.name }
+							</Typography>
+						</ListItem>
 					))
 				}
-			</ul>
+			</List>
 		);
 	}
 }

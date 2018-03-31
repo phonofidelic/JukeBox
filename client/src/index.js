@@ -29,7 +29,8 @@ const theme = createMuiTheme({
       fontSize: 12,
     },
     button: {
-      fontStyle: 'italic',
+      // fontStyle: 'italic',
+      size: 'large'
     },
   },
 });

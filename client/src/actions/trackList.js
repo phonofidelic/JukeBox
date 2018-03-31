@@ -53,11 +53,17 @@ export const startNewQueue = (track, currentTrack) => {
 	// all sounds attached to this sound and remove it from the cache.
 	console.log('startNewQueue, track', track);
 	if (currentTrack) { currentTrack.howl.unload() };
+
+	// This creates a queuItem by coppying the passed track item
+	// and adding a queueId and howl prop.
+	const queueId = Math.trunc(Math.random() * Date.now());
+
 	return dispatch => {
 		dispatch({
 			type: START_NEW_QUEUE,
 			track: { 
 				...track, 
+				queueId: queueId,
 				howl: new Howl({ src: [track.file.path], autoplay: true })
 			}
 		});
@@ -66,11 +72,16 @@ export const startNewQueue = (track, currentTrack) => {
 
 
 export const addToQueue = track => {
+	// This creates a queuItem by coppying the passed track item
+	// and adding a queueId and howl prop.
+	const queueId = Math.trunc(Math.random() * Date.now());
+	
 	return dispatch => {
 		dispatch({
 			type: ADD_TRACK_TO_QUEUE,
 			track:{ 
 				...track,
+				queueId: queueId,
 				howl: new Howl({src: [track.file.path]}) 
 			}
 		});

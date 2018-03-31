@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TrackListItem from './TrackListItem';
+import List from 'material-ui/List';
 
 export class TrackList extends Component {
 	render() {
@@ -15,7 +16,7 @@ export class TrackList extends Component {
 		} = this.props;
 
 		return (
-			<ul className="TrackList">
+			<List className="TrackList">
 				{tracks && tracks.map(track => (
 					<TrackListItem 
 						key={track._id} 
@@ -29,7 +30,7 @@ export class TrackList extends Component {
 						handleAddToQueue={handleAddToQueue}
 					/>
 				))}
-			</ul>
+			</List>
 		);
 	}
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
 class TrackListItem extends Component {
 	renderControlls() {
@@ -20,8 +21,8 @@ class TrackListItem extends Component {
 				</Button>
 				{
 					queue.length ? 
-					<Button onClick={ () => { handleAddToQueue(track) }}> 
-						add to queue
+					<Button label="Add to queue" onClick={ () => { handleAddToQueue(track) }}> 
+						+
 					</Button>
 					: 
 					null
@@ -45,7 +46,7 @@ class TrackListItem extends Component {
 
 		return (
 			<Typography>
-			<li 
+			<ListItem 
 				className="TrackListItem"
 				onClick={() => handleSelectTrack(track)}
 				style={
@@ -57,7 +58,7 @@ class TrackListItem extends Component {
 			>
 			{ track.name }
 			{ selectedTrack && track._id === selectedTrack._id ? this.renderControlls() : null }
-			</li>
+			</ListItem>
 			</Typography>
 		);
 	}

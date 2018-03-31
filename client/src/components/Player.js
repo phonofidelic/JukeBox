@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 import QueueList from './QueueList';
+import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+import { 
+	Pause, 
+	PlayArrow, 
+	Stop, 
+	SkipPrevious, 
+	SkipNext,
+	MoreVert
+} from 'material-ui-icons';
 
 export class Player extends Component {
 	renderControlls() {
@@ -16,12 +27,32 @@ export class Player extends Component {
 		} = this.props;
 
 		return (
-			<div>
-				<Button disabled={queue.length < 1} onClick={ handlePlayPrev }>{'|<'}</Button>
-				{!playing ? <Button onClick={ handlePlayTrack }>play</Button> : <Button onClick={ handlePauseTrack }>pause</Button>}
-				<Button onClick={ handleStopTrack }>stop</Button>
-				<Button disabled={queue.length <= 1 && queuIndex !== queue.length-1} onClick={ handlePlayNext }>>|</Button>
-			</div>
+			<Grid item xs={12}>
+						<IconButton disabled={queue.length < 1} onClick={ handlePlayPrev }>
+							<SkipPrevious />
+						</IconButton>
+						{
+							!playing ? 
+							<IconButton onClick={ handlePlayTrack }>
+								<PlayArrow />
+							</IconButton>
+							: 
+							<IconButton onClick={ handlePauseTrack }>
+								<Pause />
+							</IconButton>
+						}
+						{/*<IconButton onClick={ handleStopTrack }>
+													<Stop />
+												</IconButton>*/}
+						<IconButton 
+							disabled={queue.length <= 1 && queuIndex !== queue.length-1} 
+							onClick={ handlePlayNext }>
+							<SkipNext />
+						</IconButton>
+						<IconButton>
+							<MoreVert />
+						</IconButton>
+			</Grid>
 		);
 	}
 
@@ -32,7 +63,9 @@ export class Player extends Component {
 			<div className="Player">
 				{queue.length > 0 && (
 					<div>
-						{ this.renderControlls() }
+						<Grid container>
+							{ this.renderControlls() }
+						</Grid>
 						<QueueList 
 							queue={queue}
 							currentTrack={currentTrack}
