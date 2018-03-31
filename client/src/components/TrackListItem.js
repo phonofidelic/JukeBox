@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from './Button';
+import Button from 'material-ui/Button';
 
 class TrackListItem extends Component {
 	renderControlls() {
@@ -14,15 +14,14 @@ class TrackListItem extends Component {
 
 		return (
 			<span>
-				<Button 
-					handleClick={ () => { handleStartNewQueue(track, currentTrack) }} 
-					text="play" 
-				/>
+				<Button onClick={ () => { handleStartNewQueue(track, currentTrack) }} >
+					play
+				</Button>
 				{
 					queue.length ? 
-					<Button 
-						handleClick={ () => { handleAddToQueue(track) } } 
-						text="add to queue" /> 
+					<Button onClick={ () => { handleAddToQueue(track) }}> 
+						add to queue
+					</Button>
 					: 
 					null
 				}

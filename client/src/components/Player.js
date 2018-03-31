@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import QueueList from './QueueList';
+import Button from 'material-ui/Button';
 
 export class Player extends Component {
 	renderControlls() {
@@ -16,10 +17,10 @@ export class Player extends Component {
 
 		return (
 			<div>
-				<button disabled={queue.length < 1} onClick={ handlePlayPrev }>{'|<'}</button>
-				{!playing ? <button onClick={ handlePlayTrack }>play</button> : <button onClick={ handlePauseTrack }>pause</button>}
-				<button onClick={ handleStopTrack }>stop</button>
-				<button disabled={queue.length <= 1 && queuIndex !== queue.length-1} onClick={ handlePlayNext }>>|</button>
+				<Button disabled={queue.length < 1} onClick={ handlePlayPrev }>{'|<'}</Button>
+				{!playing ? <Button onClick={ handlePlayTrack }>play</Button> : <Button onClick={ handlePauseTrack }>pause</Button>}
+				<Button onClick={ handleStopTrack }>stop</Button>
+				<Button disabled={queue.length <= 1 && queuIndex !== queue.length-1} onClick={ handlePlayNext }>>|</Button>
 			</div>
 		);
 	}
