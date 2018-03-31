@@ -9,6 +9,7 @@
     "howler": "^2.0.9",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-beta.36",
+    "material-ui-upload": "^1.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-howler": "^3.7.1",

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'material-ui/Button';
+import Upload from 'material-ui-upload/Upload';
 
 // Register uploader form
 const form = reduxForm({
@@ -31,6 +32,10 @@ const FileInput = ({
 		{...inputProps}
 		{...props}
 	/>
+);
+
+const MaterialUiFileInput = () => (
+	<Upload label="Add" />
 );
 
 export class Uploader extends Component {

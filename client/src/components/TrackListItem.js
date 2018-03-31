@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 class TrackListItem extends Component {
 	renderControlls() {
@@ -43,6 +44,7 @@ class TrackListItem extends Component {
 		};
 
 		return (
+			<Typography>
 			<li 
 				className="TrackListItem"
 				onClick={() => handleSelectTrack(track)}
@@ -56,6 +58,7 @@ class TrackListItem extends Component {
 			{ track.name }
 			{ selectedTrack && track._id === selectedTrack._id ? this.renderControlls() : null }
 			</li>
+			</Typography>
 		);
 	}
 }
