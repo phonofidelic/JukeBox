@@ -30,7 +30,7 @@ const theme = createMuiTheme({
     },
     button: {
       // fontStyle: 'italic',
-      size: 'large'
+      // size: 'large'
     },
   },
 });

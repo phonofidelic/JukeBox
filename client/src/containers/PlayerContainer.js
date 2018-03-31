@@ -30,20 +30,23 @@ class PlayerContainer extends Component {
 		this.props.playPrev(player.queue, player.queueIndex);
 	}
 
+	handleToggleQueue() {
+		this.props.toggleQueue();
+	}
+
 	render() {
 		const { trackList, player } = this.props;
 		// console.log('PlayerContainer, playing:', playing)
 		return (
 			<Player 
-				queue={ player.queue } 
-				playing={ player.playing }
-				queuIndex={ player.queuIndex }
-				currentTrack={ player.currentTrack }
+				player={ player }
+				trackList={ trackList }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }
 				handleStopTrack={ this.handleStopTrack.bind(this) }
 				handlePlayNext={ this.handlePlayNext.bind(this) }
 				handlePlayPrev={ this.handlePlayPrev.bind(this) }
+				handleToggleQueue={ this.handleToggleQueue.bind(this) }
 				selectedTrack={ trackList.selectedTrack }
 			/>
 		);

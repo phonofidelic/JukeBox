@@ -3,7 +3,8 @@ import {
 	PAUSE_TRACK,
 	STOP_TRACK,
 	PLAY_NEXT,
-	PLAY_PREV
+	PLAY_PREV,
+	TOGGLE_QUEUE_VISIBILITY
 } from '../actiontypes';
 
 export const playTrack = (queue, queueIndex) => {
@@ -40,8 +41,8 @@ export const playNext = (queue, queueIndex) => {
 	return dispatch => {
 		dispatch({
 			type: PLAY_NEXT
-		})
-	}
+		});
+	};
 }
 
 export const playPrev = (queue, queueIndex) => {
@@ -51,6 +52,15 @@ export const playPrev = (queue, queueIndex) => {
 	return dispatch => {
 		dispatch({
 			type: PLAY_PREV
-		})
-	}
+		});
+	};
+}
+
+export const toggleQueue = () => {
+	console.log('toggle')
+	return dispatch => {
+		dispatch({
+			type: TOGGLE_QUEUE_VISIBILITY
+		});
+	};
 }

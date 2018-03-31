@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
+import { 
+	PlayArrow,
+	Queue
+} from 'material-ui-icons';
 
 class TrackListItem extends Component {
 	renderControlls() {
@@ -16,14 +21,14 @@ class TrackListItem extends Component {
 
 		return (
 			<span>
-				<Button onClick={ () => { handleStartNewQueue(track, currentTrack) }} >
-					play
-				</Button>
+				<IconButton onClick={ () => { handleStartNewQueue(track, currentTrack) }} >
+				<PlayArrow />
+				</IconButton>
 				{
 					queue.length ? 
-					<Button label="Add to queue" onClick={ () => { handleAddToQueue(track) }}> 
-						+
-					</Button>
+					<IconButton label="Add to queue" onClick={ () => { handleAddToQueue(track) }}> 
+						<Queue />
+					</IconButton>
 					: 
 					null
 				}
@@ -45,7 +50,7 @@ class TrackListItem extends Component {
 		};
 
 		return (
-			<Typography>
+			
 			<ListItem 
 				className="TrackListItem"
 				onClick={() => handleSelectTrack(track)}
@@ -56,10 +61,10 @@ class TrackListItem extends Component {
 					{}
 				}
 			>
-			{ track.name }
+			<Typography>{ track.name }</Typography>
 			{ selectedTrack && track._id === selectedTrack._id ? this.renderControlls() : null }
 			</ListItem>
-			</Typography>
+			
 		);
 	}
 }

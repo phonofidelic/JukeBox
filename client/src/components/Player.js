@@ -10,29 +10,29 @@ import {
 	Stop, 
 	SkipPrevious, 
 	SkipNext,
-	MoreVert
+	MoreVert,
+	MoreHoriz
 } from 'material-ui-icons';
 
 export class Player extends Component {
 	renderControlls() {
 		const {
-			queue,
-			playing, 
-			queuIndex,
+			player,
 			handleStopTrack,
 			handlePlayTrack,
 			handlePauseTrack,
 			handlePlayNext,
-			handlePlayPrev
+			handlePlayPrev,
+			handleToggleQueue
 		} = this.props;
 
 		return (
 			<Grid item xs={12}>
-						<IconButton disabled={queue.length < 1} onClick={ handlePlayPrev }>
+						<IconButton disabled={player.queue.length < 1} onClick={ handlePlayPrev }>
 							<SkipPrevious />
 						</IconButton>
 						{
-							!playing ? 
+							!player.playing ? 
 							<IconButton onClick={ handlePlayTrack }>
 								<PlayArrow />
 							</IconButton>
@@ -45,31 +45,36 @@ export class Player extends Component {
 													<Stop />
 												</IconButton>*/}
 						<IconButton 
-							disabled={queue.length <= 1 && queuIndex !== queue.length-1} 
+							disabled={player.queue.length <= 1 && player.queuIndex !== player.queue.length-1} 
 							onClick={ handlePlayNext }>
 							<SkipNext />
 						</IconButton>
-						<IconButton>
-							<MoreVert />
+						
+						<IconButton onClick={ handleToggleQueue }>
+							{ player.showQueue ? <MoreVert /> : <MoreHoriz /> }
 						</IconButton>
 			</Grid>
 		);
 	}
 
 	render() {
-		const { queue, currentTrack } = this.props;
+		const { player, trackList } = this.props;
 
 		return (
 			<div className="Player">
-				{queue.length > 0 && (
+				{player.queue.length > 0 && (
 					<div>
 						<Grid container>
 							{ this.renderControlls() }
 						</Grid>
-						<QueueList 
-							queue={queue}
-							currentTrack={currentTrack}
-						/>
+						{player.showQueue ?
+							(<QueueList 
+								queue={player.queue}
+								currentTrack={player.currentTrack}
+							/>)
+							:
+							null
+						}
 					</div>
 				)}
 			</div>
