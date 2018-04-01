@@ -29,20 +29,33 @@ export class Player extends Component {
 			handleToggleQueue
 		} = this.props;
 
+		const styles = {
+			root: {
+			  position: 'fixed',
+			  bottom: '0px',
+			  width: '100%',
+			  boxShadow: '0px -1px 20px 1px #ccc',
+			  background: '#fff',
+			  padding: '0'
+			}
+		};
+		
 		return (
-			<div className="Player">
+			<div style={styles.root}>
 				{	player.queue.length > 0 &&
 					<div>
 					<Grid container>
-						<PlayerControls 
-							player={player}
-							handleStopTrack={handleStopTrack}
-							handlePlayTrack={handlePlayTrack}
-							handlePauseTrack={handlePauseTrack}
-							handlePlayNext={handlePlayNext}
-							handlePlayPrev={handlePlayPrev}
-							handleToggleQueue={handleToggleQueue}
-						/>
+						<Grid item xs={12}>
+							<PlayerControls 
+								player={player}
+								handleStopTrack={handleStopTrack}
+								handlePlayTrack={handlePlayTrack}
+								handlePauseTrack={handlePauseTrack}
+								handlePlayNext={handlePlayNext}
+								handlePlayPrev={handlePlayPrev}
+								handleToggleQueue={handleToggleQueue}
+							/>
+						</Grid>
 					</Grid>
 					<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
 						<QueueList queue={player.queue} currentTrack={player.currentTrack} />

@@ -12,7 +12,47 @@ import {
 	MoreHoriz
 } from 'material-ui-icons';
 
+let touch;
+
 class PlayerControls extends Component {
+	handleTouchStart(e) {
+		console.log('touch-start', e.targetTouches);
+		// Set new starting touch reference
+		touch = e.targetTouches[0].clientY;
+
+		// Fix player position to touch Y position
+	}
+
+	handleTouchMove(e) {
+		console.log('touch-move', e.targetTouches);
+
+		// Update player position to touch Y position
+	}
+
+	handleTouchEnd(e) {
+		const {player, handleToggleQueue} = this.props;
+		console.log('touch-end', e.targetTouches);
+		// if(e.targetTouches.length) console.log('touch-end, touch diff', touch - e.targetTouches[0].clientY);
+		
+		// If touch has lower clientY (higher screen pos) at end,
+		// handle show queue
+		// If touch has higher clientY (lower screen pos) at end,
+		// handle hide queue
+		if(e.targetTouches.length && touch - e.targetTouches[0].clientY > 0) {
+			console.log('OPEN');
+			// If queue is not already opoen, open it
+			!player.showQueue ? handleToggleQueue() : null;
+		} else if(e.targetTouches.length && touch - e.targetTouches[0].clientY < 0){
+			console.log('CLOSE');
+			// If queue is not already closed, close it
+			player.showQueue ? handleToggleQueue() : null;
+		}
+	}
+
+	handleTouchCancel(e) {
+		console.log('touch-cancel', e.targetTouches);
+	}
+
 	render() {
 		const {
 			player,
@@ -24,33 +64,41 @@ class PlayerControls extends Component {
 			handleToggleQueue
 		} = this.props;
 
-		// TODO: Move PLayerControls to own component,
-		//			 Add touch event listeners/handling on componentDidMount,
-		//			 remove them on componentWillUnmount
 		return (
-			<Grid item xs={12} className="PlayerControls" onTouchStart={(e) => console.log('[LOG] onTouchStart', e) }>
-				<IconButton disabled={player.queue.length < 1} onClick={ handlePlayPrev }>
-					<SkipPrevious />
-				</IconButton>
-				{
-					!player.playing ? 
-					<IconButton onClick={ handlePlayTrack }>
-						<PlayArrow />
+			<Grid 
+				container 
+				alignItems="center">
+				<Grid item xs={12}>
+					<IconButton disabled={player.queue.length < 1} onClick={ handlePlayPrev }>
+						<SkipPrevious />
 					</IconButton>
-					: 
-					<IconButton onClick={ handlePauseTrack }>
-						<Pause />
+					{
+						!player.playing ? 
+						<IconButton onClick={ handlePlayTrack }>
+							<PlayArrow />
+						</IconButton>
+						: 
+						<IconButton onClick={ handlePauseTrack }>
+							<Pause />
+						</IconButton>
+					}
+					<IconButton 
+						disabled={player.queue.length <= 1 && player.queuIndex !== player.queue.length-1} 
+						onClick={ handlePlayNext }>
+						<SkipNext />
 					</IconButton>
-				}
-				<IconButton 
-					disabled={player.queue.length <= 1 && player.queuIndex !== player.queue.length-1} 
-					onClick={ handlePlayNext }>
-					<SkipNext />
-				</IconButton>
-				
-				<IconButton onClick={ handleToggleQueue }>
-					{ player.showQueue ? <MoreVert /> : <MoreHoriz /> }
-				</IconButton>
+				</Grid>
+				<div style={{position: 'fixed', right: '0px', zIndex: '1001'}}>
+					<IconButton 
+						onClick={ handleToggleQueue }
+						onTouchStart={this.handleTouchStart.bind(this)}
+						onTouchMove={this.handleTouchMove.bind(this)}
+						onTouchEnd={this.handleTouchEnd.bind(this)}
+						onTouchCancel={this.handleTouchCancel.bind(this)} 
+					>
+						{ player.showQueue ? <MoreVert /> : <MoreHoriz /> }
+					</IconButton>
+				</div>
 			</Grid>
 		);
 	}
