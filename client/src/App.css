@@ -29,8 +29,8 @@
   display: flex;
 }
 
-.PlayerControlls {
-  flex: 1;
+.PlayerControls {
+  border-bottom: 1px solid #ccc;
 }
 
 .QueueList {

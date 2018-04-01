@@ -12,9 +12,11 @@
     "material-ui-upload": "^1.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hammerjs": "^1.0.1",
     "react-howler": "^3.7.1",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.1",
+    "react-touch": "^0.4.3",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
     "redux-thunk": "^2.2.0"

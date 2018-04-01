@@ -24,7 +24,7 @@ const getTracks = (req, res, next) => {
 	// .select('name file')
 	.exec((err, tracks) => {
 		if (err) return next(err);
-		console.log('GET /tracks response:\n', tracks);
+		// console.log('GET /tracks response:\n', tracks);
 		res.json({message: 'Received tracks', data: tracks });
 	});
 }

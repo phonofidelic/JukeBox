@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
 import { 
 	PlayArrow,
 	Queue
 } from 'material-ui-icons';
+
+const styles = theme => ({
+  root: {
+    // width: '100%',
+    // maxWidth: 360,
+    backgroundColor: theme.palette.primary.main
+  },
+});
 
 class TrackListItem extends Component {
 	renderControlls() {
@@ -20,7 +30,7 @@ class TrackListItem extends Component {
 		} = this.props;
 
 		return (
-			<span>
+			<Grid item>				
 				<IconButton onClick={ () => { handleStartNewQueue(track, currentTrack) }} >
 				<PlayArrow />
 				</IconButton>
@@ -32,7 +42,7 @@ class TrackListItem extends Component {
 					: 
 					null
 				}
-			</span>
+			</Grid>
 		);
 	}
 
@@ -61,8 +71,14 @@ class TrackListItem extends Component {
 					{}
 				}
 			>
-			<Typography>{ track.name }</Typography>
-			{ selectedTrack && track._id === selectedTrack._id ? this.renderControlls() : null }
+				<Grid container justify={'flex-end'} alignItems={'center'}>
+					<Grid item>
+						<Typography>{ track.name }</Typography>
+					</Grid>
+				</Grid>
+				<Grid container justify={'center'} alignItems={'center'}>
+					{ selectedTrack && track._id === selectedTrack._id ? this.renderControlls() : null }
+				</Grid>
 			</ListItem>
 			
 		);

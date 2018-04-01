@@ -33,6 +33,18 @@ const theme = createMuiTheme({
       // size: 'large'
     },
   },
+  palette: {
+    primary: {
+      main: '#d2d8d8',
+      light: '#fff',
+      dark: '#a1a7a7'
+    },
+    secondary: {
+      main: '#f44336',
+      light: '#ff7961',
+      dark: '#ba000d'
+    }
+  }
 });
 
 ReactDOM.render(
