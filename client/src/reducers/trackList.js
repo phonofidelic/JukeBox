@@ -3,13 +3,17 @@ import {
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
 	UPLOAD_SUCCESS,
-	SELECT_TRACK
+	SELECT_TRACK,
+	POST_TRACK_DATA,
+	POST_TRACK_DATA_SUCCESS,
+	POST_TRACK_DATA_FAILURE
 } from '../actiontypes';
 
 const INITIAL_STATE = {
 	fetchingTracks: false,
 	tracks: [],
 	selectedTrack: null,
+	postingTrackData: false,
 	error: false
 };
 
@@ -45,6 +49,34 @@ const trackData = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				selectedTrack: action.selectedTrack
+			}
+
+		case POST_TRACK_DATA:
+			return {
+				...state,
+				postingTrackData: true
+			}
+
+		case POST_TRACK_DATA_SUCCESS:
+			// Find index of track to be updated: https://stackoverflow.com/questions/42053178/update-array-of-object-without-mutation
+			const index = state.tracks.findIndex(track => track._id === action.updatedTrack._id);
+
+			return {
+				...state,
+				postingTrackData: false,
+				tracks: [
+					...state.tracks.slice(0, index), 
+					action.updatedTrack, 
+					...state.tracks.slice(index+1)
+				],
+				message: 'Track data saved'
+			}
+
+		case POST_TRACK_DATA_FAILURE:
+			return {
+				...state,
+				postingTrackData: false,
+				error: 'Could not save changes'
 			}
 
 		default:

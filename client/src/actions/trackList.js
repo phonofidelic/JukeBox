@@ -4,7 +4,10 @@ import {
 	FETCH_TRACKS_FAILURE,
 	SELECT_TRACK,
 	START_NEW_QUEUE,
-	ADD_TRACK_TO_QUEUE
+	ADD_TRACK_TO_QUEUE,
+	POST_TRACK_DATA,
+	POST_TRACK_DATA_SUCCESS,
+	POST_TRACK_DATA_FAILURE
 } from '../actiontypes';
 import axios from 'axios';
 import { Howl } from 'howler';
@@ -86,5 +89,28 @@ export const addToQueue = track => {
 			}
 		});
 	};
+}
+
+export const postTrackData = (formData, trackData) => {
+	console.log('postTrackData, formData:', formData, 'trackData:', trackData);
+	return dispatch => {
+		dispatch({
+			type: POST_TRACK_DATA,
+		});
+		axios.put(`${TRACKS_URL}/${trackData._id}`, formData)
+		.then(response => {
+			console.log('postTrackData response:', response)
+			dispatch({
+				type: POST_TRACK_DATA_SUCCESS,
+				updatedTrack: response.data.data
+			});
+		})
+		.catch(err => {
+			console.error('postTrackData error:', err);
+			dispatch({
+				type: POST_TRACK_DATA_FAILURE
+			});
+		});
+	}
 }
 

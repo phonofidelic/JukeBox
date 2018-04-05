@@ -69,7 +69,7 @@ const editTrack = (req, res, next) => {
 	// TODO: check and only change updated feilds
 	// Make sure req.body matches Track model
 	freshData = req.body;
-	Track.findByIdAndUpdate(trackId, freshData, (err, updatedTrack) => {
+	Track.findByIdAndUpdate(trackId, freshData, {new: true}, (err, updatedTrack) => {
 		if (err) return next(err);
 		console.log('PUT /tracks/:trackId response:\n', updatedTrack);
 		res.json({ message: 'Track updated', data: updatedTrack });

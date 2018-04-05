@@ -23,6 +23,14 @@ export class TrackListContainer extends Component {
 		this.props.addToQueue(track);
 	}
 
+	handleOpenEditTrackInfo(track) {
+		console.log('handleOpenEditTrackInfo, track:', track);
+	}
+
+	handlePostTrackData(trackData, track) {
+		this.props.postTrackData(trackData, track);
+	}
+
 	render() {
 		const { trackList, player } = this.props;
 
@@ -30,14 +38,16 @@ export class TrackListContainer extends Component {
 		// {...this.props} ?
 		return(
 			<TrackList 
-				tracks={ trackList.tracks }
-				queue={ player.queue }
-				selectedTrack={ trackList.selectedTrack }
-				playing={ player.playing }
-				currentTrack={ player.currentTrack }
-				handleSelectTrack={ this.handleSelectTrack.bind(this) }
-				handleStartNewQueue={ this.handleStartNewQueue.bind(this) }
-				handleAddToQueue={ this.handleAddToQueue.bind(this) }
+				tracks={trackList.tracks}
+				queue={player.queue}
+				selectedTrack={trackList.selectedTrack}
+				playing={player.playing}
+				currentTrack={player.currentTrack}
+				handleSelectTrack={this.handleSelectTrack.bind(this)}
+				handleStartNewQueue={this.handleStartNewQueue.bind(this)}
+				handleAddToQueue={this.handleAddToQueue.bind(this)}
+				handleOpenEditTrackInfo={this.handleOpenEditTrackInfo.bind(this)}
+				handlePostTrackData={this.handlePostTrackData.bind(this)}
 			/> 
 		)
 	}

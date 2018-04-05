@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import { 
 	Pause, 
@@ -12,13 +10,15 @@ import {
 	MoreHoriz
 } from 'material-ui-icons';
 
-let touch;
-
 class PlayerControls extends Component {
+	state = {
+		touch: null
+	}
+
 	handleTouchStart(e) {
 		console.log('touch-start', e.targetTouches);
 		// Set new starting touch reference
-		touch = e.targetTouches[0].clientY;
+		this.setState({touch: e.targetTouches[0].clientY})
 
 		// Fix player position to touch Y position
 	}
@@ -38,11 +38,11 @@ class PlayerControls extends Component {
 		// handle show queue
 		// If touch has higher clientY (lower screen pos) at end,
 		// handle hide queue
-		if(e.targetTouches.length && touch - e.targetTouches[0].clientY > 0) {
+		if(e.targetTouches.length && this.state.touch - e.targetTouches[0].clientY > 0) {
 			console.log('OPEN');
 			// If queue is not already opoen, open it
 			!player.showQueue ? handleToggleQueue() : null;
-		} else if(e.targetTouches.length && touch - e.targetTouches[0].clientY < 0){
+		} else if(e.targetTouches.length && this.state.touch - e.targetTouches[0].clientY < 0){
 			console.log('CLOSE');
 			// If queue is not already closed, close it
 			player.showQueue ? handleToggleQueue() : null;

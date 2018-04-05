@@ -2,25 +2,12 @@ import React, { Component } from 'react';
 import PlayerControls from './PlayerControls';
 import QueueList from './QueueList';
 import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
-import IconButton from 'material-ui/IconButton';
 import Collapse from 'material-ui/transitions/Collapse';
-import { 
-	Pause, 
-	PlayArrow, 
-	Stop, 
-	SkipPrevious, 
-	SkipNext,
-	MoreVert,
-	MoreHoriz
-} from 'material-ui-icons';
 
 export class Player extends Component {
 	render() {
 		const { 
 			player, 
-			trackList,
 			handleStopTrack,
 			handlePlayTrack,
 			handlePauseTrack,

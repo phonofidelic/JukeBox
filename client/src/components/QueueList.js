@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, withTheme } from 'material-ui/styles';
+import { withTheme } from 'material-ui/styles';
 import List, { ListItem } from 'material-ui/List';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -18,7 +18,6 @@ class QueuList extends Component {
 		const { 
 			queue, 
 			currentTrack, 
-			classes, 
 			theme 
 		} = this.props;
 

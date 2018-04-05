@@ -43,6 +43,12 @@ const theme = createMuiTheme({
       main: '#f44336',
       light: '#ff7961',
       dark: '#ba000d'
+    },
+    context: {
+      danger: '#EF5350',
+      warning: 'orange',
+      success: 'green',
+      info: 'blue'
     }
   }
 });

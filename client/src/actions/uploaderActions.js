@@ -13,7 +13,7 @@ export const uploadTrack = formData => {
 	return dispatch => {
 		dispatch({
 			type: UPLOAD_TRACK
-		})
+		});
 		axios.post(TRACKS_URL, formData)
 		.then(response => {
 			console.log('uploadTrack response:', response);
