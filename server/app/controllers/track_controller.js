@@ -77,6 +77,7 @@ const editTrack = (req, res, next) => {
 }
 
 // Delete a track
+// DELETE /tracks/:trackId
 const removeTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	Track.findByIdAndRemove(trackId, (err, removedTrack) => {
@@ -84,6 +85,8 @@ const removeTrack = (req, res, next) => {
 		console.log('DELETE /tracks/:trackId response:\n', removedTrack);
 		res.json({ message: 'Track removed', data: removedTrack });
 	});
+	// TODO: Delete track in file system, otherwise there will be lots of
+	// 			 files with no reference in the DB
 }
 
 module.exports = {

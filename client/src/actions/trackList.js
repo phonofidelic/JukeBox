@@ -7,7 +7,10 @@ import {
 	ADD_TRACK_TO_QUEUE,
 	POST_TRACK_DATA,
 	POST_TRACK_DATA_SUCCESS,
-	POST_TRACK_DATA_FAILURE
+	POST_TRACK_DATA_FAILURE,
+	DELETE_TRACK,
+	DELETE_TRACK_SUCCESS,
+	DELETE_TRACK_FAILURE
 } from '../actiontypes';
 import axios from 'axios';
 import { Howl } from 'howler';
@@ -108,7 +111,31 @@ export const postTrackData = (formData, trackData) => {
 		.catch(err => {
 			console.error('postTrackData error:', err);
 			dispatch({
-				type: POST_TRACK_DATA_FAILURE
+				type: POST_TRACK_DATA_FAILURE,
+				error: err
+			});
+		});
+	}
+}
+
+export const deleteTrack = (trackData) => {
+	return dispatch => {
+		dispatch({
+			type: DELETE_TRACK
+		});
+		axios.delete(`${TRACKS_URL}/${trackData._id}`)
+		.then(response => {
+			console.log('deleteTrack response:', response);
+			dispatch({
+				type: DELETE_TRACK_SUCCESS,
+				deletedTrack: response.data.data
+			})
+		})
+		.catch(err => {
+			console.error('deleteTrack error:', err);
+			dispatch({
+				type: DELETE_TRACK_FAILURE,
+				error: err
 			});
 		});
 	}

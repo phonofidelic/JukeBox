@@ -87,7 +87,7 @@ class TrackListItem extends Component {
 			queue,
 			handleStartNewQueue,
 			handleAddToQueue,
-			handleOpenEditTrackInfo
+			handleDeleteTrack
 		} = this.props;
 
 		const { anchorEl } = this.state;
@@ -127,7 +127,7 @@ class TrackListItem extends Component {
 					style={styles.menu}
 				>
 					<MenuItem onClick={this.handelSelectEdit.bind(this)}>Edit Track</MenuItem>
-					<MenuItem>Delete Track</MenuItem>
+					<MenuItem onClick={() => handleDeleteTrack(track)}>Delete Track</MenuItem>
 				</Menu>
 			</Grid>
 		);

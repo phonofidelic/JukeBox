@@ -6,14 +6,17 @@ import {
 	SELECT_TRACK,
 	POST_TRACK_DATA,
 	POST_TRACK_DATA_SUCCESS,
-	POST_TRACK_DATA_FAILURE
+	POST_TRACK_DATA_FAILURE,
+	DELETE_TRACK,
+	DELETE_TRACK_SUCCESS,
+	DELETE_TRACK_FAILURE
 } from '../actiontypes';
 
 const INITIAL_STATE = {
 	fetchingTracks: false,
+	postingTrackData: false,
 	tracks: [],
 	selectedTrack: null,
-	postingTrackData: false,
 	error: false
 };
 
@@ -59,15 +62,15 @@ const trackData = (state = INITIAL_STATE, action) => {
 
 		case POST_TRACK_DATA_SUCCESS:
 			// Find index of track to be updated: https://stackoverflow.com/questions/42053178/update-array-of-object-without-mutation
-			const index = state.tracks.findIndex(track => track._id === action.updatedTrack._id);
+			const updateIndex = state.tracks.findIndex(track => track._id === action.updatedTrack._id);
 
 			return {
 				...state,
 				postingTrackData: false,
 				tracks: [
-					...state.tracks.slice(0, index), 
+					...state.tracks.slice(0, updateIndex), 
 					action.updatedTrack, 
-					...state.tracks.slice(index+1)
+					...state.tracks.slice(updateIndex+1)
 				],
 				message: 'Track data saved'
 			}
@@ -77,6 +80,32 @@ const trackData = (state = INITIAL_STATE, action) => {
 				...state,
 				postingTrackData: false,
 				error: 'Could not save changes'
+			}
+
+		case DELETE_TRACK:
+			return {
+				...state,
+				postingTrackData: true
+			}
+
+		case DELETE_TRACK_SUCCESS:
+		const deleteIndex = state.tracks.findIndex(track => track._id === action.deletedTrack._id);
+
+			return {
+				...state,
+				postingTrackData: false,
+				message: 'Successfully deleted track',
+				tracks: [
+					...state.tracks.slice(0, deleteIndex), 
+					...state.tracks.slice(deleteIndex+1)
+				],
+			}
+
+		case DELETE_TRACK_FAILURE:
+			return {
+				...state,
+				postingTrackData: false,
+				error: 'Could not delete track'
 			}
 
 		default:

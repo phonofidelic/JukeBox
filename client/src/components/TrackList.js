@@ -15,8 +15,8 @@ export class TrackList extends Component {
 			handleSelectTrack,
 			handleStartNewQueue,
 			handleAddToQueue,
-			handleOpenEditTrackInfo,
 			handlePostTrackData,
+			handleDeleteTrack,
 			theme
 		} = this.props;
 
@@ -41,8 +41,8 @@ export class TrackList extends Component {
 							handleSelectTrack={handleSelectTrack}
 							handleStartNewQueue={handleStartNewQueue}
 							handleAddToQueue={handleAddToQueue}
-							handleOpenEditTrackInfo={handleOpenEditTrackInfo}
 							handlePostTrackData={handlePostTrackData}
+							handleDeleteTrack={handleDeleteTrack}
 						/>
 					))}
 				</List>

@@ -23,12 +23,13 @@ export class TrackListContainer extends Component {
 		this.props.addToQueue(track);
 	}
 
-	handleOpenEditTrackInfo(track) {
-		console.log('handleOpenEditTrackInfo, track:', track);
+	handlePostTrackData(formData, trackData) {
+		this.props.postTrackData(formData, trackData);
 	}
 
-	handlePostTrackData(trackData, track) {
-		this.props.postTrackData(trackData, track);
+	handleDeleteTrack(trackData) {
+		console.log('handleDeleteTrack, trackData:', trackData)
+		this.props.deleteTrack(trackData);
 	}
 
 	render() {
@@ -46,8 +47,8 @@ export class TrackListContainer extends Component {
 				handleSelectTrack={this.handleSelectTrack.bind(this)}
 				handleStartNewQueue={this.handleStartNewQueue.bind(this)}
 				handleAddToQueue={this.handleAddToQueue.bind(this)}
-				handleOpenEditTrackInfo={this.handleOpenEditTrackInfo.bind(this)}
 				handlePostTrackData={this.handlePostTrackData.bind(this)}
+				handleDeleteTrack={this.handleDeleteTrack.bind(this)}
 			/> 
 		)
 	}
