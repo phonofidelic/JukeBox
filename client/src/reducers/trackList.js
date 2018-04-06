@@ -8,6 +8,8 @@ import {
 	POST_TRACK_DATA_SUCCESS,
 	POST_TRACK_DATA_FAILURE,
 	DELETE_TRACK,
+	DELETE_TRACK_CONFIRM,
+	DELETE_TRACK_CANCEL,
 	DELETE_TRACK_SUCCESS,
 	DELETE_TRACK_FAILURE
 } from '../actiontypes';
@@ -17,7 +19,8 @@ const INITIAL_STATE = {
 	postingTrackData: false,
 	tracks: [],
 	selectedTrack: null,
-	error: false
+	error: false,
+	message: null
 };
 
 const trackData = (state = INITIAL_STATE, action) => {
@@ -85,7 +88,18 @@ const trackData = (state = INITIAL_STATE, action) => {
 		case DELETE_TRACK:
 			return {
 				...state,
+				message: 'Are you sure you want to delete this track?'
+			}
+
+		case DELETE_TRACK_CONFIRM:
+			return {
+				...state,
 				postingTrackData: true
+			}
+
+		case DELETE_TRACK_CANCEL:
+			return {
+				...state
 			}
 
 		case DELETE_TRACK_SUCCESS:

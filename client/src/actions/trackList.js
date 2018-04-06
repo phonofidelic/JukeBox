@@ -9,6 +9,8 @@ import {
 	POST_TRACK_DATA_SUCCESS,
 	POST_TRACK_DATA_FAILURE,
 	DELETE_TRACK,
+	DELETE_TRACK_CONFIRM,
+	DELETE_TRACK_CANCEL,
 	DELETE_TRACK_SUCCESS,
 	DELETE_TRACK_FAILURE
 } from '../actiontypes';
@@ -118,10 +120,18 @@ export const postTrackData = (formData, trackData) => {
 	}
 }
 
-export const deleteTrack = (trackData) => {
+export const deleteTrack = () => {
 	return dispatch => {
 		dispatch({
 			type: DELETE_TRACK
+		});
+	}
+}
+
+export const deleteTrackConfirm = trackData => {
+	return dispatch => {
+		dispatch({
+			type: DELETE_TRACK_CONFIRM
 		});
 		axios.delete(`${TRACKS_URL}/${trackData._id}`)
 		.then(response => {
@@ -141,3 +151,10 @@ export const deleteTrack = (trackData) => {
 	}
 }
 
+export const deleteTrackCancel = () => {
+	return dispatch => {
+		dispatch({
+			typr: DELETE_TRACK_CANCEL
+		});
+	}
+}

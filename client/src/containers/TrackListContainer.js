@@ -29,7 +29,7 @@ export class TrackListContainer extends Component {
 
 	handleDeleteTrack(trackData) {
 		console.log('handleDeleteTrack, trackData:', trackData)
-		this.props.deleteTrack(trackData);
+		this.props.deleteTrackConfirm(trackData);
 	}
 
 	render() {

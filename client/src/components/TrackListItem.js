@@ -15,6 +15,14 @@ import {
 } from 'material-ui-icons';
 import TextField from 'material-ui/TextField';
 import EditTrackForm from './EditTrackForm';
+import Button from 'material-ui/Button';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import AlertDialog from './AlertDialog';
 
 const form = reduxForm({
 	form: 'editTrackForm'
@@ -127,7 +135,18 @@ class TrackListItem extends Component {
 					style={styles.menu}
 				>
 					<MenuItem onClick={this.handelSelectEdit.bind(this)}>Edit Track</MenuItem>
-					<MenuItem onClick={() => handleDeleteTrack(track)}>Delete Track</MenuItem>
+					{/*<MenuItem onClick={() => handleDeleteTrack(track)}>Delete Track</MenuItem>*/}
+					<MenuItem>
+						<AlertDialog 
+							onAlertClose={this.handleOptionsClose.bind(this)}
+							triggerButtonText="Delete"
+							headerText="Are you sure you want to delete this track?" 
+							bodyText={'Confirming will permanently delete the selected track. This action cannot be undone.'} 
+							actionCancelButtonText="Cancel"
+							actionConfirmButtonText="Confirm"
+							handleActionConfirm={() => handleDeleteTrack(track)}
+						/>
+					</MenuItem>
 				</Menu>
 			</Grid>
 		);

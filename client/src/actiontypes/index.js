@@ -21,5 +21,7 @@ export const // uploaderActionTypes
 						 POST_TRACK_DATA_SUCCESS = 'post_track_data_success',
 						 POST_TRACK_DATA_FAILURE = 'post_track_data_failure',
 						 DELETE_TRACK = 'delete_track',
+						 DELETE_TRACK_CONFIRM = 'delete_track_confirm',
+						 DELETE_TRACK_CANCEL = 'delete_track_cancel',
 						 DELETE_TRACK_SUCCESS = 'delete_track_success',
 						 DELETE_TRACK_FAILURE = 'delete_track_failure';
