@@ -103,7 +103,7 @@ export const postTrackData = (formData, trackData) => {
 		dispatch({
 			type: POST_TRACK_DATA,
 		});
-		axios.put(`${TRACKS_URL}x/${trackData._id}`, formData)
+		axios.put(`${TRACKS_URL}/${trackData._id}`, formData)
 		.then(response => {
 			console.log('postTrackData response:', response)
 			dispatch({
