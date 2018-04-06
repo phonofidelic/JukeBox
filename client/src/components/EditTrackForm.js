@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, Form } from 'redux-form';
-import { withTheme } from 'material-ui/styles';
+import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import { 

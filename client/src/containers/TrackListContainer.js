@@ -11,44 +11,12 @@ export class TrackListContainer extends Component {
 		this.props.getTracks();
 	}
 
-	handleSelectTrack(track) {
-		this.props.selectTrack(track);
-	}
-
-	handleStartNewQueue(track, currentTrack) {
-		this.props.startNewQueue(track, currentTrack);
-	}
-
-	handleAddToQueue(track) {
-		this.props.addToQueue(track);
-	}
-
-	handlePostTrackData(formData, trackData) {
-		this.props.postTrackData(formData, trackData);
-	}
-
-	handleDeleteTrack(trackData) {
-		console.log('handleDeleteTrack, trackData:', trackData)
-		this.props.deleteTrackConfirm(trackData);
-	}
-
 	render() {
-		const { trackList, player } = this.props;
+		const { trackList } = this.props;
 
-		// TODO: simplify props
-		// {...this.props} ?
 		return(
 			<TrackList 
-				tracks={trackList.tracks}
-				queue={player.queue}
-				selectedTrack={trackList.selectedTrack}
-				playing={player.playing}
-				currentTrack={player.currentTrack}
-				handleSelectTrack={this.handleSelectTrack.bind(this)}
-				handleStartNewQueue={this.handleStartNewQueue.bind(this)}
-				handleAddToQueue={this.handleAddToQueue.bind(this)}
-				handlePostTrackData={this.handlePostTrackData.bind(this)}
-				handleDeleteTrack={this.handleDeleteTrack.bind(this)}
+				trackList={trackList}
 			/> 
 		)
 	}
@@ -56,8 +24,7 @@ export class TrackListContainer extends Component {
 
 const mapStateToProps = state => {
 	return {
-		trackList: state.trackList,
-		player: state.player
+		trackList: state.trackList
 	}
 }
 

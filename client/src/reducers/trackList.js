@@ -11,7 +11,8 @@ import {
 	DELETE_TRACK_CONFIRM,
 	DELETE_TRACK_CANCEL,
 	DELETE_TRACK_SUCCESS,
-	DELETE_TRACK_FAILURE
+	DELETE_TRACK_FAILURE,
+	CLEAR_MESSAGE
 } from '../actiontypes';
 
 const INITIAL_STATE = {
@@ -20,7 +21,10 @@ const INITIAL_STATE = {
 	tracks: [],
 	selectedTrack: null,
 	error: false,
-	message: null
+	message: {
+		text: null,
+		context: null
+	}
 };
 
 const trackData = (state = INITIAL_STATE, action) => {
@@ -75,14 +79,15 @@ const trackData = (state = INITIAL_STATE, action) => {
 					action.updatedTrack, 
 					...state.tracks.slice(updateIndex+1)
 				],
-				message: 'Track data saved'
+				message: action.message
 			}
 
 		case POST_TRACK_DATA_FAILURE:
 			return {
 				...state,
 				postingTrackData: false,
-				error: 'Could not save changes'
+				error: 'Could not save changes',
+				message: action.message
 			}
 
 		case DELETE_TRACK:
@@ -120,6 +125,12 @@ const trackData = (state = INITIAL_STATE, action) => {
 				...state,
 				postingTrackData: false,
 				error: 'Could not delete track'
+			}
+
+		case CLEAR_MESSAGE:
+			return {
+				...state,
+				message: { text: null, context: null },
 			}
 
 		default:

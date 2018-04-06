@@ -12,7 +12,9 @@ import {
 	DELETE_TRACK_CONFIRM,
 	DELETE_TRACK_CANCEL,
 	DELETE_TRACK_SUCCESS,
-	DELETE_TRACK_FAILURE
+	DELETE_TRACK_FAILURE,
+	SET_MESSAGE,
+	CLEAR_MESSAGE
 } from '../actiontypes';
 import axios from 'axios';
 import { Howl } from 'howler';
@@ -97,24 +99,24 @@ export const addToQueue = track => {
 }
 
 export const postTrackData = (formData, trackData) => {
-	console.log('postTrackData, formData:', formData, 'trackData:', trackData);
 	return dispatch => {
 		dispatch({
 			type: POST_TRACK_DATA,
 		});
-		axios.put(`${TRACKS_URL}/${trackData._id}`, formData)
+		axios.put(`${TRACKS_URL}x/${trackData._id}`, formData)
 		.then(response => {
 			console.log('postTrackData response:', response)
 			dispatch({
 				type: POST_TRACK_DATA_SUCCESS,
-				updatedTrack: response.data.data
+				updatedTrack: response.data.data,
+				message: {text: 'Track data saved!', context: 'success'} //TODO: return message from response
 			});
 		})
 		.catch(err => {
 			console.error('postTrackData error:', err);
 			dispatch({
 				type: POST_TRACK_DATA_FAILURE,
-				error: err
+				message: {text: 'Could not save changes', context: 'danger'}
 			});
 		});
 	}
