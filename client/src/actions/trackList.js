@@ -28,19 +28,25 @@ export const getTracks = () => {
 			type: FETCH_TRACKS
 		});
 
-		axios.get(TRACKS_URL)
+		axios.get(`${TRACKS_URL}`)
 		.then(response => {
 			console.log('getTracks response:', response);
+			const message = { text: 'Tracks loaded!', context: 'info'};
 			dispatch({
 				type: FETCH_TRACKS_SUCCESS,
 				tracks: response.data.data,
-				message: response.data.message
+				message: message
+			});
+			dispatch({
+				type: SET_MESSAGE,
+				message: message
 			});
 		})
 		.catch(err => {
 			console.error(err);
 			dispatch({
 				type: FETCH_TRACKS_FAILURE,
+				message: {text: 'Could not fetch tracks', context: 'danger'},
 				error: {message: 'Could not fetch tracks'} // TODO: get message from server response
 			});
 		});
@@ -85,6 +91,7 @@ export const addToQueue = track => {
 	// This creates a queuItem by coppying the passed track item
 	// and adding a queueId and howl prop.
 	const queueId = Math.trunc(Math.random() * Date.now());
+	const message = { text: `Added ${track.name} to queue`, context: 'info' };
 	
 	return dispatch => {
 		dispatch({
@@ -93,7 +100,13 @@ export const addToQueue = track => {
 				...track,
 				queueId: queueId,
 				howl: new Howl({src: [track.file.path]}) 
-			}
+			},
+			message: message
+		});
+		// !!! Is this an anti-pattern?
+		dispatch({
+			type: SET_MESSAGE,
+			message: message
 		});
 	};
 }
@@ -140,13 +153,15 @@ export const deleteTrackConfirm = trackData => {
 			console.log('deleteTrack response:', response);
 			dispatch({
 				type: DELETE_TRACK_SUCCESS,
-				deletedTrack: response.data.data
+				deletedTrack: response.data.data,
+				message: {text: 'Track was deleted', context: 'success'}
 			})
 		})
 		.catch(err => {
 			console.error('deleteTrack error:', err);
 			dispatch({
 				type: DELETE_TRACK_FAILURE,
+				message: {text: 'Could not delete track', context: 'danger'},
 				error: err
 			});
 		});

@@ -21,10 +21,7 @@ const INITIAL_STATE = {
 	tracks: [],
 	selectedTrack: null,
 	error: false,
-	message: {
-		text: null,
-		context: null
-	}
+	message: null
 };
 
 const trackData = (state = INITIAL_STATE, action) => {
@@ -39,13 +36,15 @@ const trackData = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				fetchingTracks: false,
-				tracks: action.tracks
+				tracks: action.tracks,
+				message: action.message
 			}
 
 		case FETCH_TRACKS_FAILURE:
 			return {
 				...state,
 				fetchingTracks: false,
+				message: action.message,
 				error: action.error
 			}
 
@@ -113,7 +112,7 @@ const trackData = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				postingTrackData: false,
-				message: 'Successfully deleted track',
+				message: action.message,
 				tracks: [
 					...state.tracks.slice(0, deleteIndex), 
 					...state.tracks.slice(deleteIndex+1)
@@ -124,13 +123,14 @@ const trackData = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				postingTrackData: false,
+				message: action.message,
 				error: 'Could not delete track'
 			}
 
-		case CLEAR_MESSAGE:
+		case 'TEST':
 			return {
 				...state,
-				message: { text: null, context: null },
+				message: action.message
 			}
 
 		default:

@@ -6,7 +6,7 @@ import {
 	ADD_TRACK_TO_QUEUE,
 	PLAY_NEXT,
 	PLAY_PREV,
-	TOGGLE_QUEUE_VISIBILITY
+	TOGGLE_QUEUE_VISIBILITY,
 } from '../actiontypes';
 
 const INITIAL_STATE = {
@@ -15,7 +15,8 @@ const INITIAL_STATE = {
 	howl: null,
 	playing: false,
 	queueIndex: null,
-	currentTrack: null
+	currentTrack: null,
+	message: null
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -32,19 +33,20 @@ const player = (state = INITIAL_STATE, action) => {
 		case ADD_TRACK_TO_QUEUE:
 			return {
 				...state,
-				queue: [...state.queue, action.track]
+				queue: [...state.queue, action.track],
+				message: action.message
 			}
 
 		case PLAY_TRACK:
 			return {
 				...state,
-				playing: true
+				playing: true,
 			}
 
 		case PAUSE_TRACK:
 			return {
 				...state,
-				playing: false
+				playing: false,
 			}
 
 		case STOP_TRACK:

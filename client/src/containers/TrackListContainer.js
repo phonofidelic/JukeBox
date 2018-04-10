@@ -11,6 +11,10 @@ export class TrackListContainer extends Component {
 		this.props.getTracks();
 	}
 
+	componentDidCatch(error, info) {
+    console.log('componentDidCatch, error', error)
+  }
+
 	render() {
 		const { trackList } = this.props;
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { messageActions } from '../actions';
 import Message from '../components/Message';
+import { CLEAR_MESSAGE } from '../actiontypes'
 
 class MessageContainer extends Component {
 	handleClearMessage() {
@@ -10,17 +11,42 @@ class MessageContainer extends Component {
 	}
 
 	render() {
-		const { messages, trackList } = this.props;
+		const { message } = this.props;
+		if (message) console.log('MessageContainer, messages', message)
+
+		if (message) 
+			return (
+				<Message 
+					open={Boolean(message)}
+					text={message.text}
+					context={message.context} 
+					handleClearMessage={this.handleClearMessage.bind(this)} 
+				/>
+			)
+		
+
 		return (
-			<Message messageData={trackList.message.text} context={trackList.message.context} handleClearMessage={this.handleClearMessage.bind(this)} />
-		);
+			<Message open={Boolean(message)} />
+		)
 	}
+}
+
+// Selector checks for current message
+const getMessage = state => {
+	for (const reducer in state) {
+		if (state[reducer].message) {
+			return state[reducer].message
+		}
+	}
+}
+
+const getMessages = state => {
+
 }
 
 const mapStateToProps = state => {
 	return {
-		messages: state.messages,
-		trackList: state.trackList
+		message: state.messages.message
 	}
 }
 

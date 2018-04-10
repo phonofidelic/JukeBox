@@ -5,7 +5,7 @@ import {
 
 const INITIAL_STATE = {
 	message: null,
-	context: null
+	messages: []
 }
 
 const messages = (state = INITIAL_STATE, action) => {
@@ -14,14 +14,13 @@ const messages = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				message: action.message,
-				context: action.context
+				messages: [ ...state.messages, action.message ]
 			}
 
 		case CLEAR_MESSAGE:
 			return {
 				...state,
 				message: null,
-				context: null
 			}
 
 		default: return state;
