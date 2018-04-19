@@ -27,4 +27,6 @@ export const // uploaderActionTypes
 						 DELETE_TRACK_FAILURE = 'delete_track_failure',
 						 // messageActiontypes
 						 SET_MESSAGE = 'set_message',
-						 CLEAR_MESSAGE = 'clear_message';
+						 CLEAR_MESSAGE = 'clear_message',
+						 SET_ALERT = 'set_alert',
+						 CLEAR_ALERT = 'clear_alert';

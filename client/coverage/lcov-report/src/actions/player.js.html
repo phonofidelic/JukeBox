@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">20.83% </span>
+        <span class="strong">21.43% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>5/24</span>
+        <span class='fraction'>6/28</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">20.83% </span>
+        <span class="strong">21.43% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>5/24</span>
+        <span class='fraction'>6/28</span>
       </div>
     </div>
     <p class="quiet">
@@ -101,7 +101,17 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,7 +119,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -118,7 +129,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -127,7 +138,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -136,7 +147,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -147,9 +158,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -161,7 +181,8 @@
 	PAUSE_TRACK,
 	STOP_TRACK,
 	PLAY_NEXT,
-	PLAY_PREV
+	PLAY_PREV,
+	TOGGLE_QUEUE_VISIBILITY
 } from '../actiontypes';
 &nbsp;
 export const playTrack = <span class="fstat-no" title="function not covered" >(q</span>ueue, queueIndex) =&gt; {
@@ -192,32 +213,41 @@ export const stopTrack = <span class="fstat-no" title="function not covered" >(q
 }
 &nbsp;
 export const playNext = <span class="fstat-no" title="function not covered" >(q</span>ueue, queueIndex) =&gt; {
-<span class="cstat-no" title="statement not covered" >	console.log('playNext, queueIndex:', queueIndex);</span>
+<span class="cstat-no" title="statement not covered" >	console.log('playNext, queueIndex:', queueIndex+1);</span>
 <span class="cstat-no" title="statement not covered" >	queue[queueIndex].howl.stop();</span>
 <span class="cstat-no" title="statement not covered" >	queue[queueIndex+1].howl.play();</span>
 <span class="cstat-no" title="statement not covered" >	return <span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >		dispatch({</span>
 			type: PLAY_NEXT
-		})
-	}
+		});
+	};
 }
 &nbsp;
 export const playPrev = <span class="fstat-no" title="function not covered" >(q</span>ueue, queueIndex) =&gt; {
-<span class="cstat-no" title="statement not covered" >	console.log('playPrev, queueIndex:', queueIndex);</span>
+<span class="cstat-no" title="statement not covered" >	console.log('playPrev, queueIndex:', queueIndex-1);</span>
 <span class="cstat-no" title="statement not covered" >	queue[queueIndex].howl.stop();</span>
 <span class="cstat-no" title="statement not covered" >	queue[queueIndex-1].howl.play();</span>
 <span class="cstat-no" title="statement not covered" >	return <span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >		dispatch({</span>
 			type: PLAY_PREV
-		})
-	}
+		});
+	};
+}
+&nbsp;
+export const toggleQueue = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >	console.log('toggle')</span>
+<span class="cstat-no" title="statement not covered" >	return <span class="fstat-no" title="function not covered" >di</span>spatch =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >		dispatch({</span>
+			type: TOGGLE_QUEUE_VISIBILITY
+		});
+	};
 }</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Mar 28 2018 22:44:13 GMT-0700 (PDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Apr 16 2018 17:43:57 GMT-0700 (PDT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

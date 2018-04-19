@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>3/3</span>
       </div>
     </div>
     <p class="quiet">
@@ -98,7 +98,21 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,19 +138,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,64 +173,75 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import PlayerControls from './PlayerControls';
+import QueueList from './QueueList';
+import Grid from 'material-ui/Grid';
+import Collapse from 'material-ui/transitions/Collapse';
 &nbsp;
 export class Player extends Component {
-	renderControlls() {
-		const {
-			queue,
-			playing, 
-			queuIndex,
+	render() {
+		const { 
+			player, 
 			handleStopTrack,
 			handlePlayTrack,
 			handlePauseTrack,
 			handlePlayNext,
-			handlePlayPrev
+			handlePlayPrev,
+			handleToggleQueue
 		} = this.props;
 &nbsp;
+		const styles = {
+			root: {
+			  position: 'fixed',
+			  bottom: '0px',
+			  width: '100%',
+			  boxShadow: '0px -1px 20px 1px #ccc',
+			  background: '#fff',
+			  padding: '0'
+			}
+		};
+		
+		// [CONTRACT]
+		// If player.queue has tracks: 
+		// * render controls and queue list.
+		// * pass player action handlers to PLayerControls component.
+		// * render QueueList with queue and currentTrack props inside MUI Collapse component.
+		// Otherwise: Player component is an empty div.
 		return (
-			&lt;div&gt;
-				&lt;button disabled={queue.length &lt; 1} onClick={ handlePlayPrev }&gt;{'|&lt;'}&lt;/button&gt;
-				{!playing ? &lt;button onClick={ handlePlayTrack }&gt;play&lt;/button&gt; : <span class="branch-1 cbranch-no" title="branch not covered" >&lt;button onClick={ handlePauseTrack }&gt;pause&lt;/button&gt;}</span>
-				&lt;button onClick={ handleStopTrack }&gt;stop&lt;/button&gt;
-				&lt;button disabled={queue.length &lt;= 1 &amp; queuIndex !== queue.length+1} onClick={ handlePlayNext }&gt;&gt;|&lt;/button&gt;
-			&lt;/div&gt;
-		);
-	}
-&nbsp;
-	renderQueue() {
-		const { queue, queuIndex } = this.props;
-		return (
-			&lt;ul&gt;
-				{ queue.map((track, i) =&gt; (
-					&lt;li key={i}&gt;{track.name}{i === queuIndex ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;span&gt;*&lt;/span&gt; </span>: null}&lt;/li&gt;
-				)) }
-			&lt;/ul&gt;
-		);
-	}
-&nbsp;
-	render() {
-		const { queue } = this.props;
-		return (
-			&lt;div&gt;
-				{queue.length &gt; 0 &amp;&amp; (
-					&lt;div&gt;
-						Player
-						{this.renderControlls()}
-						{this.renderQueue()}
+			&lt;div style={styles.root}&gt;
+				{	player.queue.length &gt; 0 &amp;&amp;
+<span class="branch-1 cbranch-no" title="branch not covered" >					&lt;div&gt;</span>
+						&lt;Grid container&gt;
+							&lt;Grid item xs={12}&gt;
+								&lt;PlayerControls 
+									player={player}
+									handleStopTrack={handleStopTrack}
+									handlePlayTrack={handlePlayTrack}
+									handlePauseTrack={handlePauseTrack}
+									handlePlayNext={handlePlayNext}
+									handlePlayPrev={handlePlayPrev}
+									handleToggleQueue={handleToggleQueue}
+								/&gt;
+							&lt;/Grid&gt;
+						&lt;/Grid&gt;
+						&lt;Collapse direction="up" in={player.showQueue} collapsedHeight="0px"&gt;
+							&lt;QueueList queue={player.queue} currentTrack={player.currentTrack} /&gt;
+						&lt;/Collapse&gt;
 					&lt;/div&gt;
-				)}
+				}
 			&lt;/div&gt;
 		);
 	}
 }
 &nbsp;
-export default Player;</pre></td></tr>
+export default Player;
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Mar 28 2018 22:44:13 GMT-0700 (PDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Apr 16 2018 17:43:57 GMT-0700 (PDT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

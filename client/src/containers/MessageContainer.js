@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { messageActions } from '../actions';
 import Message from '../components/Message';
-import { CLEAR_MESSAGE } from '../actiontypes'
 
 class MessageContainer extends Component {
 	handleClearMessage() {

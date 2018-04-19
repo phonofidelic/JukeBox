@@ -1,7 +1,8 @@
 import {
 	UPLOAD_TRACK,
 	UPLOAD_SUCCESS,
-	UPLOAD_FAILURE
+	UPLOAD_FAILURE,
+	SET_MESSAGE
 } from '../actiontypes';
 import axios from 'axios';
 import config from '../config';
@@ -21,9 +22,13 @@ export const uploadTrack = formData => {
 				type: UPLOAD_SUCCESS,
 				uploadedTrack: response.data.data
 			});
+			dispatch({
+				type: SET_MESSAGE,
+				message: {text: `${response.data.data.name} saved to library`, context: 'success'}
+			});
 		})
 		.catch(err => {
-			console.log('uploadTrack error:', err);
+			console.error('uploadTrack error:', err);
 			dispatch({
 				type: UPLOAD_FAILURE,
 				error: err

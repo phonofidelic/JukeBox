@@ -20,31 +20,31 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>3/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>3/4</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -90,20 +90,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,46 +115,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
-import TrackListItem from './TrackListItem';
+import TrackListItemContainer from '../containers/TrackListItemContainer';
+import List from 'material-ui/List';
+import { withTheme } from 'material-ui/styles';
 &nbsp;
 export class TrackList extends Component {
 	render() {
 		const { 
-			tracks,
-			selectedTrack,
-			playing,
-			currentTrack,
-			handleSelectTrack,
-			handleStartNewQueue,
-			handleAddToQueue
+			trackList,
+			theme
 		} = this.props;
 &nbsp;
+		const styles = {
+			root: {
+				background: theme.palette.primary.light,
+				borderTop: `1px solid ${theme.palette.primary.main}`,
+				padding: '0px'
+			}
+		}
+&nbsp;
 		return (
-			&lt;ul&gt;
-				{tracks &amp;&amp; tracks.map(track =&gt; (
-					&lt;TrackListItem 
+			&lt;List className="TrackList" style={styles.root}&gt;
+				{trackList.tracks &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >trackList.tracks.map(<span class="fstat-no" title="function not covered" >tr</span>ack =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >					&lt;TrackListItemContainer </span>
 						key={track._id} 
 						track={track} 
-						selectedTrack={selectedTrack}
-						playing={playing}
-						currentTrack={currentTrack}
-						handleSelectTrack={handleSelectTrack}
-						handleStartNewQueue={handleStartNewQueue}
-						handleAddToQueue={handleAddToQueue}
+						selectedTrack={trackList.selectedTrack}
 					/&gt;
 				))}
-			&lt;/ul&gt;
+			&lt;/List&gt;
 		);
 	}
 }
 &nbsp;
-export default TrackList;</pre></td></tr>
+export default withTheme()(TrackList);</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Mar 28 2018 22:44:13 GMT-0700 (PDT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Apr 16 2018 17:43:57 GMT-0700 (PDT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

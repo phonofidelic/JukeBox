@@ -27,26 +27,32 @@ export class Player extends Component {
 			}
 		};
 		
+		// [CONTRACT]
+		// If player.queue has tracks: 
+		// * render controls and queue list.
+		// * pass player action handlers to PLayerControls component.
+		// * render QueueList with queue and currentTrack props inside MUI Collapse component.
+		// Otherwise: Player component is an empty div.
 		return (
 			<div style={styles.root}>
 				{	player.queue.length > 0 &&
 					<div>
-					<Grid container>
-						<Grid item xs={12}>
-							<PlayerControls 
-								player={player}
-								handleStopTrack={handleStopTrack}
-								handlePlayTrack={handlePlayTrack}
-								handlePauseTrack={handlePauseTrack}
-								handlePlayNext={handlePlayNext}
-								handlePlayPrev={handlePlayPrev}
-								handleToggleQueue={handleToggleQueue}
-							/>
+						<Grid container>
+							<Grid item xs={12}>
+								<PlayerControls 
+									player={player}
+									handleStopTrack={handleStopTrack}
+									handlePlayTrack={handlePlayTrack}
+									handlePauseTrack={handlePauseTrack}
+									handlePlayNext={handlePlayNext}
+									handlePlayPrev={handlePlayPrev}
+									handleToggleQueue={handleToggleQueue}
+								/>
+							</Grid>
 						</Grid>
-					</Grid>
-					<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
-						<QueueList queue={player.queue} currentTrack={player.currentTrack} />
-					</Collapse>
+						<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
+							<QueueList queue={player.queue} currentTrack={player.currentTrack} />
+						</Collapse>
 					</div>
 				}
 			</div>

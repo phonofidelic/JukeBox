@@ -17,6 +17,7 @@ class AlertDialog extends React.Component {
   };
 
   handleClickOpen = () => {
+    console.log('baaaajs')
     this.setState({ open: true });
   };
 
@@ -36,7 +37,8 @@ class AlertDialog extends React.Component {
   render() {
     const { 
       triggerButtonText, 
-      headerText, bodyText, 
+      headerText,
+      bodyText, 
       actionCancelButtonText, 
       actionConfirmButtonText,
       handleActionConfirm
@@ -72,3 +74,4 @@ class AlertDialog extends React.Component {
 }
 
 export default AlertDialog;
+

@@ -42,7 +42,16 @@ class TrackListItem extends Component {
 				lineHeight: '50px'
 			}
 		};
-
+	
+		// [CONTRACT]
+		// * selectedTrack && track._id ?
+		//	 Use styles.selected css
+		//	 Otherwise, use syles.root css
+		//
+		// * this.state.editMode ?
+		//	 render EditTrackForm with track prop
+		//	 
+		// * selectedTrack && track._id === selectedTrack._id ?
 		return (	
 			<ListItem 
 				onClick={() => handleSelectTrack(track)}

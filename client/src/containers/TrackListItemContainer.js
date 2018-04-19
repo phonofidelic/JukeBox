@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { trackListActions, playerActions } from '../actions';
+import { trackListActions, playerActions, messageActions } from '../actions';
 import TrackListItem from '../components/TrackListItem';
 
-const actions = { ...trackListActions, ...playerActions };
+const actions = { ...trackListActions, ...playerActions, ...messageActions };
 
 class TrackListItemContainer extends Component {
 	handleSelectTrack(track) {
@@ -23,7 +23,12 @@ class TrackListItemContainer extends Component {
 	}
 
 	handleDeleteTrack(trackData) {
-		this.props.deleteTrackConfirm(trackData);
+		// TODO: dispatch custom confirm action connected to MUI Alert component
+		const confirm = window.confirm('Are you sure you want to delete this track?')
+		if (confirm) {
+			return this.props.deleteTrackConfirm(trackData)
+		}
+		return this.props.deleteTrackCancel();
 	}
 
 	render() {

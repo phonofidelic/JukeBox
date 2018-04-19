@@ -124,6 +124,10 @@ export const postTrackData = (formData, trackData) => {
 				updatedTrack: response.data.data,
 				message: {text: 'Track data saved!', context: 'success'} //TODO: return message from response
 			});
+			dispatch({
+				type: SET_MESSAGE,
+				message: {text: `${response.data.data.name} updated!`, context: 'success'}
+			});
 		})
 		.catch(err => {
 			console.error('postTrackData error:', err);
@@ -155,6 +159,10 @@ export const deleteTrackConfirm = trackData => {
 				type: DELETE_TRACK_SUCCESS,
 				deletedTrack: response.data.data,
 				message: {text: 'Track was deleted', context: 'success'}
+			});
+			dispatch({
+				type: SET_MESSAGE,
+				message: {text: `${response.data.data.name} was deleted`, context: 'success'}
 			})
 		})
 		.catch(err => {
@@ -171,7 +179,7 @@ export const deleteTrackConfirm = trackData => {
 export const deleteTrackCancel = () => {
 	return dispatch => {
 		dispatch({
-			typr: DELETE_TRACK_CANCEL
+			type: DELETE_TRACK_CANCEL
 		});
 	}
 }

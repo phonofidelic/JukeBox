@@ -4869,6 +4869,10 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
+mui-redux-alerts@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/mui-redux-alerts/-/mui-redux-alerts-0.2.0.tgz#fc7a9e7d859c4a465e66f652b2e9cfc6ce78a04f"
+
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz#899f11d9686e5e05cb91b35d5f0e63b773cfc901"

@@ -9,17 +9,34 @@ import {
 import Menu, { MenuItem } from 'material-ui/Menu';
 import AlertDialog from './AlertDialog';
 
+const deleteTrackAlert = {
+	headerText: 'Are you sure you want to delete this track?',
+	bodyText: 'Confirming will permanently delete the selected track. This action cannot be undone.',
+	cancleButtonText: 'Cancel',
+	confirmButtonText: 'Confirm'
+}
+
 class TrackListItemControls extends Component {
 	state = {
-		anchorEl: null
+		anchorEl: null,
+		alertOpen: false
 	}
 
 	handleOptionsClick(e) {
-		this.setState({anchorEl: e.currentTarget});
+		this.setState({ ...this.state, anchorEl: e.currentTarget });
 	}
 
 	handleOptionsClose(e) {
-		this.setState({anchorEl: null});
+		this.setState({ ...this.state, anchorEl: null });
+	}
+
+	handleMenuOptionClickEdit() {
+		this.props.handleToggleEditMode();
+	}
+
+	handleMenuOptionClickDelete() {
+		this.setState({ ...this.state, anchorEl: null });
+		this.props.handleDeleteTrack(this.props.track);
 	}
 
 	render() {
@@ -29,7 +46,7 @@ class TrackListItemControls extends Component {
 			handleStartNewQueue,
 			handleAddToQueue,
 			handleDeleteTrack,
-			handleToggleEditMode
+			handleToggleEditMode,
 		} = this.props;
 
 		const { anchorEl } = this.state;
@@ -68,9 +85,10 @@ class TrackListItemControls extends Component {
 					onClose={this.handleOptionsClose.bind(this)}
 					style={styles.menu}
 				>
-					<MenuItem onClick={() => handleToggleEditMode()}>Edit Track</MenuItem>
-					<MenuItem>
-						<AlertDialog 
+					<MenuItem onClick={() => this.handleMenuOptionClickEdit()}>Edit Track</MenuItem>
+					<MenuItem onClick={() => this.handleMenuOptionClickDelete()}>
+						Delete
+						{/*<AlertDialog 
 							onAlertClose={this.handleOptionsClose.bind(this)}
 							triggerButtonText="Delete"
 							headerText="Are you sure you want to delete this track?" 
@@ -78,7 +96,7 @@ class TrackListItemControls extends Component {
 							actionCancelButtonText="Cancel"
 							actionConfirmButtonText="Confirm"
 							handleActionConfirm={() => handleDeleteTrack(track)}
-						/>
+						/>*/}
 					</MenuItem>
 				</Menu>
 			</Grid>

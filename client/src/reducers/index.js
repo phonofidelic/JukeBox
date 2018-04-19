@@ -8,5 +8,5 @@ export default combineReducers({
 	trackList,
 	player,
 	messages,
-	form: formReducer
+	form: formReducer,
 });
