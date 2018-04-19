@@ -24,7 +24,6 @@ export class TrackList extends Component {
 					<TrackListItemContainer 
 						key={track._id} 
 						track={track} 
-						selectedTrack={trackList.selectedTrack}
 					/>
 				))}
 			</List>

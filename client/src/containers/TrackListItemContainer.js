@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { trackListActions, playerActions, messageActions } from '../actions';
+import { getSelectedTrack } from '../selectors';
 import TrackListItem from '../components/TrackListItem';
 
 const actions = { ...trackListActions, ...playerActions, ...messageActions };
@@ -32,12 +33,12 @@ class TrackListItemContainer extends Component {
 	}
 
 	render() {
-		const { trackList, player, track } = this.props;
+		const { selectedTrack, player, track } = this.props;
 		return (
 			<TrackListItem 
 				track={track}
 				player={player}
-				selectedTrack={trackList.selectedTrack}
+				selectedTrack={selectedTrack}
 				handleSelectTrack={this.handleSelectTrack.bind(this)}
 				handleStartNewQueue={this.handleStartNewQueue.bind(this)}
 				handleAddToQueue={this.handleAddToQueue.bind(this)}
@@ -50,7 +51,8 @@ class TrackListItemContainer extends Component {
 
 const mapStateToProps = state => {
 	return {
-		trackList: state.trackList,
+		// trackList: state.trackList,
+		selectedTrack: getSelectedTrack(state),
 		player: state.player
 	}
 }
