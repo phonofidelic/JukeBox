@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/player';
+import { getSelectedTrack } from '../selectors';
 import Player from '../components/Player';
 
 class PlayerContainer extends Component {
@@ -35,19 +36,18 @@ class PlayerContainer extends Component {
 	}
 
 	render() {
-		const { trackList, player } = this.props;
+		const { trackList, player, selectedTrack } = this.props;
 		// console.log('PlayerContainer, playing:', playing)
 		return (
 			<Player 
 				player={ player }
-				trackList={ trackList }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }
 				handleStopTrack={ this.handleStopTrack.bind(this) }
 				handlePlayNext={ this.handlePlayNext.bind(this) }
 				handlePlayPrev={ this.handlePlayPrev.bind(this) }
 				handleToggleQueue={ this.handleToggleQueue.bind(this) }
-				selectedTrack={ trackList.selectedTrack }
+				selectedTrack={ selectedTrack }
 			/>
 		);
 	}
@@ -56,7 +56,7 @@ class PlayerContainer extends Component {
 const mapStateToProps = state => {
 	return {
 		player: state.player,
-		trackList: state.trackList
+		selectedTrack: getSelectedTrack(state),
 	}
 };
 
