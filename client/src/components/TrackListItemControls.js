@@ -58,7 +58,7 @@ class TrackListItemControls extends Component {
 		}
 
 		return (
-			<Grid item xs={4}>				
+			<Grid container justify="flex-end">
 				<IconButton title="Start new queue" onClick={ () => { handleStartNewQueue(track, player.currentTrack) }} >
 				<PlayArrow />
 				</IconButton>

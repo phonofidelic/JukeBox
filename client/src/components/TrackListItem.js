@@ -39,7 +39,8 @@ class TrackListItem extends Component {
 			selected: {
 				background: theme.palette.primary.main,
 				height: '50px',
-				lineHeight: '50px'
+				lineHeight: '50px',
+				verticalAlign: 'middle,'
 			}
 		};
 	
@@ -64,26 +65,30 @@ class TrackListItem extends Component {
 			>
 				{
 					this.state.editMode ?
-					<EditTrackForm
-						track={track}
-						handlePostTrackData={handlePostTrackData}
-						handleToggleEditMode={this.handleToggleEditMode.bind(this)}
-					/>
+					<Grid container alignItems="center">
+						<EditTrackForm
+							track={track}
+							handlePostTrackData={handlePostTrackData}
+							handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+						/>
+					</Grid>
 					:
-					<Grid container alignItems={'center'}>
-						<Grid item xs={8}><Typography>{ track.name }</Typography></Grid>
+					<Grid container alignItems="center">
+						<Grid item xs={6}><Typography noWrap>{ track.name }</Typography></Grid>
 						{ 
 							selectedTrack && track._id === selectedTrack._id ? 
-							<TrackListItemControls 
-								track={track}
-								player={player}
-								handleStartNewQueue={handleStartNewQueue}
-								handleAddToQueue={handleAddToQueue}
-								handleDeleteTrack={handleDeleteTrack}
-								handleToggleEditMode={this.handleToggleEditMode.bind(this)}
-							/>
+							<Grid item xs={6}>
+									<TrackListItemControls 
+										track={track}
+										player={player}
+										handleStartNewQueue={handleStartNewQueue}
+										handleAddToQueue={handleAddToQueue}
+										handleDeleteTrack={handleDeleteTrack}
+										handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+									/>
+							</Grid>
 							: 
-							null 
+							null
 						}
 					</Grid>
 				}
