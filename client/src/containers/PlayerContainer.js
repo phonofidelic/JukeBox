@@ -12,7 +12,6 @@ class PlayerContainer extends Component {
 
 	handlePauseTrack() {
 		const { player } = this.props;
-		console.log('handlePauseTrack, track:', player.howl)
 		this.props.pauseTrack(player.queue, player.queueIndex);
 	}
 
@@ -37,7 +36,6 @@ class PlayerContainer extends Component {
 
 	render() {
 		const { trackList, player, selectedTrack } = this.props;
-		// console.log('PlayerContainer, playing:', playing)
 		return (
 			<Player 
 				player={ player }

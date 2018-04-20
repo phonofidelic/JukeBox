@@ -14,7 +14,8 @@ export class TrackList extends Component {
 			root: {
 				background: theme.palette.primary.light,
 				borderTop: `1px solid ${theme.palette.primary.main}`,
-				padding: '0px'
+				padding: '0px',
+				paddingBottom: '70px' // TODO: link value to Player height
 			}
 		}
 
