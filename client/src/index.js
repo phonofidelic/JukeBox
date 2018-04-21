@@ -9,10 +9,18 @@ import App from './App';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import registerServiceWorker from './registerServiceWorker';
 
+import createBrowserHistory from 'history/createBrowserHistory';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+
+const history = createBrowserHistory();
+
 const store = createStore(
 	reducer,
 	window.window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-	applyMiddleware(reduxThunk)
+	applyMiddleware(
+    reduxThunk, 
+    routerMiddleware(history)
+  )
 );
 
 const theme = createMuiTheme({
@@ -55,8 +63,10 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
 	<Provider store={store}>
-		<MuiThemeProvider theme={theme}>
-			<App />
-		</MuiThemeProvider>
+    <ConnectedRouter history={history}>
+  		<MuiThemeProvider theme={theme}>
+        <App />
+  		</MuiThemeProvider>
+    </ConnectedRouter>
 	</Provider>, document.getElementById('root'));
 registerServiceWorker();

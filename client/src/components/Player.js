@@ -19,7 +19,7 @@ export class Player extends Component {
 		const styles = {
 			root: {
 			  position: 'fixed',
-			  bottom: '0px',
+			  bottom: '56px', // Makes room for bottom Nav componenet
 			  width: '100%',
 			  boxShadow: '0px -1px 20px 1px #ccc',
 			  background: '#fff',
