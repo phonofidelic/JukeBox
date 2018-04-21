@@ -47,7 +47,15 @@ class EditTrackForm extends Component {
 		}
 
 		return (
-			<form style={{width: '100%'}} onSubmit={handleSubmit((formData) => handlePostTrackData(formData, track))}>
+			<form 
+				style={{width: '100%'}} 
+				onSubmit={
+					handleSubmit((formData) => {
+						handlePostTrackData(formData, track); 
+						handleToggleEditMode();
+					})
+				}
+			>
 				<Grid container alignItems="center">
 					<Grid item xs={6}>
 						<Field 
