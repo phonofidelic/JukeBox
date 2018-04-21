@@ -25,6 +25,7 @@ export const // uploaderActionTypes
 						 PLAY_NEXT = 'play_next',
 						 PLAY_PREV = 'play_prev',
 						 TOGGLE_QUEUE_VISIBILITY = 'toggle_queue_visibility',
+						 PLAY_FROM_QUEUE = 'play_from_queue',
 						 // messageActiontypes
 						 SET_MESSAGE = 'set_message',
 						 CLEAR_MESSAGE = 'clear_message',

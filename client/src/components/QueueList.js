@@ -13,7 +13,20 @@ import Typography from 'material-ui/Typography';
 //   },
 // });
 
-class QueuList extends Component {
+class QueueList extends Component {
+	constructor(props) {
+		super(props);
+		this.handleQueueItemClick = this.handleQueueItemClick.bind(this)
+	}
+
+	handleQueueItemClick(newQueueIndex, track) {
+		// console.log('handleQueueItemClick, track:', track)
+		console.log('handleQueueItemClick, newQueueIndex:', newQueueIndex)
+		// console.log('handleQueueItemClick, currentTrack:', currentTrack)
+		
+		this.props.handlePlayFromQueue(this.props.queue, this.props.queueIndex, newQueueIndex, track);
+	}
+
 	render() {
 		const { 
 			queue, 
@@ -28,12 +41,13 @@ class QueuList extends Component {
 		}
 
 		return (
-			<List className={""} style={{padding: '0'}}>
+			<List style={{padding: '0'}}>
 				{
 					queue.map((track, i) => (
 						<ListItem 
 							key={ track.queueId }
 							style={ currentTrack.queueId === track.queueId ? styles.playing : null }
+							onClick={() => this.handleQueueItemClick(i, track)}
 						>
 							<Grid container>
 								<Grid item>
@@ -50,4 +64,4 @@ class QueuList extends Component {
 	}
 }
 
-export default withTheme()(QueuList);
+export default withTheme()(QueueList);

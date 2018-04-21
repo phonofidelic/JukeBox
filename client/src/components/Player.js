@@ -13,7 +13,8 @@ export class Player extends Component {
 			handlePauseTrack,
 			handlePlayNext,
 			handlePlayPrev,
-			handleToggleQueue
+			handleToggleQueue,
+			handlePlayFromQueue,
 		} = this.props;
 
 		const styles = {
@@ -51,7 +52,14 @@ export class Player extends Component {
 							</Grid>
 						</Grid>
 						<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
-							<QueueList queue={player.queue} currentTrack={player.currentTrack} />
+							<QueueList 
+								queue={player.queue} 
+								queueIndex={player.queueIndex}
+								currentTrack={player.currentTrack} 
+								handleStopTrack={handleStopTrack}
+								handlePlayTrack={handlePlayTrack}
+								handlePlayFromQueue={handlePlayFromQueue}
+							/>
 						</Collapse>
 					</div>
 				}

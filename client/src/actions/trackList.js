@@ -37,10 +37,10 @@ export const getTracks = () => {
 				tracks: response.data.data,
 				message: message
 			});
-			dispatch({
-				type: SET_MESSAGE,
-				message: message
-			});
+			// dispatch({
+			// 	type: SET_MESSAGE,
+			// 	message: message
+			// });
 		})
 		.catch(err => {
 			console.error(err);

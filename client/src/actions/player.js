@@ -4,7 +4,8 @@ import {
 	STOP_TRACK,
 	PLAY_NEXT,
 	PLAY_PREV,
-	TOGGLE_QUEUE_VISIBILITY
+	TOGGLE_QUEUE_VISIBILITY,
+	PLAY_FROM_QUEUE
 } from '../actiontypes';
 
 export const playTrack = (queue, queueIndex) => {
@@ -63,4 +64,20 @@ export const toggleQueue = () => {
 			type: TOGGLE_QUEUE_VISIBILITY
 		});
 	};
+}
+
+export const playFromQueue = (queue, prevQueueIndex, newQueueIndex, track) => {
+	console.log('prevQueueIndex:', prevQueueIndex)
+	console.log('newQueueIndex:', newQueueIndex)
+	// If a track is currently playing, 
+	// stop it before playing the selected queue track
+	queue[prevQueueIndex].howl.stop();
+	queue[newQueueIndex].howl.play();
+	return dispatch => {
+		dispatch({
+			type: PLAY_FROM_QUEUE,
+			queueIndex: newQueueIndex,
+			currentTrack: track,
+		})
+	}
 }
