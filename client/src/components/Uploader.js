@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import Dropzone from 'react-dropzone';
 import Button from 'material-ui/Button';
 import Upload from 'material-ui-upload/Upload';
+
+const FILE_FIELD_NAME = 'audioFiles';
 
 // Register uploader form
 const form = reduxForm({
@@ -39,27 +42,69 @@ const MaterialUiFileInput = () => (
 );
 
 export class Uploader extends Component {
+	renderDropzoneInput(field) {
+    const files = field.input.value;
+
+    return (
+      <div>
+        <Dropzone
+          name={field.name}
+          onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}
+        >
+          {
+            field.meta.touched && 
+            field.meta.error &&
+            <span className="error">{field.meta.error}</span>
+          }
+          {
+            files && Array.isArray(files) &&
+            <ul>
+              { files.map((file, i) => <li key={i}>{file.name}</li>) }
+            </ul>
+          }
+        </Dropzone>
+      </div>
+    );
+  }
+
 	render() {
 		const { 
 			trackName, 
 			handleUploadTrack,
-			handleSubmit
+			handleUploadTracks,
+			handleSubmit,
+			reset
 		} = this.props;
 	
 		return (
-			<form onSubmit={handleSubmit(handleUploadTrack)} style={{margin: '20px'}}>
-				<Field
-					type="text"
-					component="input"
-					name="trackName"
-					value={trackName}
-				/>
-				<Field 
-					type="file"
-					component={FileInput}
-					name="selectedFile"
-				/>
-				<Button type="submit">Submit</Button>
+			<form onSubmit={handleSubmit(handleUploadTracks)} style={{margin: '20px'}}>
+				<div>
+					{/*
+					<Field
+						type="text"
+						component="input"
+						name="trackName"
+						value={trackName}
+					/>
+					<Field 
+						type="file"
+						component={FileInput}
+						name="selectedFile"
+					/>
+					<Button type="submit">Submit</Button>
+				*/}
+				</div>
+
+				<div>
+					<div>
+            <label htmlFor={FILE_FIELD_NAME}>Files</label>
+            <Field name={FILE_FIELD_NAME} component={this.renderDropzoneInput} />
+          </div>
+          <div>
+            <button type="submit">Submit</button>
+            <button onClick={reset}>Clear Values</button>
+          </div>
+				</div>
 			</form>
 		);
 	}
