@@ -1,10 +1,37 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Mixed = Schema.Types.Mixed;
+
+// const TrackModel = mongoose.model(
+// 	'Track', 
+// 	Schema({
+// 		name: String,
+// 		file: {
+// 			path: { type: String, required: true },
+// 			originalname: String,
+// 			mimetype: String,
+// 			size: Number
+// 		}
+// 	})
+// );
 
 const TrackModel = mongoose.model(
-	'Track', 
+	'Track',
 	Schema({
-		name: String,
+		title: { type: String, default: 'Unknown' },
+		artist: { type: String, default: 'Unknown' },
+		album: { type: String, default: 'Unknown' },
+		order: {
+			no: { type: Number, default: 0 },
+			of: { type: Number, default: 0 }
+		},
+		picture: [
+			{
+				format: String,
+				data: Buffer
+			}
+		],
+		format: Mixed,
 		file: {
 			path: { type: String, required: true },
 			originalname: String,

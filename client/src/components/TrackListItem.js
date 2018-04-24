@@ -74,7 +74,7 @@ class TrackListItem extends Component {
 					</Grid>
 					:
 					<Grid container alignItems="center">
-						<Grid item xs={6}><Typography noWrap>{ track.name }</Typography></Grid>
+						<Grid item xs={6}><Typography noWrap>{ track.title }</Typography></Grid>
 						{ 
 							selectedTrack && track._id === selectedTrack._id ? 
 							<Grid item xs={6}>

@@ -1,8 +1,11 @@
 const multer = require('multer'),
 		  uuidv4 = require('uuid/v4'),
+		  mm = require('music-metadata'),
+		  isFile = require('is-file'),
 			path = require('path'),
 			Track = require('../models').TrackModel,
 			config = require('../../config');
+
 
 // Configure strorage
 const storage = multer.diskStorage({
@@ -17,6 +20,7 @@ const storage = multer.diskStorage({
 });
 // Ctreate multer instance that will be used to upload/save the file
 const upload = multer({ storage });
+// const upload = multer({ dest: 'uploads/' })
 
 // Get all tracks
 const getTracks = (req, res, next) => {
@@ -63,6 +67,47 @@ const postTrack = (req, res, next) => {
 	});
 }
 
+// Add multiple tracks
+const postTracks = (req, res, next) => {
+	console.log('postTracks, req.body', req.body)
+
+	req.files.forEach(file => {
+		// Check that file is not a directiry
+		if (!isFile(file.path)) return;
+		mm.parseFile(file.path, { native: true })
+		.then(metaData => {
+			// TODO: validate data before creating new track
+			const track = new Track({
+				title: metaData.common.title,
+				artist: metaData.common.artist,
+				album: metaData.common.album,
+				picture: metaData.common.picture,
+				order: metaData.common.track,
+				format: metaData.format,
+				file: {
+					originalname: file.originalname,
+					path: file.path,
+					size: file.size,
+					mimetype: file.mimetype
+				}
+			});
+			track.save((err, savedTrack) => {
+				if (err) {
+					console.error('postTrack error:', err);
+					return next(err);
+				};
+			});
+		})
+		.catch(err => console.error('Could not parse file:', err.message))
+	});
+
+// console.log('POST /tracks response:\n', tracksToSave);
+// res.json({message: 'Track saved', data: tracksToSave });
+
+
+	
+}
+
 // Edit a track
 const editTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
@@ -94,6 +139,7 @@ module.exports = {
 	getTracks,
 	getTrack,
 	postTrack,
+	postTracks,
 	editTrack,
 	removeTrack
 }

@@ -15,18 +15,22 @@ export class TrackList extends Component {
 				background: theme.palette.primary.light,
 				borderTop: `1px solid ${theme.palette.primary.main}`,
 				padding: '0px',
-				paddingBottom: '70px' // TODO: link value to Player height
+				paddingBottom: '104px' // TODO: link value to Player + Nav height
 			}
 		}
 
 		return (
 			<List className="TrackList" style={styles.root}>
-				{trackList.tracks && trackList.tracks.map(track => (
+			{
+				trackList.tracks ? trackList.tracks.map(track => (
 					<TrackListItemContainer 
 						key={track._id} 
 						track={track} 
 					/>
-				))}
+				))
+				:
+				(<div>No tracks in Library</div>)
+			}
 			</List>
 		);
 	}

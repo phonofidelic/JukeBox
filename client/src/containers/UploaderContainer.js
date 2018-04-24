@@ -13,18 +13,6 @@ export class UploaderContainer extends Component {
     })
   }
 
-  handleUploadTracks(inputData) {
-    let formData = new FormData();
-    Object.keys(inputData).forEach(key => {
-      this.removePreviewsFromFiles(inputData[key]);
-      formData.append(key, inputData[key]);
-    });
-
-    // Dispatch POST action:
-    console.log('POST formData:', formData.getAll('files'));
-    console.log('inputData:', inputData);
-  }
-
 	handleUploadTrack(data) {
 		let formData = new FormData();
 		formData.append('trackName', data.trackName);
@@ -32,6 +20,27 @@ export class UploaderContainer extends Component {
 
 		this.props.uploadTrack(formData);
 	}
+
+	handleUploadTracks(inputData) {
+    let formData = new FormData();
+    // Object.keys(inputData).forEach(key => {
+    //   this.removePreviewsFromFiles(inputData[key]);
+    //   formData.append(`${key}[]`, inputData[key]);
+    // });
+
+    inputData.audioFiles.forEach(file => {
+    	window.URL.revokeObjectURL(file.preview);
+      file.preview = 'preview removed';
+    	formData.append('audioFiles', file);
+    })
+    
+
+    // Dispatch POST action:
+    console.log('POST formData:', formData.getAll('audioFiles'));
+    console.log('inputData:', inputData);
+
+    this.props.uploadTracks(formData);
+  }
 
 	render() {
 		return (
