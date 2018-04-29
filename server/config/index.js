@@ -5,5 +5,8 @@ const db = {
 module.exports = {
 	port: process.env.PORT || 3001,
 	db: db,
-	fileLocation: './uploads'
+	fileLocation: { 
+		audio: './uploads/audio',
+		images: './uploads/images'
+	}
 };

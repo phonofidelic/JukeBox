@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TrackListItemContainer from '../containers/TrackListItemContainer';
 import List from 'material-ui/List';
+import Typography from 'material-ui/Typography';
 import { withTheme } from 'material-ui/styles';
 
 export class TrackList extends Component {
@@ -22,14 +23,14 @@ export class TrackList extends Component {
 		return (
 			<List className="TrackList" style={styles.root}>
 			{
-				trackList.tracks ? trackList.tracks.map(track => (
+				trackList.tracks.length ? trackList.tracks.map(track => (
 					<TrackListItemContainer 
 						key={track._id} 
 						track={track} 
 					/>
 				))
 				:
-				(<div>No tracks in Library</div>)
+				(<Typography>No tracks in Library</Typography>)
 			}
 			</List>
 		);

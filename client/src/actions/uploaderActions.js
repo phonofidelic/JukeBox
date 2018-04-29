@@ -24,7 +24,11 @@ export const uploadTrack = formData => {
 			});
 			dispatch({
 				type: SET_MESSAGE,
-				message: {text: `${response.data.data.name} saved to library`, context: 'success'}
+				message: {
+					//	TODO: Store target response data in constant?
+					text: `${response.data.data.title} saved to library`, 
+					context: 'success'
+				}
 			});
 		})
 		.catch(err => {
@@ -52,7 +56,11 @@ export const uploadTracks = formData => {
 			});
 			dispatch({
 				type: SET_MESSAGE,
-				message: {text: `${response.data.data.name} saved to library`, context: 'success'}
+				message: {
+					//	TODO: Store target response data in constant?
+					text: `${response.data.data.title} saved to library`, 
+					context: 'success'
+				}
 			});
 		})
 		.catch(err => {

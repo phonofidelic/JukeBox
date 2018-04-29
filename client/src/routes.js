@@ -16,8 +16,7 @@ const TempLandingPage = () => {
 }
 
 export default (
-	<Route path="/" conponent={App}>
-		<Route path="/tracks" component={TrackListView} />
+	<Route path="/" conponent={App}>0ikloaqsRoute path="/tracks" component={TrackListView} />
 		<Route path="/uploader" component={UploaderView} />
 		<Route path="*" component={NotFound} />
 	</Route>

@@ -3,8 +3,20 @@ import { withTheme } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import { ListItem } from 'material-ui/List';
 import Grid from 'material-ui/Grid';
+import { 
+	Album
+} from 'material-ui-icons';
 import EditTrackForm from './EditTrackForm';
 import TrackListItemControls from './TrackListItemControls';
+
+function blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+        let reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = (e) => fulfill(reader.result);
+        reader.readAsDataURL(blob);
+    })
+}
 
 class TrackListItem extends Component {
 	state = {
@@ -17,6 +29,34 @@ class TrackListItem extends Component {
 			editMode: !this.state.editMode
 		});
 	}
+
+	handleImageLoad(picture) {
+		console.log('picture:', picture)
+		const arrayBuffer = new ArrayBuffer(picture.data);
+		const blob =  new Blob([picture.data], {type: picture.format});
+		// const imageUrl = new URL(`data:image/${picture.format},${blob}`);
+		var urlCreator = window.URL || window.webkitURL;
+    var imageUrl = urlCreator.createObjectURL( blob );
+    var urlString = `${imageUrl}.${picture.format}`.replace('blob:htto', '');
+    console.log('imageUrl', imageUrl);
+    console.log('arrayBuffer', picture.data)
+    console.log('blob', blob)
+    	
+
+    // return blobToDataURL(blob)
+    // .then(result => {
+    // 	console.log('blobToDataURL:', new URL(`data:image/${picture.format},${result}`))
+    // 	return new URL(`data:image/${picture.format},${result}`);
+    // })
+    // .catch(err => console.error('blobToDataURL, error:', err))
+    
+		return imageUrl;
+	}
+
+	// readImgBuffer(picture) {
+	// 	var base64String = '';
+	// 	for (var i = 0; i < picture.data)
+	// }
 
 	render() {
 		const { 
@@ -34,11 +74,12 @@ class TrackListItem extends Component {
 
 		const styles = {
 			root: {
-				borderBottom: `1px solid ${theme.palette.primary.main}`
+				borderBottom: `1px solid ${theme.palette.primary.main}`,
+				padding: '10px'
 			},
 			selected: {
 				background: theme.palette.primary.main,
-				height: '50px',
+				// height: '50px',
 				lineHeight: '50px',
 				verticalAlign: 'middle,'
 			}
@@ -74,10 +115,24 @@ class TrackListItem extends Component {
 					</Grid>
 					:
 					<Grid container alignItems="center">
-						<Grid item xs={6}><Typography noWrap>{ track.title }</Typography></Grid>
+						<Grid item xs={2}>
+							{
+								track.image.src === 'defaultImage' ?
+								<Album />
+								:
+								<img src={track.image.src} alt="Album art" width="50" height="50" />
+							}
+						</Grid>
+						<Grid item xs={5}>
+							<Grid container direction="column">
+								<div><Typography noWrap>{ track.title }</Typography></div>
+								<div><Typography noWrap variant="caption">{ track.artist }</Typography></div>
+								<div><Typography noWrap variant="caption">{ track.album }</Typography></div>
+							</Grid>
+						</Grid>
 						{ 
 							selectedTrack && track._id === selectedTrack._id ? 
-							<Grid item xs={6}>
+							<Grid item xs={5}>
 									<TrackListItemControls 
 										track={track}
 										player={player}

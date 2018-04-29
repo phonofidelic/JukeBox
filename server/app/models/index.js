@@ -21,16 +21,15 @@ const TrackModel = mongoose.model(
 		title: { type: String, default: 'Unknown' },
 		artist: { type: String, default: 'Unknown' },
 		album: { type: String, default: 'Unknown' },
+		genre: [ String ],
 		order: {
 			no: { type: Number, default: 0 },
 			of: { type: Number, default: 0 }
 		},
-		picture: [
-			{
-				format: String,
-				data: Buffer
-			}
-		],
+		image: {
+			format: String,
+			src: String
+		},
 		format: Mixed,
 		file: {
 			path: { type: String, required: true },

@@ -162,7 +162,7 @@ export const deleteTrackConfirm = trackData => {
 			});
 			dispatch({
 				type: SET_MESSAGE,
-				message: {text: `${response.data.data.name} was deleted`, context: 'success'}
+				message: {text: `${response.data.data.title} was deleted`, context: 'success'}
 			})
 		})
 		.catch(err => {

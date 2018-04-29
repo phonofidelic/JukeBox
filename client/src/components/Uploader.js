@@ -75,7 +75,6 @@ export class Uploader extends Component {
 			handleSubmit,
 			reset
 		} = this.props;
-	
 		return (
 			<form onSubmit={handleSubmit(handleUploadTracks)} style={{margin: '20px'}}>
 				<div>
@@ -102,7 +101,7 @@ export class Uploader extends Component {
           </div>
           <div>
             <button type="submit">Submit</button>
-            <button onClick={reset}>Clear Values</button>
+            <button onClick={() => reset()}>Clear Values</button>
           </div>
 				</div>
 			</form>

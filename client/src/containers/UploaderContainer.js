@@ -22,12 +22,14 @@ export class UploaderContainer extends Component {
 	}
 
 	handleUploadTracks(inputData) {
+    console.log('inputData', inputData)
     let formData = new FormData();
     // Object.keys(inputData).forEach(key => {
     //   this.removePreviewsFromFiles(inputData[key]);
     //   formData.append(`${key}[]`, inputData[key]);
     // });
 
+    if (!inputData.audioFiles) return console.log('* no input data *');
     inputData.audioFiles.forEach(file => {
     	window.URL.revokeObjectURL(file.preview);
       file.preview = 'preview removed';

@@ -4,17 +4,20 @@ const multer = require('multer'),
 		  isFile = require('is-file'),
 			path = require('path'),
 			Track = require('../models').TrackModel,
-			config = require('../../config');
+			config = require('../../config'),
+			fs = require('fs'),
+			utils = require('./utils');
+
 
 
 // Configure strorage
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, config.fileLocation);
+		cb(null, config.fileLocation.audio);
 	},
 	filename: (req, file, cb) => {
 		// Set file system name in request object
-		newName = `${uuidv4()}${path.extname(file.originalname)}`;
+		newName = `${uuidv4()}.${path.extname(file.originalname)}`;
 		cb(null, newName);
 	}
 });
@@ -69,34 +72,62 @@ const postTrack = (req, res, next) => {
 
 // Add multiple tracks
 const postTracks = (req, res, next) => {
-	console.log('postTracks, req.body', req.body)
+	console.log('postTracks, req.files', req.files)
 
 	req.files.forEach(file => {
 		// Check that file is not a directiry
 		if (!isFile(file.path)) return;
 		mm.parseFile(file.path, { native: true })
 		.then(metaData => {
-			// TODO: validate data before creating new track
-			const track = new Track({
-				title: metaData.common.title,
-				artist: metaData.common.artist,
-				album: metaData.common.album,
-				picture: metaData.common.picture,
-				order: metaData.common.track,
-				format: metaData.format,
-				file: {
-					originalname: file.originalname,
-					path: file.path,
-					size: file.size,
-					mimetype: file.mimetype
-				}
-			});
-			track.save((err, savedTrack) => {
-				if (err) {
-					console.error('postTrack error:', err);
-					return next(err);
-				};
-			});
+			if (metaData.common.picture) {
+				utils.parseImageData(metaData.common.picture).then(imageData => {
+					console.log('Saving track with image data:', imageData)
+					const track = new Track({
+						title: metaData.common.title,
+						artist: metaData.common.artist,
+						album: metaData.common.album,
+						genre: metaData.common.genre,
+						image: imageData,
+						order: metaData.common.track,
+						format: metaData.format,
+						file: {
+							originalname: file.originalname,
+							path: file.path,
+							size: file.size,
+							mimetype: file.mimetype
+						}
+					});
+					track.save((err, savedTrack) => {
+						if (err) {
+							console.error('postTrack error:', err);
+							return next(err);
+						};
+					});
+				}).catch(err => console.error('Could not parse image data:', err))
+			} else {
+				console.log('No image data found for track, saving with default image')
+				const track = new Track({
+					title: metaData.common.title,
+					artist: metaData.common.artist,
+					album: metaData.common.album,
+					genre: metaData.common.genre,
+					image: {format: 'png', src: 'defaultImage'},
+					order: metaData.common.track,
+					format: metaData.format,
+					file: {
+						originalname: file.originalname,
+						path: file.path,
+						size: file.size,
+						mimetype: file.mimetype
+					}
+				});
+				track.save((err, savedTrack) => {
+					if (err) {
+						console.error('postTrack error:', err);
+						return next(err);
+					};
+				});
+			}	
 		})
 		.catch(err => console.error('Could not parse file:', err.message))
 	});
@@ -127,7 +158,7 @@ const removeTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	Track.findByIdAndRemove(trackId, (err, removedTrack) => {
 		if (err) return next(err);
-		console.log('DELETE /tracks/:trackId response:\n', removedTrack);
+		// console.log('DELETE /tracks/:trackId response:\n', removedTrack);
 		res.json({ message: 'Track removed', data: removedTrack });
 	});
 	// TODO: Delete track in file system, otherwise there will be lots of
