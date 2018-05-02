@@ -80,7 +80,13 @@ export const startNewQueue = (track, currentTrack) => {
 			track: { 
 				...track, 
 				queueId: queueId,
-				howl: new Howl({ src: [track.file.path], autoplay: true })
+				howl: new Howl({ 
+					src: [track.file.path], 
+					autoplay: false,
+					onplay: () => console.log('howl, onplay'),
+					onpause: () => console.log('howl, onpause'),
+					onend: () => console.log('howl, onend')
+				})
 			}
 		});
 	};
@@ -91,7 +97,7 @@ export const addToQueue = track => {
 	// This creates a queuItem by coppying the passed track item
 	// and adding a queueId and howl prop.
 	const queueId = Math.trunc(Math.random() * Date.now());
-	const message = { text: `Added ${track.name} to queue`, context: 'info' };
+	const message = { text: `Added ${track.title} to queue`, context: 'info' };
 	
 	return dispatch => {
 		dispatch({

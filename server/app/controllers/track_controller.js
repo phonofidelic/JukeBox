@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 	},
 	filename: (req, file, cb) => {
 		// Set file system name in request object
-		newName = `${uuidv4()}.${path.extname(file.originalname)}`;
+		newName = `${uuidv4()}${path.extname(file.originalname)}`;
 		cb(null, newName);
 	}
 });
@@ -29,6 +29,7 @@ const upload = multer({ storage });
 const getTracks = (req, res, next) => {
 	Track.find({})
 	// .select('name file')
+	.sort({title: 1})
 	.exec((err, tracks) => {
 		if (err) return next(err);
 		// console.log('GET /tracks response:\n', tracks);
@@ -40,7 +41,7 @@ const getTracks = (req, res, next) => {
 const getTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	Track.findById(trackId)
-	.select('name file')	
+	// .select('name file')	
 	.exec((err, track) => {
 		if (err) return next(err);
 		console.log('GET /track/:trackId response:\n', track);

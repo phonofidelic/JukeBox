@@ -16,6 +16,7 @@ export class TrackList extends Component {
 				background: theme.palette.primary.light,
 				borderTop: `1px solid ${theme.palette.primary.main}`,
 				padding: '0px',
+				paddingTop: '45px',
 				paddingBottom: '104px' // TODO: link value to Player + Nav height
 			}
 		}

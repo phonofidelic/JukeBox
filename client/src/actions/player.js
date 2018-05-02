@@ -8,20 +8,30 @@ import {
 	PLAY_FROM_QUEUE
 } from '../actiontypes';
 
+var timeElapsed = 0;
+
 export const playTrack = (queue, queueIndex) => {
 	queue[queueIndex].howl.play();
+	const time = setInterval(() => {
+		console.log(queue[queueIndex].howl.seek())
+		timeElapsed += 0.01;
+	}
+	, 10);
 	return dispatch => {
 		dispatch({
-			type: PLAY_TRACK
+			type: PLAY_TRACK,
+			time: timeElapsed
 		});
 	};
 }
 
-export const pauseTrack = (queue, queueIndex) => {
+export const pauseTrack = (queue, queueIndex, pausedAt) => {
 	queue[queueIndex].howl.pause();
 	return dispatch => {
 		dispatch({
-			type: PAUSE_TRACK
+			type: PAUSE_TRACK,
+			time: queue[queueIndex].howl.seek(),
+			pausedAt: pausedAt
 		});
 	};
 }

@@ -19,9 +19,7 @@ export class TrackListContainer extends Component {
 		const { trackList } = this.props;
 
 		return(
-			<TrackList 
-				trackList={trackList}
-			/> 
+			<TrackList trackList={trackList} /> 
 		)
 	}
 }

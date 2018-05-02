@@ -42,6 +42,7 @@ const MaterialUiFileInput = () => (
 );
 
 export class Uploader extends Component {
+	
 	renderDropzoneInput(field) {
     const files = field.input.value;
 

@@ -19,7 +19,8 @@ const readImageBuffer = new Promise((resolve, reject) => {
 })
 
 
-// TODO: Handle image sizes, save multiple image sizes
+// TODO: Handle image sizes and save multiple images for sm/md/lg
+// TODO, BUG: Handle broken images - some images show up as broken image links in ui
 const parseImageData = (image) => new Promise((resolve, reject) => {
 	const imgPath = `${config.fileLocation.images}/${uuidv4()}.${image[0].format}`;
 

@@ -30,34 +30,6 @@ class TrackListItem extends Component {
 		});
 	}
 
-	handleImageLoad(picture) {
-		console.log('picture:', picture)
-		const arrayBuffer = new ArrayBuffer(picture.data);
-		const blob =  new Blob([picture.data], {type: picture.format});
-		// const imageUrl = new URL(`data:image/${picture.format},${blob}`);
-		var urlCreator = window.URL || window.webkitURL;
-    var imageUrl = urlCreator.createObjectURL( blob );
-    var urlString = `${imageUrl}.${picture.format}`.replace('blob:htto', '');
-    console.log('imageUrl', imageUrl);
-    console.log('arrayBuffer', picture.data)
-    console.log('blob', blob)
-    	
-
-    // return blobToDataURL(blob)
-    // .then(result => {
-    // 	console.log('blobToDataURL:', new URL(`data:image/${picture.format},${result}`))
-    // 	return new URL(`data:image/${picture.format},${result}`);
-    // })
-    // .catch(err => console.error('blobToDataURL, error:', err))
-    
-		return imageUrl;
-	}
-
-	// readImgBuffer(picture) {
-	// 	var base64String = '';
-	// 	for (var i = 0; i < picture.data)
-	// }
-
 	render() {
 		const { 
 			track,

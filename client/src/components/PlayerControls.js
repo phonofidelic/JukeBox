@@ -69,7 +69,7 @@ class PlayerControls extends Component {
 				container 
 				alignItems="center">
 				<Grid item xs={12}>
-					<IconButton disabled={player.queue.length < 1} onClick={ handlePlayPrev }>
+					<IconButton disabled={player.queueIndex === 0} onClick={ handlePlayPrev }>
 						<SkipPrevious />
 					</IconButton>
 					{
@@ -83,7 +83,7 @@ class PlayerControls extends Component {
 						</IconButton>
 					}
 					<IconButton 
-						disabled={player.queue.length <= 1 && player.queuIndex !== player.queue.length-1} 
+						disabled={player.queueIndex+1 === player.queue.length} 
 						onClick={ handlePlayNext }>
 						<SkipNext />
 					</IconButton>

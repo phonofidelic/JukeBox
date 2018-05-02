@@ -13,10 +13,12 @@ import {
 const INITIAL_STATE = {
 	queue: [],
 	showQueue: true,
-	howl: null,
+	// howl: null,
 	playing: false,
 	queueIndex: null,
 	currentTrack: null,
+	time: 0,
+	pausedAt: null,
 	message: null
 };
 
@@ -42,12 +44,15 @@ const player = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				playing: true,
+				time: action.time,
 			}
 
 		case PAUSE_TRACK:
 			return {
 				...state,
 				playing: false,
+				time: action.time,
+				pausedAt: action.pausedAt
 			}
 
 		case STOP_TRACK:
