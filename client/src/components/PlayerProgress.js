@@ -44,9 +44,10 @@ class PlayerProgress extends Component {
 			progress: {
 				background: 'green',
 				height: '100%',
-				width: `${this.state.timeElapsed / player.currentTrack.format.duration * 100}%`,
+				width: `${this.state.timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`,
 			}
 		}
+
 		return (
 			// <span>time: {this.state.timeElapsed / player.currentTrack.format.duration * 100 }</span>
 			<div style={styles.progressContainer}>
