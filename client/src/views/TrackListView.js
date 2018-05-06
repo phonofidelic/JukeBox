@@ -13,7 +13,7 @@ const TrackListView = () => {
 	return (
 		<div>
 			<div style={styles.header}>
-				<Typography variant="display1">Track List!</Typography>
+				<Typography variant="display1">Track List</Typography>
 			</div>
 			<TrackListContainer />
 		</div>

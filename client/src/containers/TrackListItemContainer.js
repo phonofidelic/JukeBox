@@ -34,6 +34,7 @@ class TrackListItemContainer extends Component {
 
 	render() {
 		const { selectedTrack, player, track } = this.props;
+		// console.log('timeElapsed from TrackListItemContainer:', this.state.timeElapsed)
 		return (
 			<TrackListItem 
 				track={track}

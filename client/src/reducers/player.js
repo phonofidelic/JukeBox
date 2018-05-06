@@ -19,6 +19,7 @@ const INITIAL_STATE = {
 	currentTrack: null,
 	time: 0,
 	pausedAt: null,
+	intervalId: null,
 	message: null
 };
 

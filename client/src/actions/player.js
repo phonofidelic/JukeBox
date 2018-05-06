@@ -5,32 +5,105 @@ import {
 	PLAY_NEXT,
 	PLAY_PREV,
 	TOGGLE_QUEUE_VISIBILITY,
-	PLAY_FROM_QUEUE
+	PLAY_FROM_QUEUE,
+	START_NEW_QUEUE,
+	ADD_TRACK_TO_QUEUE,
+	SET_MESSAGE,
+	SET_INTERVAL_ID
 } from '../actiontypes';
+import { Howl } from 'howler';
+import { Timer } from './utils';
 
-var timeElapsed = 0;
+const howlOnPlay = track => {
+	console.log('howl, onplay', track.title);
+	window.dispatchEvent(new Event('howl_play'));
+};
+const howlOnPause = track => {
+	console.log('howl, onpause', track.title);
+	window.dispatchEvent(new Event('howl_pause'));
+};
+const howlOnEnd = track => {
+	console.log('howl, onend', track.title);
+	window.dispatchEvent(new Event('howl_end'));
+}
 
-export const playTrack = (queue, queueIndex) => {
-	queue[queueIndex].howl.play();
-	const time = setInterval(() => {
-		console.log(queue[queueIndex].howl.seek())
-		timeElapsed += 0.01;
-	}
-	, 10);
+
+// TODO: startNewQueue and addToQueue are player actions.
+// 			 Refactor to make this less confusing?
+export const startNewQueue = (track, currentTrack) => {
+	console.log('startNewQueue, track', track);
+
+	// Unload and destroy the Howl object. This will immediately stop 
+	// all sounds attached to this sound and remove it from the cache.
+	if (currentTrack) { currentTrack.howl.stop() };
+
+	// This creates a queuItem by coppying the passed track item
+	// and adding a queueId and howl prop.
+	const queueId = Math.trunc(Math.random() * Date.now());
 	return dispatch => {
 		dispatch({
-			type: PLAY_TRACK,
-			time: timeElapsed
+			type: START_NEW_QUEUE,
+			track: { 
+				...track, 
+				queueId: queueId,
+				howl: new Howl({ 
+					src: [track.file.path], 
+					autoplay: true,
+					onplay: () => howlOnPlay(track),
+					onpause: () => howlOnPause(track),
+					onend: () => howlOnEnd(track)
+				})
+			}
 		});
 	};
 }
 
-export const pauseTrack = (queue, queueIndex, pausedAt) => {
-	queue[queueIndex].howl.pause();
+export const addToQueue = track => {
+	// This creates a queuItem by coppying the passed track item
+	// and adding a queueId and howl prop.
+	const queueId = Math.trunc(Math.random() * Date.now());
+	const message = { text: `Added ${track.title} to queue`, context: 'info' };
+	
+	return dispatch => {
+		dispatch({
+			type: ADD_TRACK_TO_QUEUE,
+			track:{ 
+				...track,
+				queueId: queueId,
+				howl: new Howl({ 
+					src: [track.file.path], 
+					// autoplay: true,
+					onplay: () => howlOnPlay(track),
+					onpause: () => howlOnPause(track),
+					onend: () => howlOnEnd(track)
+				}) 
+			},
+			message: message
+		});
+		// !!! Is this an anti-pattern?
+		dispatch({
+			type: SET_MESSAGE,
+			message: message
+		});
+	};
+}
+
+export const playTrack = (currentTrack) => {
+	currentTrack.howl.play();
+	return dispatch => {
+		dispatch({
+			type: PLAY_TRACK,
+		});
+	};
+}
+
+export const pauseTrack = (currentTrack) => {
+	currentTrack.howl.pause();
+	const pausedAt = currentTrack.howl.seek();
 	return dispatch => {
 		dispatch({
 			type: PAUSE_TRACK,
-			time: queue[queueIndex].howl.seek(),
+			time: pausedAt,
 			pausedAt: pausedAt
 		});
 	};

@@ -100,6 +100,7 @@ class TrackListItem extends Component {
 								<div><Typography noWrap>{ track.title }</Typography></div>
 								<div><Typography noWrap variant="caption">{ track.artist }</Typography></div>
 								<div><Typography noWrap variant="caption">{ track.album }</Typography></div>
+								<div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div>
 							</Grid>
 						</Grid>
 						{ 

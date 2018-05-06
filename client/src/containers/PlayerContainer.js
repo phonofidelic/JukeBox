@@ -4,46 +4,35 @@ import * as actions from '../actions/player';
 import { getSelectedTrack } from '../selectors';
 import Player from '../components/Player';
 
+function precisionRound(number, precision) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
+}
+
 class PlayerContainer extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			timeElapsed: 0,
-			lastClearedIncrement: 0,
-		}
-		this.incrementer = null;
-	}
-
-	componentDidMount() {
-		console.log('start')
-		// this.incrementer = setInterval(() => {
-		// 	this.setState({ timeElapsed: this.state.timeElapsed + 0.01})
-		// }
-		// , 10);
+		}		
 	}
 
 	handlePlayTrack() {
 		const { player } = this.props;
-		this.props.playTrack(player.queue, player.queueIndex);
+		this.props.playTrack(player.currentTrack);
 
-		// player.queue[player.queueIndex].howl.play();
-		// this.incrementer = setInterval(() => {
-		// 	console.log(player.queue[player.queueIndex].howl.seek())
-		// 	this.setState({ timeElapsed: this.state.timeElapsed + 0.01})
-		// }
-		// , 10);
+		// const intervalId = setInterval(() => {
+		// 	this.setState({
+		// 		timeElapsed: player.currentTrack.howl.seek() || 0
+		// 	})
+		// }, 1000)
+		// this.props.setIntervalId(intervalId);
 	}
 
 	handlePauseTrack() {
 		const { player } = this.props;
-		this.props.pauseTrack(player.queue, player.queueIndex, this.state.timeElapsed);
-
-		console.log('stop')
-		clearInterval(this.incrementer);
-		this.setState({
-			lastClearedIncrement: this.incrementer
-		});
+		this.props.pauseTrack(player.currentTrack);
+		// clearInterval(player.intervalId)
 	}
 
 	handleStopTrack() {
@@ -75,7 +64,7 @@ class PlayerContainer extends Component {
 		return (
 			<Player 
 				player={ player }
-				time={ player.time }
+				time={ this.state.timeElapsed }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }
 				handleStopTrack={ this.handleStopTrack.bind(this) }
