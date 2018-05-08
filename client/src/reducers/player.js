@@ -8,6 +8,7 @@ import {
 	PLAY_PREV,
 	TOGGLE_QUEUE_VISIBILITY,
 	PLAY_FROM_QUEUE,
+	SEEK,
 } from '../actiontypes';
 
 const INITIAL_STATE = {
@@ -90,6 +91,12 @@ const player = (state = INITIAL_STATE, action) => {
 				queueIndex: action.queueIndex,
 				currentTrack: action.currentTrack,
 				playing: true
+			}
+
+		case SEEK:
+			return {
+				...state,
+				pos: action.pos
 			}
 
 		default: return state;

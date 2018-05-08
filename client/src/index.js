@@ -10,7 +10,7 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import registerServiceWorker from './registerServiceWorker';
 
 import createBrowserHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 
 const history = createBrowserHistory();
 

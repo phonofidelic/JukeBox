@@ -7,7 +7,9 @@ import {
 	SkipPrevious, 
 	SkipNext,
 	MoreVert,
-	MoreHoriz
+	MoreHoriz,
+	ExpandMore,
+	ExpandLess
 } from 'material-ui-icons';
 
 class PlayerControls extends Component {
@@ -96,7 +98,7 @@ class PlayerControls extends Component {
 						onTouchEnd={this.handleTouchEnd.bind(this)}
 						onTouchCancel={this.handleTouchCancel.bind(this)} 
 					>
-						{ player.showQueue ? <MoreVert /> : <MoreHoriz /> }
+						{ player.showQueue ? <ExpandMore /> : <ExpandLess /> }
 					</IconButton>
 				</div>
 			</Grid>

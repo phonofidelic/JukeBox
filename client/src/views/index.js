@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TrackListContainer from '../containers/TrackListContainer';
 import UploaderContainer from '../containers/UploaderContainer';
 import Typography from 'material-ui/Typography';

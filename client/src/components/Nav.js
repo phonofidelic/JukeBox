@@ -8,8 +8,6 @@ import {
 
 class Nav extends Component {
   render() {
-    const { router } = this.props;
-    console.log('nav props:', this.props)
     const styles = {
       root: {
         position: 'fixed',

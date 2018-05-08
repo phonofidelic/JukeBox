@@ -9,15 +9,6 @@ import {
 import EditTrackForm from './EditTrackForm';
 import TrackListItemControls from './TrackListItemControls';
 
-function blobToDataURL(blob) {
-    return new Promise((fulfill, reject) => {
-        let reader = new FileReader();
-        reader.onerror = reject;
-        reader.onload = (e) => fulfill(reader.result);
-        reader.readAsDataURL(blob);
-    })
-}
-
 class TrackListItem extends Component {
 	state = {
 		editMode: false

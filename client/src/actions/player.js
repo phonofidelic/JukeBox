@@ -9,10 +9,9 @@ import {
 	START_NEW_QUEUE,
 	ADD_TRACK_TO_QUEUE,
 	SET_MESSAGE,
-	SET_INTERVAL_ID
+	SEEK
 } from '../actiontypes';
 import { Howl } from 'howler';
-import { Timer } from './utils';
 
 const howlOnPlay = track => {
 	console.log('howl, onplay', track.title);
@@ -161,6 +160,17 @@ export const playFromQueue = (queue, prevQueueIndex, newQueueIndex, track) => {
 			type: PLAY_FROM_QUEUE,
 			queueIndex: newQueueIndex,
 			currentTrack: track,
+		})
+	}
+}
+
+export const seekInTrack = (pos, currentTrack) => {
+	console.log('@seekInTrack, seek', pos)
+	currentTrack.howl.seek(pos)
+	return dispatch => {
+		dispatch({
+			type: SEEK,
+			pos: pos
 		})
 	}
 }

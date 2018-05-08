@@ -18,6 +18,7 @@ export class Player extends Component {
 			handlePlayPrev,
 			handleToggleQueue,
 			handlePlayFromQueue,
+			handleSeek,
 		} = this.props;
 
 		const styles = {
@@ -42,7 +43,10 @@ export class Player extends Component {
 				{	player.queue.length > 0 &&
 					<div>
 						<div>
-							<PlayerProgress player={player} />
+							<PlayerProgress 
+								player={player}
+								handleSeek={handleSeek}
+							 />
 						</div>
 						<Grid container>
 							<Grid item xs={12}>

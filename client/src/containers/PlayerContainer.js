@@ -10,29 +10,14 @@ function precisionRound(number, precision) {
 }
 
 class PlayerContainer extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			timeElapsed: 0,
-		}		
-	}
-
 	handlePlayTrack() {
 		const { player } = this.props;
 		this.props.playTrack(player.currentTrack);
-
-		// const intervalId = setInterval(() => {
-		// 	this.setState({
-		// 		timeElapsed: player.currentTrack.howl.seek() || 0
-		// 	})
-		// }, 1000)
-		// this.props.setIntervalId(intervalId);
 	}
 
 	handlePauseTrack() {
 		const { player } = this.props;
 		this.props.pauseTrack(player.currentTrack);
-		// clearInterval(player.intervalId)
 	}
 
 	handleStopTrack() {
@@ -58,13 +43,16 @@ class PlayerContainer extends Component {
 		this.props.playFromQueue(queue, prevQueueIndex, queueIndex, track);
 	}
 
+	handleSeek(pos, currentTrack) {
+		this.props.seekInTrack(pos, currentTrack)
+	}
+
 	render() {
-		// console.log('time:', this.state.timeElapsed)
 		const { trackList, player, selectedTrack, queueIndex } = this.props;
 		return (
 			<Player 
 				player={ player }
-				time={ this.state.timeElapsed }
+				selectedTrack={ selectedTrack }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }
 				handleStopTrack={ this.handleStopTrack.bind(this) }
@@ -72,7 +60,7 @@ class PlayerContainer extends Component {
 				handlePlayPrev={ this.handlePlayPrev.bind(this) }
 				handleToggleQueue={ this.handleToggleQueue.bind(this) }
 				handlePlayFromQueue={ this.handlePlayFromQueue.bind(this) }
-				selectedTrack={ selectedTrack }
+				handleSeek={ this.handleSeek.bind(this) }
 			/>
 		);
 	}
