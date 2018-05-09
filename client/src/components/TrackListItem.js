@@ -27,7 +27,7 @@ class TrackListItem extends Component {
 			player,
 			selectedTrack,
 			handleSelectTrack,
-			handlePostTrackData,
+			handleEditTrackData,
 			handleStartNewQueue,
 			handleAddToQueue,
 			handleDeleteTrack,
@@ -72,7 +72,7 @@ class TrackListItem extends Component {
 					<Grid container alignItems="center">
 						<EditTrackForm
 							track={track}
-							handlePostTrackData={handlePostTrackData}
+							handleEditTrackData={handleEditTrackData}
 							handleToggleEditMode={this.handleToggleEditMode.bind(this)}
 						/>
 					</Grid>

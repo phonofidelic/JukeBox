@@ -77,7 +77,7 @@ class PlayerProgress extends Component {
 		}
 		const segStyle = {
 			// background: 'green',
-			border: '1px solid #fff', // TODO: Remove all borders, their just there for development
+			// border: '1px solid #fff', // TODO: Remove all borders, their just there for development
 			borderTop: 'none',
 			borderBottom: 'none',
 			height: '100%',

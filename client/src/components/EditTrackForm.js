@@ -32,7 +32,7 @@ class EditTrackForm extends Component {
 		const { 
 			track, 
 			handleSubmit, 
-			handlePostTrackData, 
+			handleEditTrackData, 
 			handleToggleEditMode,
 			theme,
 		} = this.props;
@@ -51,7 +51,7 @@ class EditTrackForm extends Component {
 				style={{width: '100%'}} 
 				onSubmit={
 					handleSubmit((formData) => {
-						handlePostTrackData(formData, track); 
+						handleEditTrackData(formData, track); 
 						handleToggleEditMode();
 					})
 				}
@@ -60,11 +60,25 @@ class EditTrackForm extends Component {
 					<Grid item xs={6}>
 						<Field 
 							type="text"
-							name="name"
+							name="title"
 							autoFocus
 							component={renderField}
-							label="Track name"
-							value={track.name}
+							label="Track title"
+							placeholder={track.title}
+						/>
+						<Field 
+							type="text"
+							name="artist"
+							component={renderField}
+							label="Artist"
+							placeholder={track.artist}
+						/>
+						<Field 
+							type="text"
+							name="album"
+							component={renderField}
+							label="Album"
+							placeholder={track.album}
 						/>
 					</Grid>
 					<Grid item xs={6}>

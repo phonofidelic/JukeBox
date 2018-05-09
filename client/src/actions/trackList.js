@@ -54,6 +54,7 @@ export const getTracks = () => {
 }
 
 export const selectTrack = track => {
+	console.log(track)
 	return dispatch => {
 		dispatch({
 			type: SELECT_TRACK,
@@ -123,7 +124,8 @@ export const selectTrack = track => {
 // 	};
 // }
 
-export const postTrackData = (formData, trackData) => {
+export const editTrack = (formData, trackData) => {
+	console.log('@editTrack, formData', formData)
 	return dispatch => {
 		dispatch({
 			type: POST_TRACK_DATA,
@@ -138,7 +140,7 @@ export const postTrackData = (formData, trackData) => {
 			});
 			dispatch({
 				type: SET_MESSAGE,
-				message: {text: `${response.data.data.name} updated!`, context: 'success'}
+				message: {text: `${response.data.data.title} updated!`, context: 'success'}
 			});
 		})
 		.catch(err => {

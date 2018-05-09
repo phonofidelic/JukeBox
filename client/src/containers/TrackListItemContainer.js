@@ -19,8 +19,8 @@ class TrackListItemContainer extends Component {
 		this.props.addToQueue(track);
 	}
 
-	handlePostTrackData(formData, trackData) {
-		this.props.postTrackData(formData, trackData);
+	handleEditTrackData(formData, trackData) {
+		this.props.editTrack(formData, trackData);
 	}
 
 	handleDeleteTrack(trackData) {
@@ -43,7 +43,7 @@ class TrackListItemContainer extends Component {
 				handleSelectTrack={this.handleSelectTrack.bind(this)}
 				handleStartNewQueue={this.handleStartNewQueue.bind(this)}
 				handleAddToQueue={this.handleAddToQueue.bind(this)}
-				handlePostTrackData={this.handlePostTrackData.bind(this)}
+				handleEditTrackData={this.handleEditTrackData.bind(this)}
 				handleDeleteTrack={this.handleDeleteTrack.bind(this)}
 			/>
 		);
