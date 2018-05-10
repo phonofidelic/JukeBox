@@ -13,7 +13,7 @@ const multer = require('multer'),
 // Configure strorage
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, config.fileLocation.audio);
+		cb(null, config.fileLocation_audio);
 	},
 	filename: (req, file, cb) => {
 		// Set file system name in request object

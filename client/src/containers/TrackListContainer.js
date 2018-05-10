@@ -26,7 +26,7 @@ export class TrackListContainer extends Component {
 
 const mapStateToProps = state => {
 	return {
-		trackList: state.trackList
+		trackList: state.trackList_reducer
 	}
 }
 

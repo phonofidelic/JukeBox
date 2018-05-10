@@ -45,7 +45,7 @@ const getMessages = state => {
 
 const mapStateToProps = state => {
 	return {
-		message: state.messages.message
+		message: state.message_reducer.message
 	}
 }
 

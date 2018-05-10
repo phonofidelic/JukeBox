@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/uploaderActions';
+import * as actions from '../actions/uploader.actions';
 import Uploader from '../components/Uploader';
 
 export class UploaderContainer extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/player';
+import * as actions from '../actions/player.actions';
 import { getSelectedTrack } from '../selectors';
 import Player from '../components/Player';
 
@@ -68,7 +68,7 @@ class PlayerContainer extends Component {
 
 const mapStateToProps = state => {
 	return {
-		player: state.player,
+		player: state.player_reducer,
 		selectedTrack: getSelectedTrack(state),
 	}
 };

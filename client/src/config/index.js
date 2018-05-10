@@ -1,3 +1,3 @@
-export default {
+export const URLS = {
 	TRACKS_URL: '/tracks'
 }

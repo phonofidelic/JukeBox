@@ -1,7 +1,7 @@
 export const getSelectedTrack = state => {
-	return state.trackList.selectedTrack;
+	return state.trackList_reducer.selectedTrack;
 }
 
 export const getCurrentQueueIndex = state => {
-	return state.player.queueIndex;
+	return state.player_reducer.queueIndex;
 }
