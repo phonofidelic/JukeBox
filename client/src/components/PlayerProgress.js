@@ -10,7 +10,7 @@ class PlayerProgress extends Component {
 
 	componentDidMount() {
 		window.addEventListener('howl_play', e => {
-			console.log('howl_play event', e);
+			// console.log('howl_play event', e);
 			const { player } = this.props;
 
 			if (this.intervalID) clearInterval(this.intervalID);
@@ -23,12 +23,12 @@ class PlayerProgress extends Component {
 		});
 
 		window.addEventListener('howl_pause', e => {
-			console.log('howl_pause event', e);
+			// console.log('howl_pause event', e);
 			clearInterval(this.intervalID);
 		});
 
 		window.addEventListener('howl_end', e => {
-			console.log('howl_end event', e);
+			// console.log('howl_end event', e);
 			clearInterval(this.intervalID);
 		});
 	}

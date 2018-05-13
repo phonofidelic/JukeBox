@@ -5,9 +5,9 @@ import {
 	SET_MESSAGE
 } from '../actiontypes';
 import axios from 'axios';
-import config from '../config';
+import { URLS } from '../config';
 
-const TRACKS_URL = config.TRACKS_URL;
+const TRACKS_URL = URLS.TRACKS_URL;
 
 export const uploadTrack = formData => {
 	console.log('@uploadTrack, formData:', formData);

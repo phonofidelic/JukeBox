@@ -24,7 +24,7 @@ const INITIAL_STATE = {
 	message: null
 };
 
-const trackData = (state = INITIAL_STATE, action) => {
+const trackList_reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case FETCH_TRACKS:
 			return {
@@ -138,4 +138,4 @@ const trackData = (state = INITIAL_STATE, action) => {
 	}
 };
 
-export default trackData;
+export default trackList_reducer;

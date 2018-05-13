@@ -13,22 +13,20 @@ import {
 } from '../actiontypes';
 import { Howl } from 'howler';
 
+// Set up global event diapatchers for howl events
 const howlOnPlay = track => {
-	console.log('howl, onplay', track.title);
+	console.log('** howl, onplay', track.title);
 	window.dispatchEvent(new Event('howl_play'));
 };
 const howlOnPause = track => {
-	console.log('howl, onpause', track.title);
+	console.log('** howl, onpause', track.title);
 	window.dispatchEvent(new Event('howl_pause'));
 };
-const howlOnEnd = track => {
-	console.log('howl, onend', track.title);
+const howlOnEnd = (track) => {
+	console.log('** howl, onend', track.title);
 	window.dispatchEvent(new Event('howl_end'));
 }
 
-
-// TODO: startNewQueue and addToQueue are player actions.
-// 			 Refactor to make this less confusing?
 export const startNewQueue = (track, currentTrack) => {
 	console.log('startNewQueue, track', track);
 
@@ -108,8 +106,8 @@ export const pauseTrack = (currentTrack) => {
 	};
 }
 
-export const stopTrack = (queue, queueIndex) => {
-	queue[queueIndex].howl.stop();
+export const stopTrack = (currentTrack) => {
+	currentTrack && currentTrack.howl.stop();
 	return dispatch => {
 		dispatch({
 			type: STOP_TRACK

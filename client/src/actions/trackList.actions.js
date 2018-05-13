@@ -18,9 +18,9 @@ import {
 } from '../actiontypes';
 import axios from 'axios';
 import { Howl } from 'howler';
-import config from '../config';
+import { URLS } from '../config';
 
-const TRACKS_URL = config.TRACKS_URL
+const TRACKS_URL = URLS.TRACKS_URL
 
 export const getTracks = () => {
 	return dispatch => {

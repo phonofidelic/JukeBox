@@ -5,6 +5,7 @@ import Grid from 'material-ui/Grid';
 import Collapse from 'material-ui/transitions/Collapse';
 import {Howl, Howler} from 'howler';
 import PlayerProgress from './PlayerProgress';
+import { withTheme } from 'material-ui/styles';
 
 export class Player extends Component {
 	render() {
@@ -19,6 +20,7 @@ export class Player extends Component {
 			handleToggleQueue,
 			handlePlayFromQueue,
 			handleSeek,
+			theme,
 		} = this.props;
 
 		const styles = {
@@ -27,7 +29,7 @@ export class Player extends Component {
 			  bottom: '56px', // Makes room for bottom Nav componenet
 			  width: '100%',
 			  boxShadow: '0px -1px 20px 1px #ccc',
-			  background: '#fff',
+			  background: theme.palette.primary.light,
 			  padding: '0'
 			}
 		};
@@ -78,4 +80,4 @@ export class Player extends Component {
 	}
 }
 
-export default Player;
+export default withTheme()(Player);

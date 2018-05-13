@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/player';
+import * as actions from '../actions/player.actions';
 import { getSelectedTrack } from '../selectors';
 import Player from '../components/Player';
 
@@ -10,6 +10,13 @@ function precisionRound(number, precision) {
 }
 
 class PlayerContainer extends Component {
+	componentDidMount() {
+		// Listen for howl_end event
+		window.addEventListener('howl_end', e => {
+			this.handlePlayNext();
+		});
+	}
+
 	handlePlayTrack() {
 		const { player } = this.props;
 		this.props.playTrack(player.currentTrack);
@@ -27,7 +34,13 @@ class PlayerContainer extends Component {
 
 	handlePlayNext() {
 		const { player } = this.props;
-		this.props.playNext(player.queue, player.queueIndex);
+
+		if (player.queueIndex+1 < player.queue.length) {
+			this.props.playNext(player.queue, player.queueIndex);
+		} else {
+			console.log('last track')
+			this.props.stopTrack(false);
+		}
 	}
 
 	handlePlayPrev() {

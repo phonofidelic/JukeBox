@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 	pendingActionData: null
 }
 
-const messages = (state = INITIAL_STATE, action) => {
+const message_reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case SET_MESSAGE:
 			return {
@@ -46,4 +46,4 @@ const messages = (state = INITIAL_STATE, action) => {
 	}
 }
 
-export default messages;
+export default message_reducer;

@@ -1,6 +1,6 @@
-import * as trackListActions from './trackList';
-import * as playerActions from './player';
-import * as messageActions from './messageActions';
+import * as trackListActions from './trackList.actions';
+import * as playerActions from './player.actions';
+import * as messageActions from './message.actions';
 
 export { trackListActions };
 export { playerActions };
