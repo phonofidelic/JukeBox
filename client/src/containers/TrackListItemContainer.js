@@ -54,7 +54,7 @@ const mapStateToProps = state => {
 	return {
 		// trackList: state.trackList,
 		selectedTrack: getSelectedTrack(state),
-		player: state.player_reducer
+		player: state.player
 	}
 }
 

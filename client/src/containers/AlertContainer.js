@@ -43,8 +43,8 @@ class AlertContainer extends Component {
 
 const mapStateToProps = state => {
 	return {
-		alert: state.message_reducer.alert,
-		pendingAction: state.message_reducer.pendingAction
+		alert: state.message.alert,
+		pendingAction: state.message.pendingAction
 	}
 }
 
