@@ -33,7 +33,7 @@ const getTracks = (req, res, next) => {
 	.exec((err, tracks) => {
 		if (err) return next(err);
 		// console.log('GET /tracks response:\n', tracks);
-		res.json({message: 'Received tracks', data: tracks });
+		res.json({message: 'Received tracks', tracks: tracks });
 	});
 }
 

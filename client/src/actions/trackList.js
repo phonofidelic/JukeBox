@@ -34,7 +34,7 @@ export const getTracks = () => {
 			const message = { text: 'Tracks loaded!', context: 'info'};
 			dispatch({
 				type: FETCH_TRACKS_SUCCESS,
-				tracks: response.data.data,
+				tracks: response.data.tracks,
 				message: message
 			});
 			// dispatch({

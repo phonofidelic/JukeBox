@@ -58,7 +58,7 @@ class PlayerProgress extends Component {
 			}
 		}
 
-		// console.log('## duration:', Math.round(player.currentTrack.format.duration))
+		console.log('## duration:', player.currentTrack.format.duration)
 		let segments = [];
 		for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
 			segments.push({pos: i});
