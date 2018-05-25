@@ -37,5 +37,5 @@ export const THEME = {
       success: 'green',
       info: 'blue'
     }
-  }
+  },
 }

@@ -31,4 +31,11 @@ export const // uploaderActionTypes
 						 SET_MESSAGE = 'set_message',
 						 CLEAR_MESSAGE = 'clear_message',
 						 SET_ALERT = 'set_alert',
-						 CLEAR_ALERT = 'clear_alert';
+						 CLEAR_ALERT = 'clear_alert',
+						 // authActiontypes
+						 POST_REGISTRATION = 'post_registration',
+						 REGISTRATION_SUCCESS = 'registration_success',
+						 REGISTRATION_FAILURE = 'registration_failure',
+						 POST_LOGIN = 'post_login',
+						 LOGIN_SUCCESS = 'login_success',
+						 LOGIN_FAILURE = 'login_failure';

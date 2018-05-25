@@ -1,19 +1,46 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Mixed = Schema.Types.Mixed;
+const bcrypt = require('bcrypt-nodejs');
 
-// const TrackModel = mongoose.model(
-// 	'Track', 
-// 	Schema({
-// 		name: String,
-// 		file: {
-// 			path: { type: String, required: true },
-// 			originalname: String,
-// 			mimetype: String,
-// 			size: Number
-// 		}
-// 	})
-// );
+const UserSchema = new Schema({
+	email: { type: String, required: true },
+	password: { type: String, required: true },
+})
+
+UserSchema.pre('save', function(next) {
+	let user = this;
+	SALT_FACTOR = 5;
+
+	console.log('## user:', user)
+	// if(!user.isModified('password')) return next();
+
+	bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+		if (err) return next(err);
+
+		bcrypt.hash(user.password, salt, null, (err, hash) => {
+			if (err) return next(err);
+			user.password = hash;
+			next();
+		});
+	});
+});
+
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+	console.log('comparePassword, this:', this)
+	bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+		if (err) {
+			console.error('comparePassword error:', err)
+			return cb(err);
+		}
+		cb(null, isMatch);
+	});
+};
+
+const UserModel = mongoose.model(
+	'User',
+	UserSchema
+);
 
 const TrackModel = mongoose.model(
 	'Track',
@@ -52,5 +79,6 @@ const AlbumModel = mongoose.model(
 );
 
 module.exports = {
-	TrackModel: TrackModel
+	TrackModel: TrackModel,
+	UserModel: UserModel
 }

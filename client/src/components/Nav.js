@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import { 
+  Home,
   FileUpload,
   Storage,
-} from 'material-ui-icons'
+} from 'material-ui-icons';
 
 class Nav extends Component {
   render() {
@@ -22,6 +23,13 @@ class Nav extends Component {
         showLabels 
         style={styles.root}
       >
+        <BottomNavigationAction 
+          component={Link} 
+          to="/"
+          label="Home" 
+          value="/" 
+          icon={<Home />} 
+        />
         <BottomNavigationAction 
           component={Link} 
           to="/tracklist"
