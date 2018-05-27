@@ -2,12 +2,14 @@ import React from 'react';
 import TrackListContainer from '../containers/TrackListContainer';
 import UploaderContainer from '../containers/UploaderContainer';
 import AuthContainer from '../containers/AuthContainer';
+import DashboardContainer from '../containers/DashboardContainer';
 import Typography from 'material-ui/Typography';
 
-export const HomeView = () => {
+export const HomeView = (props) => {
 	return (
 		<div>
 			<Typography variant="display1">Home</Typography>
+			<DashboardContainer {...props} />
 		</div>
 	);
 }

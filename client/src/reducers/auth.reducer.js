@@ -6,6 +6,9 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_FAILURE,
 	UNAUTH_USER,
+	GET_USER_INFO,
+	GET_USER_INFO_SUCCESS,
+	GET_USER_INFO_FAILURE,
 } from '../actiontypes';
 
 const INITIAL_STATE = {
@@ -61,6 +64,27 @@ const auth = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				message: 'User successfully logged out'	
+			}
+
+		case GET_USER_INFO:
+			return {
+				...state,
+				waiting: true,
+			}
+
+		case GET_USER_INFO_SUCCESS:
+			return {
+				...state,
+				waiting: false,
+				user: action.user,
+				message: action.message,
+			}
+
+		case GET_USER_INFO_FAILURE:
+			return {
+				...state,
+				waiting: false,
+				message: 'Could not retreive user info',
 			}
 
 		default: return state

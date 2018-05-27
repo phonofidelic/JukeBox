@@ -39,4 +39,7 @@ export const // uploaderActionTypes
 						 POST_LOGIN = 'post_login',
 						 LOGIN_SUCCESS = 'login_success',
 						 LOGIN_FAILURE = 'login_failure',
-						 UNAUTH_USER = 'unauth_user';
+						 UNAUTH_USER = 'unauth_user',
+						 GET_USER_INFO = 'get_user_info',
+						 GET_USER_INFO_SUCCESS = 'get_user_info_success',
+						 GET_USER_INFO_FAILURE = 'get_user_info_failure';

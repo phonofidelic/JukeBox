@@ -27,7 +27,7 @@ const upload = multer({ storage });
 
 // Get all tracks
 const getTracks = (req, res, next) => {
-	Track.find({})
+	Track.find({'userId': req.get('userId')})
 	// .select('name file')
 	.sort({title: 1})
 	.exec((err, tracks) => {
@@ -73,7 +73,7 @@ const postTrack = (req, res, next) => {
 
 // Add multiple tracks
 const postTracks = (req, res, next) => {
-	console.log('postTracks, req.files', req.files)
+	console.log('postTracks')
 
 	req.files.forEach(file => {
 		// Check that file is not a directiry
@@ -84,6 +84,7 @@ const postTracks = (req, res, next) => {
 				utils.parseImageData(metaData.common.picture).then(imageData => {
 					console.log('Saving track with image data:', imageData)
 					const track = new Track({
+						userId: req.get('userId'),
 						title: metaData.common.title,
 						artist: metaData.common.artist,
 						album: metaData.common.album,
@@ -108,6 +109,7 @@ const postTracks = (req, res, next) => {
 			} else {
 				console.log('No image data found for track, saving with default image')
 				const track = new Track({
+					userId: req.get('userId'),
 					title: metaData.common.title,
 					artist: metaData.common.artist,
 					album: metaData.common.album,

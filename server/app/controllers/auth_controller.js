@@ -45,11 +45,28 @@ exports.registerNewUser = (req, res, next) => {
 exports.login = (req, res, next) => {
 	// console.log('login:', req.body)
 	const { email, password } = req.body;
-	let userInfo = setUserInfo(req.user);
+	const userInfo = setUserInfo(req.user);
 	console.log('userInfo:', userInfo)
 
 	res.json({
+		message: 'Login successfull',
 		token: generateToken(userInfo),
 		user: userInfo
+	});
+}
+
+exports.getUserInfo = (req, res, next) => {
+	console.log('getUserInfo', req.get('userId'))
+	const user = User.findOne({_id: req.get('userId')}, (err, user) => {
+		if (err) return next(err);
+		return user;
+	});
+	user.select('email _id');
+	user.exec((err, user) => {
+		if (err) return next(err);
+		res.json({
+			message: 'User info retrieved',
+			user: user
+		});
 	});
 }

@@ -39,8 +39,8 @@ class App extends Component {
   // }
 
   render() {
-    const { auth, router } = this.props;
-    console.log('isAuthed', auth.isAuthed)
+    // const { auth, router } = this.props;
+    // console.log('isAuthed', auth.isAuthed)
 
     return (
       <div className="App">
@@ -48,9 +48,9 @@ class App extends Component {
         <AlertContainer />
         <Switch>
           {/*<Route path="/tracklist" component={TrackListView} />*/}
-          <AuthenticatedRoute isAuthed={auth.isAuthed} exact path="/" component={props => <HomeView {...props} />} />
-          <AuthenticatedRoute isAuthed={auth.isAuthed} path="/tracklist" component={props => <TrackListView {...props} />} />
-          <AuthenticatedRoute isAuthed={auth.isAuthed} path="/uploader" component={props => <UploaderView {...props} />} />
+          <AuthenticatedRoute exact path="/" component={props => <HomeView {...props} />} />
+          <AuthenticatedRoute path="/tracklist" component={props => <TrackListView {...props} />} />
+          <AuthenticatedRoute path="/uploader" component={props => <UploaderView {...props} />} />
           <Route path="/login" component={props => <LoginView {...props} />} />
           <Route path="/*" component={NotFound} />
         </Switch>
@@ -68,4 +68,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, authActions)(App);
+export default App;

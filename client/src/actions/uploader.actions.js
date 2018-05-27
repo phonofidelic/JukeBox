@@ -41,13 +41,18 @@ export const uploadTrack = formData => {
 	}
 }
 
-export const uploadTracks = formData => {
+export const uploadTracks = (formData) => {
 	console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
 	return dispatch => {
 		dispatch({
 			type: UPLOAD_TRACK
 		});
-		axios.post(TRACKS_URL, formData)
+		axios.post(TRACKS_URL, formData, { 
+			headers: { 
+				token: localStorage.getItem('JWT'),
+				userId: localStorage.getItem('userId')
+			} 
+		})
 		.then(response => {
 			console.log('uploadTrack response:', response);
 			dispatch({

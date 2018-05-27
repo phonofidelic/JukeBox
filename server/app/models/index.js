@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Mixed = Schema.Types.Mixed;
 const bcrypt = require('bcrypt-nodejs');
 
 const UserSchema = new Schema({
@@ -45,6 +44,7 @@ const UserModel = mongoose.model(
 const TrackModel = mongoose.model(
 	'Track',
 	Schema({
+		userId: { type: Schema.Types.ObjectId, required: true },
 		title: { type: String, default: 'Unknown' },
 		artist: { type: String, default: 'Unknown' },
 		album: { type: String, default: 'Unknown' },
@@ -57,7 +57,7 @@ const TrackModel = mongoose.model(
 			format: String,
 			src: String
 		},
-		format: Mixed,
+		format: Schema.Types.Mixed,
 		file: {
 			path: { type: String, required: true },
 			originalname: String,

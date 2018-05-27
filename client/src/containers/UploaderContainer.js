@@ -35,7 +35,6 @@ export class UploaderContainer extends Component {
       file.preview = 'preview removed';
     	formData.append('audioFiles', file);
     })
-    
 
     // Dispatch POST action:
     console.log('POST formData:', formData.getAll('audioFiles'));
@@ -54,7 +53,7 @@ export class UploaderContainer extends Component {
 const mapStateToProps = state => {
 	return {
 		// TODO: uploader reducer needs to be created (not yet used)
-		uploader: state.uploader
+		uploader: state.uploader,
 	}
 }
 
