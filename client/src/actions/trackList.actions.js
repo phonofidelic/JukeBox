@@ -28,7 +28,7 @@ export const getTracks = () => {
 			type: FETCH_TRACKS
 		});
 
-		axios.get(`${TRACKS_URL}`)
+		axios.get(`${TRACKS_URL}`, {headers: {token: localStorage.getItem('JWT')}})
 		.then(response => {
 			console.log('getTracks response:', response);
 			const message = { text: 'Tracks loaded!', context: 'info'};

@@ -7,12 +7,12 @@ import Typography from 'material-ui/Typography';
 export const HomeView = () => {
 	return (
 		<div>
-			<h1>Home</h1>
+			<Typography variant="display1">Home</Typography>
 		</div>
 	);
 }
 
-export const TrackListView = () => {
+export const TrackListView = (props) => {
 	const styles = {
 		header: {
 			height: '40px',
@@ -28,26 +28,26 @@ export const TrackListView = () => {
 			<div style={styles.header}>
 				<Typography variant="display1">Track List</Typography>
 			</div>
-			<TrackListContainer />
+			<TrackListContainer {...props} />
 		</div>
 	)
 }
 
 
-export const UploaderView = () => {
+export const UploaderView = (props) => {
 	return (
 		<div>
 			<Typography variant="display1">Uploader</Typography>
-			<UploaderContainer />
+			<UploaderContainer {...props} />
 		</div>
 	);
 };
 
-export const LoginView = () => {
+export const LoginView = (props) => {
 	return (
 		<div>
 			<Typography variant="display1">Login</Typography>
-			<AuthContainer />
+			<AuthContainer {...props} />
 		</div>
 	);
 };

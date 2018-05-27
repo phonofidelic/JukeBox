@@ -8,8 +8,8 @@ const config = require('./index');
 
 const localOptions = { usernameField: 'email' };
 const jwtOptions = {
-	jwtFromRequest: ExtractJwt.fromHeader(),
-	secretOrKey: '1JFlYjRtx7IUm8l0d6aT',
+	jwtFromRequest: ExtractJwt.fromHeader('token'),
+	secretOrKey: config.JWT_SECRET,
 };
 
 const localLogin = new LocalStrategy(
@@ -29,16 +29,21 @@ const localLogin = new LocalStrategy(
 );
 
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+	console.log('JwtStrategy, payload:', payload)
 	User.findById(payload._id, function(err, user) {
-		if (err) { return done(err, false); }
+		if (err) { 
+			console.error('Could not find user:', err);
+			return done(err, false); 
+		}
 
 		if (user) {
 			done(null, user);
 		} else {
+			console.log('No user...')
 			done(null, false)
 		}
 	});
 });
 
-passport.use(jwtLogin);
 passport.use(localLogin);
+passport.use(jwtLogin);

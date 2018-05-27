@@ -5,6 +5,7 @@ import {
   Home,
   FileUpload,
   Storage,
+  ExitToApp,
 } from 'material-ui-icons';
 
 class Nav extends Component {
@@ -43,6 +44,14 @@ class Nav extends Component {
           label="Uploader" 
           value="/uploader" 
           icon={<FileUpload />} 
+        />
+        <BottomNavigationAction 
+          onClick={() => this.props.handleSignOut()}
+          component={Link}
+          to="/login" 
+          label="Sign out" 
+          value="/login" 
+          icon={<ExitToApp />} 
         />
       </BottomNavigation>
     );

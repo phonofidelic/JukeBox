@@ -31,23 +31,25 @@ exports.registerNewUser = (req, res, next) => {
 		});
 		user.save((err, user) => {
 			if (err) return next(err);
+			let userInfo = setUserInfo(user);
+
 			res.json({
 				message: 'new user registered',
-				token: `fake_token_${Date.now()}`,
-				user: setUserInfo(user)
+				token: generateToken(userInfo),
+				user: userInfo
 			});
 		});
 	});	
 }
 
 exports.login = (req, res, next) => {
-	console.log('login:', req.body)
+	// console.log('login:', req.body)
 	const { email, password } = req.body;
 	let userInfo = setUserInfo(req.user);
 	console.log('userInfo:', userInfo)
 
 	res.json({
-		token: 'JWT ' + generateToken(userInfo),
+		token: generateToken(userInfo),
 		user: userInfo
 	});
 }

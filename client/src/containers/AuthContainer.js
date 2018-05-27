@@ -4,13 +4,9 @@ import { authActions } from '../actions';
 import LoginForm from '../components/LoginForm';
 import RegistrationForm from '../components/RegistrationForm';
 import Typography from 'material-ui/Typography';
+import { Redirect } from 'react-router-dom';
 
 class AuthContainer extends Component {
-	handleLogin(formData) {
-		console.log('handleLogin', formData)
-		this.props.login(formData);
-	}
-
 	handleNewRegistration(formData) {
 		console.log('handleNewRegistration', formData)
 
@@ -31,14 +27,28 @@ class AuthContainer extends Component {
 		this.props.postRegistration(formData);
 	}
 
+	handleLogin(formData) {
+		console.log('handleLogin', formData)
+		this.props.login(formData);
+	}
+
 	render() {
+		const { auth, from } = this.props;
+
+		if (auth.isAuthed) {
+			<Redirect to={from} />
+		}
+
 		return (
 			<div>
 				<LoginForm
+					auth={auth}
+					from={from}
 					handleLogin={this.handleLogin.bind(this)}
 				/>
 				<Typography style={{marginTop: '50px', fontStyle: 'italic'}}>- or -</Typography>
 				<RegistrationForm 
+					auth={auth}
 					handleNewRegistration={this.handleNewRegistration.bind(this)}
 				/>
 			</div>
@@ -46,9 +56,14 @@ class AuthContainer extends Component {
 	}
 }
 
+const getRedirectReferrer = (state) => {
+	return state.router.location.pathname;
+}
+
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    from: getRedirectReferrer(state),
   }
 }
 

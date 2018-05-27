@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import Button from '@material-ui/core/Button';
+import { Redirect } from 'react-router-dom';
 
 const form = reduxForm({
 	form: 'loginForm'
@@ -25,9 +26,13 @@ const renderField = ({
 class LoginForm extends Component {
 	render() {
 		const { 
+			auth,
+			from,
 			handleLogin,
 			handleSubmit,
 		} = this.props;
+
+		console.log('LoginForm, from:', from)
 
 		const styles = {
 			root: {
@@ -37,6 +42,10 @@ class LoginForm extends Component {
 				margin: '10px'
 			}
 		}
+
+		// if (auth.isAuthed) {
+		// 	return <Redirect to={from.pathname} />
+		// }
 
 		return (
 			<form

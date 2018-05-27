@@ -12,7 +12,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import { THEME } from './config';
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 const store = createStore(
 	reducer,

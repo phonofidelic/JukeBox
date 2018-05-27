@@ -38,4 +38,5 @@ export const // uploaderActionTypes
 						 REGISTRATION_FAILURE = 'registration_failure',
 						 POST_LOGIN = 'post_login',
 						 LOGIN_SUCCESS = 'login_success',
-						 LOGIN_FAILURE = 'login_failure';
+						 LOGIN_FAILURE = 'login_failure',
+						 UNAUTH_USER = 'unauth_user';

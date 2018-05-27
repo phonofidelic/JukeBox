@@ -5,8 +5,10 @@ import {
 	POST_LOGIN,
 	LOGIN_SUCCESS,
 	LOGIN_FAILURE,
+	UNAUTH_USER,
 } from '../actiontypes';
 import axios from 'axios';
+import { history } from '../.';
 
 export const postRegistration = data => {
 	return dispatch => {	
@@ -17,6 +19,8 @@ export const postRegistration = data => {
 		axios.post('/auth/register', data)
 		.then(response => {
 			console.log('postRegistration response:', response);
+			localStorage.setItem('JWT', response.data.token);
+			history.push('/'); // TODO: push referrer instead of static 'home'
 			dispatch({
 				type: REGISTRATION_SUCCESS,
 				user: response.data.user,
@@ -43,6 +47,8 @@ export const login = data => {
 		axios.post('/auth/login', data)
 		.then(response => {
 			console.log('login response:', response);
+			localStorage.setItem('JWT', response.data.token);
+			history.push('/'); // TODO: push referrer instead of static 'home'
 			dispatch({
 				type: LOGIN_SUCCESS,
 				user: response.data.user,
@@ -55,6 +61,15 @@ export const login = data => {
 			dispatch({
 				type: LOGIN_FAILURE,
 			})
+		});
+	}
+}
+
+export const logoutUser = () => {
+	return dispatch => {
+		localStorage.removeItem('JWT');
+		dispatch({
+			type: UNAUTH_USER
 		});
 	}
 }
