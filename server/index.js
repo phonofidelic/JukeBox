@@ -13,7 +13,7 @@ const authRoutes = require('./app/routes/auth_routes');
 const trackRoutes = require('./app/routes/track_routes');
 
 const PORT = config.port;
-const DB_URL = config.db.url;
+const DB_URI = config.db;
 const FILE_LOCATION = config.fileLocation;
 
 const app = express();
@@ -22,7 +22,8 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 
 // Configure db
-mongoose.connect(DB_URL);
+mongoose.connect(DB_URI);
+console.log('### DB_URI:', DB_URI)
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error'));
 db.on('open', () => console.log('DB connection successfull!'));

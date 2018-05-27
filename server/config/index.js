@@ -1,11 +1,9 @@
-const db = {
-	url: 'mongodb://localhost:27017/jukeTest'
-};
-
+require('dotenv').config();
+console.log('### process.env.JWT_SECRET:', process.env.JWT_SECRET)
 module.exports = {
 	port: process.env.PORT || 3001,
-	db: db,
+	db: process.env.MONGODB_URI || 'mongodb://localhost:27017/jukeTest',
 	fileLocation_audio: './uploads/audio',
 	fileLocation_images: './uploads/images',
-	JWT_SECRET: '1JFlYjRtx7IUm8l0d6aT'	// Where did this come from???????
+	JWT_SECRET: process.env.JWT_SECRET	// Where did this come from???????
 };

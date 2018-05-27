@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && yarn start\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cd client && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "cd server && NODE_ENV=production node index.js"
   },
   "author": "",
   "license": "ISC",
