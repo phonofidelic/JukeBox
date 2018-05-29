@@ -7,3 +7,6 @@ mock_assets
 node_modules
 dist
 **/notes.*
+Dockerfile
+.dockerignore
+docker-compose.yml

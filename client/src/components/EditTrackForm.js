@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { withTheme } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import IconButton from 'material-ui/IconButton';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import Grid from '@material-ui/core/Grid';
 import { 
 	Cancel,
 	Done
-} from 'material-ui-icons';
-import Grid from 'material-ui/Grid';
+} from '@material-ui/icons';
+import { withTheme } from '@material-ui/core/styles';
 
 const form = reduxForm({
 	form: 'editTrackForm'

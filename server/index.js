@@ -23,21 +23,22 @@ app.use(passport.initialize());
 
 // Configure db
 mongoose.connect(DB_URI);
-console.log('### DB_URI:', DB_URI)
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error'));
 db.on('open', () => console.log('DB connection successfull!'));
 
+// Configure middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+// Configure access-control headers
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
+// Configure routers
 app.use('/uploads', express.static('./uploads'));
 app.use('/tracks', trackRoutes);
 app.use('/auth', authRoutes);

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { withTheme } from 'material-ui/styles';
-import List, { ListItem } from 'material-ui/List';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { withTheme } from '@material-ui/core/styles';
 
 // const styles = theme => ({
 //   root: {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Grid from 'material-ui/Grid';
-import IconButton from 'material-ui/IconButton';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import { 
 	Pause, 
 	PlayArrow, 
@@ -10,7 +10,7 @@ import {
 	MoreHoriz,
 	ExpandMore,
 	ExpandLess
-} from 'material-ui-icons';
+} from '@material-ui/icons';
 
 class PlayerControls extends Component {
 	state = {

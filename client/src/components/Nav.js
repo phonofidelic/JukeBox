@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { 
   Home,
   FileUpload,
   Storage,
   ExitToApp,
-} from 'material-ui-icons';
+} from '@material-ui/icons';
 
 class Nav extends Component {
   render() {

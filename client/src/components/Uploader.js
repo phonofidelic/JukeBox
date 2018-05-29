@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Dropzone from 'react-dropzone';
-import Button from 'material-ui/Button';
 import Upload from 'material-ui-upload/Upload';
+import Dropzone from 'react-dropzone';
+import Button from '@material-ui/core/Button';
 
 const FILE_FIELD_NAME = 'audioFiles';
 

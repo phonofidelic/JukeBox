@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import TrackListItemContainer from '../containers/TrackListItemContainer';
-import List from 'material-ui/List';
-import Typography from 'material-ui/Typography';
-import { withTheme } from 'material-ui/styles';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import { withTheme } from '@material-ui/core/styles';
 
 export class TrackList extends Component {
 	render() {

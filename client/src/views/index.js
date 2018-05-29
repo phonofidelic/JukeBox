@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TrackListContainer from '../containers/TrackListContainer';
 import UploaderContainer from '../containers/UploaderContainer';
 import AuthContainer from '../containers/AuthContainer';
 import DashboardContainer from '../containers/DashboardContainer';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 export const HomeView = (props) => {
 	return (

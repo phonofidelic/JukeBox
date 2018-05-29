@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import Grid from 'material-ui/Grid';
-import IconButton from 'material-ui/IconButton';
+// import AlertDialog from './AlertDialog';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { 
 	PlayArrow,
 	Queue,
 	MoreVert
-} from 'material-ui-icons';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import AlertDialog from './AlertDialog';
+} from '@material-ui/icons';
 
 const deleteTrackAlert = {
 	headerText: 'Are you sure you want to delete this track?',

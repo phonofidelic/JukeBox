@@ -7,7 +7,8 @@
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && yarn start\"",
     "build": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod": "cd server && NODE_ENV=production node index.js"
+    "start": "cd server && NODE_ENV=production node index.js",
+    "prodinstall": "cd server && npm install"
   },
   "author": "",
   "license": "ISC",

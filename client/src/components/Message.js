@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import Snackbar from 'material-ui/Snackbar';
-import IconButton from 'material-ui/IconButton';
-import Grid from 'material-ui/Grid';
-import { 
-	Close
-} from 'material-ui-icons';
-import { withTheme } from 'material-ui/styles';
-
-
+import Snackbar from '@material-ui/core/Snackbar';
+import { withTheme } from '@material-ui/core/styles';
 
 class Message extends Component {
 
@@ -33,7 +26,7 @@ class Message extends Component {
 					horizontal: 'center'
 				}}
 				open={open}
-				SnackbarContentProps={{
+				ContentProps={{
       	  'aria-describedby': 'message-id',
         }}
         message={

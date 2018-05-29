@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { withTheme } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import { ListItem } from 'material-ui/List';
-import Grid from 'material-ui/Grid';
-import { 
-	Album
-} from 'material-ui-icons';
 import EditTrackForm from './EditTrackForm';
 import TrackListItemControls from './TrackListItemControls';
+import Typography from '@material-ui/core/Typography';
+import ListItem from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid';
+import { 
+	Album
+} from '@material-ui/icons';
+import { withTheme } from '@material-ui/core/styles';
+
 
 class TrackListItem extends Component {
 	state = {

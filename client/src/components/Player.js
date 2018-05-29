@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import PlayerControls from './PlayerControls';
-import QueueList from './QueueList';
-import Grid from 'material-ui/Grid';
-import Collapse from 'material-ui/transitions/Collapse';
 import {Howl, Howler} from 'howler';
 import PlayerProgress from './PlayerProgress';
-import { withTheme } from 'material-ui/styles';
+import PlayerControls from './PlayerControls';
+import QueueList from './QueueList';
+import Grid from '@material-ui/core/Grid';
+import Collapse from '@material-ui/core/Collapse';
+import { withTheme } from '@material-ui/core/styles';
 
 export class Player extends Component {
 	render() {
