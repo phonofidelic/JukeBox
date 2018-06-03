@@ -25,9 +25,9 @@ class TrackListItemContainer extends Component {
 
 	handleDeleteTrack(trackData) {
 		// TODO: dispatch custom confirm action connected to MUI Alert component
-		const confirm = window.confirm('Are you sure you want to delete this track?')
+		const confirm = window.confirm('Are you sure you want to delete this track?');
 		if (confirm) {
-			return this.props.deleteTrackConfirm(trackData)
+			return this.props.deleteTrackConfirm(trackData);
 		}
 		return this.props.deleteTrackCancel();
 	}

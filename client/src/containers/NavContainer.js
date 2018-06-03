@@ -6,7 +6,11 @@ import Nav from '../components/Nav';
 class NavContainer extends Component {
 	handleSignOut() {
 		console.log('handleSignOut, this.props:', this.props)
-    this.props.logoutUser();
+		const confirm = window.confirm('Are you sure you want to sign out?');
+		if (confirm === true) {
+			return this.props.logoutUser();
+		}
+    return;
 	}
 
 	render() {

@@ -48,10 +48,7 @@ class Nav extends Component {
         />
         <BottomNavigationAction 
           onClick={() => this.props.handleSignOut()}
-          component={Link}
-          to="/login" 
           label="Sign out" 
-          value="/login" 
           icon={<ExitToApp />} 
         />
       </BottomNavigation>

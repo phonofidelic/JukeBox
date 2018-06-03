@@ -74,6 +74,7 @@ export const logoutUser = () => {
 	return dispatch => {
 		localStorage.removeItem('JWT');
 		localStorage.removeItem('userId');
+		history.push('/');
 		dispatch({
 			type: UNAUTH_USER
 		});
