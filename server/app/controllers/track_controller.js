@@ -1,26 +1,10 @@
-const multer = require('multer');
-const uuidv4 = require('uuid/v4');
 const mm = require('music-metadata');
 const isFile = require('is-file');
 const path = require('path');
 const Track = require('../models').TrackModel;
 const fs = require('fs');
 const utils = require('./utils');
-
-// Configure strorage
-const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, process.env.FS_AUDIO);
-	},
-	filename: (req, file, cb) => {
-		// Set file system name in request object
-		newName = `${uuidv4()}${path.extname(file.originalname)}`;
-		cb(null, newName);
-	}
-});
-// Ctreate multer instance that will be used to upload/save the file
-const upload = multer({ storage });
-// const upload = multer({ dest: 'uploads/' })
+const storage = require('../../config/storage_config');
 
 // Get all tracks
 const getTracks = (req, res, next) => {
@@ -166,7 +150,6 @@ const removeTrack = (req, res, next) => {
 }
 
 module.exports = {
-	upload,
 	getTracks,
 	getTrack,
 	postTrack,

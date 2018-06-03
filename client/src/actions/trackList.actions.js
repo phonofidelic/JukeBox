@@ -135,7 +135,12 @@ export const editTrack = (formData, trackData) => {
 		dispatch({
 			type: POST_TRACK_DATA,
 		});
-		axios.put(`${TRACKS_URL}/${trackData._id}`, formData)
+		axios.put(`${TRACKS_URL}/${trackData._id}`, formData, {
+			headers: {
+				token: localStorage.getItem('JWT'),
+				userId: localStorage.getItem('userId')
+			}
+		})
 		.then(response => {
 			console.log('postTrackData response:', response)
 			dispatch({
@@ -171,7 +176,12 @@ export const deleteTrackConfirm = trackData => {
 		dispatch({
 			type: DELETE_TRACK_CONFIRM
 		});
-		axios.delete(`${TRACKS_URL}/${trackData._id}`)
+		axios.delete(`${TRACKS_URL}/${trackData._id}`, {
+			headers: {
+				token: localStorage.getItem('JWT'),
+				userId: localStorage.getItem('userId')
+			}
+		})
 		.then(response => {
 			console.log('deleteTrack response:', response);
 			dispatch({

@@ -1,7 +1,8 @@
 const path = require('path');
 const multer = require('multer');
+const uuidv4 = require('uuid/v4');
 
-module.exports.storage = multer.diskStorage({
+const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, process.env.FS_AUDIO);
 	},
@@ -11,3 +12,5 @@ module.exports.storage = multer.diskStorage({
 		cb(null, newName);
 	}
 });
+
+module.exports = multer({ storage });
