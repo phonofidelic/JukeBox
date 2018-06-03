@@ -1,10 +1,8 @@
 const User = require('../models').UserModel;
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const config = require('../../config');
-
 const generateToken = user => {
-	return jwt.sign(user, config.JWT_SECRET, {
+	return jwt.sign(user, process.env.JWT_SECRET, {
 		expiresIn: 3600
 	});
 };

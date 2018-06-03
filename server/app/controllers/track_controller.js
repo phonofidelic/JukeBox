@@ -1,19 +1,16 @@
-const multer = require('multer'),
-		  uuidv4 = require('uuid/v4'),
-		  mm = require('music-metadata'),
-		  isFile = require('is-file'),
-			path = require('path'),
-			Track = require('../models').TrackModel,
-			config = require('../../config'),
-			fs = require('fs'),
-			utils = require('./utils');
-
-
+const multer = require('multer');
+const uuidv4 = require('uuid/v4');
+const mm = require('music-metadata');
+const isFile = require('is-file');
+const path = require('path');
+const Track = require('../models').TrackModel;
+const fs = require('fs');
+const utils = require('./utils');
 
 // Configure strorage
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, config.fileLocation_audio);
+		cb(null, process.env.FS_AUDIO);
 	},
 	filename: (req, file, cb) => {
 		// Set file system name in request object

@@ -1,15 +1,13 @@
-
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../app/models').UserModel;
-const config = require('./index');
 
 const localOptions = { usernameField: 'email' };
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('token'),
-	secretOrKey: config.JWT_SECRET,
+	secretOrKey: process.env.JWT_SECRET,
 };
 
 const localLogin = new LocalStrategy(

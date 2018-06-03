@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const User = require('../models').UserModel;
-const config = require('../../config');
 const passportService = require('../../config/passport_config');
 const passport = require('passport');
 const authController = require('../controllers/auth_controller');

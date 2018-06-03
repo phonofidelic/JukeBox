@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { authActions } from '../actions';
 import LoginForm from '../components/LoginForm';
 import RegistrationForm from '../components/RegistrationForm';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 import { Redirect } from 'react-router-dom';
 
 class AuthContainer extends Component {

@@ -1,20 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
-const fs = require('path');
 const mongoose = require('mongoose');
-const multer = require('multer');
-const uuidv4 = require('uuid/v4');
-// const routes = require('./app/routes');
-const config = require('./config');
 const passport = require('passport');
 const logger = require('morgan');
 const authRoutes = require('./app/routes/auth_routes');
 const trackRoutes = require('./app/routes/track_routes');
 
-const PORT = config.port;
-const DB_URI = config.db;
-const FILE_LOCATION = config.fileLocation;
+const PORT = process.env.PORT;
+const DB_CONNECTION = process.env.DB_CONNECTION;
 
 const app = express();
 
@@ -22,7 +16,7 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 
 // Configure db
-mongoose.connect(DB_URI);
+mongoose.connect(DB_CONNECTION);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error'));
 db.on('open', () => console.log('DB connection successfull!'));

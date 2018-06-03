@@ -59,7 +59,7 @@ export const getTracks = () => {
 }
 
 export const selectTrack = track => {
-	console.log(track)
+	// console.log(track)
 	return dispatch => {
 		dispatch({
 			type: SELECT_TRACK,
