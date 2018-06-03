@@ -115,12 +115,6 @@ const postTracks = (req, res, next) => {
 		})
 		.catch(err => console.error('Could not parse file:', err.message))
 	});
-
-// console.log('POST /tracks response:\n', tracksToSave);
-// res.json({message: 'Track saved', data: tracksToSave });
-
-
-	
 }
 
 // Edit a track
@@ -142,7 +136,22 @@ const removeTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	Track.findByIdAndRemove(trackId, (err, removedTrack) => {
 		if (err) return next(err);
-		// console.log('DELETE /tracks/:trackId response:\n', removedTrack);
+		console.log('DELETE /tracks/:trackId track path:\n', removedTrack.file.path);
+		// Delete audio file in uploads/audio
+		fs.unlink(removedTrack.file.path, (err) => {
+			if (err) return next(err);
+			console.log(`Deleted audio file ${removedTrack.file.path}`);
+		});
+
+		// If an imnage file exists,
+		// delete it from uploads/images
+		if (removedTrack.image.src) {
+			fs.unlink(removedTrack.image.src, (err) => {
+				if (err) return next(err);
+				console.log(`Deleted image file ${removedTrack.image.src}`);
+			});
+		}
+
 		res.json({ message: 'Track removed', data: removedTrack });
 	});
 	// TODO: Delete track in file system, otherwise there will be lots of
