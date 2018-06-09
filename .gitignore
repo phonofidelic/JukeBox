@@ -10,3 +10,5 @@ dist
 Dockerfile
 .dockerignore
 docker-compose.yml
+**/build
+server/client_build

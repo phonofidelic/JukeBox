@@ -38,7 +38,7 @@ app.use('/tracks', trackRoutes);
 app.use('/auth', authRoutes);
 
 // Serve static client files
-app.use(express.static('../client/build'));
+app.use(express.static(process.env.CLIENT_DIR));
 
 // app.use('/*', (req, res) => {
 // 	res.status(404).json({message: 'Recource not found'});
