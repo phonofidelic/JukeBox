@@ -42,4 +42,6 @@ export const // uploaderActionTypes
 						 UNAUTH_USER = 'unauth_user',
 						 GET_USER_INFO = 'get_user_info',
 						 GET_USER_INFO_SUCCESS = 'get_user_info_success',
-						 GET_USER_INFO_FAILURE = 'get_user_info_failure';
+						 GET_USER_INFO_FAILURE = 'get_user_info_failure',
+						 VALIDATION_ERROR='validation_error',
+						 CLEAR_ERROR='clear_error';

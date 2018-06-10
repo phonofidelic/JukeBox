@@ -15,7 +15,7 @@ class Message extends Component {
 
 		const styles = {
 			root: {
-				background: `${theme.palette.context[context]}`
+				color: `${theme.palette.context[context]}`
 			}
 		}
 

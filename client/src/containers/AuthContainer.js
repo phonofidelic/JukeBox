@@ -28,8 +28,15 @@ class AuthContainer extends Component {
 	}
 
 	handleLogin(formData) {
+		
+    	
 		console.log('handleLogin', formData)
+
 		this.props.login(formData);
+	}
+
+	handleClearError() {
+		this.props.clearError();
 	}
 
 	render() {
@@ -45,6 +52,7 @@ class AuthContainer extends Component {
 					auth={auth}
 					from={from}
 					handleLogin={this.handleLogin.bind(this)}
+					handleClearError={this.handleClearError.bind(this)}
 				/>
 				<Typography style={{marginTop: '50px', fontStyle: 'italic'}}>- or -</Typography>
 				<RegistrationForm 

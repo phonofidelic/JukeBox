@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { validation } from '../utils';
 
 const form = reduxForm({
 	form: 'registrationForm'
@@ -17,6 +18,7 @@ const renderField = ({
 }) => (
 	<TextField
 		label={label}
+		error={Boolean(touched && error)}
 		{...input}
 		{...custom} 
 	/>
@@ -56,6 +58,7 @@ class RegistrationForm extends Component {
 						name="email"
 						label="Email"
 						placeholder="Enter your email"
+						validate={[validation.required]}
 					/>
 				</div>
 				<div>
@@ -66,6 +69,7 @@ class RegistrationForm extends Component {
 						label="Password"
 						label="Password"
 						placeholder="Choose a password"
+						validate={[validation.required]}
 					/>
 				</div>
 				<div>
@@ -75,6 +79,7 @@ class RegistrationForm extends Component {
 						name="password_confirm"
 						label="Confirm password"
 						placeholder="Confirm password"
+						validate={[validation.required]}
 					/>
 				</div>
 				<div style={{marginTop: '20px'}}>

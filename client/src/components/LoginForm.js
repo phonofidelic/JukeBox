@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { validation } from '../utils';
 
 const form = reduxForm({
 	form: 'loginForm'
@@ -16,7 +17,8 @@ const renderField = ({
  ...custom 
 }) => (
 	<TextField
-		label={label}
+		label={Boolean(touched && error) ? error : label}
+		error={Boolean(touched && error)}
 		{...input}
 		{...custom} 
 	/>
@@ -28,6 +30,7 @@ class LoginForm extends Component {
 			auth,
 			handleLogin,
 			handleSubmit,
+			handleClearError,
 		} = this.props;
 
 
@@ -40,10 +43,13 @@ class LoginForm extends Component {
 			}
 		}
 
+		console.log('LoginForm, auth.loginErr:', Boolean(auth.loginErr))
 		return (
 			<form
 				style={styles.root}
 				onSubmit={handleSubmit(handleLogin)}
+				onChange={auth.loginErr && handleClearError}
+				auth={auth}
 			>
 				<div style={styles.header}>
 					<Typography>
@@ -56,6 +62,8 @@ class LoginForm extends Component {
 						type="email"
 						name="email"
 						label="Email"
+						error={auth.loginErr}
+						validate={[validation.required, validation.email]}
 						placeholder="Enter your email"
 					/>
 				</div>
@@ -65,7 +73,8 @@ class LoginForm extends Component {
 						type="password"
 						name="password"
 						label="Password"
-						label="Password"
+						error={auth.loginErr}
+						validate={[validation.required]}
 						placeholder="Enter your password"
 					/>
 				</div>

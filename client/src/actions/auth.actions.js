@@ -9,6 +9,9 @@ import {
 	GET_USER_INFO,
 	GET_USER_INFO_SUCCESS,
 	GET_USER_INFO_FAILURE,
+	VALIDATION_ERROR,
+	SET_MESSAGE,
+	CLEAR_ERROR,
 } from '../actiontypes';
 import axios from 'axios';
 import { history } from '../.';
@@ -42,11 +45,12 @@ export const postRegistration = data => {
 	}
 }
 
-export const login = data => {
+export const login = data => {	
 	return dispatch => {
 		dispatch({
 			type: POST_LOGIN
 		});
+		console.log('login, data:', data)
 		// TODO: 	Validate data
 		axios.post('/auth/login', data)
 		.then(response => {
@@ -62,10 +66,15 @@ export const login = data => {
 			});
 		})
 		.catch(err => {
-			console.error('login error:', err);
+			// console.log('login error:', err.response);
 			dispatch({
 				type: LOGIN_FAILURE,
+				error: err
 			});
+			dispatch({
+				type: SET_MESSAGE,
+				message: {text: `Could not authenticate. Please check that your email and password are correct.`, context: 'danger'}
+			})
 		});
 	}
 }
@@ -105,6 +114,14 @@ export const getUserInfo = () => {
 				type: GET_USER_INFO_FAILURE,
 				// message: err,
 			});
+		})
+	}
+}
+
+export const clearError = () => {
+	return dispatch => {
+		dispatch({
+			type: CLEAR_ERROR
 		})
 	}
 }
