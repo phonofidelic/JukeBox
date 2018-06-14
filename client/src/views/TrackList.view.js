@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TrackListContainer from '../containers/TrackListContainer';
+import UploaderContainer from '../containers/UploaderContainer';
 import PlayerContainer from '../containers/PlayerContainer';
 import NavContainer from '../containers/NavContainer';
 import Typography from '@material-ui/core/Typography';
@@ -21,6 +22,7 @@ const TrackListView = (props) => {
 				<Typography variant="display1">Track List</Typography>
 			</div>
 			<TrackListContainer {...props} />
+			{/*<UploaderContainer />*/}
 			<PlayerContainer />
       <NavContainer />
 		</div>

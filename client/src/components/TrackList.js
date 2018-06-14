@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import TrackListItemContainer from '../containers/TrackListItemContainer';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import {
+	Typography, 
+	List, 
+	ListItem,
+} from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 
 export class TrackList extends Component {
 	render() {
 		const { 
 			trackList,
-			theme
+			theme,
 		} = this.props;
 
 		const styles = {
@@ -19,12 +22,12 @@ export class TrackList extends Component {
 				paddingTop: '45px',
 				paddingBottom: '104px' // TODO: link value to Player + Nav height
 			}
-		}
+		};
 
 		return (
 			<List className="TrackList" style={styles.root}>
 			{
-				trackList.tracks.length ? trackList.tracks.map(track => (
+				trackList.tracks.length > 0 ? trackList.tracks.map(track => (
 					<TrackListItemContainer 
 						key={track._id} 
 						track={track} 

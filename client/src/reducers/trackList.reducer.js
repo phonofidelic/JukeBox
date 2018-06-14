@@ -51,7 +51,7 @@ const trackList_reducer = (state = INITIAL_STATE, action) => {
 		case UPLOAD_SUCCESS:
 			return {
 				...state,
-				tracks: [...state.tracks, action.uploadedTrack]
+				tracks: [...state.tracks, ...action.uploadedTracks]
 			}
 
 		case SELECT_TRACK:

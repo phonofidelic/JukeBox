@@ -9,38 +9,6 @@ import { URLS } from '../config';
 
 const TRACKS_URL = URLS.TRACKS_URL;
 
-export const uploadTrack = formData => {
-	console.log('@uploadTrack, formData:', formData);
-	return dispatch => {
-		dispatch({
-			type: UPLOAD_TRACK
-		});
-		axios.post(TRACKS_URL, formData)
-		.then(response => {
-			console.log('uploadTrack response:', response);
-			dispatch({
-				type: UPLOAD_SUCCESS,
-				uploadedTrack: response.data.data
-			});
-			dispatch({
-				type: SET_MESSAGE,
-				message: {
-					//	TODO: Store target response data in constant?
-					text: `${response.data.data.title} saved to library`, 
-					context: 'success'
-				}
-			});
-		})
-		.catch(err => {
-			console.error('uploadTrack error:', err);
-			dispatch({
-				type: UPLOAD_FAILURE,
-				error: err
-			});
-		});
-	}
-}
-
 export const uploadTracks = (formData) => {
 	console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
 	return dispatch => {
@@ -55,15 +23,16 @@ export const uploadTracks = (formData) => {
 		})
 		.then(response => {
 			console.log('uploadTrack response:', response);
+			// document.dispatchEvent(new Event('library-update'));
 			dispatch({
 				type: UPLOAD_SUCCESS,
-				uploadedTrack: response.data.data
+				uploadedTracks: response.data.tracks
 			});
 			dispatch({
 				type: SET_MESSAGE,
 				message: {
 					//	TODO: Store target response data in constant?
-					text: `${response.data.data.title} saved to library`, 
+					text: `${response.data.message}`, 
 					context: 'success'
 				}
 			});

@@ -56,6 +56,8 @@ const postTrack = (req, res, next) => {
 const postTracks = (req, res, next) => {
 	console.log('postTracks')
 
+	let savedTracks = [];
+
 	req.files.forEach(file => {
 		// Check that file is not a directiry
 		if (!isFile(file.path)) return;
@@ -85,6 +87,9 @@ const postTracks = (req, res, next) => {
 							console.error('postTrack error:', err);
 							return next(err);
 						};
+						// return savedTrack;
+						console.log('Track saved')
+						savedTracks.push(savedTrack);
 					});
 				}).catch(err => console.error('Could not parse image data:', err))
 			} else {
@@ -110,11 +115,15 @@ const postTracks = (req, res, next) => {
 						console.error('postTrack error:', err);
 						return next(err);
 					};
+					// return savedTrack;
+					console.log('Track saved')
+					savedTracks.push(savedTrack);
 				});
 			}	
 		})
 		.catch(err => console.error('Could not parse file:', err.message))
 	});
+	res.json({message: 'Tracks saved', tracks: savedTracks })
 }
 
 // Edit a track

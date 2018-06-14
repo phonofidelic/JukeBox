@@ -59,7 +59,6 @@ class TrackListItemControls extends Component {
 			}
 		}
 
-		console.log('# state:', this.state)
 		return (
 			<Grid container justify="flex-end">
 				<IconButton title="Start new queue" onClick={ () => { handleStartNewQueue(track, player.currentTrack) }} >

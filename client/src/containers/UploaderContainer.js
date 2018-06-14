@@ -13,14 +13,6 @@ export class UploaderContainer extends Component {
     })
   }
 
-	handleUploadTrack(data) {
-		let formData = new FormData();
-		formData.append('trackName', data.trackName);
-		formData.append('selectedFile', data.selectedFile);
-
-		this.props.uploadTrack(formData);
-	}
-
 	handleUploadTracks(inputData) {
     console.log('inputData', inputData)
     let formData = new FormData();
@@ -45,7 +37,7 @@ export class UploaderContainer extends Component {
 
 	render() {
 		return (
-			<Uploader handleUploadTrack={this.handleUploadTrack.bind(this)} handleUploadTracks={this.handleUploadTracks.bind(this)} />
+			<Uploader handleUploadTracks={this.handleUploadTracks.bind(this)} />
 		);
 	}
 }

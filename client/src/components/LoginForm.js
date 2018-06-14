@@ -17,7 +17,7 @@ const renderField = ({
  ...custom 
 }) => (
 	<TextField
-		label={Boolean(touched && error) ? error : label}
+		label={Boolean(touched && error || custom.loginerr) ? error : label}
 		error={Boolean(touched && error)}
 		{...input}
 		{...custom} 
@@ -62,7 +62,7 @@ class LoginForm extends Component {
 						type="email"
 						name="email"
 						label="Email"
-						error={auth.loginErr}
+						loginerr={auth.loginErr}
 						validate={[validation.required, validation.email]}
 						placeholder="Enter your email"
 					/>
@@ -73,7 +73,7 @@ class LoginForm extends Component {
 						type="password"
 						name="password"
 						label="Password"
-						error={auth.loginErr}
+						loginerr={auth.loginErr}
 						validate={[validation.required]}
 						placeholder="Enter your password"
 					/>

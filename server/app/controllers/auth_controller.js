@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const generateToken = user => {
 	return jwt.sign(user, process.env.JWT_SECRET, {
-		expiresIn: 3600
+		expiresIn: '12h'
 	});
 };
 

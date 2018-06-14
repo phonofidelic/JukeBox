@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withTheme } from '@material-ui/core/styles';
 
 class PlayerProgress extends Component {
 	constructor(props) {
@@ -41,7 +42,7 @@ class PlayerProgress extends Component {
 	}
 
 	render() {
-		const { player } = this.props;
+		const { player, theme } = this.props;
 		const styles = {
 			progressContainer: {
 				height: '10px',
@@ -49,7 +50,7 @@ class PlayerProgress extends Component {
 				background: '#ccc',
 			},
 			progress: {
-				background: 'green',
+				background: theme.palette.secondary.main,
 				height: '100%',
 				width: `${this.state.timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`,
 			},
@@ -58,7 +59,6 @@ class PlayerProgress extends Component {
 			}
 		}
 
-		console.log('## duration:', player.currentTrack.format.duration)
 		let segments = [];
 		for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
 			segments.push({pos: i});
@@ -66,8 +66,6 @@ class PlayerProgress extends Component {
 		const ww = window.innerWidth;
 		const segWidth = Math.floor(ww/segments.length);
 	
-		// console.log('segments', segments, 'segWidth', segWidth)
-
 		const segContainerStyle = {
 			display: 'flex',
 			position: 'absolute',
@@ -107,4 +105,4 @@ class PlayerProgress extends Component {
 	}
 }
 
-export default PlayerProgress;
+export default withTheme()(PlayerProgress);
