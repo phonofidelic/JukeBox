@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
+import {
+	Snackbar,
+	Typography,
+} from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 
 class Message extends Component {
@@ -15,7 +18,13 @@ class Message extends Component {
 
 		const styles = {
 			root: {
-				color: `${theme.palette.context[context]}`
+				
+				// textAlign: 'center',
+				// width: '100%',
+			},
+			text: {
+				color: `${theme.palette.primary.light}`,
+				textAlign: 'center',
 			}
 		}
 
@@ -32,7 +41,7 @@ class Message extends Component {
         message={
 	      	<span id="message-id" style={styles.root} 
 	      	>
-	      		{text}
+	      		<Typography style={styles.text}>{text}</Typography>
 	      	</span>
         }
         onClick={ () => { handleClearMessage() }}

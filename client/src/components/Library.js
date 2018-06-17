@@ -32,7 +32,7 @@ export class Library extends Component {
 		};
 
 		return (
-			<List className="TrackList" style={styles.root}>
+			<List style={styles.root}>
 			{
 				library.tracks.length > 0 ? library.tracks.map(track => (
 					<TrackListItemContainer 

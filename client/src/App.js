@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authActions } from './actions';
-import './App.css';
 import MessageContainer from './containers/MessageContainer';
 import AlertContainer from './containers/AlertContainer';
 import { Route, Redirect, Switch } from 'react-router-dom';
@@ -25,17 +24,14 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
 };
 
 class App extends Component {
-  // handleSignOut() {
-  //   console.log('handleSignOut, this.props:', this.props)
-  //   // this.props.logoutUser();
-  // }
-
   render() {
-    // const { auth, router } = this.props;
-    // console.log('isAuthed', auth.isAuthed)
-
+    const styles = {
+      root: {
+        textAlign: 'center',
+      }
+    }
     return (
-      <div className="App">
+      <div style={styles.root}>
         <MessageContainer />
         <AlertContainer />
         <Switch>
