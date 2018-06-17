@@ -6,28 +6,14 @@ import {
 	List, 
 	ListItem,
 	Button,
+	IconButton,
 } from '@material-ui/core';
-
-// TODO: Make this a HOC, then implement TrackList as WithUploader(Tracklist)
-// export const withUploader = ({ compontnet: Component, ...rest })
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class UploaderFullscreen extends Component {
-  constructor() {
-    super()
-    this.state = {
-      dropzoneActive: false,
-      files: []
-    }
-    // this.onDrop = this.onDrop.bind(this)
+  state = {
+    dropzoneActive: false,
   }
-
-  // componentDidMount() {
-  // 	const { input } = this.props;
-  // 	console.log('## input:', input)
-  // 	console.log('## this:', this)
-  // 	input.onChange(this.props.files);
-  // 	// console.log('input.onChange, this.state.files:', this.state.files)
-  // }
 
   onDragEnter() {
     this.setState({
@@ -41,20 +27,6 @@ class UploaderFullscreen extends Component {
     });
   }
 
-  onDrop(files) {
-  	// const { input } = this.props;
-   //  this.setState({
-   //  	dropzoneActive: false,
-   //  	files: [...this.state.files, ...files]
-   //  })
-    // input.onChange([...this.state.files, ...files]);
-    // console.log('input.value:', input.value)
-    // console.log('[...this.state.files, ...files]:', [...this.state.files, ...files])
-    // console.log('this.state.files:', this.state.files)
-    // input.onDrop([...this.state.files, ...files]);
-    this.props.handleOnDrop(files);
-  }
-
   renderOverlay() {
   	const { theme }  = this.props;
   	const styles = {
@@ -66,6 +38,7 @@ class UploaderFullscreen extends Component {
 	      left: 0,
 	      padding: '2.5em 0',
 	      background: 'rgba(0,0,0,0.5)',
+	      zIndex: 1001,
 	      textAlign: 'center',
 	      color: theme.palette.primary.light,
 	    },
@@ -76,13 +49,20 @@ class UploaderFullscreen extends Component {
 
   	return (
   		<div style={styles.root}>
-  			<Typography style={styles.infoText}>Drop audo files for upload...</Typography>
+  			<Typography style={styles.infoText}>Drop audio files for upload...</Typography>
   		</div>
   	);
   }
 
   renderUploadList() {
-  	const { input, theme, droppedFiles } = this.props;
+  	const { 
+  		input, 
+  		theme, 
+  		droppedFiles,
+  		handleReset,
+  		handleRemoveTrack,
+  	} = this.props;
+
   	const styles = {
   		root: {
   			position: 'absolute',
@@ -95,6 +75,12 @@ class UploaderFullscreen extends Component {
 	      textAlign: 'center',
       	color: theme.palette.primary.light,
   		},
+  		listItem: {
+  			padding: '0px 16px',
+  		},
+  		listItemText: {
+  			color: theme.palette.primary.light,
+  		},
   		controlls: {
   			margin: '5px',
   			color: theme.palette.primary.light,
@@ -104,7 +90,14 @@ class UploaderFullscreen extends Component {
   	return (
   		<div style={styles.root}>
 	  		<List>
-	  			{droppedFiles.map((file, i) => <ListItem key={i}>{file.name} - {file.size}</ListItem>)}
+	  			{droppedFiles.map((file, i) => 
+	  				<ListItem key={i} style={styles.listItem}>
+	  					<Typography style={styles.listItemText}>
+	  						{file.name} | {file.size} kb
+	  					</Typography>
+	  					<IconButton style={{marginLeft: 5}} onClick={() => handleRemoveTrack(i)}><DeleteIcon/></IconButton>
+	  				</ListItem>
+	  			)}
 	  		</List>
 
 	  		<div>
@@ -114,7 +107,7 @@ class UploaderFullscreen extends Component {
 		  		>Submit</Button>
 		  		<Button 
 		  			style={styles.controlls}
-		  			onClick={() => this.props.reset()}
+		  			onClick={() => handleReset()}
 		  		>Cancel</Button>
 		  	</div>
 	  	</div>
@@ -123,27 +116,26 @@ class UploaderFullscreen extends Component {
 
   render() {
     const { dropzoneActive } = this.state;
-    const { input, name, droppedFiles } = this.props;
+    const { input, name, droppedFiles, handleOnDrop } = this.props;
     const dropzoneStyle = {
     	position: 'absolute',
     	top: 0,
     	right: 0,
     	botom: 0,
     	left: 0,
-    	// background: 'green',
     	width: '100%',
     	height: '100%',
-    	// pointerEvents: 'none',
     };
-    console.log('this.state.files:', this.state.files)
-    console.log('UploaderFullscreen, this.props:', this.props)
+
+    // console.log('UploaderFullscreen, this.props:', this.props)
+
     return (
       <Dropzone
       	name={input.name}
         disableClick
         style={dropzoneStyle}
         accept={''}
-        onDrop={this.onDrop.bind(this)}
+        onDrop={handleOnDrop.bind(this)}
         onDragEnter={this.onDragEnter.bind(this)}
         onDragLeave={this.onDragLeave.bind(this)}
       >

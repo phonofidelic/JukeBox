@@ -13,46 +13,17 @@ const form = reduxForm({
 })
 
 export class Uploader extends Component {
-	
-	// renderDropzoneInput(field) {
- //    const files = field.input.value;
- //    const styles = {
- //    	root: {
- //    		background: 'green',
- //    	}
- //    }
-
- //    return (
- //      <div>
- //        <Dropzone
- //          name={field.name}
- //          onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}
- //        >
- //          {
- //            field.meta.touched && 
- //            field.meta.error &&
- //            <span className="error">{field.meta.error}</span>
- //          }
- //          {
- //            files && Array.isArray(files) &&
- //            <ul>
- //              { files.map((file, i) => <li key={i}>{file.name}</li>) }
- //            </ul>
- //          }
- //        </Dropzone>
- //      </div>
- //    );
- //  }
-
   uploadTracksAndReset(files) {
   	console.log('uploadTracksAndReset, files:', files)
   	const { handleUploadTracks, reset } = this.props;
   	handleUploadTracks(files);
-  	reset();
+  	this.handleReset();
   }
 
-  handleInputChange(files) {
-
+  handleReset() {
+  	const { reset, cleaeDroppedFiles } = this.props;
+  	reset();
+  	cleaeDroppedFiles();
   }
 
 	render() {
@@ -60,6 +31,7 @@ export class Uploader extends Component {
 			trackName, 
 			droppedFiles,
 			handleOnDrop,
+			handleRemoveTrack,
 			handleUploadTracks,
 			handleSubmit,
 			reset
@@ -68,28 +40,24 @@ export class Uploader extends Component {
 		const styles = {
 			root: {
 				margin: '20px',
-				// visibility: 'hidden',
 			}
 		}
+
 		return (
 			<form onSubmit={handleSubmit(this.uploadTracksAndReset.bind(this))} style={styles.root}>
-
-					<div>
-            <label htmlFor={FILE_FIELD_NAME}>
-	            <Field 
-	            	name={FILE_FIELD_NAME}
-	            	handleOnDrop={handleOnDrop}
-	            	droppedFiles={droppedFiles}
-	            	reset={reset}
-	            	component={ (props) => <UploaderFullscreen {...props} /> } 
-	            />
-            </label>
-          </div>
-
-          {/*<div>
-            <button type="submit">Submit</button>
-            <button onClick={() => reset()}>Clear Values</button>
-          </div>*/}
+				<div>
+          <label htmlFor={FILE_FIELD_NAME}>
+            <Field 
+            	name={FILE_FIELD_NAME}
+            	handleOnDrop={handleOnDrop}
+            	droppedFiles={droppedFiles}
+            	reset={reset}
+            	handleRemoveTrack={handleRemoveTrack}
+            	handleReset={this.handleReset.bind(this)}
+            	component={ (props) => <UploaderFullscreen {...props} /> } 
+            />
+          </label>
+        </div>
 			</form>
 		);
 	}

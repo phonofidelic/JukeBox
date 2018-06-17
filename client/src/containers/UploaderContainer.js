@@ -19,25 +19,28 @@ export class UploaderContainer extends Component {
     });
   }
 
-	removePreviewsFromFiles(files) {
-    // Remove preview for all files to prevent memory leaks:
-    // https://github.com/react-dropzone/react-dropzone#word-of-caution-when-working-with-previews
-    files.forEach(file => {
-      window.URL.revokeObjectURL(file.preview);
-      file.preview = 'preview removed';
-    })
+  cleaeDroppedFiles() {
+    this.setState({
+      droppedFiles: []
+    });
   }
 
-	handleUploadTracks(inputData) {
-    console.log('handleUploadTracks, inputData:', inputData)
+  handleRemoveTrack(index) {
+    const updatedFileList = [...this.state.droppedFiles];
+    updatedFileList.splice(index, 1);
+    this.setState({
+      droppedFiles: updatedFileList
+    });
+  }
+
+	handleUploadTracks() {
     console.log('handleUploadTracks, droppedFiles:', this.state.droppedFiles)
     let formData = new FormData();
-    // Object.keys(inputData).forEach(key => {
-    //   this.removePreviewsFromFiles(inputData[key]);
-    //   formData.append(`${key}[]`, inputData[key]);
-    // });
 
     if (!this.state.droppedFiles) return console.log('* no input data *');
+
+    // Remove preview for all files to prevent memory leaks:
+    // https://github.com/react-dropzone/react-dropzone#word-of-caution-when-working-with-previews
     this.state.droppedFiles.forEach(file => {
     	window.URL.revokeObjectURL(file.preview);
       file.preview = 'preview removed';
@@ -45,9 +48,6 @@ export class UploaderContainer extends Component {
     })
 
     // Dispatch POST action:
-    console.log('POST formData:', formData.getAll('audioFiles'));
-    console.log('inputData:', inputData);
-
     this.props.uploadTracks(formData);
   }
 
@@ -56,6 +56,8 @@ export class UploaderContainer extends Component {
 			<Uploader 
         handleUploadTracks={this.handleUploadTracks.bind(this)}
         handleOnDrop={this.handleOnDrop.bind(this)} 
+        handleRemoveTrack={this.handleRemoveTrack.bind(this)}
+        cleaeDroppedFiles={this.cleaeDroppedFiles.bind(this)}
         droppedFiles={this.state.droppedFiles}
       />
 		);
