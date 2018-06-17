@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import TrackListContainer from '../containers/TrackListContainer';
+import LibraryContainer from '../containers/LibraryContainer';
 import UploaderContainer from '../containers/UploaderContainer';
 import PlayerContainer from '../containers/PlayerContainer';
 import NavContainer from '../containers/NavContainer';
 import Typography from '@material-ui/core/Typography';
 
-const TrackListView = (props) => {
+const LibraryView = (props) => {
 	const styles = {
 		header: {
 			height: '40px',
@@ -19,9 +19,9 @@ const TrackListView = (props) => {
 	return (
 		<div>
 			<div style={styles.header}>
-				<Typography variant="display1">Track List</Typography>
+				<Typography variant="display1">Library</Typography>
 			</div>
-			<TrackListContainer {...props} />
+			<LibraryContainer {...props} />
 			{/*<UploaderContainer />*/}
 			<PlayerContainer />
       <NavContainer />
@@ -29,4 +29,4 @@ const TrackListView = (props) => {
 	)
 }
 
-export default TrackListView;
+export default LibraryView;

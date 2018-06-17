@@ -7,10 +7,17 @@ import {
 } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 
-export class TrackList extends Component {
+// class FilterControlls extends Component {
+// 	render() {
+
+// 	}
+// }
+
+export class Library extends Component {
+
 	render() {
 		const { 
-			trackList,
+			library,
 			theme,
 		} = this.props;
 
@@ -27,7 +34,7 @@ export class TrackList extends Component {
 		return (
 			<List className="TrackList" style={styles.root}>
 			{
-				trackList.tracks.length > 0 ? trackList.tracks.map(track => (
+				library.tracks.length > 0 ? library.tracks.map(track => (
 					<TrackListItemContainer 
 						key={track._id} 
 						track={track} 
@@ -41,4 +48,4 @@ export class TrackList extends Component {
 	}
 }
 
-export default withTheme()(TrackList);
+export default withTheme()(Library);

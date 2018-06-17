@@ -1,5 +1,5 @@
 export const getSelectedTrack = state => {
-	return state.trackList.selectedTrack;
+	return state.library.selectedTrack;
 }
 
 export const getCurrentQueueIndex = state => {

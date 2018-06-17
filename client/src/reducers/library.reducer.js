@@ -24,7 +24,7 @@ const INITIAL_STATE = {
 	message: null
 };
 
-const trackList_reducer = (state = INITIAL_STATE, action) => {
+const library_reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case FETCH_TRACKS:
 			return {
@@ -127,15 +127,9 @@ const trackList_reducer = (state = INITIAL_STATE, action) => {
 				error: 'Could not delete track'
 			}
 
-		case 'TEST':
-			return {
-				...state,
-				message: action.message
-			}
-
 		default:
 			return state;
 	}
 };
 
-export default trackList_reducer;
+export default library_reducer;

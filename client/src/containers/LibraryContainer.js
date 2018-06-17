@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { trackListActions, playerActions } from '../actions';
-import TrackList from '../components/TrackList';
+import Library from '../components/Library';
 
 const actions = { ...trackListActions, ...playerActions };
 
@@ -54,17 +54,17 @@ export class TrackListContainer extends Component {
   }
 
 	render() {
-		const { trackList } = this.props;
+		const { library } = this.props;
 
 		return(
-			<TrackList trackList={trackList} handleUploadTracks={this.handleUploadTracks.bind(this)} /> 
+			<Library library={library} handleUploadTracks={this.handleUploadTracks.bind(this)} /> 
 		)
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		trackList: state.trackList
+		library: state.library
 	}
 }
 
