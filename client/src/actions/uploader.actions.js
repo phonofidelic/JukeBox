@@ -10,7 +10,7 @@ import { URLS } from '../config';
 const TRACKS_URL = URLS.TRACKS_URL;
 
 export const uploadTracks = (formData) => {
-	console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
+	// console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
 	return dispatch => {
 		dispatch({
 			type: UPLOAD_TRACK

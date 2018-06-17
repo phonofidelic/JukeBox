@@ -1,5 +1,7 @@
 .DS_Store
-.log
+npm-debug.log
+server/npm-debug.log
+**/*.log
 **/.env
 notes.md
 sandbox

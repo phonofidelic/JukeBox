@@ -21,11 +21,13 @@ class UploaderFullscreen extends Component {
     // this.onDrop = this.onDrop.bind(this)
   }
 
-  componentDidMount() {
-  	const {input} = this.props;
-  	input.onChange(this.state.files);
-  	console.log('input.onChange, this.state.files:', this.state.files)
-  }
+  // componentDidMount() {
+  // 	const { input } = this.props;
+  // 	console.log('## input:', input)
+  // 	console.log('## this:', this)
+  // 	input.onChange(this.props.files);
+  // 	// console.log('input.onChange, this.state.files:', this.state.files)
+  // }
 
   onDragEnter() {
     this.setState({
@@ -40,18 +42,17 @@ class UploaderFullscreen extends Component {
   }
 
   onDrop(files) {
-  	const {input} = this.props;
-    // this.setState({
-    //   dropzoneActive: false,
-    //   files: [...this.state.files, ...files]
-    // });
-    this.setState((state) => ({
-    	dropzoneActive: false,
-      files: [...state.files, ...files]
-    }));
-    input.onChange([...this.state.files, ...files]);
+  	// const { input } = this.props;
+   //  this.setState({
+   //  	dropzoneActive: false,
+   //  	files: [...this.state.files, ...files]
+   //  })
+    // input.onChange([...this.state.files, ...files]);
     // console.log('input.value:', input.value)
-    console.log('this.state.files:', [...this.state.files, ...files])
+    // console.log('[...this.state.files, ...files]:', [...this.state.files, ...files])
+    // console.log('this.state.files:', this.state.files)
+    // input.onDrop([...this.state.files, ...files]);
+    this.props.handleOnDrop(files);
   }
 
   renderOverlay() {
@@ -81,7 +82,7 @@ class UploaderFullscreen extends Component {
   }
 
   renderUploadList() {
-  	const { input, theme } = this.props;
+  	const { input, theme, droppedFiles } = this.props;
   	const styles = {
   		root: {
   			position: 'absolute',
@@ -103,7 +104,7 @@ class UploaderFullscreen extends Component {
   	return (
   		<div style={styles.root}>
 	  		<List>
-	  			{this.state.files.map((file, i) => <ListItem key={i}>{file.name} - {file.size}</ListItem>)}
+	  			{droppedFiles.map((file, i) => <ListItem key={i}>{file.name} - {file.size}</ListItem>)}
 	  		</List>
 
 	  		<div>
@@ -122,7 +123,7 @@ class UploaderFullscreen extends Component {
 
   render() {
     const { dropzoneActive } = this.state;
-    const { input } = this.props;
+    const { input, name, droppedFiles } = this.props;
     const dropzoneStyle = {
     	position: 'absolute',
     	top: 0,
@@ -134,8 +135,8 @@ class UploaderFullscreen extends Component {
     	height: '100%',
     	// pointerEvents: 'none',
     };
-    
-    // console.log('UploaderFullscreen, this:', this)
+    console.log('this.state.files:', this.state.files)
+    console.log('UploaderFullscreen, this.props:', this.props)
     return (
       <Dropzone
       	name={input.name}
@@ -147,7 +148,7 @@ class UploaderFullscreen extends Component {
         onDragLeave={this.onDragLeave.bind(this)}
       >
         { dropzoneActive && this.renderOverlay() }
-        { this.state.files.length > 0 && this.renderUploadList() }
+        { droppedFiles.length > 0 && this.renderUploadList() }
       </Dropzone>
     );
   }

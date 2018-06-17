@@ -4,6 +4,21 @@ import * as actions from '../actions/uploader.actions';
 import Uploader from '../components/Uploader';
 
 export class UploaderContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      droppedFiles: [],
+    }
+  }
+
+  handleOnDrop(files) {
+    // return console.log('handleOnDrop, files:', files);
+    this.setState({
+      droppedFiles: [...this.state.droppedFiles, ...files]
+    });
+  }
+
 	removePreviewsFromFiles(files) {
     // Remove preview for all files to prevent memory leaks:
     // https://github.com/react-dropzone/react-dropzone#word-of-caution-when-working-with-previews
@@ -14,15 +29,16 @@ export class UploaderContainer extends Component {
   }
 
 	handleUploadTracks(inputData) {
-    console.log('inputData', inputData)
+    console.log('handleUploadTracks, inputData:', inputData)
+    console.log('handleUploadTracks, droppedFiles:', this.state.droppedFiles)
     let formData = new FormData();
     // Object.keys(inputData).forEach(key => {
     //   this.removePreviewsFromFiles(inputData[key]);
     //   formData.append(`${key}[]`, inputData[key]);
     // });
 
-    if (!inputData.audioFiles) return console.log('* no input data *');
-    inputData.audioFiles.forEach(file => {
+    if (!this.state.droppedFiles) return console.log('* no input data *');
+    this.state.droppedFiles.forEach(file => {
     	window.URL.revokeObjectURL(file.preview);
       file.preview = 'preview removed';
     	formData.append('audioFiles', file);
@@ -37,7 +53,11 @@ export class UploaderContainer extends Component {
 
 	render() {
 		return (
-			<Uploader handleUploadTracks={this.handleUploadTracks.bind(this)} />
+			<Uploader 
+        handleUploadTracks={this.handleUploadTracks.bind(this)}
+        handleOnDrop={this.handleOnDrop.bind(this)} 
+        droppedFiles={this.state.droppedFiles}
+      />
 		);
 	}
 }

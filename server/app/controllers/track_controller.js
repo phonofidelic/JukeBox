@@ -54,7 +54,7 @@ const postTrack = (req, res, next) => {
 
 // Add multiple tracks
 const postTracks = (req, res, next) => {
-	console.log('postTracks')
+	console.log('postTracks, req.files:', req.files)
 
 	let savedTracks = [];
 

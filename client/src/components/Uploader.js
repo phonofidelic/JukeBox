@@ -14,35 +14,35 @@ const form = reduxForm({
 
 export class Uploader extends Component {
 	
-	renderDropzoneInput(field) {
-    const files = field.input.value;
-    const styles = {
-    	root: {
-    		background: 'green',
-    	}
-    }
+	// renderDropzoneInput(field) {
+ //    const files = field.input.value;
+ //    const styles = {
+ //    	root: {
+ //    		background: 'green',
+ //    	}
+ //    }
 
-    return (
-      <div>
-        <Dropzone
-          name={field.name}
-          onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}
-        >
-          {
-            field.meta.touched && 
-            field.meta.error &&
-            <span className="error">{field.meta.error}</span>
-          }
-          {
-            files && Array.isArray(files) &&
-            <ul>
-              { files.map((file, i) => <li key={i}>{file.name}</li>) }
-            </ul>
-          }
-        </Dropzone>
-      </div>
-    );
-  }
+ //    return (
+ //      <div>
+ //        <Dropzone
+ //          name={field.name}
+ //          onDrop={(filesToUpload, e) => field.input.onChange(filesToUpload)}
+ //        >
+ //          {
+ //            field.meta.touched && 
+ //            field.meta.error &&
+ //            <span className="error">{field.meta.error}</span>
+ //          }
+ //          {
+ //            files && Array.isArray(files) &&
+ //            <ul>
+ //              { files.map((file, i) => <li key={i}>{file.name}</li>) }
+ //            </ul>
+ //          }
+ //        </Dropzone>
+ //      </div>
+ //    );
+ //  }
 
   uploadTracksAndReset(files) {
   	console.log('uploadTracksAndReset, files:', files)
@@ -51,9 +51,15 @@ export class Uploader extends Component {
   	reset();
   }
 
+  handleInputChange(files) {
+
+  }
+
 	render() {
 		const { 
 			trackName, 
+			droppedFiles,
+			handleOnDrop,
 			handleUploadTracks,
 			handleSubmit,
 			reset
@@ -71,8 +77,11 @@ export class Uploader extends Component {
 					<div>
             <label htmlFor={FILE_FIELD_NAME}>
 	            <Field 
-	            	name={FILE_FIELD_NAME} 
-	            	component={props => <UploaderFullscreen reset={reset} {...props} />} 
+	            	name={FILE_FIELD_NAME}
+	            	handleOnDrop={handleOnDrop}
+	            	droppedFiles={droppedFiles}
+	            	reset={reset}
+	            	component={ (props) => <UploaderFullscreen {...props} /> } 
 	            />
             </label>
           </div>
