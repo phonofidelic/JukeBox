@@ -42,12 +42,9 @@ export class TrackListContainer extends Component {
     this.props.uploadTracks(formData);
   }
 
-	// componentDidMount() {
-	// 	document.addEventListener('library-updated', e => {
-	// 		console.log('library-update, e:', e);
-	// 		this.props.getTracks();
-	// 	})
-	// }
+  handleOrderBy(fieldName) {
+    this.props.orderTracksByFieldValue(fieldName);
+  }
 
 	componentDidCatch(error, info) {
     console.log('componentDidCatch, error', error)
@@ -57,14 +54,18 @@ export class TrackListContainer extends Component {
 		const { library } = this.props;
 
 		return(
-			<Library library={library} handleUploadTracks={this.handleUploadTracks.bind(this)} /> 
+			<Library 
+        library={library} 
+        handleUploadTracks={this.handleUploadTracks.bind(this)} 
+        handleOrderBy={this.handleOrderBy.bind(this)}
+      /> 
 		)
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		library: state.library
+		library: state.library,
 	}
 }
 

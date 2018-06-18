@@ -34,9 +34,9 @@ class Nav extends Component {
         />
         <BottomNavigationAction 
           component={Link} 
-          to="/tracklist"
-          label="Tracks" 
-          value="/tracklist" 
+          to="/library"
+          label="Library" 
+          value="/library" 
           icon={<Storage />} 
         />
         <BottomNavigationAction 

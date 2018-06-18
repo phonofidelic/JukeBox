@@ -13,6 +13,7 @@ import {
 	DELETE_TRACK_CANCEL,
 	DELETE_TRACK_SUCCESS,
 	DELETE_TRACK_FAILURE,
+	ORDER_TRACKS_BY_FIELD_VALUE,
 	SET_MESSAGE,
 	CLEAR_MESSAGE
 } from '../actiontypes';
@@ -58,6 +59,16 @@ export const getTracks = () => {
 	}
 }
 
+export const orderTracksByFieldValue = (fieldName) => {
+	console.log('orderTracksByFieldValue, fieldName:', fieldName)
+	return dispatch => {
+		dispatch({
+			type: ORDER_TRACKS_BY_FIELD_VALUE,
+			fieldName: fieldName
+		})
+	}
+}
+
 export const selectTrack = track => {
 	// console.log(track)
 	return dispatch => {
@@ -67,67 +78,6 @@ export const selectTrack = track => {
 		});
 	}
 }
-
-// // TODO: startNewQueue and addToQueue are player actions.
-// // 			 Refactor to make this less confusing?
-// export const startNewQueue = (track, currentTrack) => {
-// 	// Unload and destroy the Howl object. This will immediately stop 
-// 	// all sounds attached to this sound and remove it from the cache.
-// 	console.log('startNewQueue, track', track);
-// 	if (currentTrack) { currentTrack.howl.unload() };
-
-// 	// This creates a queuItem by coppying the passed track item
-// 	// and adding a queueId and howl prop.
-// 	const queueId = Math.trunc(Math.random() * Date.now());
-
-// 	return dispatch => {
-// 		dispatch({
-// 			type: START_NEW_QUEUE,
-// 			track: { 
-// 				...track, 
-// 				queueId: queueId,
-// 				howl: new Howl({ 
-// 					src: [track.file.path], 
-// 					autoplay: true,
-// 					onplay: () => console.log('howl, onplay'),
-// 					onpause: () => console.log('howl, onpause'),
-// 					onend: () => console.log('howl, onend')
-// 				})
-// 			}
-// 		});
-// 	};
-// }
-
-
-// export const addToQueue = track => {
-// 	// This creates a queuItem by coppying the passed track item
-// 	// and adding a queueId and howl prop.
-// 	const queueId = Math.trunc(Math.random() * Date.now());
-// 	const message = { text: `Added ${track.title} to queue`, context: 'info' };
-	
-// 	return dispatch => {
-// 		dispatch({
-// 			type: ADD_TRACK_TO_QUEUE,
-// 			track:{ 
-// 				...track,
-// 				queueId: queueId,
-// 				howl: new Howl({ 
-// 					src: [track.file.path], 
-// 					// autoplay: true,
-// 					onplay: () => console.log('howl, onplay'),
-// 					onpause: () => console.log('howl, onpause'),
-// 					onend: () => console.log('howl, onend')
-// 				}) 
-// 			},
-// 			message: message
-// 		});
-// 		// !!! Is this an anti-pattern?
-// 		dispatch({
-// 			type: SET_MESSAGE,
-// 			message: message
-// 		});
-// 	};
-// }
 
 export const editTrack = (formData, trackData) => {
 	console.log('@editTrack, formData', formData)

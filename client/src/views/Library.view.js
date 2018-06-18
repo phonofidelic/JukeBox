@@ -12,14 +12,14 @@ const LibraryView = (props) => {
 			position: 'fixed',
 			top: '0px',
 			width: '100%',
-			zIndex: '1000',
+			// zIndex: '1000',
 			background: '#fff'
 		}
 	}
 	return (
 		<div>
 			<div style={styles.header}>
-				<Typography variant="display1">Library</Typography>
+				{/*<Typography variant="display1">Library</Typography>*/}
 			</div>
 			<LibraryContainer {...props} />
 			{/*<UploaderContainer />*/}

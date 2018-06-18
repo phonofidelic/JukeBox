@@ -12,6 +12,7 @@ import {
 	DELETE_TRACK_CANCEL,
 	DELETE_TRACK_SUCCESS,
 	DELETE_TRACK_FAILURE,
+	ORDER_TRACKS_BY_FIELD_VALUE,
 	CLEAR_MESSAGE
 } from '../actiontypes';
 
@@ -125,6 +126,21 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 				postingTrackData: false,
 				message: action.message,
 				error: 'Could not delete track'
+			}
+
+		case ORDER_TRACKS_BY_FIELD_VALUE:
+		let tracksByArtist = [...state.tracks];
+
+		tracksByArtist.sort((a, b) => {
+			const trackA = a[action.fieldName].toUpperCase();
+			const trackB = b[action.fieldName].toUpperCase();
+			if (trackA < trackB) return -1;
+			if (trackA > trackB) return 1;
+			return 0;
+		})
+			return {
+				...state,
+				tracks: tracksByArtist
 			}
 
 		default:

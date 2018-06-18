@@ -36,7 +36,7 @@ class App extends Component {
         <AlertContainer />
         <Switch>
           <AuthenticatedRoute exact path="/" component={props => <HomeView {...props} />} />
-          <AuthenticatedRoute path="/tracklist" component={props => <LibraryView {...props} />} />
+          <AuthenticatedRoute path="/library" component={props => <LibraryView {...props} />} />
           <AuthenticatedRoute path="/uploader" component={props => <UploaderView {...props} />} />
           <Route path="/login" component={props => <LandingView {...props} />} />
           <Route path="/*" component={NotFound} />

@@ -16,6 +16,7 @@ export const // uploaderActionTypes
 						 DELETE_TRACK_CANCEL = 'delete_track_cancel',
 						 DELETE_TRACK_SUCCESS = 'delete_track_success',
 						 DELETE_TRACK_FAILURE = 'delete_track_failure',
+						 ORDER_TRACKS_BY_FIELD_VALUE = 'order_tracks_by_field_value',
 						 // playerActiontypes
 						 PLAY_TRACK = 'play_track',
 						 PAUSE_TRACK = 'pause_track',
