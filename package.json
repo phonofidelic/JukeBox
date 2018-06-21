@@ -8,7 +8,8 @@
     "build": "cd client && npm run build && cp -R build ../server/client_build && cd .. && docker build -t phonofidelic/jukebox .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && npm run prod",
-    "prodinstall": "cd server && npm install"
+    "prodinstall": "cd server && npm install",
+    "devinstall": "concurrently \"cd server && npm install\" \"cd client && yarn\""
   },
   "author": "",
   "license": "ISC",
