@@ -38,4 +38,11 @@ export const THEME = {
       info: 'blue'
     }
   },
+  dimensions: {
+    libraryDesktop: {
+      titleCellWidth: '300px',
+      artistCellWidth: '100px',
+      albumCellWidth: '100px,'
+    },
+  },
 }

@@ -3,6 +3,7 @@ export const // uploaderActionTypes
 						 UPLOAD_SUCCESS = 'upload_success',
 						 UPLOAD_FAILURE = 'upload_failure',
 						 // trackListActiontypes
+						 LOAD_LIBRARY = 'load_library',
 						 FETCH_TRACKS = 'fetch_tracks',
 						 FETCH_TRACKS_SUCCESS = 'fetch_tracks_success',
 						 FETCH_TRACKS_FAILURE = 'fetch_tracks_failure',

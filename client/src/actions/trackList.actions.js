@@ -1,4 +1,5 @@
 import {
+	LOAD_LIBRARY,
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
@@ -21,7 +22,24 @@ import axios from 'axios';
 import { Howl } from 'howler';
 import { URLS } from '../config';
 
-const TRACKS_URL = URLS.TRACKS_URL
+const TRACKS_URL = URLS.TRACKS_URL;
+
+export const loadLibrary = () => {
+	console.log('loadLibrary called')
+	return dispatch => {
+		dispatch({
+			type: LOAD_LIBRARY
+		});
+
+		axios.get('/library')
+		.then(response => {
+			console.log('loadLibrary response:', response);;
+		})
+		.catch(err => {
+			console.error(err);
+		});
+	}
+}
 
 export const getTracks = () => {
 	return dispatch => {

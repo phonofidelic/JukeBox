@@ -101,7 +101,7 @@ export class Library extends Component {
 				}
 				</List>
 			</div>
-		);
+		)
 	}
 }
 

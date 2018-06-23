@@ -18,9 +18,6 @@ const LibraryView = (props) => {
 	}
 	return (
 		<div>
-			<div style={styles.header}>
-				{/*<Typography variant="display1">Library</Typography>*/}
-			</div>
 			<LibraryContainer {...props} />
 			{/*<UploaderContainer />*/}
 			<PlayerContainer />

@@ -1,4 +1,5 @@
 import {
+	LOAD_LIBRARY,
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
@@ -27,6 +28,11 @@ const INITIAL_STATE = {
 
 const library_reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case LOAD_LIBRARY:
+			return {
+				...state
+			}
+
 		case FETCH_TRACKS:
 			return {
 				...state,

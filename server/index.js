@@ -6,6 +6,7 @@ const passport = require('passport');
 const logger = require('morgan');
 const authRoutes = require('./app/routes/auth_routes');
 const trackRoutes = require('./app/routes/track_routes');
+const libraryRoutes = require('./app/routes/library.routes');
 
 const PORT = process.env.PORT;
 const DB_CONNECTION = process.env.DB_CONNECTION;
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 app.use('/uploads', express.static('./uploads'));
 app.use('/tracks', trackRoutes);
 app.use('/auth', authRoutes);
+app.use('/library', libraryRoutes);
 
 // Serve static client files
 app.use(express.static(process.env.CLIENT_DIR));

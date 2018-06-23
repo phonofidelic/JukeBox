@@ -1,7 +1,8 @@
 const mm = require('music-metadata');
 const isFile = require('is-file');
 const path = require('path');
-const Track = require('../models').TrackModel;
+// const Track = require('../models').TrackModel;
+const Track = require('../models/track.model');
 const fs = require('fs');
 const utils = require('./utils');
 const storage = require('../../config/storage_config');
@@ -10,7 +11,7 @@ const storage = require('../../config/storage_config');
 const getTracks = (req, res, next) => {
 	Track.find({'userId': req.get('userId')})
 	// .select('name file')
-	.sort({title: 1})
+	.sort({ artist: 1, album: 1, 'order.no': 1})
 	.exec((err, tracks) => {
 		if (err) return next(err);
 		// console.log('GET /tracks response:\n', tracks);
@@ -64,7 +65,7 @@ const postTracks = (req, res, next) => {
 		mm.parseFile(file.path, { native: true })
 		.then(metaData => {
 			if (metaData.common.picture) {
-				utils.parseImageData(metaData.common.picture).then(imageData => {
+				utils.saveImage(metaData.common.picture).then(imageData => {
 					console.log('Saving track with image data:', imageData)
 					const track = new Track({
 						userId: req.get('userId'),

@@ -38,34 +38,53 @@ class TrackListItem extends Component {
 
 		const styles = {
 			root: {
-				borderBottom: `1px solid ${theme.palette.primary.main}`,
-				padding: '10px'
+				// borderBottom: `1px solid ${theme.palette.primary.main}`,
+				// padding: '10px'
+				borderLeft: `solid ${theme.palette.primary.light} 5px`,
 			},
 			selected: {
+				// background: theme.palette.primary.main,
+				// // height: '50px',
+				// lineHeight: '50px',
+				// verticalAlign: 'middle,'
+			},
+			defaultImgContainer: {
+				width: '50px', 
+				height: '50px', 
+				display: 'flex',
 				background: theme.palette.primary.main,
-				// height: '50px',
-				lineHeight: '50px',
-				verticalAlign: 'middle,'
-			}
+			},
+			defaultImg: {
+				margin: 'auto',
+				color: theme.palette.primary.light,
+			},
+			playing: {
+				borderLeft: `solid ${theme.palette.secondary.main} 5px`,
+				// background: theme.palette.secondary.main,
+				// backgroundSize: '50px'
+			},
 		};
 	
-		// [CONTRACT]
-		// * selectedTrack && track._id ?
-		//	 Use styles.selected css
-		//	 Otherwise, use syles.root css
-		//
-		// * this.state.editMode ?
-		//	 render EditTrackForm with track prop
-		//	 
-		// * selectedTrack && track._id === selectedTrack._id ?
 		return (	
 			<ListItem 
 				onClick={() => handleSelectTrack(track)}
+				divider
 				style={
 					selectedTrack && track._id === selectedTrack._id ? 
-					styles.selected 
+					styles.selected
 					: 
-					styles.root
+					styles.root,
+
+					player.currentTrack && player.currentTrack._id === track._id ?
+					{...styles.playing}
+					:
+					null
+				}
+				dense={
+					selectedTrack && track._id === selectedTrack._id ? 
+					false
+					: 
+					true
 				}
 			>
 				{
@@ -78,26 +97,30 @@ class TrackListItem extends Component {
 						/>
 					</Grid>
 					:
-					<Grid container alignItems="center">
+					<Grid 
+						container 
+						alignItems="center"
+						
+						>
 						<Grid item xs={2}>
 							{
 								track.image.src === 'defaultImage' ?
-								<Album />
+								<div style={styles.defaultImgContainer}><Album style={styles.defaultImg} /></div>
 								:
 								<img src={track.image.src} alt="Album art" width="50" height="50" />
 							}
 						</Grid>
-						<Grid item xs={5}>
+						<Grid item xs={6}>
 							<Grid container direction="column">
 								<div><Typography noWrap>{ track.title }</Typography></div>
 								<div><Typography noWrap variant="caption">{ track.artist }</Typography></div>
 								<div><Typography noWrap variant="caption">{ track.album }</Typography></div>
-								<div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div>
+								{ (selectedTrack && track._id === selectedTrack._id) && <div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div>}
 							</Grid>
 						</Grid>
 						{ 
 							selectedTrack && track._id === selectedTrack._id ? 
-							<Grid item xs={5}>
+							<Grid item xs={4}>
 									<TrackListItemControls 
 										track={track}
 										player={player}
