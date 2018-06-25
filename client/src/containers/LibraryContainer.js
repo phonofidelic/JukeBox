@@ -12,10 +12,12 @@ export class TrackListContainer extends Component {
 		this.props.getTracks();
     this.props.loadLibrary();
     this.state = {
-      order: 'asc',
+      order: 'desc',
       orderBy: 'title',
       page: 0,
       rowsPerPage: 5,
+      anchorEl: null,
+      alertOpen: false,
     }
 	}
 
@@ -66,15 +68,44 @@ export class TrackListContainer extends Component {
     this.setState({ order, orderBy });
   }
 
+  handleSelectTrack(track) {
+    this.props.selectTrack(track);
+  }
+
+  handleOptionsClick(e) {
+    e.preventDefault();
+    console.log('# options click #\n', e.currentTarget)
+    this.setState({ ...this.state, anchorEl: e.currentTarget });
+  }
+
+  handleOptionsClose(e) {
+    this.setState({ ...this.state, anchorEl: null });
+  }
+
+  handleMenuOptionClickEdit() {
+    this.props.handleToggleEditMode();
+  }
+
+  handleMenuOptionClickDelete() {
+    this.setState({ ...this.state, anchorEl: null });
+    this.props.handleDeleteTrack(this.props.track);
+  }
+
 	componentDidCatch(error, info) {
     console.log('componentDidCatch, error', error)
   }
 
 	render() {
 		const { library } = this.props;
-    const { order, orderBy } = this.state;
+    const { 
+      order, 
+      orderBy, 
+      anchorEl 
+    } = this.state;
+
     const userAgentIsMobile = navigator.userAgent.indexOf('Mobile') > 0;
-    console.log('userAgentIsMobile:', userAgentIsMobile)
+
+    // console.log('userAgentIsMobile:', userAgentIsMobile)
 
 		return userAgentIsMobile ?
 			<Library 
@@ -87,7 +118,13 @@ export class TrackListContainer extends Component {
         library={library} 
         order={order}
         orderBy={orderBy}
+        anchorEl={anchorEl}
         handleRequestSort={this.handleRequestSort.bind(this)}
+        handleSelectTrack={this.handleSelectTrack.bind(this)}
+        handleOptionsClick={this.handleOptionsClick.bind(this)}
+        handleOptionsClose={this.handleOptionsClose.bind(this)}
+        handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
+        handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
       />
 	}
 }

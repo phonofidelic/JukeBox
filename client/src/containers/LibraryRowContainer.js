@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { trackListActions, playerActions, messageActions } from '../actions';
+import { trackListActions, playerActions } from '../actions';
 import { getSelectedTrack } from '../selectors';
-import TrackListItem from '../components/TrackListItem';
+import LibraryRow from '../components/LibraryRow';
 import { TableRow } from '@material-ui/core';
 
-const actions = { ...trackListActions, ...playerActions, ...messageActions };
+const actions = { ...trackListActions, ...playerActions };
 
-class TrackListItemContainer extends Component {
+class LibraryRowContainer extends Component {
 	handleSelectTrack(track) {
 		this.props.selectTrack(track);
 	}
 
 	handleStartNewQueue(track, currentTrack) {
-		this.props.playAsLastInQueue(track, currentTrack);
+		this.props.playAsLastInQueue(track, currentTrack, true);
 	}
 
 	handleAddToQueue(track) {
@@ -25,8 +25,9 @@ class TrackListItemContainer extends Component {
 	}
 
 	handleDeleteTrack(trackData) {
+		console.log('trackData', trackData)
 		// TODO: dispatch custom confirm action connected to MUI Alert component
-		const confirm = window.confirm('Are you sure you want to delete this track?');
+		const confirm = window.confirm(`Are you sure you want to delete "${trackData.title}"?`);
 		if (confirm) {
 			return this.props.deleteTrackConfirm(trackData);
 		}
@@ -34,10 +35,15 @@ class TrackListItemContainer extends Component {
 	}
 
 	render() {
-		const { selectedTrack, player, track } = this.props;
-		// console.log('timeElapsed from TrackListItemContainer:', this.state.timeElapsed)
+		const {
+			track,
+			player,
+			selectedTrack,
+			handleStartNewQueue,
+		} = this.props;
+
 		return (
-			<TrackListItem 
+			<LibraryRow
 				track={track}
 				player={player}
 				selectedTrack={selectedTrack}
@@ -46,8 +52,9 @@ class TrackListItemContainer extends Component {
 				handleAddToQueue={this.handleAddToQueue.bind(this)}
 				handleEditTrackData={this.handleEditTrackData.bind(this)}
 				handleDeleteTrack={this.handleDeleteTrack.bind(this)}
-			/>
-		)
+			>
+			</LibraryRow>
+		);
 	}
 }
 
@@ -59,4 +66,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, actions)(TrackListItemContainer);
+export default connect(mapStateToProps, actions)(LibraryRowContainer);

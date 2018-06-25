@@ -11,8 +11,12 @@ import { withTheme } from '@material-ui/core/styles';
 
 
 class TrackListItem extends Component {
-	state = {
-		editMode: false
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			editMode: false
+		}
 	}
 
 	handleToggleEditMode() {
@@ -35,6 +39,8 @@ class TrackListItem extends Component {
 			handleToggleEditMode,
 			theme
 		} = this.props;
+
+		const { editMode } = this.state;
 
 		const styles = {
 			root: {
@@ -64,21 +70,21 @@ class TrackListItem extends Component {
 				// backgroundSize: '50px'
 			},
 		};
+
+		console.log('editMode:', editMode);
 	
-		return (	
-			<ListItem 
+		return (
+            <ListItem 
 				onClick={() => handleSelectTrack(track)}
 				divider
 				style={
-					selectedTrack && track._id === selectedTrack._id ? 
+					(selectedTrack && track._id === selectedTrack._id ? 
 					styles.selected
 					: 
-					styles.root,
-
-					player.currentTrack && player.currentTrack._id === track._id ?
+					styles.root, player.currentTrack && player.currentTrack._id === track._id ?
 					{...styles.playing}
 					:
-					null
+					null)
 				}
 				dense={
 					selectedTrack && track._id === selectedTrack._id ? 
@@ -88,7 +94,7 @@ class TrackListItem extends Component {
 				}
 			>
 				{
-					this.state.editMode ?
+					editMode ?
 					<Grid container alignItems="center">
 						<EditTrackForm
 							track={track}
@@ -136,8 +142,8 @@ class TrackListItem extends Component {
 					</Grid>
 				}
 			</ListItem>
-		);
+        );
 	}
 }
 
-export default withTheme()((TrackListItem));
+export default withTheme()(TrackListItem);

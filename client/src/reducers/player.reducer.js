@@ -3,6 +3,7 @@ import {
 	PAUSE_TRACK,
 	STOP_TRACK,
 	START_NEW_QUEUE,
+	UNSHIFT_TO_QUEUE,
 	ADD_TRACK_TO_QUEUE,
 	PLAY_NEXT,
 	PLAY_PREV,
@@ -31,7 +32,16 @@ const player = (state = INITIAL_STATE, action) => {
 				playing: true,
 				currentTrack: action.track,
 				queue: [action.track],
-				queueIndex: 0
+				queueIndex: 0,
+			}
+
+		case UNSHIFT_TO_QUEUE:
+			return {
+				...state,
+				playing: true,
+				currentTrack: action.track,
+				queue: [...state.queue, action.track],
+				queueIndex: state.queue.length,
 			}
 
 		case ADD_TRACK_TO_QUEUE:

@@ -7,6 +7,7 @@ import {
 	TOGGLE_QUEUE_VISIBILITY,
 	PLAY_FROM_QUEUE,
 	START_NEW_QUEUE,
+	UNSHIFT_TO_QUEUE,
 	ADD_TRACK_TO_QUEUE,
 	SET_MESSAGE,
 	SEEK
@@ -27,7 +28,11 @@ const howlOnEnd = (track) => {
 	window.dispatchEvent(new Event('howl_end'));
 }
 
-export const startNewQueue = (track, currentTrack) => {
+export const unshiftToQueueAndPlay = (track, currentTrack) => {
+
+}
+
+export const playAsLastInQueue = (track, currentTrack, sameQueue) => {
 	console.log('startNewQueue, track', track);
 
 	// Unload and destroy the Howl object. This will immediately stop 
@@ -39,7 +44,7 @@ export const startNewQueue = (track, currentTrack) => {
 	const queueId = Math.trunc(Math.random() * Date.now());
 	return dispatch => {
 		dispatch({
-			type: START_NEW_QUEUE,
+			type: sameQueue? UNSHIFT_TO_QUEUE : START_NEW_QUEUE,
 			track: { 
 				...track, 
 				queueId: queueId,

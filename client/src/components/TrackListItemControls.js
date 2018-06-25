@@ -87,9 +87,9 @@ class TrackListItemControls extends Component {
 					onClose={this.handleOptionsClose.bind(this)}
 					style={styles.menu}
 				>
-					<MenuItem onClick={() => this.handleMenuOptionClickEdit()}>Edit Track</MenuItem>
+					<MenuItem onClick={() => this.handleMenuOptionClickEdit()}>Edit info</MenuItem>
 					<MenuItem onClick={() => this.handleMenuOptionClickDelete()}>
-						Delete
+						Delete track
 						{/*<AlertDialog 
 							onAlertClose={this.handleOptionsClose.bind(this)}
 							triggerButtonText="Delete"

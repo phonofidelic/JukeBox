@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LibraryRowContainer from '../containers/LibraryRowContainer';
 import {
 	Table,
 	TableHead,
@@ -12,6 +13,7 @@ import {
 import { Album } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import { _ } from 'underscore';
+import LibraryContextMenu from './LibraryContextMenu';
 
 const columnData = [
 	{ id: 'title', numeric: false, disablePadding: true, label: 'Title' },
@@ -31,11 +33,24 @@ class LibraryDesktop extends Component {
   	: _.sortBy(_.sortBy(list, 'order.no'), orderBy).reverse();
   }
 
+  handleRowClick(e, track) {
+  	e.preventDefault();
+  	console.log('handleRowClick', e)
+  	// this.props.handleSelectTrack(track)
+  }
+
 	render() {
 		const {
 			library,
+			player,
 			order,
 			orderBy,
+			anchorEl,
+			handleSelectTrack,
+			handleOptionsClick,
+			handleOptionsClose,
+			handleMenuOptionClickEdit,
+			handleMenuOptionClickDelete,
 			theme,
 		} = this.props;
 
@@ -44,13 +59,13 @@ class LibraryDesktop extends Component {
 				background: theme.palette.primary.light,
 				// borderTop: `1px solid ${theme.palette.primary.main}`,
 				// padding: '0px',
-				// paddingTop: '45px',
+				// marginTop: '57px',
 				marginBottom: '104px' // TODO: link value to Player + Nav height
 			},
 			tableHead: {
 				// position: 'fixed',
 				// top: 0,
-				// height: '50px',
+				// // height: '50px',
 				// width: '100%',
 				// background: theme.palette.primary.light,
 			},
@@ -73,9 +88,12 @@ class LibraryDesktop extends Component {
 				margin: 'auto',
 				color: theme.palette.primary.light,
 			},
+			selected: {
+				background: theme.palette.primary.main,
+			},
 		}
 
-		console.log(`LibraryDesktop, orderBy: ${orderBy}, ${order}`)
+		// console.log(`LibraryDesktop, orderBy: ${orderBy}, ${order}`)
 		return (
 			<Table style={styles.root}>
 				<TableHead style={styles.tableHead}>
@@ -105,30 +123,11 @@ class LibraryDesktop extends Component {
 					{library.tracks.length > 0 ? 
 						this.sortByField(library.tracks, order, orderBy)
 						.map(track => (
-						<TableRow key={track._id} hover>
-							<TableCell>
-							{
-								track.image.src === 'defaultImage' ?
-								<div style={styles.defaultImgContainer}><Album style={styles.defaultImg} /></div>
-								:
-								<img src={track.image.src} alt="Album art" width="32" height="32" />
-							}
-							</TableCell>
-							<TableCell style={styles.titleCell}>
-								<Tooltip 
-									title={track.title} 
-									placement="top-end"
-									enterDelay={300}>
-									<Typography noWrap>{track.title}</Typography>
-								</Tooltip>
-							</TableCell>
-							<TableCell style={styles.artistCell}>
-								<Typography noWrap>{track.artist}</Typography>
-							</TableCell>
-							<TableCell style={styles.albumCell}>
-								<Typography noWrap>{track.album}</Typography>
-							</TableCell>
-						</TableRow>
+						<LibraryRowContainer
+							key={track._id}
+							track={track}
+							selectedTrack={library.selectedTrack}
+						/>
 					))
 					:
 					(
