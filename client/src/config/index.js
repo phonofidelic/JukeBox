@@ -41,8 +41,9 @@ export const THEME = {
   dimensions: {
     libraryDesktop: {
       titleCellWidth: '300px',
+      durrationCellWidth: '100px',
       artistCellWidth: '100px',
-      albumCellWidth: '100px,'
+      albumCellWidth: '100px',
     },
   },
 }

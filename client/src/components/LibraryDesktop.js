@@ -10,15 +10,17 @@ import {
 	Typography,
 	Tooltip,
 } from '@material-ui/core';
-import { Album } from '@material-ui/icons';
+import { Album, Schedule } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import { _ } from 'underscore';
 import LibraryContextMenu from './LibraryContextMenu';
 
 const columnData = [
-	{ id: 'title', numeric: false, disablePadding: true, label: 'Title' },
-	{ id: 'artist', numeric: false, disablePadding: true, label: 'Artist' },
-	{ id: 'album', numeric: false, disablePadding: true, label: 'Album' },
+	// { id: 'empty', numeric: false, disablePadding: true, label: ''},
+	{ id: 'title', numeric: false, disablePadding: false, label: 'Title' },
+	{ id: 'duration', numeric: false, disablePadding: false, label: <Schedule /> },
+	{ id: 'artist', numeric: false, disablePadding: false, label: 'Artist' },
+	{ id: 'album', numeric: false, disablePadding: false, label: 'Album' },
 ]
 
 class LibraryDesktop extends Component {
@@ -26,8 +28,17 @@ class LibraryDesktop extends Component {
     this.props.handleRequestSort(e, columnId);
   };
 
-  // http://janetriley.net/2014/12/sort-on-multiple-keys-with-underscores-sortby.html
+  /*
+   * http://janetriley.net/2014/12/sort-on-multiple-keys-with-underscores-sortby.html
+   * https://lodash.com/docs/#sortBy
+   */
   sortByField(list, order, orderBy) {
+  	if (orderBy === 'duration') {
+  		return order === 'desc' 
+  		? _.sortBy(list, ['format', 'duration'])
+  		: _.sortBy(list, ['format', 'duration']).reverse();
+  	}
+  	console.log('not duration')
   	return order === 'desc' 
   	? _.sortBy(_.sortBy(list, 'order.no'), orderBy)
   	: _.sortBy(_.sortBy(list, 'order.no'), orderBy).reverse();

@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core';
 import { Album } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
+import * as moment from 'moment';
+import 'moment-duration-format';
 
 class LibraryRow extends Component {
 	constructor(props) {
@@ -64,6 +66,9 @@ class LibraryRow extends Component {
 			albumCell: {
 				maxWidth: theme.dimensions.libraryDesktop.albumCellWidth,
 			},
+			durationCell: {
+				maxWidth: theme.dimensions.libraryDesktop.durrationCellWidth,
+			},
 			defaultImgContainer: {
 				width: '32px', 
 				height: '32px', 
@@ -79,7 +84,18 @@ class LibraryRow extends Component {
 			},
 		};
 
-		console.log('editMode:', editMode);
+		const muinets = Math.floor(track.format.duration/60);
+		const rawSeconds = Math.floor(track.format.duration) - muinets * 60;
+
+		const seconds = rawSeconds <= 9
+			? rawSeconds + '0'
+			: rawSeconds;
+
+		// console.log('editMode:', editMode);
+		var dateTest = new Date();
+		// console.log('moment.duration:', moment.duration(track.format.duration, 'seconds'));
+		const mDuration = moment.duration(Math.floor(track.format.duration), 'seconds').format('mm:ss', { forceLength: false });
+		console.log('mDuration:', mDuration)
 
 		return (
 			<TableRow 
@@ -110,6 +126,9 @@ class LibraryRow extends Component {
 						enterDelay={300}>
 						<Typography noWrap>{track.title}</Typography>
 					</Tooltip>
+				</TableCell>
+				<TableCell style={styles.durationCell}>
+					<Typography noWrap>{mDuration}</Typography>
 				</TableCell>
 				<TableCell style={styles.artistCell}>
 					<Typography noWrap>{track.artist}</Typography>
