@@ -8,7 +8,10 @@ import {
 	Typography,
 	Tooltip,
 } from '@material-ui/core';
-import { Album } from '@material-ui/icons';
+import { 
+	Album,
+	PlayCircleOutline,
+} from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import * as moment from 'moment';
 import 'moment-duration-format';
@@ -113,10 +116,17 @@ class LibraryRow extends Component {
 			>
 				<TableCell>
 				{
-					track.image.src === 'defaultImage' ?
-					<div style={styles.defaultImgContainer}><Album style={styles.defaultImg} /></div>
-					:
-					<img src={track.image.src} alt="Album art" width="32" height="32" />
+					player.playing && player.currentTrack._id === track._id ? 
+						<div style={styles.defaultImgContainer}>
+							<PlayCircleOutline style={styles.defaultImg} />
+						</div>
+					: 
+						track.image.src === 'defaultImage' ?
+							<div style={styles.defaultImgContainer}>
+								<Album style={styles.defaultImg} />
+							</div>
+						:
+							<img src={track.image.src} alt="Album art" width="32" height="32" />
 				}
 				</TableCell>
 				<TableCell style={styles.titleCell}>
