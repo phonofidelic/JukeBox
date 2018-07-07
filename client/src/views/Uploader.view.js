@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 const UploaderView = (props) => {
 	return (
 		<div>
-			<Typography variant="display1">Uploader</Typography>
 			<UploaderContainer {...props} />
 			<PlayerContainer />
       <NavContainer />

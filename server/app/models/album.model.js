@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const STRINGS = {
+	default_unknown: 'Unknown',
+	default_noDescription: 'No description provided'
+}
+
 const AlbumSchema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
-	title: { type: String, default: 'Unknown' },
-	artist: { 
-		id: { type: Schema.Types.ObjectId },
-		name: { type: String, default: 'Unknown'}
-	},
-	label: { 
-		id: { type: Schema.Types.ObjectId },
-		name: { type: String, default: 'Unknown'}
-	},
+	title: { type: String, default: STRINGS.default_unknown },
+	artist: Schema.Types.Mixed,
+	label: Schema.Types.Mixed,
 	year: { type: Number },
 	genre: [ String ],
-	artwork: [ String ] // array of img src strings
+	artwork: [ String ], // array of img src strings
+	description: { type: String, default: STRINGS.default_noDescription }
 });
 
 module.exports = mongoose.model(

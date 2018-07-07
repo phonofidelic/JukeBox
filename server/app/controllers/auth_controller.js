@@ -41,7 +41,6 @@ exports.registerNewUser = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
-	// console.log('login:', req.body)
 	const { email, password } = req.body;
 	const userInfo = setUserInfo(req.user);
 	console.log('userInfo:', userInfo)

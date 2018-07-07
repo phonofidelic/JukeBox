@@ -3,6 +3,8 @@ const isFile = require('is-file');
 const path = require('path');
 // const Track = require('../models').TrackModel;
 const Track = require('../models/track.model');
+const Artist = require('../models/artist.model');
+const Album = require('../models/album.model');
 const fs = require('fs');
 const utils = require('./utils');
 const storage = require('../../config/storage_config');
@@ -57,6 +59,7 @@ const postTrack = (req, res, next) => {
 const postTracks = (req, res, next) => {
 	console.log('postTracks, req.files:', req.files)
 
+	const userId = req.get('userId');
 	let savedTracks = [];
 
 	req.files.forEach(file => {
@@ -64,65 +67,87 @@ const postTracks = (req, res, next) => {
 		if (!isFile(file.path)) return;
 		mm.parseFile(file.path, { native: true })
 		.then(metaData => {
-			if (metaData.common.picture) {
-				utils.saveImage(metaData.common.picture).then(imageData => {
-					console.log('Saving track with image data:', imageData)
-					const track = new Track({
-						userId: req.get('userId'),
-						title: metaData.common.title,
-						artist: metaData.common.artist,
-						album: metaData.common.album,
-						genre: metaData.common.genre,
-						image: imageData,
-						order: metaData.common.track,
-						format: metaData.format,
-						file: {
-							originalname: file.originalname,
-							path: file.path,
-							size: file.size,
-							mimetype: file.mimetype
-						}
-					});
-					track.save((err, savedTrack) => {
-						if (err) {
-							console.error('postTrack error:', err);
-							return next(err);
-						};
-						// return savedTrack;
-						console.log('Track saved')
-						savedTracks.push(savedTrack);
-					});
-				}).catch(err => console.error('Could not parse image data:', err))
-			} else {
-				console.log('No image data found for track, saving with default image')
-				const track = new Track({
-					userId: req.get('userId'),
-					title: metaData.common.title,
-					artist: metaData.common.artist,
-					album: metaData.common.album,
-					genre: metaData.common.genre,
-					image: {format: 'png', src: 'defaultImage'},
-					order: metaData.common.track,
-					format: metaData.format,
-					file: {
-						originalname: file.originalname,
-						path: file.path,
-						size: file.size,
-						mimetype: file.mimetype
-					}
-				});
-				track.save((err, savedTrack) => {
-					if (err) {
-						console.error('postTrack error:', err);
+			console.log('### Handleing parsed meta-data...');
+			// console.log('### metaData:', metaData);
+
+			// Check if track already exists in library
+			Track.findOne({ title: metaData.common.title })
+			.exec((err, track) => {
+				if (err) return next(err);
+
+				if (!track) {
+					console.log('\n### No track found in DB, creating new track...')
+					// Check for existing Artist and Album info
+					// Check for embeded image
+					return Promise.all([
+						utils.saveImage(metaData.common.picture),
+						utils.checkArtist(metaData, Artist, userId), 
+						utils.checkAlbum(metaData, Album, userId)
+					])
+					.then(values => {
+						console.log('## values:', values);
+						// Save track with parsed meta-data and 
+						// values passed from utility methods
+						const newTrack = new Track({
+							userId: userId,
+							title: metaData.common.title,
+							image: values[0],
+							artist: values[1],
+							album: values[2],
+							genre: metaData.common.genre,
+							order: metaData.common.track,
+							format: metaData.format,
+							file: {
+								originalname: file.originalname,
+								path: file.path,
+								size: file.size,
+								mimetype: file.mimetype
+							}
+						});
+						newTrack.save((err, newTrack) => {
+							// Update Artist and Album docs with new track info
+							Artist.findById(newTrack.artist._id, (err, artist) => {
+								if (err) return next(err);
+								if (!artist) return console.log('\n### No artist found, ');
+								console.log('\n### Updating album data on artist')
+								artist.albums.push(newTrack.album);
+								artist.save();
+							});
+
+							Album.findById(newTrack.album._id, (err, album) => {
+								if (err) return next(err);
+								if (!album) return console.log('\n### No album found');
+								console.log('\n### Updating artist data on album')
+								album.artist = newTrack.artist;
+								album.save();
+							});
+							savedTracks.push(newTrack);
+						});
+					})
+					.catch(err => {
+						console.error(err);
 						return next(err);
-					};
-					// return savedTrack;
-					console.log('Track saved')
-					savedTracks.push(savedTrack);
+					});
+				}
+
+				// TODO: If a match is found, ask the user if they want to:
+				// 			 1) overwrite the existing track,
+				// 			 2) discard the current track being added,
+				// 			 3) save a new version of this track.
+				//
+				//			 For now, delete the saved audio file of the current file object
+				fs.unlink(file.path, (err) => {
+					if (err) return next(err);
+					console.log('### Deleted '+ file.path);
 				});
-			}	
+
+				return console.log('### Track already saved');
+			});
 		})
-		.catch(err => console.error('Could not parse file:', err.message))
+		.catch(err => {
+			console.error('Could not parse file:', err.message);
+			return next(err);
+		})
 	});
 	res.json({message: 'Tracks saved', tracks: savedTracks })
 }

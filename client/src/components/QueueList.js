@@ -53,7 +53,7 @@ class QueueList extends Component {
 							<Grid container>
 								<Grid item>
 									<Typography>
-										{ track.title } - { track.artist } - { track.album }
+										{ track.title } - { track.artist.name } - { track.album.title }
 									</Typography>
 								</Grid>
 							</Grid>

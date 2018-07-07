@@ -131,10 +131,10 @@ class LibraryRow extends Component {
 					<Typography noWrap>{mDuration}</Typography>
 				</TableCell>
 				<TableCell style={styles.artistCell}>
-					<Typography noWrap>{track.artist}</Typography>
+					<Typography noWrap>{track.artist.name}</Typography>
 				</TableCell>
 				<TableCell style={styles.albumCell}>
-					<Typography noWrap>{track.album}</Typography>
+					<Typography noWrap>{track.album.title}</Typography>
 				</TableCell>
 				<LibraryContextMenu 
 					track={track}

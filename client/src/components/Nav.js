@@ -8,14 +8,17 @@ import {
   Storage,
   ExitToApp,
 } from '@material-ui/icons';
+import { withTheme } from '@material-ui/core/styles';
 
 class Nav extends Component {
   render() {
+    const { theme } = this.props;
     const styles = {
       root: {
         position: 'fixed',
         bottom: '0px',
         width: '100%',
+        height: theme.dimensions.nav.navHeight,
       }
     }
 
@@ -56,4 +59,4 @@ class Nav extends Component {
   };
 }
 
-export default Nav;
+export default withTheme()(Nav);

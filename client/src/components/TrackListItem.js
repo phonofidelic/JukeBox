@@ -119,8 +119,8 @@ class TrackListItem extends Component {
 						<Grid item xs={6}>
 							<Grid container direction="column">
 								<div><Typography noWrap>{ track.title }</Typography></div>
-								<div><Typography noWrap variant="caption">{ track.artist }</Typography></div>
-								<div><Typography noWrap variant="caption">{ track.album }</Typography></div>
+								<div><Typography noWrap variant="caption">{ track.artist.name }</Typography></div>
+								<div><Typography noWrap variant="caption">{ track.album.title }</Typography></div>
 								{ (selectedTrack && track._id === selectedTrack._id) && <div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div>}
 							</Grid>
 						</Grid>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { withTheme } from '@material-ui/core/styles';
 import {
 	Typography, 
 	List, 
@@ -8,7 +7,8 @@ import {
 	Button,
 	IconButton,
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { RemoveCircle } from '@material-ui/icons';
+import { withTheme } from '@material-ui/core/styles';
 
 class UploaderFullscreen extends Component {
   state = {
@@ -65,25 +65,26 @@ class UploaderFullscreen extends Component {
 
   	const styles = {
   		root: {
-  			position: 'absolute',
-	      top: 0,
-	      right: 0,
-	      bottom: 0,
-	      left: 0,
+  			// position: 'absolute',
+	    //   top: 0,
+	    //   right: 0,
+	    //   bottom: theme.dimensions.nav.navHeight,
+	    //   left: 0,
+        marginBottom: theme.dimensions.nav.navHeight,
 	      padding: '2.5em 0',
-	      background: 'rgba(0,0,0,0.5)',
+	      // background: 'rgba(0,0,0,0.5)',
 	      textAlign: 'center',
-      	color: theme.palette.primary.light,
+      	// color: theme.palette.primary.light,
   		},
   		listItem: {
   			padding: '0px 16px',
   		},
   		listItemText: {
-  			color: theme.palette.primary.light,
+  			// color: theme.palette.primary.light,
   		},
   		controlls: {
   			margin: '5px',
-  			color: theme.palette.primary.light,
+  			// color: theme.palette.primary.light,
   		}
   	}
 
@@ -95,7 +96,7 @@ class UploaderFullscreen extends Component {
 	  					<Typography style={styles.listItemText}>
 	  						{file.name} | {file.size} kb
 	  					</Typography>
-	  					<IconButton style={{marginLeft: 5}} onClick={() => handleRemoveTrack(i)}><DeleteIcon/></IconButton>
+	  					<IconButton style={{marginLeft: 5}} onClick={() => handleRemoveTrack(i)}><RemoveCircle/></IconButton>
 	  				</ListItem>
 	  			)}
 	  		</List>
@@ -115,16 +116,32 @@ class UploaderFullscreen extends Component {
   }
 
   render() {
+    const { 
+      input, 
+      name, 
+      droppedFiles, 
+      handleOnDrop, 
+      theme,
+    } = this.props;
+
     const { dropzoneActive } = this.state;
-    const { input, name, droppedFiles, handleOnDrop } = this.props;
-    const dropzoneStyle = {
-    	position: 'absolute',
-    	top: 0,
-    	right: 0,
-    	botom: 0,
-    	left: 0,
-    	width: '100%',
-    	height: '100%',
+
+    const styles = {
+    	root: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        botom: theme.dimensions.nav.navHeight,
+        left: 0,
+        width: '100%',
+        height: '100%',
+      },
+      infoText: {
+        position: 'fixed',
+        top: '33vh',
+        width: '100%',
+        textAlign: 'center',
+      },
     };
 
     // console.log('UploaderFullscreen, this.props:', this.props)
@@ -133,14 +150,18 @@ class UploaderFullscreen extends Component {
       <Dropzone
       	name={input.name}
         disableClick
-        style={dropzoneStyle}
+        style={styles.root}
         accept={''}
         onDrop={handleOnDrop.bind(this)}
         onDragEnter={this.onDragEnter.bind(this)}
         onDragLeave={this.onDragLeave.bind(this)}
       >
         { dropzoneActive && this.renderOverlay() }
-        { droppedFiles.length > 0 && this.renderUploadList() }
+        { 
+          droppedFiles.length > 0 
+          ? this.renderUploadList()
+          : <Typography style={styles.infoText}>Drag and drop files to upload</Typography>
+         }
       </Dropzone>
     );
   }

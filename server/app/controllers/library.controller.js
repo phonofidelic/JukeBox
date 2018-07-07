@@ -21,15 +21,13 @@ module.exports.loadLibrary = (req, res, next) => {
 				if (err) return next(err);
 				resolve(tracks)
 			})
-		})
-		,
+		}),
 		Artist.find({ 'userId': req.get('userId') })
 		.sort({ name: 1 })
 		.exec((err, artists) => {
 			if (err) return next(err);
 			return artists;
 		}),
-
 		Album.find({ 'userId': req.get('userId') })
 		.sort({ title: 1 })
 		.exec((err, tracks) => {

@@ -66,7 +66,7 @@ export const login = data => {
 			});
 		})
 		.catch(err => {
-			// console.log('login error:', err.response);
+			console.log('login error:', err.response);
 			dispatch({
 				type: LOGIN_FAILURE,
 				error: err

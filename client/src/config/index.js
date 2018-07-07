@@ -45,5 +45,8 @@ export const THEME = {
       artistCellWidth: '100px',
       albumCellWidth: '100px',
     },
+    nav: {
+      navHeight: '56px',
+    }
   },
 }
