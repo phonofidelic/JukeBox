@@ -1,9 +1,10 @@
-const User = require('../models').UserModel;
+const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+
 const generateToken = user => {
 	return jwt.sign(user, process.env.JWT_SECRET, {
-		expiresIn: '12h'
+		expiresIn: '5h'	// TODO: Set expiration time in env variable
 	});
 };
 
@@ -53,17 +54,12 @@ exports.login = (req, res, next) => {
 }
 
 exports.getUserInfo = (req, res, next) => {
-	console.log('getUserInfo', req.get('userId'))
-	const user = User.findOne({_id: req.get('userId')}, (err, user) => {
-		if (err) return next(err);
-		return user;
-	});
-	user.select('email _id');
-	user.exec((err, user) => {
-		if (err) return next(err);
-		res.json({
-			message: 'User info retrieved',
-			user: user
-		});
+	// console.log('### getUserInfo, setUserInfo(req.user)', setUserInfo(req.user))
+	const user = setUserInfo(req.user);
+	if (!user._id) return next(new Error('Coulld not set user info.'));
+
+	res.json({
+		message: 'User info retrieved',
+		user: setUserInfo(req.user)
 	});
 }

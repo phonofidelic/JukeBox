@@ -132,8 +132,9 @@ class LibraryRow extends Component {
 				<TableCell style={styles.titleCell}>
 					<Tooltip 
 						title={track.title} 
-						placement="top-end"
-						enterDelay={300}>
+						placement="top-start"
+						enterDelay={300}
+					>
 						<Typography noWrap>{track.title}</Typography>
 					</Tooltip>
 				</TableCell>
@@ -141,10 +142,22 @@ class LibraryRow extends Component {
 					<Typography noWrap>{mDuration}</Typography>
 				</TableCell>
 				<TableCell style={styles.artistCell}>
-					<Typography noWrap>{track.artist.name}</Typography>
+					<Tooltip 
+						title={track.artist.name} 
+						placement="top-start"
+						enterDelay={300}
+					>
+						<Typography noWrap>{track.artist.name}</Typography>
+					</Tooltip>
 				</TableCell>
 				<TableCell style={styles.albumCell}>
-					<Typography noWrap>{track.album.title}</Typography>
+					<Tooltip 
+						title={track.album.title} 
+						placement="top-start"
+						enterDelay={300}
+					>
+						<Typography noWrap>{track.album.title}</Typography>
+					</Tooltip>
 				</TableCell>
 				<LibraryContextMenu 
 					track={track}

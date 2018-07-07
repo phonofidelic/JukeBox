@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const Track = require('../models').TrackModel;
 const passport = require('passport');
 const	libraryController = require('../controllers/library.controller');
 const upload = require('../../config/storage_config');

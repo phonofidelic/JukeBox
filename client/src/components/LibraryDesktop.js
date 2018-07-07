@@ -17,10 +17,10 @@ import LibraryContextMenu from './LibraryContextMenu';
 
 const columnData = [
 	// { id: 'empty', numeric: false, disablePadding: true, label: ''},
-	{ id: 'title', numeric: false, disablePadding: false, label: 'Title' },
-	{ id: 'duration', numeric: false, disablePadding: false, label: <Schedule /> },
-	{ id: 'artist', numeric: false, disablePadding: false, label: 'Artist' },
-	{ id: 'album', numeric: false, disablePadding: false, label: 'Album' },
+	{ id: 'title', numeric: false, disablePadding: false, label: 'Title', labelText: 'Title' },
+	{ id: 'duration', numeric: false, disablePadding: false, label: <Schedule />, labelText: 'Duration' },
+	{ id: 'artist', numeric: false, disablePadding: false, label: 'Artist', labelText: 'Artist' },
+	{ id: 'album', numeric: false, disablePadding: false, label: 'Album', labelText: 'Album' },
 ]
 
 class LibraryDesktop extends Component {
@@ -118,13 +118,19 @@ class LibraryDesktop extends Component {
 	                padding={column.disablePadding ? 'none' : 'default'}
 	                sortDirection={orderBy === column.id ? order : false}
 	              >
-	              	<TableSortLabel
-	              		active={orderBy === column.id}
-	              		direction={order}
-	              		onClick={this.createSortHandler(column.id)}
-	              	>
-	              		{column.label}
-	              	</TableSortLabel>
+	             		<Tooltip
+              			title={column.labelText}
+              			placement="bottom-start"
+              			enterDelay={300}
+              		>
+		              	<TableSortLabel
+		              		active={orderBy === column.id}
+		              		direction={order}
+		              		onClick={this.createSortHandler(column.id)}
+		              	>
+		              		{column.label}
+		              	</TableSortLabel>
+	              	</Tooltip>
 	              </TableCell>
 							))
 						}
