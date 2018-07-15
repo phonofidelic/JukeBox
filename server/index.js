@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const logger = require('morgan');
-const authRoutes = require('./app/routes/auth_routes');
+const authRoutes = require('./app/routes/auth.routes');
 const trackRoutes = require('./app/routes/track_routes');
 const libraryRoutes = require('./app/routes/library.routes');
 
