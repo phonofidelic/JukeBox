@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { trackListActions, playerActions, messageActions } from '../actions';
+import { libraryActions, playerActions, messageActions } from '../actions';
 import { getSelectedTrack } from '../selectors';
 import TrackListItem from '../components/TrackListItem';
 import { TableRow } from '@material-ui/core';
 
-const actions = { ...trackListActions, ...playerActions, ...messageActions };
+const actions = { ...libraryActions, ...playerActions, ...messageActions };
 
 class TrackListItemContainer extends Component {
 	handleSelectTrack(track) {
@@ -13,7 +13,7 @@ class TrackListItemContainer extends Component {
 	}
 
 	handleStartNewQueue(track, currentTrack) {
-		this.props.playAsLastInQueue(track, currentTrack);
+		this.props.sendToQueueAndPlay(track, currentTrack, true);
 	}
 
 	handleAddToQueue(track) {

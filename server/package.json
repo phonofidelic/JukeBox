@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "DB_CONNECTION=mongodb://localhost:27017/jukeTest nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod": "node index.js"
+    "prod": "node index.js",
+    "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js"
+
   },
   "author": "",
   "license": "ISC",

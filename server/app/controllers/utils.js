@@ -20,19 +20,25 @@ module.exports.saveImage = (image) => new Promise((resolve, reject) => {
 });
 
 module.exports.checkArtist = (metaData, Artist, userId) => new Promise((resolve, reject) => {
+	console.
+	log('\n############## metaData.common.artist:', metaData.common.artist);
 	Artist.findOne({ name: metaData.common.artist })
 	.then((artist) => {
 		console.log('\n### @checkArtist, artist:', artist);
 		if (!artist) {
+			console.log('\n### Artist not found in DB, creating new document...');
 			const newArtist = new Artist({
 				userId: userId,
 				name: metaData.common.artist
 			});
-			newArtist.save();
-			console.log('### new artist saved, newArtist:', newArtist);
-			resolve(newArtist);
+			newArtist.save((err, savedArtist) => {
+				console.log('\n### New Artist saved, savedArtist:', savedArtist);
+				resolve(savedArtist);
+			});
+		} else {
+			console.log('\n### Artist found in db, updating track document...');
+			resolve(artist);
 		}
-		resolve(artist);
 	})
 	.catch(err => {
 		reject(err);
@@ -44,16 +50,20 @@ module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, r
 	.then(album => {
 		console.log('\n### @checkAlbum, album:', album);
 		if (!album) {
+			console.log('\n### Album not found in DB, creating new document...');
 			const newAlbum = new Album({
 				userId: userId,
 				title: metaData.common.album,
 				artist: metaData.common.artist
 			});
-			newAlbum.save();
-			console.log('### new album saved, newAlbum:', newAlbum);
-			resolve(newAlbum);
+			newAlbum.save((err, savedAlbum) => {
+				console.log('\n### New album saved, savedAlbum:', savedAlbum);
+				resolve(savedAlbum);	
+			});
+		} else {
+			console.log('\n### Album found in db, updating track document...');
+			resolve(album);
 		}
-		resolve(album);
 	})
 	.catch(err => {
 		reject(err);

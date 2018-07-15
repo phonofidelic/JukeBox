@@ -8,8 +8,8 @@ const authRoutes = require('./app/routes/auth.routes');
 const trackRoutes = require('./app/routes/track_routes');
 const libraryRoutes = require('./app/routes/library.routes');
 
-const PORT = process.env.PORT;
-const DB_CONNECTION = process.env.DB_CONNECTION;
+// const PORT = process.env.PORT;
+// const DB_CONNECTION = process.env.DB_CONNECTION;
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 
 // Configure db
-mongoose.connect(DB_CONNECTION);
+mongoose.connect(process.env.DB_CONNECTION);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error'));
 db.on('open', () => console.log('DB connection successfull!'));
@@ -46,4 +46,4 @@ app.use(express.static(process.env.CLIENT_DIR));
 // 	res.status(404).json({message: 'Recource not found'});
 // })
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));
