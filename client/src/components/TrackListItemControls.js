@@ -64,14 +64,6 @@ class TrackListItemControls extends Component {
 				<IconButton title="Start new queue" onClick={ () => { handleStartNewQueue(track, player.currentTrack) }} >
 				<PlayArrow />
 				</IconButton>
-				{
-					player.queue.length ? 
-					<IconButton title="Add to queue" onClick={ () => { handleAddToQueue(track) }}> 
-						<Queue />
-					</IconButton>
-					: 
-					null
-				}
 				<IconButton 
 					title="Options"
 					aria-owns={anchorEl ? 'options-menu' : null}
@@ -87,6 +79,7 @@ class TrackListItemControls extends Component {
 					onClose={this.handleOptionsClose.bind(this)}
 					style={styles.menu}
 				>
+					<MenuItem onClick={() => handleAddToQueue(track)}>Add to queue</MenuItem>
 					<MenuItem onClick={() => this.handleMenuOptionClickEdit()}>Edit info</MenuItem>
 					<MenuItem onClick={() => this.handleMenuOptionClickDelete()}>
 						Delete track

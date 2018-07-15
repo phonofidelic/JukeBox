@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { trackListActions, playerActions } from '../actions';
+import { libraryActions, playerActions } from '../actions';
 import Library from '../components/Library';
 import LibraryDesktop from '../components/LibraryDesktop';
 
-const actions = { ...trackListActions, ...playerActions };
+const actions = { ...libraryActions, ...playerActions };
 
 export class TrackListContainer extends Component {
 	constructor(props) {
