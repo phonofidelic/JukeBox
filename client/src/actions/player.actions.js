@@ -32,7 +32,7 @@ export const unshiftToQueueAndPlay = (track, currentTrack) => {
 
 }
 
-export const playAsLastInQueue = (track, currentTrack, sameQueue) => {
+export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
 	console.log('startNewQueue, track', track);
 
 	// Unload and destroy the Howl object. This will immediately stop 
