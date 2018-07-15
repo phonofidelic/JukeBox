@@ -85,7 +85,7 @@ const postTracks = (req, res, next) => {
 						utils.checkAlbum(metaData, Album, userId)
 					])
 					.then(values => {
-						console.log('## values:', values);
+						console.log('### values:', values);
 						// Save track with parsed meta-data and 
 						// values passed from utility methods
 						const newTrack = new Track({
