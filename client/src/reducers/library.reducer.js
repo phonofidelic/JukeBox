@@ -135,18 +135,37 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 			}
 
 		case ORDER_TRACKS_BY_FIELD_VALUE:
-		let tracksByArtist = [...state.tracks];
+			let tracksToSort = [...state.tracks];
+			
+			if (action.fieldName === 'artist') {
+				tracksToSort.sort((a, b) => {
+					const trackA = a[action.fieldName].name.toUpperCase();
+					const trackB = b[action.fieldName].name.toUpperCase();
+					if (trackA < trackB) return -1;
+					if (trackA > trackB) return 1;
+					return 0;
+				})
+			} else if (action.fieldName === 'album') {
+				tracksToSort.sort((a, b) => {
+					const trackA = a[action.fieldName].title.toUpperCase();
+					const trackB = b[action.fieldName].title.toUpperCase();
+					if (trackA < trackB) return -1;
+					if (trackA > trackB) return 1;
+					return 0;
+				})
+			} else {
+				tracksToSort.sort((a, b) => {
+					const trackA = a[action.fieldName].toUpperCase();
+					const trackB = b[action.fieldName].toUpperCase();
+					if (trackA < trackB) return -1;
+					if (trackA > trackB) return 1;
+					return 0;
+				})
+			}
 
-		tracksByArtist.sort((a, b) => {
-			const trackA = a[action.fieldName].toUpperCase();
-			const trackB = b[action.fieldName].toUpperCase();
-			if (trackA < trackB) return -1;
-			if (trackA > trackB) return 1;
-			return 0;
-		})
 			return {
 				...state,
-				tracks: tracksByArtist
+				tracks: tracksToSort
 			}
 
 		default:
