@@ -1,5 +1,7 @@
 import {
 	LOAD_LIBRARY,
+	LOAD_LIBRARY_SUCCESS,
+	LOAD_LIBRARY_FAILURE,
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
@@ -14,14 +16,21 @@ import {
 	DELETE_TRACK_SUCCESS,
 	DELETE_TRACK_FAILURE,
 	ORDER_TRACKS_BY_FIELD_VALUE,
+	FETCH_DETAIL_VIEW,
+	FETCH_DETAIL_VIEW_FAILURE,
+	SHOW_DETAIL_VIEW,
+	CLOSE_DETAIL_VIEW,
 	CLEAR_MESSAGE
 } from '../actiontypes';
 
 const INITIAL_STATE = {
+	loadingLibrary: false,
 	fetchingTracks: false,
+	loadingDetailView: false,
 	postingTrackData: false,
 	tracks: [],
 	selectedTrack: null,
+	detailViewData: null,
 	error: false,
 	message: null
 };
@@ -30,7 +39,24 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case LOAD_LIBRARY:
 			return {
-				...state
+				...state,
+				loadingLibrary: true
+			}
+
+		case LOAD_LIBRARY_SUCCESS:
+			return {
+				...state,
+				loadingLibrary: false,
+				tracks: action.tracks,
+				artists: action.artists,
+				albums: action.artists
+			}
+
+		case LOAD_LIBRARY_FAILURE:
+			return {
+				...state,
+				loadingLibrary: false,
+				error: action.error
 			}
 
 		case FETCH_TRACKS:
@@ -166,6 +192,32 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				tracks: tracksToSort
+			}
+
+		case FETCH_DETAIL_VIEW:
+			return {
+				...state,
+				loadingDetailView: true,
+			}
+
+		case FETCH_DETAIL_VIEW_FAILURE:
+			return {
+				...state,
+				loadingDetailView: false,
+				error: action.error,
+			}
+
+		case SHOW_DETAIL_VIEW:
+			return {
+				...state,
+				loadingDetailView: false,
+				detailViewData: action.detailViewData,
+			}
+
+		case CLOSE_DETAIL_VIEW:
+			return {
+				...state,
+				detailViewData: null,
 			}
 
 		default:

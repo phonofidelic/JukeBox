@@ -1,5 +1,7 @@
 import {
 	LOAD_LIBRARY,
+	LOAD_LIBRARY_SUCCESS,
+	LOAD_LIBRARY_FAILURE,
 	FETCH_TRACKS,
 	FETCH_TRACKS_SUCCESS,
 	FETCH_TRACKS_FAILURE,
@@ -16,27 +18,47 @@ import {
 	DELETE_TRACK_FAILURE,
 	ORDER_TRACKS_BY_FIELD_VALUE,
 	SET_MESSAGE,
+	SHOW_DETAIL_VIEW,
+	FETCH_DETAIL_VIEW_FAILURE,
+	FETCH_DETAIL_VIEW,
+	CLOSE_DETAIL_VIEW,
 	CLEAR_MESSAGE
 } from '../actiontypes';
 import axios from 'axios';
 import { Howl } from 'howler';
 import { URLS } from '../config';
 
-const TRACKS_URL = URLS.TRACKS_URL;
+const { TRACK_URL, ARTIST_URL} = URLS;
 
 export const loadLibrary = () => {
-	console.log('loadLibrary called')
+	// console.log('loadLibrary called')
 	return dispatch => {
 		dispatch({
 			type: LOAD_LIBRARY
 		});
 
-		axios.get('/library')
+		axios.get('/library', {
+			headers: { 
+				token: localStorage.getItem('JWT'),
+				userId: localStorage.getItem('userId')
+			}
+		})
 		.then(response => {
-			console.log('loadLibrary response:', response);;
+			console.log('loadLibrary response:', response);
+
+			dispatch({
+				type: LOAD_LIBRARY_SUCCESS,
+				tracks: response.data.library[0],
+				artists: response.data.library[1],
+				albums: response.data.library[2]
+			});
 		})
 		.catch(err => {
 			console.error(err);
+			dispatch({
+				type: LOAD_LIBRARY_FAILURE,
+				error: err
+			});
 		});
 	}
 }
@@ -47,7 +69,7 @@ export const getTracks = () => {
 			type: FETCH_TRACKS
 		});
 
-		axios.get(`${TRACKS_URL}`, { 
+		axios.get(`${TRACK_URL}`, { 
 			headers: { 
 				token: localStorage.getItem('JWT'),
 				userId: localStorage.getItem('userId')
@@ -103,7 +125,7 @@ export const editTrack = (formData, trackData) => {
 		dispatch({
 			type: POST_TRACK_DATA,
 		});
-		axios.put(`${TRACKS_URL}/${trackData._id}`, formData, {
+		axios.put(`${TRACK_URL}/${trackData._id}`, formData, {
 			headers: {
 				token: localStorage.getItem('JWT'),
 				userId: localStorage.getItem('userId')
@@ -144,7 +166,7 @@ export const deleteTrackConfirm = trackData => {
 		dispatch({
 			type: DELETE_TRACK_CONFIRM
 		});
-		axios.delete(`${TRACKS_URL}/${trackData._id}`, {
+		axios.delete(`${TRACK_URL}/${trackData._id}`, {
 			headers: {
 				token: localStorage.getItem('JWT'),
 				userId: localStorage.getItem('userId')
@@ -177,6 +199,44 @@ export const deleteTrackCancel = () => {
 	return dispatch => {
 		dispatch({
 			type: DELETE_TRACK_CANCEL
+		});
+	}
+}
+
+export const showDetailView = (id, type) => {
+	return dispatch => {
+		dispatch({
+			type: FETCH_DETAIL_VIEW
+		});
+
+		axios.get(`${ARTIST_URL}/${id}`, {
+			headers: { 
+				token: localStorage.getItem('JWT'),
+				userId: localStorage.getItem('userId')
+			}
+		})
+		.then(response => {
+			console.log('showDetailView, response:', response);
+			dispatch({
+				type: SHOW_DETAIL_VIEW,
+				detailViewData: response.data.artist,
+			});
+		})
+		.catch(err => {
+			console.error('showDetailView error:', err);
+			dispatch({
+				type: FETCH_DETAIL_VIEW_FAILURE,
+				error: err,
+			})
+		});
+	}
+}
+
+export const closeDetailView = () => {
+	console.log('closeDetailView')
+	return dispatch => {
+		dispatch({
+			type: CLOSE_DETAIL_VIEW
 		});
 	}
 }

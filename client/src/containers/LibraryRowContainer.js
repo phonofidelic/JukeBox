@@ -34,12 +34,22 @@ class LibraryRowContainer extends Component {
 		return this.props.deleteTrackCancel();
 	}
 
+	handleOpenDetailView(data, type) {
+    this.props.showDetailView(data, type);
+  }
+
+  handleCloseDetailView() {
+    this.props.closeDetailView();
+  }
+
 	render() {
 		const {
 			track,
 			player,
 			selectedTrack,
 			handleStartNewQueue,
+			handleOpenDetailView,
+			handleCloseDetailView,
 		} = this.props;
 
 		return (
@@ -52,6 +62,8 @@ class LibraryRowContainer extends Component {
 				handleAddToQueue={this.handleAddToQueue.bind(this)}
 				handleEditTrackData={this.handleEditTrackData.bind(this)}
 				handleDeleteTrack={this.handleDeleteTrack.bind(this)}
+				handleOpenDetailView={this.handleOpenDetailView.bind(this)}
+        handleCloseDetailView={this.handleCloseDetailView.bind(this)}
 			>
 			</LibraryRow>
 		);

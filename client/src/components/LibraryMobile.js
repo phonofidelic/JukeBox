@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TrackListItemContainer from '../containers/TrackListItemContainer';
+import DetailCard from './DetailCard';
 import LibraryControls from './LibraryControls';
 import {
 	Typography, 
@@ -18,7 +19,7 @@ const FIELD_VALUES = {
 	ALBUM: 'album'
 };
 
-export class Library extends Component {
+export class LibraryMobile extends Component {
 	state = {
 		orderBy: FIELD_VALUES.TITLE,
 	}
@@ -34,6 +35,7 @@ export class Library extends Component {
 			library,
 			artistList,
 			handleOrderBy,
+			handleCloseDetailView,
 			theme,
 		} = this.props;
 
@@ -49,6 +51,13 @@ export class Library extends Component {
 
 		return (
 			<div style={styles.root}>
+				{
+					// library.detailViewData &&
+					<DetailCard 
+						detailViewData={library.detailViewData}
+						handleCloseDetailView={handleCloseDetailView}
+					/>
+				}
 				<LibraryControls 
 					orderBy={this.state.orderBy} 
 					setFilter={this.setFilter.bind(this)} 
@@ -71,4 +80,4 @@ export class Library extends Component {
 	}
 }
 
-export default withTheme()(Library);
+export default withTheme()(LibraryMobile);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { libraryActions, playerActions } from '../actions';
-import Library from '../components/Library';
+import LibraryMobile from '../components/LibraryMobile';
 import LibraryDesktop from '../components/LibraryDesktop';
 
 const actions = { ...libraryActions, ...playerActions };
@@ -9,7 +9,6 @@ const actions = { ...libraryActions, ...playerActions };
 export class TrackListContainer extends Component {
 	constructor(props) {
 		super(props);
-		this.props.getTracks();
     this.props.loadLibrary();
     this.state = {
       order: 'desc',
@@ -91,6 +90,10 @@ export class TrackListContainer extends Component {
     this.props.handleDeleteTrack(this.props.track);
   }
 
+  handleCloseDetailView() {
+    this.props.closeDetailView();
+  }
+
 	componentDidCatch(error, info) {
     console.log('componentDidCatch, error', error)
   }
@@ -108,10 +111,11 @@ export class TrackListContainer extends Component {
     // console.log('userAgentIsMobile:', userAgentIsMobile)
 
 		return userAgentIsMobile ?
-			<Library 
+			<LibraryMobile 
         library={library} 
         handleUploadTracks={this.handleUploadTracks.bind(this)} 
         handleOrderBy={this.handleOrderBy.bind(this)}
+        handleCloseDetailView={this.handleCloseDetailView.bind(this)}
       /> 
 		:
       <LibraryDesktop 
@@ -125,6 +129,7 @@ export class TrackListContainer extends Component {
         handleOptionsClose={this.handleOptionsClose.bind(this)}
         handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
         handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
+        handleCloseDetailView={this.handleCloseDetailView.bind(this)}
       />
 	}
 }

@@ -69,3 +69,36 @@ module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, r
 		reject(err);
 	});
 });
+
+module.exports.loadTracks = (Track, userId) => new Promise((resolve, reject) => {
+	Track.find({ userId: userId })
+	.sort({ title: 1})
+	.then((tracks) => {
+		resolve(tracks);
+	})
+	.catch(err => {
+		reject(err);
+	});
+});
+
+module.exports.loadArtists = (Artist, userId) => new Promise((resolve, reject) => {
+	Artist.find({ userId: userId })
+	.sort({ name: 1})
+	.then((artists) => {
+		resolve(artists);
+	})
+	.catch(err => {
+		reject(err);
+	});
+});
+
+module.exports.loadAlbums = (Album, userId) =>  new Promise((resolve, reject) => {
+	Album.find({ userId: userId })
+	.sort({ title: 1})
+	.then((albums) => {
+		resolve(albums);
+	})
+	.catch(err => {
+		reject(err);
+	});
+})

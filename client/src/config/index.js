@@ -1,5 +1,6 @@
 export const URLS = {
-	TRACKS_URL: '/tracks'
+	TRACK_URL: '/tracks',
+  ARTIST_URL: '/library/artists'
 }
 
 export const THEME = {

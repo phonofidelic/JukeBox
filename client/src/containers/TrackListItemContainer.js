@@ -33,6 +33,10 @@ class TrackListItemContainer extends Component {
 		return this.props.deleteTrackCancel();
 	}
 
+	handleOpenDetailView(data, type) {
+    this.props.showDetailView(data, type);
+  }
+
 	render() {
 		const { selectedTrack, player, track } = this.props;
 		// console.log('timeElapsed from TrackListItemContainer:', this.state.timeElapsed)
@@ -46,6 +50,7 @@ class TrackListItemContainer extends Component {
 				handleAddToQueue={this.handleAddToQueue.bind(this)}
 				handleEditTrackData={this.handleEditTrackData.bind(this)}
 				handleDeleteTrack={this.handleDeleteTrack.bind(this)}
+				handleOpenDetailView={this.handleOpenDetailView.bind(this)}
 			/>
 		)
 	}

@@ -54,6 +54,7 @@ class LibraryRow extends Component {
 			handleEditTrackData,
 			handleStartNewQueue,
 			handleAddToQueue,
+			handleOpenDetailView,
 			theme,
 		} = this.props;
 
@@ -98,7 +99,7 @@ class LibraryRow extends Component {
 		var dateTest = new Date();
 		// console.log('moment.duration:', moment.duration(track.format.duration, 'seconds'));
 		const mDuration = moment.duration(Math.floor(track.format.duration), 'seconds').format('mm:ss', { forceLength: false });
-		console.log('mDuration:', mDuration)
+		// console.log('mDuration:', mDuration)
 
 		return (
 			<TableRow 
@@ -147,7 +148,12 @@ class LibraryRow extends Component {
 						placement="top-start"
 						enterDelay={300}
 					>
-						<Typography noWrap>{track.artist.name}</Typography>
+						<Typography 
+							noWrap
+							onClick={() => handleOpenDetailView(track.artist._id)}
+						>
+							{track.artist.name}
+						</Typography>
 					</Tooltip>
 				</TableCell>
 				<TableCell style={styles.albumCell}>

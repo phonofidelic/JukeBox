@@ -37,6 +37,7 @@ class TrackListItem extends Component {
 			handleAddToQueue,
 			handleDeleteTrack,
 			handleToggleEditMode,
+			handleOpenDetailView,
 			theme
 		} = this.props;
 
@@ -134,6 +135,7 @@ class TrackListItem extends Component {
 										handleAddToQueue={handleAddToQueue}
 										handleDeleteTrack={handleDeleteTrack}
 										handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+										handleOpenDetailView={handleOpenDetailView}
 									/>
 							</Grid>
 							: 

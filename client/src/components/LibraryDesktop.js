@@ -14,6 +14,8 @@ import { Album, Schedule } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import { _ } from 'underscore';
 import LibraryContextMenu from './LibraryContextMenu';
+import DetailCard from './DetailCard';
+
 
 const columnData = [
 	// { id: 'empty', numeric: false, disablePadding: true, label: ''},
@@ -38,7 +40,7 @@ class LibraryDesktop extends Component {
   		? _.sortBy(list, ['format', 'duration'])
   		: _.sortBy(list, ['format', 'duration']).reverse();
   	}
-  	console.log('not duration')
+  	// console.log('not duration')
   	return order === 'desc' 
   	? _.sortBy(_.sortBy(list, 'order.no'), orderBy)
   	: _.sortBy(_.sortBy(list, 'order.no'), orderBy).reverse();
@@ -62,6 +64,7 @@ class LibraryDesktop extends Component {
 			handleOptionsClose,
 			handleMenuOptionClickEdit,
 			handleMenuOptionClickDelete,
+			handleCloseDetailView,
 			theme,
 		} = this.props;
 
@@ -106,56 +109,72 @@ class LibraryDesktop extends Component {
 
 		// console.log(`LibraryDesktop, orderBy: ${orderBy}, ${order}`)
 		return (
-			<Table style={styles.root}>
-				<TableHead style={styles.tableHead}>
-					<TableRow>
-						<TableCell></TableCell>
-						{
-							columnData.map(column => (
-								<TableCell
-									key={column.id}
-									numeric={column.numeric}
-	                padding={column.disablePadding ? 'none' : 'default'}
-	                sortDirection={orderBy === column.id ? order : false}
-	              >
-	             		<Tooltip
-              			title={column.labelText}
-              			placement="bottom-start"
-              			enterDelay={300}
-              		>
-		              	<TableSortLabel
-		              		active={orderBy === column.id}
-		              		direction={order}
-		              		onClick={this.createSortHandler(column.id)}
-		              	>
-		              		{column.label}
-		              	</TableSortLabel>
-	              	</Tooltip>
-	              </TableCell>
-							))
-						}
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{library.tracks.length > 0 ? 
-						this.sortByField(library.tracks, order, orderBy)
-						.map(track => (
-						<LibraryRowContainer
-							key={track._id}
-							track={track}
-							selectedTrack={library.selectedTrack}
-						/>
-					))
-					:
-					(
+			<div>
+				{
+					library.detailViewData ? 
+					<DetailCard 
+						detailViewData={library.detailViewData}
+						handleCloseDetailView={handleCloseDetailView} /> 
+					: 
+					null
+				}
+			{
+				// <DetailCard 
+				// 	detailViewData={library.detailViewData}
+				// 	handleCloseDetailView={handleCloseDetailView}
+				// />
+			}
+				<Table style={styles.root}>
+					<TableHead style={styles.tableHead}>
 						<TableRow>
-							<TableCell>
-								No tracks in Library
-							</TableCell>
+							<TableCell></TableCell>
+							{
+								columnData.map(column => (
+									<TableCell
+										key={column.id}
+										numeric={column.numeric}
+		                padding={column.disablePadding ? 'none' : 'default'}
+		                sortDirection={orderBy === column.id ? order : false}
+		              >
+		             		<Tooltip
+	              			title={column.labelText}
+	              			placement="bottom-start"
+	              			enterDelay={300}
+	              		>
+			              	<TableSortLabel
+			              		active={orderBy === column.id}
+			              		direction={order}
+			              		onClick={this.createSortHandler(column.id)}
+			              	>
+			              		{column.label}
+			              	</TableSortLabel>
+		              	</Tooltip>
+		              </TableCell>
+								))
+							}
 						</TableRow>
-					)}
-				</TableBody>
-			</Table>
+					</TableHead>
+					<TableBody>
+						{library.tracks.length > 0 ? 
+							this.sortByField(library.tracks, order, orderBy)
+							.map(track => (
+							<LibraryRowContainer
+								key={track._id}
+								track={track}
+								selectedTrack={library.selectedTrack}
+							/>
+						))
+						:
+						(
+							<TableRow>
+								<TableCell>
+									No tracks in Library
+								</TableCell>
+							</TableRow>
+						)}
+					</TableBody>
+				</Table>
+			</div>
 		);
 	}
 }

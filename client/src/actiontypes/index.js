@@ -4,6 +4,8 @@ export const // uploaderActionTypes
 						 UPLOAD_FAILURE = 'upload_failure',
 						 // trackListActiontypes
 						 LOAD_LIBRARY = 'load_library',
+						 LOAD_LIBRARY_SUCCESS = 'load_library_success',
+						 LOAD_LIBRARY_FAILURE = 'load_library_failure',
 						 FETCH_TRACKS = 'fetch_tracks',
 						 FETCH_TRACKS_SUCCESS = 'fetch_tracks_success',
 						 FETCH_TRACKS_FAILURE = 'fetch_tracks_failure',
@@ -18,6 +20,10 @@ export const // uploaderActionTypes
 						 DELETE_TRACK_SUCCESS = 'delete_track_success',
 						 DELETE_TRACK_FAILURE = 'delete_track_failure',
 						 ORDER_TRACKS_BY_FIELD_VALUE = 'order_tracks_by_field_value',
+						 FETCH_DETAIL_VIEW = 'fetsch_detail_view',
+						 FETCH_DETAIL_VIEW_FAILURE = 'fetch_detail_view_failure',
+						 SHOW_DETAIL_VIEW = 'show_detail_view',
+						 CLOSE_DETAIL_VIEW = 'close_detail_view',
 						 // playerActiontypes
 						 PLAY_TRACK = 'play_track',
 						 PAUSE_TRACK = 'pause_track',

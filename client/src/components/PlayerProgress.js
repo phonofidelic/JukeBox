@@ -52,7 +52,9 @@ class PlayerProgress extends Component {
 			progress: {
 				background: theme.palette.secondary.main,
 				height: '100%',
-				width: `${this.state.timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`,
+				width: player.currentTrack 
+					? `${this.state.timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`
+					: 0,
 			},
 			segment: {
 				background: 'green'
