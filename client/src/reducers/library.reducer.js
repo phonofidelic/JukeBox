@@ -24,10 +24,7 @@ import {
 } from '../actiontypes';
 
 const INITIAL_STATE = {
-	loadingLibrary: false,
-	fetchingTracks: false,
-	loadingDetailView: false,
-	postingTrackData: false,
+	loading: false,
 	tracks: [],
 	selectedTrack: null,
 	detailViewData: null,
@@ -40,13 +37,13 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case LOAD_LIBRARY:
 			return {
 				...state,
-				loadingLibrary: true
+				loading: true
 			}
 
 		case LOAD_LIBRARY_SUCCESS:
 			return {
 				...state,
-				loadingLibrary: false,
+				loading: false,
 				tracks: action.tracks,
 				artists: action.artists,
 				albums: action.artists
@@ -55,20 +52,20 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case LOAD_LIBRARY_FAILURE:
 			return {
 				...state,
-				loadingLibrary: false,
+				loading: false,
 				error: action.error
 			}
 
 		case FETCH_TRACKS:
 			return {
 				...state,
-				fetchingTracks: true
+				loading: true
 			}
 
 		case FETCH_TRACKS_SUCCESS:
 			return {
 				...state,
-				fetchingTracks: false,
+				loading: false,
 				tracks: action.tracks,
 				message: action.message
 			}
@@ -76,7 +73,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case FETCH_TRACKS_FAILURE:
 			return {
 				...state,
-				fetchingTracks: false,
+				loading: false,
 				message: action.message,
 				error: action.error
 			}
@@ -96,7 +93,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case POST_TRACK_DATA:
 			return {
 				...state,
-				postingTrackData: true
+				loading: true
 			}
 
 		case POST_TRACK_DATA_SUCCESS:
@@ -105,7 +102,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 
 			return {
 				...state,
-				postingTrackData: false,
+				loading: false,
 				tracks: [
 					...state.tracks.slice(0, updateIndex), 
 					action.updatedTrack, 
@@ -117,7 +114,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case POST_TRACK_DATA_FAILURE:
 			return {
 				...state,
-				postingTrackData: false,
+				loading: false,
 				error: 'Could not save changes',
 				message: action.message
 			}
@@ -131,7 +128,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case DELETE_TRACK_CONFIRM:
 			return {
 				...state,
-				postingTrackData: true
+				loading: true
 			}
 
 		case DELETE_TRACK_CANCEL:
@@ -144,7 +141,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 
 			return {
 				...state,
-				postingTrackData: false,
+				loading: false,
 				message: action.message,
 				tracks: [
 					...state.tracks.slice(0, deleteIndex), 
@@ -155,7 +152,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case DELETE_TRACK_FAILURE:
 			return {
 				...state,
-				postingTrackData: false,
+				loading: false,
 				message: action.message,
 				error: 'Could not delete track'
 			}
@@ -197,20 +194,20 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 		case FETCH_DETAIL_VIEW:
 			return {
 				...state,
-				loadingDetailView: true,
+				loading: true,
 			}
 
 		case FETCH_DETAIL_VIEW_FAILURE:
 			return {
 				...state,
-				loadingDetailView: false,
+				loading: false,
 				error: action.error,
 			}
 
 		case SHOW_DETAIL_VIEW:
 			return {
 				...state,
-				loadingDetailView: false,
+				loading: false,
 				detailViewData: action.detailViewData,
 			}
 

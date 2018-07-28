@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/uploader.actions';
 import Uploader from '../components/Uploader';
+import Loader from '../components/Loader';
 
 export class UploaderContainer extends Component {
   constructor(props) {
@@ -52,22 +53,30 @@ export class UploaderContainer extends Component {
   }
 
 	render() {
+    const { library } = this.props;
+
 		return (
-			<Uploader 
-        handleUploadTracks={this.handleUploadTracks.bind(this)}
-        handleOnDrop={this.handleOnDrop.bind(this)} 
-        handleRemoveTrack={this.handleRemoveTrack.bind(this)}
-        cleaeDroppedFiles={this.cleaeDroppedFiles.bind(this)}
-        droppedFiles={this.state.droppedFiles}
-      />
+      <div>
+      {
+        library.loading ?
+          <Loader />
+          :
+    			<Uploader 
+            handleUploadTracks={this.handleUploadTracks.bind(this)}
+            handleOnDrop={this.handleOnDrop.bind(this)} 
+            handleRemoveTrack={this.handleRemoveTrack.bind(this)}
+            cleaeDroppedFiles={this.cleaeDroppedFiles.bind(this)}
+            droppedFiles={this.state.droppedFiles}
+          />
+      }
+      </div>
 		);
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		// TODO: uploader reducer needs to be created (not yet used)
-		uploader: state.uploader,
+		library: state.library,
 	}
 }
 

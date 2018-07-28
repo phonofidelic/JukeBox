@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { libraryActions, playerActions } from '../actions';
 import LibraryMobile from '../components/LibraryMobile';
 import LibraryDesktop from '../components/LibraryDesktop';
+import Loader from '../components/Loader';
 
 const actions = { ...libraryActions, ...playerActions };
 
@@ -110,27 +111,36 @@ export class TrackListContainer extends Component {
 
     // console.log('userAgentIsMobile:', userAgentIsMobile)
 
-		return userAgentIsMobile ?
-			<LibraryMobile 
-        library={library} 
-        handleUploadTracks={this.handleUploadTracks.bind(this)} 
-        handleOrderBy={this.handleOrderBy.bind(this)}
-        handleCloseDetailView={this.handleCloseDetailView.bind(this)}
-      /> 
-		:
-      <LibraryDesktop 
-        library={library} 
-        order={order}
-        orderBy={orderBy}
-        anchorEl={anchorEl}
-        handleRequestSort={this.handleRequestSort.bind(this)}
-        handleSelectTrack={this.handleSelectTrack.bind(this)}
-        handleOptionsClick={this.handleOptionsClick.bind(this)}
-        handleOptionsClose={this.handleOptionsClose.bind(this)}
-        handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
-        handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
-        handleCloseDetailView={this.handleCloseDetailView.bind(this)}
-      />
+		return (
+      <div>
+      { 
+        library.loading ? 
+          <Loader /> 
+          : 
+          userAgentIsMobile ?
+      			<LibraryMobile 
+              library={library} 
+              handleUploadTracks={this.handleUploadTracks.bind(this)} 
+              handleOrderBy={this.handleOrderBy.bind(this)}
+              handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+            /> 
+        		:
+            <LibraryDesktop 
+              library={library} 
+              order={order}
+              orderBy={orderBy}
+              anchorEl={anchorEl}
+              handleRequestSort={this.handleRequestSort.bind(this)}
+              handleSelectTrack={this.handleSelectTrack.bind(this)}
+              handleOptionsClick={this.handleOptionsClick.bind(this)}
+              handleOptionsClose={this.handleOptionsClose.bind(this)}
+              handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
+              handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
+              handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+            />
+      }
+      </div>
+    );
 	}
 }
 

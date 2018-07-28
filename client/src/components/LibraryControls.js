@@ -31,7 +31,7 @@ class LibraryControls extends Component {
 			root: {
 				position: 'fixed',
 				top: 0,
-				zIndex: 1000,
+				zIndex: 1,
 				background: theme.palette.primary.light,
 				// borderBottom: `1px solid ${theme.palette.primary.dark}`
 			}

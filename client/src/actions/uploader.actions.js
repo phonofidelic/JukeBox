@@ -7,7 +7,7 @@ import {
 import axios from 'axios';
 import { URLS } from '../config';
 
-const TRACKS_URL = URLS.TRACKS_URL;
+const TRACKS_URL = URLS.TRACK_URL;
 
 export const uploadTracks = (formData) => {
 	console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
@@ -19,7 +19,7 @@ export const uploadTracks = (formData) => {
 			headers: { 
 				token: localStorage.getItem('JWT'),
 				userId: localStorage.getItem('userId')
-			} 
+			}
 		})
 		.then(response => {
 			console.log('uploadTrack response:', response);

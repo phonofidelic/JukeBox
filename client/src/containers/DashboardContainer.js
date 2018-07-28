@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authActions } from '../actions';
+import Loader from '../components/Loader';
 
 class DashboardContainer extends Component {
 	constructor(props) {
@@ -12,7 +13,14 @@ class DashboardContainer extends Component {
 		const { auth } = this.props;
 		return (
 			<div>
-				email: { auth.user && auth.user.email }
+				{ 
+					auth.loading ?
+					<Loader />
+					:
+					<div>
+						email: { auth.user && auth.user.email }
+					</div>	
+				}
 			</div>
 		)
 	}

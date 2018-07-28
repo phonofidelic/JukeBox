@@ -15,7 +15,7 @@ import {
 
 const INITIAL_STATE = {
 	isAuthed: false,
-	waiting: false,
+	loading: false,
 	user: null,
 	token: null, // No need to store token here if storing in localStorage?
 	message: null,
@@ -27,13 +27,13 @@ const auth = (state = INITIAL_STATE, action) => {
 		case POST_REGISTRATION:
 			return {
 				...state,
-				waiting: true,
+				loading: true,
 			}
 
 		case REGISTRATION_SUCCESS:
 			return {
 				...state,
-				waiting: false,
+				loading: false,
 				isAuthed: true,
 				user: action.user,
 				token: action.token,
@@ -43,20 +43,20 @@ const auth = (state = INITIAL_STATE, action) => {
 		case REGISTRATION_FAILURE:
 			return {
 				...state,
-				waiting: false,
+				loading: false,
 				message: action.failure,
 			}
 
 		case POST_LOGIN:
 			return {
 				...state,
-				waiting: true,
+				loading: true,
 			}
 
 		case LOGIN_SUCCESS:
 			return {
 				...state,
-				waiting: false,
+				loading: false,
 				isAuthed: true,
 				user: action.user,
 				token: action.token,
@@ -78,13 +78,13 @@ const auth = (state = INITIAL_STATE, action) => {
 		case GET_USER_INFO:
 			return {
 				...state,
-				waiting: true,
+				loading: true,
 			}
 
 		case GET_USER_INFO_SUCCESS:
 			return {
 				...state,
-				waiting: false,
+				loading: false,
 				user: action.user,
 				message: action.message,
 			}
@@ -92,7 +92,7 @@ const auth = (state = INITIAL_STATE, action) => {
 		case GET_USER_INFO_FAILURE:
 			return {
 				...state,
-				waiting: false,
+				loading: false,
 				message: 'Could not retreive user info',
 			}
 
