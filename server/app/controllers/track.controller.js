@@ -9,54 +9,8 @@ const fs = require('fs');
 const utils = require('./utils');
 const storage = require('../../config/storage_config');
 
-// Get all tracks
-const getTracks = (req, res, next) => {
-	Track.find({'userId': req.get('userId')})
-	// .select('name file')
-	.sort({ artist: 1, album: 1, 'order.no': 1})
-	.exec((err, tracks) => {
-		if (err) return next(err);
-		// console.log('GET /tracks response:\n', tracks);
-		res.json({message: 'Received tracks', tracks: tracks });
-	});
-}
-
-// Get a specified track
-const getTrack = (req, res, next) => {
-	const trackId = req.params.trackId;
-	Track.findById(trackId)
-	// .select('name file')	
-	.exec((err, track) => {
-		if (err) return next(err);
-		console.log('GET /track/:trackId response:\n', track);
-		res.json({ mesasge: 'Received track', data: track });
-	});
-}
-
-// Add a track
-const postTrack = (req, res, next) => {
-	// TODO: validate data before creating new track
-	const track = new Track({
-		name: req.body.trackName,
-		file: {
-			originalname: req.file.originalname,
-			path: req.file.path,
-			size: req.file.size,
-			mimetype: req.file.mimetype
-		}
-	});
-	track.save((err, savedTrack) => {
-		if (err) {
-			console.error('postTrack error:', err);
-			return next(err);
-		};
-		console.log('POST /tracks response:\n', savedTrack);
-		res.json({message: 'Track saved', data: savedTrack });
-	});
-}
-
 // Add multiple tracks
-const postTracks = (req, res, next) => {
+module.exports.postTracks = (req, res, next) => {
 	console.log('postTracks, req.files:', req.files)
 
 	const userId = req.get('userId');
@@ -150,10 +104,10 @@ const postTracks = (req, res, next) => {
 		})
 	});
 	res.json({message: 'Tracks saved', tracks: savedTracks })
-}
+};
 
 // Edit a track
-const editTrack = (req, res, next) => {
+module.exports.editTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	// TODO: check and only change updated feilds
 	// Make sure req.body matches Track model
@@ -163,11 +117,11 @@ const editTrack = (req, res, next) => {
 		console.log('PUT /tracks/:trackId response:\n', updatedTrack);
 		res.json({ message: 'Track updated', data: updatedTrack });
 	});
-}
+};
 
 // Delete a track
 // DELETE /tracks/:trackId
-const removeTrack = (req, res, next) => {
+module.exports.removeTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	Track.findByIdAndRemove(trackId, (err, removedTrack) => {
 		if (err) return next(err);
@@ -191,13 +145,4 @@ const removeTrack = (req, res, next) => {
 	});
 	// TODO: Delete track in file system, otherwise there will be lots of
 	// 			 files with no reference in the DB
-}
-
-module.exports = {
-	getTracks,
-	getTrack,
-	postTrack,
-	postTracks,
-	editTrack,
-	removeTrack
-}
+};

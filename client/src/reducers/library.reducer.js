@@ -20,7 +20,8 @@ import {
 	FETCH_DETAIL_VIEW_FAILURE,
 	SHOW_DETAIL_VIEW,
 	CLOSE_DETAIL_VIEW,
-	CLEAR_MESSAGE
+	CLEAR_MESSAGE,
+	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
 
 const INITIAL_STATE = {
@@ -215,6 +216,12 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				detailViewData: null,
+			}
+
+		case DISMISS_LIBRARY_ERR:
+			return {
+				...state,
+				error: false,
 			}
 
 		default:

@@ -22,13 +22,14 @@ import {
 	FETCH_DETAIL_VIEW_FAILURE,
 	FETCH_DETAIL_VIEW,
 	CLOSE_DETAIL_VIEW,
-	CLEAR_MESSAGE
+	CLEAR_MESSAGE,
+	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
 import axios from 'axios';
 import { Howl } from 'howler';
 import { URLS } from '../config';
 
-const { TRACK_URL, ARTIST_URL} = URLS;
+const { TRACK_URL, ARTIST_URL, ALBUM_URL} = URLS;
 
 export const loadLibrary = () => {
 	// console.log('loadLibrary called')
@@ -209,7 +210,7 @@ export const showDetailView = (id, type) => {
 			type: FETCH_DETAIL_VIEW
 		});
 
-		axios.get(`${ARTIST_URL}/${id}`, {
+		axios.get(`${type === 'artist' ? ARTIST_URL : ALBUM_URL}/${id}`, {
 			headers: { 
 				token: localStorage.getItem('JWT'),
 				userId: localStorage.getItem('userId')
@@ -219,14 +220,14 @@ export const showDetailView = (id, type) => {
 			console.log('showDetailView, response:', response);
 			dispatch({
 				type: SHOW_DETAIL_VIEW,
-				detailViewData: response.data.artist,
+				detailViewData: response.data.artist || response.data.album,
 			});
 		})
 		.catch(err => {
 			console.error('showDetailView error:', err);
 			dispatch({
 				type: FETCH_DETAIL_VIEW_FAILURE,
-				error: err,
+				error: err.response,
 			})
 		});
 	}
@@ -238,5 +239,13 @@ export const closeDetailView = () => {
 		dispatch({
 			type: CLOSE_DETAIL_VIEW
 		});
+	}
+}
+
+export const dismissLibraryError = () => {
+	return dispatch => {
+		dispatch({
+			type: DISMISS_LIBRARY_ERR
+		})
 	}
 }

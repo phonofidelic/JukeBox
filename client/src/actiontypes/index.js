@@ -24,6 +24,7 @@ export const // uploaderActionTypes
 						 FETCH_DETAIL_VIEW_FAILURE = 'fetch_detail_view_failure',
 						 SHOW_DETAIL_VIEW = 'show_detail_view',
 						 CLOSE_DETAIL_VIEW = 'close_detail_view',
+						 DISMISS_LIBRARY_ERR = 'dismiss_library_err',
 						 // playerActiontypes
 						 PLAY_TRACK = 'play_track',
 						 PAUSE_TRACK = 'pause_track',

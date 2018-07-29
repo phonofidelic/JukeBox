@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const logger = require('morgan');
 const authRoutes = require('./app/routes/auth.routes');
-const trackRoutes = require('./app/routes/track_routes');
+const trackRoutes = require('./app/routes/track.routes');
 const libraryRoutes = require('./app/routes/library.routes');
 
 // const PORT = process.env.PORT;
@@ -42,8 +42,9 @@ app.use('/library', libraryRoutes);
 // Serve static client files
 app.use(express.static(process.env.CLIENT_DIR));
 
-// app.use('/*', (req, res) => {
-// 	res.status(404).json({message: 'Recource not found'});
-// })
+// Catch all unhandled routes
+app.use('/*', (req, res) => {
+	res.status(404).json({message: 'Recource not found'});
+})
 
 app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));

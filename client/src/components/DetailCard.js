@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import {
 	Button,
-	Card,
-	CardMedia,
-	CardContent,
-	CardActions,
 	Dialog,
 	DialogTitle,
 	DialogContent,
 	DialogContentText,
 	DialogActions,
-	Modal,
 	Typography,	
 } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 
 const PLACEHOLDER_IMAGE = `http://placekitten.com/${navigator.userAgent.indexOf('Mobile') > 0 ? window.innerWidth : '600'}/400`;
 
@@ -59,17 +53,9 @@ class DetailCard extends Component {
 
 		const styles = {
 			root: {
-				// position: 'fixed',
 				top: 0,
-				// background: '#333',
-				// width: '80vw',
-				// height: '80vh',
-				// margin: '20px auto',
 				zIndex: 1,
 			},
-			// card: {
-
-			// },
 			cardMedia: {
 				width: 600,
 				height: 400,
@@ -88,26 +74,6 @@ class DetailCard extends Component {
 			}
 		}
 
-		// return (
-		// 	<div style={styles.root}>
-		// 		<Card raised={true} style={styles.card} scroll="paper">
-		// 			<CardMedia image={PLACEHOLDER_IMAGE} style={styles.cardMedia}/>
-		// 			<CardContent>
-		// 				<Typography 
-		// 					variant="headline" 
-		// 					component="h2"
-		// 					gutterBottom
-		// 				>
-		// 					{ detailViewData && detailViewData.name}
-		// 				</Typography>
-		// 				<Typography>
-		// 					{ DUMMY_TEXT }
-		// 				</Typography>
-		// 			</CardContent>
-		// 		</Card>
-		// 	</div>
-		// );
-
 		return (
 			<div>
 				<Dialog
@@ -122,7 +88,7 @@ class DetailCard extends Component {
 								<img src={PLACEHOLDER_IMAGE}></img>
 							</div>
 							<DialogTitle>
-								{ detailViewData.name }
+								{ detailViewData.name || detailViewData.title }
 							</DialogTitle>
 							<DialogContentText style={styles.dialogText}>
 								{ DUMMY_TEXT }
@@ -140,34 +106,6 @@ class DetailCard extends Component {
 				</Dialog>
 			</div>
 		);
-
-		// return (
-		// 	<Modal
-		// 		open={Boolean(detailViewData)}
-		// 	>
-		// 		<Card raised={true}>
-		// 			{	detailViewData &&
-		// 				<CardContent>
-		// 					<Typography 
-		// 						variant="headline" 
-		// 						component="h2"
-		// 						gutterBottom
-		// 					>
-		// 						{ detailViewData.name}
-		// 					</Typography>
-		// 					<Typography>
-		// 						{ detailViewData.description }
-		// 					</Typography>
-		// 				</CardContent>
-		// 			}
-		// 			<CardActions>
-		// 				<Button onClick={handleCloseDetailView}>
-		// 					Close
-		// 				</Button>
-		// 			</CardActions>
-		// 		</Card>
-		// 	</Modal>
-		// );
 	}
 }
 

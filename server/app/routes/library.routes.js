@@ -13,7 +13,8 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 // router.delete('/tracks/:trackId', requireAuth, trackController.removeTrack);
 
 router.get('/', requireAuth, libraryController.loadLibrary);
-router.get('/artists', requireAuth, libraryController.getArtists);
+// router.get('/artists', requireAuth, libraryController.getArtists);
 router.get('/artists/:artistId', requireAuth, libraryController.getArtist);
+router.get('/albums/:albumId', requireAuth, libraryController.getAlbum);
 
 module.exports = router;

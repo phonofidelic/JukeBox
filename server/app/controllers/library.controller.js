@@ -49,3 +49,16 @@ module.exports.getArtist = (req, res, next) => {
 		next(err);
 	});
 };
+
+module.exports.getAlbum = (req, res, next) => {
+	const userId = req.get('userId');
+
+	Album.findById(req.params.albumId)
+	.then(album => {
+		console.log('### getArtist, album:', album);
+		res.json({ message: 'Album details loaded', album: album });
+	})
+	.catch(err => {
+		next(err);
+	});
+}

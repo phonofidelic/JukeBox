@@ -150,7 +150,7 @@ class LibraryRow extends Component {
 					>
 						<Typography 
 							noWrap
-							onClick={() => handleOpenDetailView(track.artist._id)}
+							onClick={() => handleOpenDetailView(track.artist._id, 'artist')}
 						>
 							{track.artist.name}
 						</Typography>
@@ -162,7 +162,12 @@ class LibraryRow extends Component {
 						placement="top-start"
 						enterDelay={300}
 					>
-						<Typography noWrap>{track.album.title}</Typography>
+						<Typography 
+							noWrap
+							onClick={() => handleOpenDetailView(track.album._id, 'album')}
+						>
+							{track.album.title}
+						</Typography>
 					</Tooltip>
 				</TableCell>
 				<LibraryContextMenu 
