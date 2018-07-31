@@ -23,6 +23,7 @@ import {
 	CLEAR_MESSAGE,
 	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
+import { _ } from 'underscore';
 
 const INITIAL_STATE = {
 	loading: false,
@@ -160,31 +161,30 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 
 		case ORDER_TRACKS_BY_FIELD_VALUE:
 			let tracksToSort = [...state.tracks];
+			const BY_ARTIST = _.sortBy(_.sortBy(_.sortBy(tracksToSort, ['order', 'no']), ['album', 'title']), ['artist', 'name']);
+			const BY_ALBUM = _.sortBy(_.sortBy(tracksToSort, ['order', 'no']), ['album', 'title']);
+			const BY_TITLE = _.sortBy(tracksToSort, ['title']);
 			
 			if (action.fieldName === 'artist') {
-				tracksToSort.sort((a, b) => {
-					const trackA = a[action.fieldName].name.toUpperCase();
-					const trackB = b[action.fieldName].name.toUpperCase();
-					if (trackA < trackB) return -1;
-					if (trackA > trackB) return 1;
-					return 0;
-				})
+				// Tracks are ordered by artist name, then by album title, then by order number
+				return {
+					...state,
+					tracks: action.order === 'desc' ? BY_ARTIST : BY_ARTIST.reverse(),
+				};
+
 			} else if (action.fieldName === 'album') {
-				tracksToSort.sort((a, b) => {
-					const trackA = a[action.fieldName].title.toUpperCase();
-					const trackB = b[action.fieldName].title.toUpperCase();
-					if (trackA < trackB) return -1;
-					if (trackA > trackB) return 1;
-					return 0;
-				})
+				// Tracks are ordered by album title, then by order number
+				return {
+					...state,
+					tracks: action.order === 'desc' ? BY_ALBUM : BY_ALBUM.reverse(),
+				};
+
 			} else {
-				tracksToSort.sort((a, b) => {
-					const trackA = a[action.fieldName].toUpperCase();
-					const trackB = b[action.fieldName].toUpperCase();
-					if (trackA < trackB) return -1;
-					if (trackA > trackB) return 1;
-					return 0;
-				})
+				// Default order by title
+				return {
+					...state,
+					tracks: action.order === 'desc' ? BY_TITLE : BY_TITLE.reverse(),
+				};
 			}
 
 			return {

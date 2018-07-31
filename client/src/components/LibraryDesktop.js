@@ -40,10 +40,23 @@ class LibraryDesktop extends Component {
   		? _.sortBy(list, ['format', 'duration'])
   		: _.sortBy(list, ['format', 'duration']).reverse();
   	}
-  	// console.log('not duration')
+
+  	if (orderBy === 'artist') {
+  		return order === 'desc' 
+  		? _.sortBy(_.sortBy(list, ['order', 'no']), ['artist', 'name'])
+  		: _.sortBy(_.sortBy(list, ['order', 'no']), ['artist', 'name']).reverse();
+  	}
+
+  	if (orderBy === 'album') {
+  		return order === 'desc' 
+  		? _.sortBy(_.sortBy(list, ['order', 'no']), ['album', 'title'])
+  		: _.sortBy(_.sortBy(list, ['order', 'no']), ['album', 'title']).reverse();
+  	}
+
+  	// Default order by title
   	return order === 'desc' 
-  	? _.sortBy(_.sortBy(list, 'order.no'), orderBy)
-  	: _.sortBy(_.sortBy(list, 'order.no'), orderBy).reverse();
+  	? _.sortBy(list, ['title'])
+  	: _.sortBy(list, ['title']).reverse();
   }
 
   handleRowClick(e, track) {

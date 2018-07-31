@@ -58,7 +58,7 @@ export const loadLibrary = () => {
 			console.error(err);
 			dispatch({
 				type: LOAD_LIBRARY_FAILURE,
-				error: err
+				error: err.response
 			});
 		});
 	}
@@ -94,19 +94,20 @@ export const getTracks = () => {
 			dispatch({
 				type: FETCH_TRACKS_FAILURE,
 				message: {text: 'Could not fetch tracks', context: 'danger'},
-				error: {message: 'Could not fetch tracks'} // TODO: get message from server response
+				error: err.response
 			});
 		});
 	}
 }
 
-export const orderTracksByFieldValue = (fieldName) => {
+export const orderTracksByFieldValue = (fieldName, order) => {
 	console.log('orderTracksByFieldValue, fieldName:', fieldName)
 	return dispatch => {
 		dispatch({
 			type: ORDER_TRACKS_BY_FIELD_VALUE,
-			fieldName: fieldName
-		})
+			fieldName: fieldName,
+			order: order
+		});
 	}
 }
 
@@ -148,7 +149,8 @@ export const editTrack = (formData, trackData) => {
 			console.error('postTrackData error:', err);
 			dispatch({
 				type: POST_TRACK_DATA_FAILURE,
-				message: {text: 'Could not save changes', context: 'danger'}
+				message: {text: 'Could not save changes', context: 'danger'},
+				error: err.response
 			});
 		});
 	}
@@ -190,7 +192,7 @@ export const deleteTrackConfirm = trackData => {
 			dispatch({
 				type: DELETE_TRACK_FAILURE,
 				message: {text: 'Could not delete track', context: 'danger'},
-				error: err
+				error: err.response
 			});
 		});
 	}

@@ -15,10 +15,9 @@ export class TrackListContainer extends Component {
     this.state = {
       order: 'desc',
       orderBy: 'title',
-      page: 0,
-      rowsPerPage: 5,
+      page: 0,  // TODO
+      rowsPerPage: 5, // TODO
       anchorEl: null,
-      alertOpen: false,
     }
 	}
 
@@ -53,8 +52,9 @@ export class TrackListContainer extends Component {
     this.props.uploadTracks(formData);
   }
 
-  handleOrderBy(fieldName) {
-    this.props.orderTracksByFieldValue(fieldName);
+  handleOrderBy(fieldName, order) {
+    if (!order) order = 'desc';
+    this.props.orderTracksByFieldValue(fieldName, order);
   }
 
   // https://github.com/mui-org/material-ui/blob/66e42d782e846367d832b97a80583448cb58b721/docs/src/pages/demos/tables/EnhancedTable.js#L212
@@ -129,6 +129,8 @@ export class TrackListContainer extends Component {
             userAgentIsMobile ?
         			<LibraryMobile 
                 library={library} 
+                order={order}
+                orderBy={orderBy}
                 handleUploadTracks={this.handleUploadTracks.bind(this)} 
                 handleOrderBy={this.handleOrderBy.bind(this)}
                 handleCloseDetailView={this.handleCloseDetailView.bind(this)}
