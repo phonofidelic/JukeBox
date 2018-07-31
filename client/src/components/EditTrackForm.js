@@ -71,14 +71,14 @@ class EditTrackForm extends Component {
 							name="artist"
 							component={renderField}
 							label="Artist"
-							placeholder={track.artist}
+							placeholder={track.artist.name}
 						/>
 						<Field 
 							type="text"
 							name="album"
 							component={renderField}
 							label="Album"
-							placeholder={track.album}
+							placeholder={track.album.title}
 						/>
 					</Grid>
 					<Grid item xs={6}>

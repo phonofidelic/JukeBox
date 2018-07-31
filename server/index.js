@@ -47,4 +47,9 @@ app.use('/*', (req, res) => {
 	res.status(404).json({message: 'Recource not found'});
 });
 
+app.use((err, req, res, next) => {
+	console.error('### FROM ERROR HANDLER:', err.stack);
+	res.status(500).send('Something broke!');
+})
+
 app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));

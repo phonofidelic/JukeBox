@@ -18,6 +18,7 @@ export class TrackListContainer extends Component {
       page: 0,  // TODO
       rowsPerPage: 5, // TODO
       anchorEl: null,
+      userAgentIsMobile: navigator.userAgent.indexOf('Mobile') > 0,
     }
 	}
 
@@ -106,13 +107,14 @@ export class TrackListContainer extends Component {
 
 	render() {
 		const { library } = this.props;
-    const { 
+    const {
       order, 
       orderBy, 
-      anchorEl 
+      anchorEl,
+      userAgentIsMobile,
     } = this.state;
 
-    const userAgentIsMobile = navigator.userAgent.indexOf('Mobile') > 0;
+    // const userAgentIsMobile = navigator.userAgent.indexOf('Mobile') > 0;
 
     // console.log('userAgentIsMobile:', userAgentIsMobile)
 

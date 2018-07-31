@@ -46,7 +46,8 @@ module.exports.getArtist = (req, res, next) => {
 		res.json({ message: 'Artist details loaded', artist: artist });
 	})
 	.catch(err => {
-		next(err);
+		console.error('### getArtist error:', err)
+		next({error: new Error(err)});
 	});
 };
 

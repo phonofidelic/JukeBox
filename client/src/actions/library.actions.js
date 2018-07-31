@@ -2,12 +2,7 @@ import {
 	LOAD_LIBRARY,
 	LOAD_LIBRARY_SUCCESS,
 	LOAD_LIBRARY_FAILURE,
-	FETCH_TRACKS,
-	FETCH_TRACKS_SUCCESS,
-	FETCH_TRACKS_FAILURE,
 	SELECT_TRACK,
-	START_NEW_QUEUE,
-	ADD_TRACK_TO_QUEUE,
 	POST_TRACK_DATA,
 	POST_TRACK_DATA_SUCCESS,
 	POST_TRACK_DATA_FAILURE,
@@ -22,11 +17,9 @@ import {
 	FETCH_DETAIL_VIEW_FAILURE,
 	FETCH_DETAIL_VIEW,
 	CLOSE_DETAIL_VIEW,
-	CLEAR_MESSAGE,
 	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
 import axios from 'axios';
-import { Howl } from 'howler';
 import { URLS } from '../config';
 
 const { TRACK_URL, ARTIST_URL, ALBUM_URL} = URLS;
@@ -58,43 +51,11 @@ export const loadLibrary = () => {
 			console.error(err);
 			dispatch({
 				type: LOAD_LIBRARY_FAILURE,
-				error: err.response
-			});
-		});
-	}
-}
-
-export const getTracks = () => {
-	return dispatch => {
-		dispatch({
-			type: FETCH_TRACKS
-		});
-
-		axios.get(`${TRACK_URL}`, { 
-			headers: { 
-				token: localStorage.getItem('JWT'),
-				userId: localStorage.getItem('userId')
-			} 
-		})
-		.then(response => {
-			console.log('getTracks response:', response);
-			const message = { text: 'Tracks loaded!', context: 'info'};
-			dispatch({
-				type: FETCH_TRACKS_SUCCESS,
-				tracks: response.data.tracks,
-				message: message
-			});
-			// dispatch({
-			// 	type: SET_MESSAGE,
-			// 	message: message
-			// });
-		})
-		.catch(err => {
-			console.error(err);
-			dispatch({
-				type: FETCH_TRACKS_FAILURE,
-				message: {text: 'Could not fetch tracks', context: 'danger'},
-				error: err.response
+				error: { 
+					data: err.response.data,
+					status: err.response.status ,
+					message: err.response.data.message || err.response.data, 
+				}
 			});
 		});
 	}
@@ -150,7 +111,11 @@ export const editTrack = (formData, trackData) => {
 			dispatch({
 				type: POST_TRACK_DATA_FAILURE,
 				message: {text: 'Could not save changes', context: 'danger'},
-				error: err.response
+				error: { 
+					data: err.response.data,
+					status: err.response.status ,
+					message: err.response.data.message || err.response.data, 
+				}
 			});
 		});
 	}
@@ -192,7 +157,11 @@ export const deleteTrackConfirm = trackData => {
 			dispatch({
 				type: DELETE_TRACK_FAILURE,
 				message: {text: 'Could not delete track', context: 'danger'},
-				error: err.response
+				error: { 
+					data: err.response.data,
+					status: err.response.status ,
+					message: err.response.data.message || err.response.data, 
+				},
 			});
 		});
 	}
@@ -229,7 +198,11 @@ export const showDetailView = (id, type) => {
 			console.error('showDetailView error:', err);
 			dispatch({
 				type: FETCH_DETAIL_VIEW_FAILURE,
-				error: err.response,
+				error: { 
+					data: err.response.data,
+					status: err.response.status,
+					message: err.response.data.message || err.response.data, 
+				}
 			})
 		});
 	}

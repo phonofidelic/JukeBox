@@ -17,7 +17,7 @@ class LibraryError extends Component {
 				<Dialog open={Boolean(error)}>
 					<DialogTitle>Something went wrong.</DialogTitle>
 					<DialogContent>
-						<Typography>{ error && error.data.message }</Typography>
+						<Typography>{ Boolean(error) && `${error.status} - ${error.message}` }</Typography>
 					</DialogContent>
 					<DialogActions>
 						<Button onClick={() => handleCloseError()}>Ok</Button>

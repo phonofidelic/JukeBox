@@ -2,9 +2,6 @@ import {
 	LOAD_LIBRARY,
 	LOAD_LIBRARY_SUCCESS,
 	LOAD_LIBRARY_FAILURE,
-	FETCH_TRACKS,
-	FETCH_TRACKS_SUCCESS,
-	FETCH_TRACKS_FAILURE,
 	UPLOAD_SUCCESS,
 	SELECT_TRACK,
 	POST_TRACK_DATA,
@@ -58,28 +55,6 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 				error: action.error
 			}
 
-		case FETCH_TRACKS:
-			return {
-				...state,
-				loading: true
-			}
-
-		case FETCH_TRACKS_SUCCESS:
-			return {
-				...state,
-				loading: false,
-				tracks: action.tracks,
-				message: action.message
-			}
-
-		case FETCH_TRACKS_FAILURE:
-			return {
-				...state,
-				loading: false,
-				message: action.message,
-				error: action.error
-			}
-
 		case UPLOAD_SUCCESS:
 			return {
 				...state,
@@ -117,7 +92,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				error: 'Could not save changes',
+				error: action.error,
 				message: action.message
 			}
 
@@ -156,7 +131,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				loading: false,
 				message: action.message,
-				error: 'Could not delete track'
+				error: action.error,
 			}
 
 		case ORDER_TRACKS_BY_FIELD_VALUE:
