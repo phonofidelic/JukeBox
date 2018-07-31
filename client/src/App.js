@@ -46,11 +46,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth,
-    router: state.router,
-  }
-}
-
 export default App;

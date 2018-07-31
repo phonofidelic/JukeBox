@@ -1,4 +1,5 @@
 import {
+	CHECK_USER_AGENT,
 	POST_REGISTRATION,
 	REGISTRATION_SUCCESS,
 	REGISTRATION_FAILURE,
@@ -15,6 +16,15 @@ import {
 } from '../actiontypes';
 import axios from 'axios';
 import { history } from '../.';
+
+export const checkUserAgent = () => {
+	return dispatch => {
+		dispatch({
+			type: CHECK_USER_AGENT,
+			userAgentIsMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
+		});
+	}
+}
 
 export const postRegistration = data => {
 	return dispatch => {	

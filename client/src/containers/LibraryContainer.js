@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { libraryActions, playerActions } from '../actions';
+import { libraryActions, 
+  playerActions, 
+  authActions 
+} from '../actions';
 import LibraryMobile from '../components/LibraryMobile';
 import LibraryDesktop from '../components/LibraryDesktop';
 import LibraryError from '../components/LibraryError';
 import Loader from '../components/Loader';
 
-const actions = { ...libraryActions, ...playerActions };
+const actions = { 
+  ...libraryActions, 
+  ...playerActions, 
+  ...authActions 
+};
 
 export class TrackListContainer extends Component {
 	constructor(props) {
 		super(props);
+    this.props.checkUserAgent();
     this.props.loadLibrary();
     this.state = {
       order: 'desc',
@@ -18,7 +26,6 @@ export class TrackListContainer extends Component {
       page: 0,  // TODO
       rowsPerPage: 5, // TODO
       anchorEl: null,
-      userAgentIsMobile: navigator.userAgent.indexOf('Mobile') > 0,
     }
 	}
 
@@ -106,12 +113,11 @@ export class TrackListContainer extends Component {
   }
 
 	render() {
-		const { library } = this.props;
+		const { library, userAgentIsMobile } = this.props;
     const {
       order, 
       orderBy, 
       anchorEl,
-      userAgentIsMobile,
     } = this.state;
 
     // const userAgentIsMobile = navigator.userAgent.indexOf('Mobile') > 0;
@@ -160,6 +166,7 @@ export class TrackListContainer extends Component {
 const mapStateToProps = state => {
 	return {
 		library: state.library,
+    userAgentIsMobile: state.auth.userAgentIsMobile,
 	}
 }
 

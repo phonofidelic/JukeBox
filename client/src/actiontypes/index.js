@@ -43,6 +43,7 @@ export const // uploaderActionTypes
 						 SET_ALERT = 'set_alert',
 						 CLEAR_ALERT = 'clear_alert',
 						 // authActiontypes
+						 CHECK_USER_AGENT = 'check_user_agent',
 						 POST_REGISTRATION = 'post_registration',
 						 REGISTRATION_SUCCESS = 'registration_success',
 						 REGISTRATION_FAILURE = 'registration_failure',

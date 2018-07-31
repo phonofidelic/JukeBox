@@ -1,4 +1,5 @@
 import {
+	CHECK_USER_AGENT,
 	POST_REGISTRATION,
 	REGISTRATION_SUCCESS,
 	REGISTRATION_FAILURE,
@@ -15,6 +16,7 @@ import {
 
 const INITIAL_STATE = {
 	isAuthed: false,
+	userAgentIsMobile: null,
 	loading: false,
 	user: null,
 	token: null, // No need to store token here if storing in localStorage?
@@ -24,6 +26,12 @@ const INITIAL_STATE = {
 
 const auth = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case CHECK_USER_AGENT: 
+			return {
+				...state,
+				userAgentIsMobile: action.userAgentIsMobile,
+			}
+
 		case POST_REGISTRATION:
 			return {
 				...state,
