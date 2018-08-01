@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { authActions } from './actions';
 import MessageContainer from './containers/MessageContainer';
 import AlertContainer from './containers/AlertContainer';
+import PlayerContainer from './containers/PlayerContainer';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import UploaderView from './views/Uploader.view';
 import LibraryView from './views/Library.view';
@@ -41,6 +42,7 @@ class App extends Component {
           <Route path="/login" component={props => <LandingView {...props} />} />
           <Route path="/*" component={NotFound} />
         </Switch>
+        <PlayerContainer />
       </div>
     );
   }

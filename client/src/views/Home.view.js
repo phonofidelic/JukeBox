@@ -7,7 +7,7 @@ const HomeView = (props) => {
 	return (
 		<div>
 			<DashboardContainer {...props} />
-			<PlayerContainer />
+			{/*<PlayerContainer />*/}
       <NavContainer />
 		</div>
 	);

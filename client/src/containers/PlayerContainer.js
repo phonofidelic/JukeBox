@@ -61,11 +61,18 @@ class PlayerContainer extends Component {
 	}
 
 	render() {
-		const { trackList, player, selectedTrack, queueIndex } = this.props;
-		return (
+		const { 
+			trackList, 
+			player, 
+			selectedTrack, 
+			queueIndex,
+			userAgentIsMobile 
+		} = this.props;
+		return player.queue.length ?
 			<Player 
 				player={ player }
 				selectedTrack={ selectedTrack }
+				userAgentIsMobile={ userAgentIsMobile }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }
 				handleStopTrack={ this.handleStopTrack.bind(this) }
@@ -75,7 +82,9 @@ class PlayerContainer extends Component {
 				handlePlayFromQueue={ this.handlePlayFromQueue.bind(this) }
 				handleSeek={ this.handleSeek.bind(this) }
 			/>
-		);
+			:
+			null
+		;
 	}
 }
 
@@ -83,6 +92,7 @@ const mapStateToProps = state => {
 	return {
 		player: state.player,
 		selectedTrack: getSelectedTrack(state),
+		userAgentIsMobile: state.auth.userAgentIsMobile,
 	}
 };
 

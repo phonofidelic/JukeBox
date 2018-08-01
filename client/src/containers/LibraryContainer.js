@@ -113,7 +113,11 @@ export class TrackListContainer extends Component {
   }
 
 	render() {
-		const { library, userAgentIsMobile } = this.props;
+		const { 
+      library, 
+      userAgentIsMobile ,
+    } = this.props;
+
     const {
       order, 
       orderBy, 
@@ -149,6 +153,7 @@ export class TrackListContainer extends Component {
                 order={order}
                 orderBy={orderBy}
                 anchorEl={anchorEl}
+                userAgentIsMobile={userAgentIsMobile}
                 handleRequestSort={this.handleRequestSort.bind(this)}
                 handleSelectTrack={this.handleSelectTrack.bind(this)}
                 handleOptionsClick={this.handleOptionsClick.bind(this)}

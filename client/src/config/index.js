@@ -24,13 +24,13 @@ export const THEME = {
   },
   palette: {
     primary: {
-      main: '#d2d8d8',
-      light: '#fff',
+      main: '#d2d8d8', // accent
+      light: '#fff', // background
       dark: '#222'
     },
     secondary: {
-      main: '#f44336',
-      light: '#ff7961',
+      main: '#fbaaac', // accent
+      light: '#fafafa', // background
       dark: '#ba000d'
     },
     context: {
@@ -42,13 +42,19 @@ export const THEME = {
   },
   dimensions: {
     libraryDesktop: {
-      titleCellWidth: '300px',
-      durrationCellWidth: '100px',
-      artistCellWidth: '100px',
-      albumCellWidth: '100px',
+      titleCellWidth: 300,
+      durrationCellWidth: 100,
+      artistCellWidth: 100,
+      albumCellWidth: 100,
     },
     nav: {
-      navHeight: '56px',
+      navHeight: 56,
+    },
+    navDesktop: {
+      navWidth: 80,
+    },
+    player: {
+      playerHeight: 58,
     }
   },
 }

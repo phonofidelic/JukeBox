@@ -72,6 +72,7 @@ class LibraryDesktop extends Component {
 			order,
 			orderBy,
 			anchorEl,
+			userAgentIsMobile,
 			handleSelectTrack,
 			handleOptionsClick,
 			handleOptionsClose,
@@ -84,17 +85,15 @@ class LibraryDesktop extends Component {
 		const styles = {
 			root: {
 				background: theme.palette.primary.light,
-				// borderTop: `1px solid ${theme.palette.primary.main}`,
-				// padding: '0px',
-				// marginTop: '57px',
-				marginBottom: '104px' // TODO: link value to Player + Nav height
+				marginBottom: userAgentIsMobile ? theme.dimensions.nav.navHeight + theme.dimensions.player.playerHeight : theme.dimensions.player.playerHeight, // TODO: link value to Player + Nav height
+				marginLeft: theme.dimensions.navDesktop.navWidth,
 			},
 			tableHead: {
 				// position: 'fixed',
 				// top: 0,
 				// // height: '50px',
 				// width: '100%',
-				// background: theme.palette.primary.light,
+				backgroundColor: theme.palette.secondary.light,
 			},
 			titleCell: {
 				maxWidth: theme.dimensions.libraryDesktop.titleCellWidth,
@@ -127,7 +126,8 @@ class LibraryDesktop extends Component {
 					library.detailViewData ? 
 					<DetailCard 
 						detailViewData={library.detailViewData}
-						handleCloseDetailView={handleCloseDetailView} /> 
+						handleCloseDetailView={handleCloseDetailView}
+					 /> 
 					: 
 					null
 				}

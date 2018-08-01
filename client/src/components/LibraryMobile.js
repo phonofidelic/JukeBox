@@ -52,7 +52,7 @@ export class LibraryMobile extends Component {
 		return (
 			<div style={styles.root}>
 				{
-					// library.detailViewData &&
+					library.detailViewData &&
 					<DetailCard 
 						detailViewData={library.detailViewData}
 						handleCloseDetailView={handleCloseDetailView}

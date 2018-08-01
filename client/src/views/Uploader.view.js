@@ -8,7 +8,7 @@ const UploaderView = (props) => {
 	return (
 		<div>
 			<UploaderContainer {...props} />
-			<PlayerContainer />
+			{/*<PlayerContainer />*/}
       <NavContainer />
 		</div>
 	);

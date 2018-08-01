@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import {
+  BottomNavigation, 
+  BottomNavigationAction,
+  Grid,
+} from '@material-ui/core';
 import { 
   Home,
   FileUpload,
@@ -10,22 +13,39 @@ import {
 } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 
-class Nav extends Component {
+class NavDesktop extends Component {
+  state = {
+    value: '/library',
+  }
+
+  handleChange(event, value) {
+    console.log(value)
+    this.setState({ value: value });
+  };
+
   render() {
-    const { theme } = this.props;
+    const { theme, location } = this.props;
+    const { value } = this.state;
     const styles = {
       root: {
         position: 'fixed',
-        bottom: '0px',
-        width: '100%',
-        height: theme.dimensions.nav.navHeight,
-      }
+        left: '0px',
+        top: '0px',
+        height: '100vh',
+        width: theme.dimensions.navDesktop.navWidth,
+        // height: theme.dimensions.nav.navHeight,
+        backgroundColor: theme.palette.secondary.light,
+        zIndex: 1,
+      },
     }
 
+    console.log('location:', location)
     return(
-      <BottomNavigation 
-        value={null}
-        showLabels 
+      <Grid 
+        container
+        component={BottomNavigation} 
+        value={location.pathname}
+        alignContent={'flex-start'}
         style={styles.root}
       >
         <BottomNavigationAction 
@@ -54,9 +74,9 @@ class Nav extends Component {
           label="Sign out" 
           icon={<ExitToApp />} 
         />
-      </BottomNavigation>
+      </Grid>
     );
   };
 }
 
-export default withTheme()(Nav);
+export default withTheme()(NavDesktop);

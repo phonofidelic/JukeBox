@@ -81,10 +81,11 @@ class LibraryRow extends Component {
 			},
 			defaultImg: {
 				margin: 'auto',
-				color: theme.palette.primary.light,
+				color: '#9e9e9e',
+				// background
 			},
 			selected: {
-				background: theme.palette.primary.main,
+				background: theme.palette.secondary.light,
 			},
 		};
 

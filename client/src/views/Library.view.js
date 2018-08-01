@@ -20,7 +20,7 @@ const LibraryView = (props) => {
 		<div>
 			<LibraryContainer {...props} />
 			{/*<UploaderContainer />*/}
-			<PlayerContainer />
+			{/*<PlayerContainer />*/}
       <NavContainer />
 		</div>
 	)

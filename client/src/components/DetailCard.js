@@ -54,7 +54,7 @@ class DetailCard extends Component {
 		const styles = {
 			root: {
 				top: 0,
-				zIndex: 1,
+				// zIndex: 1,
 			},
 			cardMedia: {
 				width: 600,

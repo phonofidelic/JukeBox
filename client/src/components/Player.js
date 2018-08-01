@@ -12,6 +12,7 @@ export class Player extends Component {
 		const { 
 			player, 
 			time,
+			userAgentIsMobile,
 			handleStopTrack,
 			handlePlayTrack,
 			handlePauseTrack,
@@ -26,11 +27,13 @@ export class Player extends Component {
 		const styles = {
 			root: {
 			  position: 'fixed',
-			  bottom: '56px', // Makes room for bottom Nav componenet
+			  bottom: userAgentIsMobile ? theme.dimensions.nav.navHeight : 0, // Makes room for bottom Nav componenet
 			  width: '100%',
 			  boxShadow: '0px -1px 20px 1px #ccc',
-			  background: theme.palette.primary.light,
-			  padding: '0'
+			  backgroundColor: theme.palette.secondary.light,
+			  borderBottom: `solid 1px ${theme.palette.primary.main}`,
+			  padding: '0',
+			  zIndex: 2,
 			}
 		};
 		
@@ -41,40 +44,34 @@ export class Player extends Component {
 		// * render QueueList with queue and currentTrack props inside MUI Collapse component.
 		// Otherwise: Player component is an empty div.
 		return (
-			<div style={styles.root}>
-				{	player.queue.length > 0 &&
-					<div>
-						<div>
-							<PlayerProgress 
-								player={player}
-								handleSeek={handleSeek}
-							 />
-						</div>
-						<Grid container>
-							<Grid item xs={12}>
-								<PlayerControls 
-									player={player}
-									handleStopTrack={handleStopTrack}
-									handlePlayTrack={handlePlayTrack}
-									handlePauseTrack={handlePauseTrack}
-									handlePlayNext={handlePlayNext}
-									handlePlayPrev={handlePlayPrev}
-									handleToggleQueue={handleToggleQueue}
-								/>
-							</Grid>
-						</Grid>
-						<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
-							<QueueList 
-								queue={player.queue} 
-								queueIndex={player.queueIndex}
-								currentTrack={player.currentTrack} 
-								handleStopTrack={handleStopTrack}
-								handlePlayTrack={handlePlayTrack}
-								handlePlayFromQueue={handlePlayFromQueue}
-							/>
-						</Collapse>
-					</div>
-				}
+			<div style={styles.root}>		
+				<PlayerProgress 
+					player={player}
+					handleSeek={handleSeek}
+				 />
+				<Grid container>
+					<Grid item xs={12}>
+						<PlayerControls 
+							player={player}
+							handleStopTrack={handleStopTrack}
+							handlePlayTrack={handlePlayTrack}
+							handlePauseTrack={handlePauseTrack}
+							handlePlayNext={handlePlayNext}
+							handlePlayPrev={handlePlayPrev}
+							handleToggleQueue={handleToggleQueue}
+						/>
+					</Grid>
+				</Grid>
+				<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
+					<QueueList 
+						queue={player.queue} 
+						queueIndex={player.queueIndex}
+						currentTrack={player.currentTrack} 
+						handleStopTrack={handleStopTrack}
+						handlePlayTrack={handlePlayTrack}
+						handlePlayFromQueue={handlePlayFromQueue}
+					/>
+				</Collapse>
 			</div>
 		);
 	}

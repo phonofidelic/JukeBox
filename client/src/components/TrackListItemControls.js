@@ -24,7 +24,7 @@ class TrackListItemControls extends Component {
 	}
 
 	handleOptionsClick(e) {
-		console.log('# options click #\n', e.currentTarget)
+		// console.log('# options click #\n', e.currentTarget)
 		this.setState({ ...this.state, anchorEl: e.currentTarget });
 	}
 
@@ -41,9 +41,9 @@ class TrackListItemControls extends Component {
 		this.props.handleDeleteTrack(this.props.track);
 	}
 
-	handleMenuOptionClickDetail(id) {
+	handleMenuOptionClickDetail(id, type) {
 		this.setState({ ...this.state, anchorEl: null });
-		this.props.handleOpenDetailView(id);
+		this.props.handleOpenDetailView(id, type);
 	}
 
 	render() {
@@ -86,7 +86,8 @@ class TrackListItemControls extends Component {
 					style={styles.menu}
 				>
 					<MenuItem onClick={() => handleAddToQueue(track)}>Add to queue</MenuItem>
-					<MenuItem onClick={() => this.handleMenuOptionClickDetail(track.artist._id)}>View Artist Details</MenuItem>
+					<MenuItem onClick={() => this.handleMenuOptionClickDetail(track.artist._id, 'artist')}>View Artist Details</MenuItem>
+					<MenuItem onClick={() => this.handleMenuOptionClickDetail(track.album._id, 'album')}>View Album Details</MenuItem>
 					<MenuItem onClick={() => this.handleMenuOptionClickEdit()}>Edit info</MenuItem>
 					<MenuItem onClick={() => this.handleMenuOptionClickDelete()}>
 						Delete track
