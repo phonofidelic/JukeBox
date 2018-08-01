@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Typography,
+} from '@material-ui/core';
 import { 
   Home,
   FileUpload,
@@ -16,7 +19,7 @@ class NavMobile extends Component {
   }
 
   handleChange(event, value) {
-    console.log(value)
+    // console.log(value)
     this.setState({ value: value });
   };
 
@@ -31,40 +34,41 @@ class NavMobile extends Component {
         height: theme.dimensions.nav.navHeight,
         backgroundColor: '#fafafa',
         borderTop: `solid 1px ${theme.palette.primary.main}`,
-        zIndex: 3,
+        zIndex: 1,
       },
     }
 
-    console.log('location:', location)
+    // console.log('location:', location)
     return(
       <BottomNavigation 
         value={location.pathname}
         style={styles.root}
+        showLabels
       >
         <BottomNavigationAction 
           component={Link} 
           to="/"
-          label="Home" 
+          label={<Typography color="inherit" variant="caption">Home</Typography>}
           value="/" 
           icon={<Home />} 
         />
         <BottomNavigationAction 
           component={Link} 
           to="/library"
-          label="Library" 
+          label={<Typography color="inherit" variant="caption">Library</Typography>}
           value="/library" 
           icon={<Storage />} 
         />
         <BottomNavigationAction 
           component={Link}
           to="/uploader" 
-          label="Uploader" 
+          label={<Typography color="inherit" variant="caption">Uploader</Typography>}
           value="/uploader" 
           icon={<FileUpload />} 
         />
         <BottomNavigationAction 
           onClick={() => this.props.handleSignOut()}
-          label="Sign out" 
+          label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
           icon={<ExitToApp />} 
         />
       </BottomNavigation>

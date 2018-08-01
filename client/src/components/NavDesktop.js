@@ -4,6 +4,7 @@ import {
   BottomNavigation, 
   BottomNavigationAction,
   Grid,
+  Typography,
 } from '@material-ui/core';
 import { 
   Home,
@@ -19,7 +20,7 @@ class NavDesktop extends Component {
   }
 
   handleChange(event, value) {
-    console.log(value)
+    // console.log(value)
     this.setState({ value: value });
   };
 
@@ -33,13 +34,14 @@ class NavDesktop extends Component {
         top: '0px',
         height: '100vh',
         width: theme.dimensions.navDesktop.navWidth,
+        padding: 10,
         // height: theme.dimensions.nav.navHeight,
         backgroundColor: theme.palette.secondary.light,
         zIndex: 1,
       },
     }
 
-    console.log('location:', location)
+    // console.log('location:', location)
     return(
       <Grid 
         container
@@ -47,31 +49,32 @@ class NavDesktop extends Component {
         value={location.pathname}
         alignContent={'flex-start'}
         style={styles.root}
+        showLabels
       >
         <BottomNavigationAction 
           component={Link} 
           to="/"
-          label="Home" 
+          label={<Typography color="inherit" variant="caption">Home</Typography>}
           value="/" 
           icon={<Home />} 
         />
         <BottomNavigationAction 
           component={Link} 
           to="/library"
-          label="Library" 
+          label={<Typography color="inherit" variant="caption">Library</Typography>}
           value="/library" 
           icon={<Storage />} 
         />
         <BottomNavigationAction 
           component={Link}
           to="/uploader" 
-          label="Uploader" 
+          label={<Typography color="inherit" variant="caption">Uploader</Typography>}
           value="/uploader" 
           icon={<FileUpload />} 
         />
         <BottomNavigationAction 
           onClick={() => this.props.handleSignOut()}
-          label="Sign out" 
+          label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
           icon={<ExitToApp />} 
         />
       </Grid>
