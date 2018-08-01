@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import LibraryContainer from '../containers/LibraryContainer';
-import UploaderContainer from '../containers/UploaderContainer';
-import PlayerContainer from '../containers/PlayerContainer';
-import NavContainer from '../containers/NavContainer';
-import Typography from '@material-ui/core/Typography';
 
 const LibraryView = (props) => {
 	const styles = {
@@ -19,9 +15,6 @@ const LibraryView = (props) => {
 	return (
 		<div>
 			<LibraryContainer {...props} />
-			{/*<UploaderContainer />*/}
-			{/*<PlayerContainer />*/}
-      <NavContainer />
 		</div>
 	)
 }

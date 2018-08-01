@@ -33,8 +33,8 @@ class RegistrationForm extends Component {
 
 		const styles = {
 			root: {
-				marginTop: '50px',
-				marginBottom: '80px',
+				marginTop: 50,
+				marginBottom: 40,
 			},
 			header: {
 				margin: '10px',

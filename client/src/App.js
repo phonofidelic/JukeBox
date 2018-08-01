@@ -4,6 +4,7 @@ import { authActions } from './actions';
 import MessageContainer from './containers/MessageContainer';
 import AlertContainer from './containers/AlertContainer';
 import PlayerContainer from './containers/PlayerContainer';
+import NavContainer from './containers/NavContainer';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import UploaderView from './views/Uploader.view';
 import LibraryView from './views/Library.view';
@@ -13,8 +14,9 @@ import NotFound from './views/NotFound.view';
 
 const AuthenticatedRoute = ({ component: Component, ...rest }) => {
   // console.log('AuthenticatedRoute, JWT:', localStorage.getItem('JWT'))
+  console.log('rest:', rest)
   return <Route {...rest} render={(props) => (
-    // props.isAuthed === true
+    // rest.isAuthed === true
     localStorage.getItem('JWT') 
     ? <Component {...props} />
     : <Redirect to={{
@@ -25,6 +27,7 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
 };
 
 class App extends Component {
+
   render() {
     const styles = {
       root: {
@@ -36,13 +39,14 @@ class App extends Component {
         <MessageContainer />
         <AlertContainer />
         <Switch>
-          <AuthenticatedRoute exact path="/" component={props => <HomeView {...props} />} />
+          <AuthenticatedRoute exact path="/"  component={props => <HomeView {...props} />} />
           <AuthenticatedRoute path="/library" component={props => <LibraryView {...props} />} />
           <AuthenticatedRoute path="/uploader" component={props => <UploaderView {...props} />} />
           <Route path="/login" component={props => <LandingView {...props} />} />
           <Route path="/*" component={NotFound} />
         </Switch>
         <PlayerContainer />
+        { localStorage.getItem('JWT') && <NavContainer />}
       </div>
     );
   }
