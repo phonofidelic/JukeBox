@@ -129,12 +129,12 @@ export const deleteTrack = () => {
 	}
 }
 
-export const deleteTrackConfirm = trackData => {
+export const deleteTrackConfirm = track => {
 	return dispatch => {
 		dispatch({
 			type: DELETE_TRACK_CONFIRM
 		});
-		axios.delete(`${TRACK_URL}/${trackData._id}`, {
+		axios.delete(`${TRACK_URL}/${track._id}`, {
 			headers: {
 				token: localStorage.getItem('JWT'),
 				userId: localStorage.getItem('userId')

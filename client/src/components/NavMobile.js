@@ -33,8 +33,8 @@ class NavMobile extends Component {
         width: '100%',
         height: theme.dimensions.nav.navHeight,
         backgroundColor: '#fafafa',
-        borderTop: `solid 1px ${theme.palette.primary.main}`,
-        zIndex: 1,
+        // borderTop: `solid 1px ${theme.palette.primary.main}`,
+        zIndex: 2,
       },
     }
 

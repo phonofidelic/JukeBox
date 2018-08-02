@@ -20,15 +20,15 @@ class TrackListItemContainer extends Component {
 		this.props.addToQueue(track);
 	}
 
-	handleEditTrackData(formData, trackData) {
-		this.props.editTrack(formData, trackData);
+	handleEditTrackData(formData, track) {
+		this.props.editTrack(formData, track);
 	}
 
-	handleDeleteTrack(trackData) {
+	handleDeleteTrack(track) {
 		// TODO: dispatch custom confirm action connected to MUI Alert component
-		const confirm = window.confirm('Are you sure you want to delete this track?');
+		const confirm = window.confirm(`Are you sure you want to delete "${track.title}"?`);
 		if (confirm) {
-			return this.props.deleteTrackConfirm(trackData);
+			return this.props.deleteTrackConfirm(track);
 		}
 		return this.props.deleteTrackCancel();
 	}

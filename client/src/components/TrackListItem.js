@@ -71,8 +71,6 @@ class TrackListItem extends Component {
 				// backgroundSize: '50px'
 			},
 		};
-
-		console.log('editMode:', editMode);
 	
 		return (
             <ListItem 

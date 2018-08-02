@@ -47,14 +47,23 @@ class QueueList extends Component {
 					queue.map((track, i) => (
 						<ListItem 
 							key={ track.queueId }
+							divider={ currentTrack.queueId !== track.queueId ? true : false }
+							dense={true}
 							style={ currentTrack.queueId === track.queueId ? styles.playing : null }
 							onClick={() => this.handleQueueItemClick(i, track)}
 						>
 							<Grid container>
 								<Grid item>
-									<Typography>
-										{ track.title } - { track.artist.name } - { track.album.title }
-									</Typography>
+									<div><Typography noWrap>{ track.title }</Typography></div>
+									{ 
+										currentTrack.queueId === track.queueId ?
+										<div>
+											<div><Typography noWrap variant="caption">{ track.artist.name }</Typography></div>
+											<div><Typography noWrap variant="caption">{ track.album.title }</Typography></div>
+										</div>
+										:
+										null
+								}
 								</Grid>
 							</Grid>
 						</ListItem>
