@@ -154,9 +154,8 @@ module.exports.removeTrack = (req, res, next) => {
 			console.log(`Deleted audio file ${removedTrack.file.path}`);
 		});
 
-		// If an imnage file exists,
-		// delete it from uploads/images
-		if (removedTrack.image.src) {
+		// If an image file exists, delete it from uploads/images
+		if (removedTrack.image.src && removedTrack.image.src !== 'defaultImage') {
 			fs.unlink(removedTrack.image.src, (err) => {
 				if (err) return next(err);
 				console.log(`Deleted image file ${removedTrack.image.src}`);
