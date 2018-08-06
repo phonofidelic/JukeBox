@@ -13,7 +13,7 @@ const AlbumSchema = new Schema({
 	label: Schema.Types.Mixed,
 	year: { type: Number },
 	genre: [ String ],
-	artwork: [ String ], // array of img src strings
+	artwork: [ { format: String, src: String } ],
 	description: { type: String, default: STRINGS.default_noDescription }
 });
 

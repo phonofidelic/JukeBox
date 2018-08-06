@@ -3,7 +3,7 @@ const uuidv4 = require('uuid/v4');
 
 // TODO: Handle image sizes and save multiple images for sm/md/lg
 // TODO, BUG: Handle broken images - some images show up as broken image links in ui
-module.exports.saveImage = (image) => new Promise((resolve, reject) => {
+const saveImage = (image) => new Promise((resolve, reject) => {
 	if (!image) {
 		resolve({ format: 'png', src: 'defaultImage' });
 	}
@@ -19,9 +19,15 @@ module.exports.saveImage = (image) => new Promise((resolve, reject) => {
 	});
 });
 
+module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((resolve, reject) => {
+	Track.findOne({ title: metaData.common.title })
+	.then(track => {
+		resolve(track);
+	})
+	.catch(err => reject(err));
+});
+
 module.exports.checkArtist = (metaData, Artist, userId) => new Promise((resolve, reject) => {
-	console.
-	log('\n############## metaData.common.artist:', metaData.common.artist);
 	Artist.findOne({ name: metaData.common.artist })
 	.then((artist) => {
 		console.log('\n### @checkArtist, artist:', artist);
@@ -32,6 +38,7 @@ module.exports.checkArtist = (metaData, Artist, userId) => new Promise((resolve,
 				name: metaData.common.artist
 			});
 			newArtist.save((err, savedArtist) => {
+				if (err) return console.error('\n### Could not save Artist doc:', err);
 				console.log('\n### New Artist saved, savedArtist:', savedArtist);
 				resolve(savedArtist);
 			});
@@ -51,17 +58,48 @@ module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, r
 		console.log('\n### @checkAlbum, album:', album);
 		if (!album) {
 			console.log('\n### Album not found in DB, creating new document...');
-			const newAlbum = new Album({
-				userId: userId,
-				title: metaData.common.album,
-				artist: metaData.common.artist
-			});
-			newAlbum.save((err, savedAlbum) => {
-				console.log('\n### New album saved, savedAlbum:', savedAlbum);
-				resolve(savedAlbum);	
+
+			// Save album art 
+			saveImage(metaData.common.picture)
+			.then(image => {
+				console.log('### Saving new Album, image:', image)
+				const newAlbum = new Album({
+					userId: userId,
+					title: metaData.common.album,
+					artist: metaData.common.artist,
+					artwork: [image]
+				});
+
+				newAlbum.save((err, savedAlbum) => {
+					if (err) return console.error('\n### Could not save Album doc:', err);
+					console.log('\n### New album saved, savedAlbum:', savedAlbum);
+					resolve(savedAlbum);	
+				});
+			})
+			.catch(err => {
+				console.error('\n### Could not save image:', err);
 			});
 		} else {
 			console.log('\n### Album found in db, updating track document...');
+
+			// If uploading track has embeded album art...
+			// Check Album doc artwork field
+			// If artork field is empty of if first item is a default image...
+			if (metaData.common.picture && (album.artwork.length < 1 || album.artwork[0].src === 'defaultImage')) {
+				console.log('\n### Saving new album art...')
+				saveImage(metaData.common.picture)
+				.then(image => {
+					album.artwork.unshift(image);
+					album.save((err, savedAlbum) => {
+						if (err) return console.log('\n### Could not update album art:', err);
+						console.log('\n### Album updated with new album art');
+						resolve(savedAlbum);
+					});
+				})
+				.catch(err => {
+					console.error('\n### Could not save image:', err);
+				});
+			}
 			resolve(album);
 		}
 	})
@@ -102,3 +140,5 @@ module.exports.loadAlbums = (Album, userId) =>  new Promise((resolve, reject) =>
 		reject(err);
 	});
 })
+
+module.exports.saveImage = saveImage;

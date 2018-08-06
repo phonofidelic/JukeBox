@@ -33,8 +33,8 @@ const TrackSchema = new Schema({
 });
 
 TrackSchema.pre('validate', function(next) {
-	console.log('### FROM PRE VALIDATE ###')
-	console.log('this:', this)
+	// console.log('### FROM PRE VALIDATE ###')
+	// console.log('this:', this)
 	next();
 	
 	// Look for matching artist

@@ -39,7 +39,7 @@ module.exports.postTracks = (req, res, next) => {
 						utils.checkAlbum(metaData, Album, userId)
 					])
 					.then(values => {
-						console.log('### values:', values);
+						console.log('\n### values:', values);
 						// Save track with parsed meta-data and 
 						// values passed from utility methods
 						const newTrack = new Track({
@@ -59,22 +59,44 @@ module.exports.postTracks = (req, res, next) => {
 							}
 						});
 						newTrack.save((err, newTrack) => {
+							console.log('\n### Saving new Track document, newTrack:', newTrack);
+
 							// Update Artist and Album docs with new track info
-							Artist.findById(newTrack.artist._id, (err, artist) => {
+
+							// Check if uploading track's album exists in Artist doc
+							Artist.findOne({ name: newTrack.artist.name, albums: { $elemMatch: { title: newTrack.album.title } } }, (err, artist) => {
 								if (err) return next(err);
-								if (!artist) return console.log('\n### No artist found, ');
-								console.log('\n### Updating album data on artist')
-								artist.albums.push(newTrack.album);
-								artist.save();
+								console.log('\n### Checking for new Artist data...');
+								if (artist) {
+									return console.log('\n### Uploading track\'s Album data already in Artist doc');
+								} else {
+									console.log('\n### Uploading track\'s Album data not found in Artist doc');
+									Artist.findById(newTrack.artist._id, (err, artist) => {
+										if (err) return next(err);
+										console.log('\n### Updating Artist doc with new Album data...');
+										artist.albums.push(newTrack.album);
+										artist.save();
+									});
+								}
 							});
 
-							Album.findById(newTrack.album._id, (err, album) => {
+							// Check if uploading track's artist exists in Album doc
+							Album.findOne({ title: newTrack.album.title, 'artist.name': newTrack.artist.name }, (err, album) => {
 								if (err) return next(err);
-								if (!album) return console.log('\n### No album found');
-								console.log('\n### Updating artist data on album')
-								album.artist = newTrack.artist;
-								album.save();
+								console.log('\n### Checking for new Album data...');
+								if (album) {
+									return console.log('\n### Uploading track\'s Artist data already in Album doc');
+								} else {
+									console.log('\n### Uploading track\'s Artist data not found in Album doc');
+									Album.findById(newTrack.album._id, (err, album) => {
+										if (err) return next(err);
+										console.log('\n### Updating Album doc with new Artist data...');
+										album.artist = newTrack.artist;
+										album.save();
+									});
+								}
 							});
+
 							savedTracks.push(newTrack);
 						});
 					})
