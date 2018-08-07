@@ -34,7 +34,6 @@ module.exports.postTracks = (req, res, next) => {
 					// Check for existing Artist and Album info
 					// Check for embeded image
 					return Promise.all([
-						utils.saveImage(metaData.common.picture),
 						utils.checkArtist(metaData, Artist, userId), 
 						utils.checkAlbum(metaData, Album, userId)
 					])
@@ -45,9 +44,9 @@ module.exports.postTracks = (req, res, next) => {
 						const newTrack = new Track({
 							userId: userId,
 							title: metaData.common.title,
-							image: values[0],
-							artist: values[1],
-							album: values[2],
+							artist: values[0],
+							album: values[1],
+							image: values[1].artwork[0],
 							genre: metaData.common.genre,
 							order: metaData.common.track,
 							format: metaData.format,
@@ -97,6 +96,8 @@ module.exports.postTracks = (req, res, next) => {
 								}
 							});
 
+							// Update track image data
+
 							savedTracks.push(newTrack);
 						});
 					})
@@ -137,6 +138,7 @@ module.exports.editTrack = (req, res, next) => {
 	Track.findByIdAndUpdate(trackId, freshData, {new: true}, (err, updatedTrack) => {
 		if (err) return next(err);
 		console.log('PUT /tracks/:trackId response:\n', updatedTrack);
+		// TODO: change to: res.json({ message: 'Track removed', updatedTrack: updatedTrack });
 		res.json({ message: 'Track updated', data: updatedTrack });
 	});
 };
@@ -147,21 +149,21 @@ module.exports.removeTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	Track.findByIdAndRemove(trackId, (err, removedTrack) => {
 		if (err) return next(err);
-		console.log('DELETE /tracks/:trackId track path:\n', removedTrack.file.path);
 		// Delete audio file in uploads/audio
 		fs.unlink(removedTrack.file.path, (err) => {
 			if (err) return next(err);
-			console.log(`Deleted audio file ${removedTrack.file.path}`);
+			console.log(`\n### Deleted audio file ${removedTrack.file.path}`);
 		});
 
 		// If an image file exists, delete it from uploads/images
 		if (removedTrack.image.src && removedTrack.image.src !== 'defaultImage') {
 			fs.unlink(removedTrack.image.src, (err) => {
 				if (err) return next(err);
-				console.log(`Deleted image file ${removedTrack.image.src}`);
+				console.log(`\n### Deleted image file ${removedTrack.image.src}`);
 			});
 		}
 
+		// TODO: change to: res.json({ message: 'Track removed', removedTrack: removedTrack });
 		res.json({ message: 'Track removed', data: removedTrack });
 	});
 	// TODO: Delete track in file system, otherwise there will be lots of

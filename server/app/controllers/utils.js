@@ -12,11 +12,15 @@ const saveImage = (image) => new Promise((resolve, reject) => {
 
 	fs.writeFile(imgPath, image[0].data, (err) => {
 		if (err) {
-			console.error('readFile error', err);
+			console.error('writeFile error:', err);
 			reject(err);
 		};
 		resolve({ format: image[0].format, src:imgPath });
 	});
+});
+
+module.exports.getTrackAlbumArt = (metaData, Album) => new Promise((resolve, reject) => {
+	// Album.find
 });
 
 module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((resolve, reject) => {
@@ -139,6 +143,4 @@ module.exports.loadAlbums = (Album, userId) =>  new Promise((resolve, reject) =>
 	.catch(err => {
 		reject(err);
 	});
-})
-
-module.exports.saveImage = saveImage;
+});
