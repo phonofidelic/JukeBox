@@ -19,10 +19,6 @@ const saveImage = (image) => new Promise((resolve, reject) => {
 	});
 });
 
-module.exports.getTrackAlbumArt = (metaData, Album) => new Promise((resolve, reject) => {
-	// Album.find
-});
-
 module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((resolve, reject) => {
 	Track.findOne({ title: metaData.common.title })
 	.then(track => {
