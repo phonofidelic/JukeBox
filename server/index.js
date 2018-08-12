@@ -48,8 +48,12 @@ app.use('/*', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-	console.error('### FROM ERROR HANDLER:', err.stack);
-	res.status(500).send('Something broke!');
+	console.error('### FROM ERROR HANDLER:', err.message);
+	res.status(500).json({message: err.message || 'Something broke!'});
 })
 
 app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));
+
+// For testing
+module.exports = app;
+
