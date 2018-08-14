@@ -70,7 +70,7 @@ module.exports.postTracks = (req, res, next) => {
 									return console.log('\n### Uploading track\'s Album data already in Artist doc');
 								} else {
 									console.log('\n### Uploading track\'s Album data not found in Artist doc');
-									Artist.findById(newTrack.artist._id, (err, artist) => {
+									Artist.findById(newTrack.artist, (err, artist) => {
 										if (err) return next(err);
 										console.log('\n### Updating Artist doc with new Album data...');
 										artist.albums.push(newTrack.album);
@@ -117,7 +117,7 @@ module.exports.postTracks = (req, res, next) => {
 					if (err) return next(err);
 					console.log('### Deleted '+ file.path);
 				});
-
+				// TODO: add message object to saved tracks
 				return console.log('### Track already saved');
 			});
 		})
@@ -126,7 +126,7 @@ module.exports.postTracks = (req, res, next) => {
 			return next(err);
 		})
 	});
-	res.json({message: 'Tracks saved', tracks: savedTracks })
+	res.json({message: 'Tracks saved', tracks: savedTracks });
 };
 
 // Edit a track

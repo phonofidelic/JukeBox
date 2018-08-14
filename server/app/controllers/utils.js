@@ -19,6 +19,14 @@ const saveImage = (image) => new Promise((resolve, reject) => {
 	});
 });
 
+const findArtistByName = (artistName, Artist) => new Promise((resolve, reject) => {
+	Artist.findOne({ name: artistName }, (err, artist) => {
+		if (err) reject(err);
+		resolve(artist);
+	});
+});
+
+// TODO: delete if unused
 module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((resolve, reject) => {
 	Track.findOne({ title: metaData.common.title })
 	.then(track => {
@@ -27,30 +35,56 @@ module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((reso
 	.catch(err => reject(err));
 });
 
-module.exports.checkArtist = (metaData, Artist, userId) => new Promise((resolve, reject) => {
-	Artist.findOne({ name: metaData.common.artist })
-	.then((artist) => {
+// module.exports.checkArtist = (metaData, Artist, userId) => new Promise((resolve, reject) => {
+// 	// resolve('pass')
+// 	Artist.findOne({ name: metaData.common.artist })
+// 	.then((artist) => {
+// 		console.log('\n### @checkArtist, artist:', artist);
+// 		if (!artist) {
+// 			console.log('\n### Artist not found in DB, creating new document...');
+// 			const newArtist = new Artist({
+// 				userId: userId,
+// 				name: metaData.common.artist
+// 			});
+// 			newArtist.save((err, savedArtist) => {
+// 				if (err) {
+// 					// return console.error('\n### Could not save Artist doc:', err);
+// 					console.error('\n### Could not save Artist doc:', err);
+// 					reject(err);
+// 				}
+// 				console.log('\n### New Artist saved, savedArtist:', savedArtist);
+// 				resolve(savedArtist);
+// 			});
+// 		} else {
+// 			console.log('\n### Artist found in db, updating track document...');
+// 			resolve(artist);
+// 		}
+// 	})
+// 	.catch(err => {
+// 		reject(err);
+// 	});
+// });
+
+module.exports.checkArtist = (metaData, Artist, userId) => {
+	return Artist.findOne({ name: metaData.common.artist })
+	.then(artist => {
 		console.log('\n### @checkArtist, artist:', artist);
+
 		if (!artist) {
 			console.log('\n### Artist not found in DB, creating new document...');
-			const newArtist = new Artist({
+			return new Artist({
 				userId: userId,
 				name: metaData.common.artist
-			});
-			newArtist.save((err, savedArtist) => {
-				if (err) return console.error('\n### Could not save Artist doc:', err);
-				console.log('\n### New Artist saved, savedArtist:', savedArtist);
-				resolve(savedArtist);
-			});
-		} else {
-			console.log('\n### Artist found in db, updating track document...');
-			resolve(artist);
+			})
+			.save();
 		}
+		console.log('\n### Artist found in db');
+		return artist;
 	})
-	.catch(err => {
-		reject(err);
+	.catch(err =>{
+		return new new Error(err);
 	});
-});
+};
 
 module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, reject) => {
 	Album.findOne({ title: metaData.common.album })
@@ -110,12 +144,11 @@ module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, r
 
 module.exports.loadTracks = (Track, userId) => new Promise((resolve, reject) => {
 	Track.find({ userId: userId })
+	.populate('artistId albumId')
 	.sort({ title: 1})
-	.then((tracks) => {
+	.exec((err, tracks) => {
+		if (err) reject(err);
 		resolve(tracks);
-	})
-	.catch(err => {
-		reject(err);
 	});
 });
 
