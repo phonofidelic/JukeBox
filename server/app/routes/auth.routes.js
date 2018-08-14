@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passportService = require('../../config/passport_config');
 const passport = require('passport');
-const authController = require('../controllers/auth_controller');
+const authController = require('../controllers/auth.controller');
 
 const requireLogin = passport.authenticate('local', { session: false });
 const requireAuth = passport.authenticate('jwt', { session: false });
