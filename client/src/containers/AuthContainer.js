@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authActions } from '../actions';
-import LoginForm from '../components/LoginForm';
-import RegistrationForm from '../components/RegistrationForm';
 import Typography from '@material-ui/core/Typography';
 import { Redirect } from 'react-router-dom';
+import LoginForm from '../components/LoginForm';
+import RegistrationForm from '../components/RegistrationForm';
+import Loader from '../components/Loader';
+import ErrorMessage from '../components/ErrorMessage';
 
 class AuthContainer extends Component {
 	handleNewRegistration(formData) {
@@ -48,17 +50,24 @@ class AuthContainer extends Component {
 
 		return (
 			<div>
-				<LoginForm
-					auth={auth}
-					from={from}
-					handleLogin={this.handleLogin.bind(this)}
-					handleClearError={this.handleClearError.bind(this)}
-				/>
-				<Typography style={{marginTop: '50px', fontStyle: 'italic'}}>- or -</Typography>
-				<RegistrationForm 
-					auth={auth}
-					handleNewRegistration={this.handleNewRegistration.bind(this)}
-				/>
+				<ErrorMessage error={auth.error} />
+				{ auth.loading ?
+					<Loader />
+					:
+					<div>
+						<LoginForm
+							auth={auth}
+							from={from}
+							handleLogin={this.handleLogin.bind(this)}
+							handleClearError={this.handleClearError.bind(this)}
+						/>
+						<Typography style={{marginTop: '50px', fontStyle: 'italic'}}>- or -</Typography>
+						<RegistrationForm 
+							auth={auth}
+							handleNewRegistration={this.handleNewRegistration.bind(this)}
+						/>
+					</div>
+				}
 			</div>
 		);
 	}

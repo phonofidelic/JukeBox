@@ -49,7 +49,11 @@ export const postRegistration = data => {
 			console.error('postRegistration error:', err);
 			dispatch({
 				type: REGISTRATION_FAILURE,
-				message: err
+				error: { 
+					data: err.response.data,
+					status: err.response.status ,
+					message: err.response.data.message || err.response.data, 
+				}
 			});
 		});
 	}

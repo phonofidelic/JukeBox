@@ -9,18 +9,29 @@ import {
 	Typography,	
 } from '@material-ui/core';
 
-class LibraryError extends Component {
+class ErrorMessage extends Component {
+	state = {
+		errorDismissed: false
+	}
+
+	handleDismissError() {
+		this.setState({
+			errorDismissed: true
+		});
+	}
+
 	render() {
 		const { error, handleCloseError } = this.props;
+		const { errorDismissed } = this.state;
 		return (
 			<div>
-				<Dialog open={Boolean(error)}>
+				<Dialog open={Boolean(!errorDismissed && error)}>
 					<DialogTitle>Something went wrong.</DialogTitle>
 					<DialogContent>
 						<Typography>{ Boolean(error) && `${error.status} - ${error.message}` }</Typography>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={() => handleCloseError()}>Ok</Button>
+						<Button onClick={() => this.handleDismissError()}>Ok</Button>
 					</DialogActions>
 				</Dialog>
 			</div>
@@ -28,4 +39,4 @@ class LibraryError extends Component {
 	}
 }
 
-export default LibraryError;
+export default ErrorMessage;

@@ -21,6 +21,7 @@ const INITIAL_STATE = {
 	user: null,
 	token: null, // No need to store token here if storing in localStorage?
 	message: null,
+	error: false,
 	loginErr: null,
 }
 
@@ -52,7 +53,7 @@ const auth = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				message: action.failure,
+				error: action.error,
 			}
 
 		case POST_LOGIN:
