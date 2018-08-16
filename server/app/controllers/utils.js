@@ -35,40 +35,12 @@ module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((reso
 	.catch(err => reject(err));
 });
 
-// module.exports.checkArtist = (metaData, Artist, userId) => new Promise((resolve, reject) => {
-// 	// resolve('pass')
-// 	Artist.findOne({ name: metaData.common.artist })
-// 	.then((artist) => {
-// 		console.log('\n### @checkArtist, artist:', artist);
-// 		if (!artist) {
-// 			console.log('\n### Artist not found in DB, creating new document...');
-// 			const newArtist = new Artist({
-// 				userId: userId,
-// 				name: metaData.common.artist
-// 			});
-// 			newArtist.save((err, savedArtist) => {
-// 				if (err) {
-// 					// return console.error('\n### Could not save Artist doc:', err);
-// 					console.error('\n### Could not save Artist doc:', err);
-// 					reject(err);
-// 				}
-// 				console.log('\n### New Artist saved, savedArtist:', savedArtist);
-// 				resolve(savedArtist);
-// 			});
-// 		} else {
-// 			console.log('\n### Artist found in db, updating track document...');
-// 			resolve(artist);
-// 		}
-// 	})
-// 	.catch(err => {
-// 		reject(err);
-// 	});
-// });
-
+// BUG: Should return an Artist objectId?
 module.exports.checkArtist = (metaData, Artist, userId) => {
+	console.log('### Checking Artist collection for existing document...');
 	return Artist.findOne({ name: metaData.common.artist })
 	.then(artist => {
-		console.log('\n### @checkArtist, artist:', artist);
+		// console.log('\n### @checkArtist, artist:', artist);
 
 		if (!artist) {
 			console.log('\n### Artist not found in DB, creating new document...');
@@ -86,10 +58,12 @@ module.exports.checkArtist = (metaData, Artist, userId) => {
 	});
 };
 
+// BUG: Should return an Album objectId?
 module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, reject) => {
+	console.log('### Checking Album collection for existing document...');
 	Album.findOne({ title: metaData.common.album })
 	.then(album => {
-		console.log('\n### @checkAlbum, album:', album);
+		// console.log('\n### @checkAlbum, album:', album);
 		if (!album) {
 			console.log('\n### Album not found in DB, creating new document...');
 
@@ -100,7 +74,7 @@ module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, r
 				const newAlbum = new Album({
 					userId: userId,
 					title: metaData.common.album,
-					artist: metaData.common.artist,
+					// artist: metaData.common.artist,
 					artwork: [image]
 				});
 
@@ -144,7 +118,9 @@ module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, r
 
 module.exports.loadTracks = (Track, userId) => new Promise((resolve, reject) => {
 	Track.find({ userId: userId })
-	.populate('artistId albumId')
+	// .populate('artist album')
+	.populate({ path: 'artist', select: 'name' })
+	.populate({ path: 'album', select: 'title' })
 	.sort({ title: 1})
 	.exec((err, tracks) => {
 		if (err) reject(err);

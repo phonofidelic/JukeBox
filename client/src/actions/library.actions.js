@@ -42,9 +42,7 @@ export const loadLibrary = () => {
 
 			dispatch({
 				type: LOAD_LIBRARY_SUCCESS,
-				tracks: response.data.library[0],
-				artists: response.data.library[1],
-				albums: response.data.library[2]
+				tracks: response.data.library
 			});
 		})
 		.catch(err => {

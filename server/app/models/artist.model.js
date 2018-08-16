@@ -11,7 +11,7 @@ const STRINGS = {
 const ArtistSchema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	name: { type: String, default: STRINGS.default_unknown },
-	albums: [ Schema.Types.Mixed ],
+	albums: [ { type: Schema.Types.ObjectId, ref: 'Album' } ],
 	description: { type: String, default: STRINGS.default_noDescription }
 });
 

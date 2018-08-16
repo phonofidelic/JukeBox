@@ -18,7 +18,7 @@ module.exports.postTracks = (req, res, next) => {
 
 	req.files.forEach(file => {
 		// Check that file is not a directiry
-		if (!isFile(file.path)) return;
+		if (!isFile(file.path)) return next(new Error(`### ${file} is not a file`));
 		mm.parseFile(file.path, { native: true })
 		.then(metaData => {
 			console.log('### Handleing parsed meta-data...');
@@ -31,8 +31,8 @@ module.exports.postTracks = (req, res, next) => {
 
 				if (!track) {
 					console.log('\n### No track found in DB, creating new track...')
+
 					// Check for existing Artist and Album info
-					// Check for embeded image
 					return Promise.all([
 						utils.checkArtist(metaData, Artist, userId), 
 						utils.checkAlbum(metaData, Album, userId)
@@ -58,12 +58,13 @@ module.exports.postTracks = (req, res, next) => {
 							}
 						});
 						newTrack.save((err, newTrack) => {
+							if (err) return next(err);
 							console.log('\n### Saving new Track document, newTrack:', newTrack);
 
 							// Update Artist and Album docs with new track info
 
 							// Check if uploading track's album exists in Artist doc
-							Artist.findOne({ name: newTrack.artist.name, albums: { $elemMatch: { title: newTrack.album.title } } }, (err, artist) => {
+							Artist.findOne({ _id: newTrack.artist }, (err, artist) => {
 								if (err) return next(err);
 								console.log('\n### Checking for new Artist data...');
 								if (artist) {
@@ -80,7 +81,7 @@ module.exports.postTracks = (req, res, next) => {
 							});
 
 							// Check if uploading track's artist exists in Album doc
-							Album.findOne({ title: newTrack.album.title, 'artist.name': newTrack.artist.name }, (err, album) => {
+							Album.findOne({ _id: newTrack.album }, (err, album) => {
 								if (err) return next(err);
 								console.log('\n### Checking for new Album data...');
 								if (album) {

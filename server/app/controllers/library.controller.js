@@ -5,43 +5,11 @@ const utils = require('./utils');
 
 module.exports.loadLibrary = (req, res, next) => {
 	const userId = req.get('userId');
-	let library = {};
-	Promise.all([
-		utils.loadTracks(Track, userId),
-		utils.loadArtists(Artist, userId),
-		utils.loadAlbums(Album, userId)
-	])
+	utils.loadTracks(Track, userId)
 	.then((library) => {
-		// console.log('### loadLibrary, library:', library)
-		// TODO: change library response to:
-		// library = {
-		// 	tracks: library[0],
-		// 	artists: library[1],
-		// 	albums: library[2]
-		// };
 		res.json({ message: 'Library loaded', library: library });
 	}).catch(err => {
 		next(err);
-	});
-};
-
-// TODO: delete if unused
-module.exports.getTracks = (req, res, next) => {
-	Track.find({ 'userId': reg.get('userId') })
-	.sort({ title: 1 })
-	.exec((err, tracks) => {
-		if (err) return next(err);
-		res.json({ message: 'Tracks loaded', tracks: tracks });
-	});
-};
-
-// TODO: delete if unused
-module.exports.getArtists = (req, res, next) => {
-	Artist.find({})
-	.sort({ name: 1 })
-	.exec((err, artists) => {
-		if (err) return next(err);
-		res.json({ message: 'Artists loaded', artists: artists });
 	});
 };
 

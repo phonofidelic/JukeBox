@@ -6,8 +6,8 @@ const Album = require('./album.model');
 const TrackSchema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	title: { type: String, default: 'Unknown' },
-	artistId: { type: Schema.Types.ObjectId, required: true, ref: 'Artist' },
-	albumId: { type: Schema.Types.ObjectId, required: true, ref: 'Album' },
+	artist: { type: Schema.Types.ObjectId, required: true, ref: 'Artist' },
+	album: { type: Schema.Types.ObjectId, required: true, ref: 'Album' },
 	genre: [ String ],
 	order: {
 		no: { type: Number, default: 0 },
