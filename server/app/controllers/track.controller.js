@@ -64,7 +64,7 @@ module.exports.postTracks = (req, res, next) => {
 							// Update Artist and Album docs with new track info
 
 							// Check if uploading track's album exists in Artist doc
-							Artist.findOne({ _id: newTrack.artist }, (err, artist) => {
+							Artist.findOne({ albums: newTrack.album }, (err, artist) => {
 								if (err) return next(err);
 								console.log('\n### Checking for new Artist data...');
 								if (artist) {
@@ -81,7 +81,7 @@ module.exports.postTracks = (req, res, next) => {
 							});
 
 							// Check if uploading track's artist exists in Album doc
-							Album.findOne({ _id: newTrack.album }, (err, album) => {
+							Album.findOne({ _id: newTrack.album, artist: newTrack.artist }, (err, album) => {
 								if (err) return next(err);
 								console.log('\n### Checking for new Album data...');
 								if (album) {
