@@ -1,6 +1,6 @@
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
+// const passport = require('passport');
 
 const generateToken = user => {
 	return jwt.sign(user, process.env.JWT_SECRET, {
@@ -12,8 +12,8 @@ const setUserInfo = user => {
 	return {
 		_id: user._id,
 		email: user.email
-	}
-}
+	};
+};
 
 exports.registerNewUser = (req, res, next) => {
 	console.log('registerNewUser:', req.body)
@@ -35,7 +35,7 @@ exports.registerNewUser = (req, res, next) => {
 			res.json({
 				message: 'new user registered',
 				token: generateToken(userInfo),
-				user: userInfo
+				user: user
 			});
 		});
 	});	

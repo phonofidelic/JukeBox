@@ -26,19 +26,19 @@ describe('Track model', function() {
 			});
 		});
 
-		it('should require an artistId', function(done) {
-			testTrack.validate(function(err) {
-				expect(err.errors.artistId).to.exist;
-				done();
-			});
-		});
+		// it('should require an artistId', function(done) {
+		// 	testTrack.validate(function(err) {
+		// 		expect(err.errors.artistId).to.exist;
+		// 		done();
+		// 	});
+		// });
 
-		it('should require an albumId', function(done) {
-			testTrack.validate(function(err) {
-				expect(err.errors.albumId).to.exist;
-				done();
-			});
-		});
+		// it('should require an albumId', function(done) {
+		// 	testTrack.validate(function(err) {
+		// 		expect(err.errors.albumId).to.exist;
+		// 		done();
+		// 	});
+		// });
 
 		it('should require a file.path', function(done) {
 			testTrack.validate(function(err) {

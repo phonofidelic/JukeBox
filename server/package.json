@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "DB_CONNECTION=mongodb://localhost:27017/jukeTest nodemon index.js",
-    "test": "DB_CONNECTION=mongodb://localhost:27017/test ./node_modules/mocha/bin/mocha",
+    "dev": "DB_CONNECTION=mongodb://localhost:27017/jukeTest nodemon server.js",
+    "test": "DB_CONNECTION=mongodb://localhost:27017/test jest --coverage",
     "prod": "node index.js",
     "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js"
   },
@@ -34,6 +34,7 @@
     "mocha": "^5.2.0",
     "morgan": "^1.9.0",
     "sinon": "^6.1.4",
-    "sinon-mongoose": "^2.2.1"
+    "sinon-mongoose": "^2.2.1",
+    "supertest": "^3.1.0"
   }
 }

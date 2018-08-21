@@ -15,14 +15,19 @@ const ArtistSchema = new Schema({
 	description: { type: String, default: STRINGS.default_noDescription }
 });
 
-// ArtistSchema.statics.getArtistName = function(id) {
-// 	return this.findById(id, 'name')
-// 	.populate('artist')
-// 	.exec((err, artist) => {
-// 		console.log('### Populate artist feild:', artist)
-// 		return artist;
-// 	});
-// }
+ArtistSchema.statics.findOneWithAlbumId = function(albumId) {
+	return this.findOne({ albums: albumId }).exec();
+};
+
+// Update Artist soc with new Album data
+ArtistSchema.methods.updateWithNewAlbumData = function(albumId) {
+	this.albums.push(albumId);
+	this.save().then(artist => {
+		console.log(`\n### Artist updated with new albumId, artist: ${artist}`)
+	}).catch(err => {
+		console.error('\n### Could not update artist with new albumId:', err)
+	});
+};
 
 module.exports = mongoose.model(
 	'Artist',

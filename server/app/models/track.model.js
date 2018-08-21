@@ -26,6 +26,14 @@ const TrackSchema = new Schema({
 	}
 });
 
+TrackSchema.statics.findByTitle = function(title) {
+	Track.findOne({ title: title })
+	.exec((err, track) => {
+		if (err) return new Error(err);
+		return track;
+	});
+};
+
 module.exports = mongoose.model(
 	'Track',
 	TrackSchema

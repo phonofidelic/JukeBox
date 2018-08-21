@@ -46,14 +46,16 @@ describe('utils', () => {
 		    "__v" : 1
 			};
 
-			// return utils.checkArtist(metaData, Artist, userId).then(result => {
-			// 	console.log('### checkArtistResult, result:', result)	
-			// 	// return done()
-			// })
-			// .catch(err => {
-			// 	console.log('### checkArtistResult, err:', err)	
-			// 	// return done(err)
-			// })
+			return utils.checkArtist(metaData, Artist, userId)
+			.then(result => {
+				console.log('### checkArtistResult, result:', result)	
+				expect(result).toEqual(returnedArtist);
+				// return done()
+			})
+			.catch(err => {
+				console.log('### checkArtistResult, err:', err)	
+				// return done(err)
+			})
 			// // done()
 			
 			// return testPromise('pass').should.eventually.equal('pass');
