@@ -28,14 +28,15 @@ exports.registerNewUser = (req, res, next) => {
 			email: email,
 			password: password
 		});
-		user.save((err, user) => {
+		user.save((err, savedUser) => {
 			if (err) return next(err);
-			let userInfo = setUserInfo(user);
+			let userInfo = setUserInfo(savedUser);
+			
 
 			res.json({
 				message: 'new user registered',
 				token: generateToken(userInfo),
-				user: user
+				user: userInfo
 			});
 		});
 	});	
@@ -63,3 +64,5 @@ exports.getUserInfo = (req, res, next) => {
 		user: setUserInfo(req.user)
 	});
 }
+
+// TODO: Signout/unauth user
