@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Bug: this is not eoking:
+// Bug: this is not working:
 // Remove X-Powered-By express header from all response objects
 app.use((req, res, next) => {
   res.removeHeader("X-Powered-By");
@@ -57,7 +57,7 @@ app.use('/*', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-	console.error('### FROM ERROR HANDLER:', err.message);
+	console.error('### FROM ERROR HANDLER:', err);
 	res.status(500).json({message: err.message || 'Something broke!'});
 })
 

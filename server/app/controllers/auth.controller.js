@@ -1,6 +1,9 @@
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
-// const passport = require('passport');
+
+const STRINGS = {
+	user_registration_success: 'new user registered'
+}
 
 const generateToken = user => {
 	return jwt.sign(user, process.env.JWT_SECRET, {
@@ -16,7 +19,7 @@ const setUserInfo = user => {
 };
 
 exports.registerNewUser = (req, res, next) => {
-	console.log('registerNewUser:', req.body)
+	// console.log('registerNewUser:', req.body)
 	const { email, password } = req.body;
 	// TODO: Validate registration data before writing to DB
 
@@ -28,13 +31,14 @@ exports.registerNewUser = (req, res, next) => {
 			email: email,
 			password: password
 		});
+		
 		user.save((err, savedUser) => {
 			if (err) return next(err);
+
 			let userInfo = setUserInfo(savedUser);
-			
 
 			res.json({
-				message: 'new user registered',
+				message: STRINGS.user_registration_success,
 				token: generateToken(userInfo),
 				user: userInfo
 			});
@@ -45,7 +49,7 @@ exports.registerNewUser = (req, res, next) => {
 exports.login = (req, res, next) => {
 	const { email, password } = req.body;
 	const userInfo = setUserInfo(req.user);
-	console.log('userInfo:', userInfo)
+	// console.log('userInfo:', userInfo)
 
 	res.json({
 		message: 'Login successfull',

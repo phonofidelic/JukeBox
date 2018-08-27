@@ -1,3 +1,4 @@
+const fs = require('fs');
 const mm = require('music-metadata');
 const isFile = require('is-file');
 const path = require('path');
@@ -5,9 +6,15 @@ const path = require('path');
 const Track = require('../models/track.model');
 const Artist = require('../models/artist.model');
 const Album = require('../models/album.model');
-const fs = require('fs');
 const utils = require('./utils');
 const storage = require('../../config/storage_config');
+
+const STRINGS = {
+	user_registration_success: 'new user registered',
+	user_login_success: 'Login successfull',
+	user_data_querry_success: 'User info retrieved',
+	tracks_post_success: 'Tracks saved'
+};
 
 // Add multiple tracks
 module.exports.postTracks = (req, res, next) => {
@@ -92,8 +99,6 @@ module.exports.postTracks = (req, res, next) => {
 								}
 							});
 
-							// Update track image data
-
 							savedTracks.push(savedTrack);
 						});
 					})
@@ -122,7 +127,7 @@ module.exports.postTracks = (req, res, next) => {
 			return next(err);
 		})
 	});
-	res.json({message: 'Tracks saved', tracks: savedTracks });
+	res.json({message: STRINGS.tracks_post_success, tracks: savedTracks });
 };
 
 // Edit a track
