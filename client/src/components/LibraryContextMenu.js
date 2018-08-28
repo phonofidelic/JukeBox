@@ -15,9 +15,16 @@ class LibraryContextMenu extends Component {
 			handleAddToQueue,
 		} = this.props;
 
+		const styles = {
+			root: {
+				padding: '0px'
+			}
+		}
+
 		// console.log('LibraryContextMenu, anchorEl:', anchorEl)
 		return (
 			<Menu
+				style={styles.root}
 				id="options-menu"
 				anchorEl={anchorEl}
 				open={Boolean(anchorEl)}

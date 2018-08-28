@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authActions } from '../actions';
+import { getRedirectReferrer } from '../selectors';
 import Typography from '@material-ui/core/Typography';
 import { Redirect } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import RegistrationForm from '../components/RegistrationForm';
 import Loader from '../components/Loader';
-import ErrorMessage from '../components/ErrorMessage';
+import ErrorMessageContainer from './ErrorMessageContainer';
 
 class AuthContainer extends Component {
 	handleNewRegistration(formData) {
@@ -50,7 +51,7 @@ class AuthContainer extends Component {
 
 		return (
 			<div>
-				<ErrorMessage error={auth.error} />
+				<ErrorMessageContainer />
 				{ auth.loading ?
 					<Loader />
 					:
@@ -73,9 +74,9 @@ class AuthContainer extends Component {
 	}
 }
 
-const getRedirectReferrer = (state) => {
-	return state.router.location.pathname;
-}
+// const getRedirectReferrer = (state) => {
+// 	return state.router.location.pathname;
+// }
 
 const mapStateToProps = state => {
   return {

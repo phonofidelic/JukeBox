@@ -37,6 +37,7 @@ class LibraryRow extends Component {
 	}
 
 	handleToggleEditMode() {
+		console.log('handleToggleEditMode, state:', this.state)
 		this.setState({ ...this.state, editMode: !this.state.editMode });
 	}
 

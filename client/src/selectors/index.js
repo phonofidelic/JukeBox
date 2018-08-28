@@ -5,3 +5,7 @@ export const getSelectedTrack = state => {
 export const getCurrentQueueIndex = state => {
 	return state.player.queueIndex;
 }
+
+export const getRedirectReferrer = state => {
+	return state.router.location.pathname;
+}

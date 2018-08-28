@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/uploader.actions';
 import Uploader from '../components/Uploader';
 import Loader from '../components/Loader';
+import ErrorMessageContainer from './ErrorMessageContainer';
 
 export class UploaderContainer extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ export class UploaderContainer extends Component {
 
 		return (
       <div>
+      <ErrorMessageContainer />
       {
         library.loading ?
           <Loader />

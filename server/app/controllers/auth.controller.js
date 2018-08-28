@@ -2,7 +2,8 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 const STRINGS = {
-	user_registration_success: 'new user registered'
+	user_registration_success: 'new user registered',
+	user_email_conflict: 'Sorry, that email address is already in use'
 }
 
 const generateToken = user => {
@@ -25,7 +26,7 @@ exports.registerNewUser = (req, res, next) => {
 
 	User.findOne({email: email}, (err, existingUser) => {
 		if (err) return next(err);
-		if (existingUser) return res.status(422).send({error: 'Sorry, that email address is already in use'});
+		if (existingUser) return res.status(422).json({ message: STRINGS.user_email_conflict });
 
 		const user = new User({
 			email: email,

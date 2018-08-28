@@ -52,7 +52,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				error: action.error
+				// error: action.error
 			}
 
 		case UPLOAD_SUCCESS:

@@ -21,17 +21,17 @@ class ErrorMessage extends Component {
 	}
 
 	render() {
-		const { error, handleCloseError } = this.props;
+		const { error, handleClearError } = this.props;
 		const { errorDismissed } = this.state;
 		return (
 			<div>
-				<Dialog open={Boolean(!errorDismissed && error)}>
+				<Dialog open={error.showError}>
 					<DialogTitle>Something went wrong.</DialogTitle>
 					<DialogContent>
-						<Typography>{ Boolean(error) && `${error.status} - ${error.message}` }</Typography>
+						<Typography>{`${error.status} - ${error.message}` }</Typography>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={() => this.handleDismissError()}>Ok</Button>
+						<Button onClick={() => handleClearError()}>Ok</Button>
 					</DialogActions>
 				</Dialog>
 			</div>

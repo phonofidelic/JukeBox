@@ -7,7 +7,7 @@ import { libraryActions,
 import LibraryMobile from '../components/LibraryMobile';
 import LibraryDesktop from '../components/LibraryDesktop';
 import Loader from '../components/Loader';
-import ErrorMessage from '../components/ErrorMessage';
+import ErrorMessageContainer from './ErrorMessageContainer';
 
 const actions = { 
   ...libraryActions, 
@@ -124,13 +124,9 @@ export class TrackListContainer extends Component {
       anchorEl,
     } = this.state;
 
-    // const userAgentIsMobile = navigator.userAgent.indexOf('Mobile') > 0;
-
-    // console.log('userAgentIsMobile:', userAgentIsMobile)
-
 		return (
       <div>
-        <ErrorMessage error={library.error} />
+        <ErrorMessageContainer />
         { library.loading ? 
           <Loader /> 
           : 

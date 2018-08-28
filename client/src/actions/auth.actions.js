@@ -46,14 +46,12 @@ export const postRegistration = data => {
 			});
 		})
 		.catch(err => {
-			console.error('postRegistration error:', err);
+			console.log('postRegistration error:', err);
 			dispatch({
 				type: REGISTRATION_FAILURE,
-				error: { 
-					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
-				}
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data,
 			});
 		});
 	}
@@ -83,12 +81,14 @@ export const login = data => {
 			console.log('login error:', err.response);
 			dispatch({
 				type: LOGIN_FAILURE,
-				error: err
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data,
 			});
-			dispatch({
-				type: SET_MESSAGE,
-				message: {text: `Could not authenticate. Please check that your email and password are correct.`, context: 'danger'}
-			})
+			// dispatch({
+			// 	type: SET_MESSAGE,
+			// 	message: {text: `Could not authenticate. Please check that your email and password are correct.`, context: 'danger'}
+			// })
 		});
 	}
 }
@@ -126,7 +126,9 @@ export const getUserInfo = () => {
 		.catch(err => {
 			dispatch({
 				type: GET_USER_INFO_FAILURE,
-				// message: err,
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data,
 			});
 		})
 	}

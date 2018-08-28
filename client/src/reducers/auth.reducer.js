@@ -75,7 +75,8 @@ const auth = (state = INITIAL_STATE, action) => {
 		case LOGIN_FAILURE:
 			return {
 				...state,
-				loginErr: action.error,
+				loading: false,
+				error: action.error,
 			}
 
 		case UNAUTH_USER:

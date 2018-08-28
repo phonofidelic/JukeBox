@@ -49,11 +49,9 @@ export const loadLibrary = () => {
 			console.error(err);
 			dispatch({
 				type: LOAD_LIBRARY_FAILURE,
-				error: { 
-					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
-				}
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data, 
 			});
 		});
 	}
@@ -108,12 +106,10 @@ export const editTrack = (formData, trackData) => {
 			console.error('postTrackData error:', err);
 			dispatch({
 				type: POST_TRACK_DATA_FAILURE,
-				message: {text: 'Could not save changes', context: 'danger'},
-				error: { 
-					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
-				}
+				// message: {text: 'Could not save changes', context: 'danger'},
+				data: err.response.data,
+				status: err.response.status,
+				message: err.response.data.message || err.response.data,
 			});
 		});
 	}
@@ -154,12 +150,10 @@ export const deleteTrackConfirm = track => {
 			console.error('deleteTrack error:', err);
 			dispatch({
 				type: DELETE_TRACK_FAILURE,
-				message: {text: 'Could not delete track', context: 'danger'},
-				error: { 
-					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
-				},
+				// message: {text: 'Could not delete track', context: 'danger'},
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data, 
 			});
 		});
 	}
@@ -196,11 +190,9 @@ export const showDetailView = (id, type) => {
 			console.error('showDetailView error:', err);
 			dispatch({
 				type: FETCH_DETAIL_VIEW_FAILURE,
-				error: { 
-					data: err.response.data,
-					status: err.response.status,
-					message: err.response.data.message || err.response.data, 
-				}
+				data: err.response.data,
+				status: err.response.status,
+				message: err.response.data.message || err.response.data,
 			})
 		});
 	}

@@ -55,4 +55,5 @@ export const // uploaderActionTypes
 						 GET_USER_INFO_SUCCESS = 'get_user_info_success',
 						 GET_USER_INFO_FAILURE = 'get_user_info_failure',
 						 VALIDATION_ERROR='validation_error',
+						 TRIGGER_ERROR_MESSAGE = 'trigger_error_message',
 						 CLEAR_ERROR='clear_error';
