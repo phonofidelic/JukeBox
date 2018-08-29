@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
 	Button,
 	Dialog,
@@ -14,21 +15,18 @@ class ErrorMessage extends Component {
 		errorDismissed: false
 	}
 
-	handleDismissError() {
-		this.setState({
-			errorDismissed: true
-		});
-	}
-
 	render() {
-		const { error, handleClearError } = this.props;
-		const { errorDismissed } = this.state;
+		const { 
+			error, 
+			handleClearError,
+		} = this.props;
+
 		return (
 			<div>
 				<Dialog open={error.showError}>
-					<DialogTitle>Something went wrong.</DialogTitle>
+					<DialogTitle>{error.title}</DialogTitle>
 					<DialogContent>
-						<Typography>{`${error.status} - ${error.message}` }</Typography>
+						<Typography>{error.status && `${error.status} - `}{error.message}</Typography>
 					</DialogContent>
 					<DialogActions>
 						<Button onClick={() => handleClearError()}>Ok</Button>
@@ -37,6 +35,11 @@ class ErrorMessage extends Component {
 			</div>
 		);
 	}
+}
+
+ErrorMessage.propTypes = {
+	error: PropTypes.object.isRequired,
+	handleClearError: PropTypes.func.isRequired,
 }
 
 export default ErrorMessage;

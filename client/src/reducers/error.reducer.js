@@ -7,19 +7,25 @@ import {
 	FETCH_DETAIL_VIEW_FAILURE,
 	DELETE_TRACK_FAILURE,
 	UPLOAD_FAILURE,
-	// TRIGGER_ERROR_MESSAGE,
+	TRIGGER_ERROR_MESSAGE,
 	CLEAR_ERROR,
 } from '../actiontypes';
+
+const STRINGS = {
+	error_default: 'Something went wrong...'
+}
 
 const INITIAL_STATE = {
 	showError: false,
 	data: null,
+	title: null,
 	status: null,
 	message: null,
 };
 
 const error = (state = INITIAL_STATE, action) => {
 	switch(action.type) {
+		case TRIGGER_ERROR_MESSAGE:
 		case REGISTRATION_FAILURE: 
 		case LOGIN_FAILURE:
 		case VALIDATION_ERROR:
@@ -31,6 +37,7 @@ const error = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				showError: true,
+				title: action.title || STRINGS.error_default,
 				status: action.status,
 				message: action.message,
 			}
