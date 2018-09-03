@@ -15,7 +15,7 @@ const STRINGS = {
 	error_default: 'Something went wrong...'
 }
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	showError: false,
 	data: null,
 	title: null,

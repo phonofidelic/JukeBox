@@ -13,9 +13,9 @@ import {
 	DELETE_TRACK_FAILURE,
 	ORDER_TRACKS_BY_FIELD_VALUE,
 	SET_MESSAGE,
-	SHOW_DETAIL_VIEW,
-	FETCH_DETAIL_VIEW_FAILURE,
 	FETCH_DETAIL_VIEW,
+	FETCH_DETAIL_VIEW_SUCCESS,
+	FETCH_DETAIL_VIEW_FAILURE,
 	CLOSE_DETAIL_VIEW,
 	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
@@ -182,7 +182,7 @@ export const showDetailView = (id, type) => {
 		.then(response => {
 			console.log('showDetailView, response:', response);
 			dispatch({
-				type: SHOW_DETAIL_VIEW,
+				type: FETCH_DETAIL_VIEW_SUCCESS,
 				detailViewData: response.data.artist || response.data.album,
 			});
 		})

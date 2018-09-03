@@ -25,7 +25,7 @@ const renderField = ({
 	/>
 );
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
 	render() {
 		const { 
 			auth,
@@ -43,7 +43,7 @@ class LoginForm extends Component {
 			}
 		}
 
-		console.log('LoginForm, auth.loginErr:', Boolean(auth.loginErr))
+		// console.log('LoginForm, auth.loginErr:', Boolean(auth.loginErr))
 		return (
 			<form
 				style={styles.root}

@@ -22,7 +22,7 @@ export const // uploaderActionTypes
 						 ORDER_TRACKS_BY_FIELD_VALUE = 'order_tracks_by_field_value',
 						 FETCH_DETAIL_VIEW = 'fetsch_detail_view',
 						 FETCH_DETAIL_VIEW_FAILURE = 'fetch_detail_view_failure',
-						 SHOW_DETAIL_VIEW = 'show_detail_view',
+						 FETCH_DETAIL_VIEW_SUCCESS = 'fetch_detail_view_success',
 						 CLOSE_DETAIL_VIEW = 'close_detail_view',
 						 DISMISS_LIBRARY_ERR = 'dismiss_library_err',
 						 // playerActiontypes

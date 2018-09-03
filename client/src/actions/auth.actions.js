@@ -15,7 +15,8 @@ import {
 	CLEAR_ERROR,
 } from '../actiontypes';
 import axios from 'axios';
-import { history } from '../.';
+// import { history } from '../.';
+import { history } from '../config';
 
 export const checkUserAgent = () => {
 	return dispatch => {
@@ -62,7 +63,7 @@ export const login = data => {
 		dispatch({
 			type: POST_LOGIN
 		});
-		console.log('login, data:', data)
+		// console.log('login, data:', data)
 		// TODO: 	Validate data
 		axios.post('/auth/login', data)
 		.then(response => {
@@ -79,11 +80,12 @@ export const login = data => {
 		})
 		.catch(err => {
 			console.log('login error:', err.response);
+			// BUG: 
 			dispatch({
 				type: LOGIN_FAILURE,
 				data: err.response.data,
 				status: err.response.status ,
-				message: err.response.data.message || err.response.data,
+				message: err.response.message || err.response.data,
 			});
 			// dispatch({
 			// 	type: SET_MESSAGE,

@@ -8,11 +8,12 @@ import './index.css';
 import App from './App';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import registerServiceWorker from './registerServiceWorker';
-import createBrowserHistory from 'history/createBrowserHistory';
+// import createBrowserHistory from 'history/createBrowserHistory';
+// import { history } from './config';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
-import { THEME } from './config';
+import { history, THEME } from './config';
 
-export const history = createBrowserHistory();
+// export const history = createBrowserHistory();
 
 const store = createStore(
 	reducer,

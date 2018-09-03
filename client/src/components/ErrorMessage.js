@@ -37,9 +37,9 @@ class ErrorMessage extends Component {
 	}
 }
 
-ErrorMessage.propTypes = {
-	error: PropTypes.object.isRequired,
-	handleClearError: PropTypes.func.isRequired,
-}
+// ErrorMessage.propTypes = {
+// 	error: PropTypes.object.isRequired,
+// 	handleClearError: PropTypes.func.isRequired,
+// }
 
 export default ErrorMessage;

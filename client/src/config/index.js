@@ -1,3 +1,7 @@
+import createBrowserHistory from 'history/createBrowserHistory';
+
+export const history = createBrowserHistory();
+
 export const URLS = {
 	TRACK_URL: '/tracks',
   ARTIST_URL: '/library/artists',
@@ -29,7 +33,7 @@ export const THEME = {
       dark: '#222'
     },
     secondary: {
-      main: '#fbaaac', // accent
+      main: '#e91e00', // accent
       light: '#fafafa', // background
       dark: '#ba000d'
     },

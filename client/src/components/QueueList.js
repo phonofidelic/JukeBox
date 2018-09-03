@@ -37,7 +37,7 @@ class QueueList extends Component {
 
 		const styles = {
 			playing: {
-				background: theme.palette.secondary.main,
+				background: theme.palette.primary.main,
 			}
 		}
 

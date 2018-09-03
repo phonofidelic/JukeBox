@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { libraryActions, 
+import { 
+  libraryActions, 
   playerActions, 
   authActions 
 } from '../actions';
