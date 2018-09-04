@@ -16,11 +16,12 @@ import {
 
 const INITIAL_STATE = {
 	isAuthed: false,
-	userAgentIsMobile: null,
+	userAgentIsMobile: false,
 	loading: false,
 	user: null,
 	token: null, // No need to store token here if storing in localStorage?
 	message: null,
+	error: false,
 	loginErr: null,
 }
 
@@ -52,7 +53,7 @@ const auth = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				message: action.failure,
+				error: action.error,
 			}
 
 		case POST_LOGIN:
@@ -74,7 +75,8 @@ const auth = (state = INITIAL_STATE, action) => {
 		case LOGIN_FAILURE:
 			return {
 				...state,
-				loginErr: action.error,
+				loading: false,
+				error: action.error,
 			}
 
 		case UNAUTH_USER:

@@ -41,7 +41,9 @@ export const uploadTracks = (formData) => {
 			console.error('uploadTrack error:', err);
 			dispatch({
 				type: UPLOAD_FAILURE,
-				error: err
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data, 
 			});
 		});
 	}

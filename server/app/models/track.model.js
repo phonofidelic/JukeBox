@@ -6,14 +6,8 @@ const Album = require('./album.model');
 const TrackSchema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	title: { type: String, default: 'Unknown' },
-	artist: {
-		_id: { type: Schema.Types.ObjectId, required: true },
-		name: { type: String, default: 'Unknown' }
-	},
-	album: {
-		_id: { type: Schema.Types.ObjectId, required: true },
-		title: { type: String, default: 'Unknown' }
-	},
+	artist: { type: Schema.Types.ObjectId, required: true, ref: 'Artist' },
+	album: { type: Schema.Types.ObjectId, required: true, ref: 'Album' },
 	genre: [ String ],
 	order: {
 		no: { type: Number, default: 0 },
@@ -32,16 +26,13 @@ const TrackSchema = new Schema({
 	}
 });
 
-TrackSchema.pre('validate', function(next) {
-	console.log('### FROM PRE VALIDATE ###')
-	console.log('this:', this)
-	next();
-	
-	// Look for matching artist
-	// Artist.findOne({ name: })
-	// If one is found, add it's id to tracks artist.id field
-	// Otherwise, create a new artist document
-});
+TrackSchema.statics.findByTitle = function(title) {
+	Track.findOne({ title: title })
+	.exec((err, track) => {
+		if (err) return new Error(err);
+		return track;
+	});
+};
 
 module.exports = mongoose.model(
 	'Track',

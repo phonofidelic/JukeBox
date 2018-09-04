@@ -1,3 +1,4 @@
+const fs = require('fs');
 const mm = require('music-metadata');
 const isFile = require('is-file');
 const path = require('path');
@@ -5,9 +6,15 @@ const path = require('path');
 const Track = require('../models/track.model');
 const Artist = require('../models/artist.model');
 const Album = require('../models/album.model');
-const fs = require('fs');
 const utils = require('./utils');
 const storage = require('../../config/storage_config');
+
+const STRINGS = {
+	user_registration_success: 'new user registered',
+	user_login_success: 'Login successfull',
+	user_data_querry_success: 'User info retrieved',
+	tracks_post_success: 'Tracks saved'
+};
 
 // Add multiple tracks
 module.exports.postTracks = (req, res, next) => {
@@ -18,7 +25,7 @@ module.exports.postTracks = (req, res, next) => {
 
 	req.files.forEach(file => {
 		// Check that file is not a directiry
-		if (!isFile(file.path)) return;
+		if (!isFile(file.path)) return next(new Error(`### ${file} is not a file`));
 		mm.parseFile(file.path, { native: true })
 		.then(metaData => {
 			console.log('### Handleing parsed meta-data...');
@@ -31,23 +38,28 @@ module.exports.postTracks = (req, res, next) => {
 
 				if (!track) {
 					console.log('\n### No track found in DB, creating new track...')
+
 					// Check for existing Artist and Album info
-					// Check for embeded image
 					return Promise.all([
+<<<<<<< HEAD
 						utils.saveImage(metaData.common.picture, Album),
+||||||| merged common ancestors
+						utils.saveImage(metaData.common.picture),
+=======
+>>>>>>> 31bf30dfbd989aa6c2194f8d8d53a8617ca62989
 						utils.checkArtist(metaData, Artist, userId), 
 						utils.checkAlbum(metaData, Album, userId)
 					])
 					.then(values => {
-						console.log('### values:', values);
+						console.log('\n### values:', values);
 						// Save track with parsed meta-data and 
 						// values passed from utility methods
 						const newTrack = new Track({
 							userId: userId,
 							title: metaData.common.title,
-							image: values[0],
-							artist: values[1],
-							album: values[2],
+							artist: values[0],
+							album: values[1],
+							image: values[1].artwork[0],
 							genre: metaData.common.genre,
 							order: metaData.common.track,
 							format: metaData.format,
@@ -58,24 +70,42 @@ module.exports.postTracks = (req, res, next) => {
 								mimetype: file.mimetype
 							}
 						});
-						newTrack.save((err, newTrack) => {
+						newTrack.save((err, savedTrack) => {
+							if (err) return next(err);
+							console.log('\n### Saving new Track document, savedTrack:', savedTrack);
+
 							// Update Artist and Album docs with new track info
-							Artist.findById(newTrack.artist._id, (err, artist) => {
+
+							// Check if uploading track's album exists in Artist doc
+							Artist.findOneWithAlbumId(savedTrack.album._id)
+							.then(artist => {
+								if (artist) return console.log('\n### Uploading track\'s Album data already in Artist doc');
+								Artist.findById(savedTrack.artist)
+								.then(artist => {
+									artist.updateWithNewAlbumData(savedTrack.album._id);
+								})
+								.catch(err => next(err));
+							})
+							.catch(err => next(err));
+
+							// Check if uploading track's artist exists in Album doc
+							Album.findOne({ _id: savedTrack.album, artist: savedTrack.artist }, (err, album) => {
 								if (err) return next(err);
-								if (!artist) return console.log('\n### No artist found, ');
-								console.log('\n### Updating album data on artist')
-								artist.albums.push(newTrack.album);
-								artist.save();
+								console.log('\n### Checking for new Album data...');
+								if (album) {
+									return console.log('\n### Uploading track\'s Artist data already in Album doc');
+								} else {
+									console.log('\n### Uploading track\'s Artist data not found in Album doc');
+									Album.findById(savedTrack.album._id, (err, album) => {
+										if (err) return next(err);
+										console.log('\n### Updating Album doc with new Artist data...');
+										album.artist = savedTrack.artist;
+										album.save();
+									});
+								}
 							});
 
-							Album.findById(newTrack.album._id, (err, album) => {
-								if (err) return next(err);
-								if (!album) return console.log('\n### No album found');
-								console.log('\n### Updating artist data on album')
-								album.artist = newTrack.artist;
-								album.save();
-							});
-							savedTracks.push(newTrack);
+							savedTracks.push(savedTrack);
 						});
 					})
 					.catch(err => {
@@ -94,7 +124,7 @@ module.exports.postTracks = (req, res, next) => {
 					if (err) return next(err);
 					console.log('### Deleted '+ file.path);
 				});
-
+				// TODO: add message object to saved tracks
 				return console.log('### Track already saved');
 			});
 		})
@@ -103,7 +133,7 @@ module.exports.postTracks = (req, res, next) => {
 			return next(err);
 		})
 	});
-	res.json({message: 'Tracks saved', tracks: savedTracks })
+	res.json({message: STRINGS.tracks_post_success, tracks: savedTracks });
 };
 
 // Edit a track
@@ -115,6 +145,7 @@ module.exports.editTrack = (req, res, next) => {
 	Track.findByIdAndUpdate(trackId, freshData, {new: true}, (err, updatedTrack) => {
 		if (err) return next(err);
 		console.log('PUT /tracks/:trackId response:\n', updatedTrack);
+		// TODO: change to: res.json({ message: 'Track removed', updatedTrack: updatedTrack });
 		res.json({ message: 'Track updated', data: updatedTrack });
 	});
 };
@@ -125,22 +156,21 @@ module.exports.removeTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
 	Track.findByIdAndRemove(trackId, (err, removedTrack) => {
 		if (err) return next(err);
-		console.log('DELETE /tracks/:trackId track path:\n', removedTrack.file.path);
 		// Delete audio file in uploads/audio
 		fs.unlink(removedTrack.file.path, (err) => {
 			if (err) return next(err);
-			console.log(`Deleted audio file ${removedTrack.file.path}`);
+			console.log(`\n### Deleted audio file ${removedTrack.file.path}`);
 		});
 
-		// If an imnage file exists,
-		// delete it from uploads/images
-		if (removedTrack.image.src) {
+		// If an image file exists, delete it from uploads/images
+		if (removedTrack.image.src && removedTrack.image.src !== 'defaultImage') {
 			fs.unlink(removedTrack.image.src, (err) => {
 				if (err) return next(err);
-				console.log(`Deleted image file ${removedTrack.image.src}`);
+				console.log(`\n### Deleted image file ${removedTrack.image.src}`);
 			});
 		}
 
+		// TODO: change to: res.json({ message: 'Track removed', removedTrack: removedTrack });
 		res.json({ message: 'Track removed', data: removedTrack });
 	});
 	// TODO: Delete track in file system, otherwise there will be lots of

@@ -13,9 +13,9 @@ import {
 	DELETE_TRACK_FAILURE,
 	ORDER_TRACKS_BY_FIELD_VALUE,
 	SET_MESSAGE,
-	SHOW_DETAIL_VIEW,
-	FETCH_DETAIL_VIEW_FAILURE,
 	FETCH_DETAIL_VIEW,
+	FETCH_DETAIL_VIEW_SUCCESS,
+	FETCH_DETAIL_VIEW_FAILURE,
 	CLOSE_DETAIL_VIEW,
 	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
@@ -42,20 +42,16 @@ export const loadLibrary = () => {
 
 			dispatch({
 				type: LOAD_LIBRARY_SUCCESS,
-				tracks: response.data.library[0],
-				artists: response.data.library[1],
-				albums: response.data.library[2]
+				tracks: response.data.library
 			});
 		})
 		.catch(err => {
 			console.error(err);
 			dispatch({
 				type: LOAD_LIBRARY_FAILURE,
-				error: { 
-					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
-				}
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data, 
 			});
 		});
 	}
@@ -110,12 +106,10 @@ export const editTrack = (formData, trackData) => {
 			console.error('postTrackData error:', err);
 			dispatch({
 				type: POST_TRACK_DATA_FAILURE,
-				message: {text: 'Could not save changes', context: 'danger'},
-				error: { 
-					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
-				}
+				// message: {text: 'Could not save changes', context: 'danger'},
+				data: err.response.data,
+				status: err.response.status,
+				message: err.response.data.message || err.response.data,
 			});
 		});
 	}
@@ -156,12 +150,10 @@ export const deleteTrackConfirm = track => {
 			console.error('deleteTrack error:', err);
 			dispatch({
 				type: DELETE_TRACK_FAILURE,
-				message: {text: 'Could not delete track', context: 'danger'},
-				error: { 
-					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
-				},
+				// message: {text: 'Could not delete track', context: 'danger'},
+				data: err.response.data,
+				status: err.response.status ,
+				message: err.response.data.message || err.response.data, 
 			});
 		});
 	}
@@ -190,7 +182,7 @@ export const showDetailView = (id, type) => {
 		.then(response => {
 			console.log('showDetailView, response:', response);
 			dispatch({
-				type: SHOW_DETAIL_VIEW,
+				type: FETCH_DETAIL_VIEW_SUCCESS,
 				detailViewData: response.data.artist || response.data.album,
 			});
 		})
@@ -198,11 +190,9 @@ export const showDetailView = (id, type) => {
 			console.error('showDetailView error:', err);
 			dispatch({
 				type: FETCH_DETAIL_VIEW_FAILURE,
-				error: { 
-					data: err.response.data,
-					status: err.response.status,
-					message: err.response.data.message || err.response.data, 
-				}
+				data: err.response.data,
+				status: err.response.status,
+				message: err.response.data.message || err.response.data,
 			})
 		});
 	}

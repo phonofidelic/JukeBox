@@ -15,3 +15,4 @@ docker-compose.yml
 **/build
 server/client_build
 .commit_notes
+**/coverage

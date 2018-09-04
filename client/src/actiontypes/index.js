@@ -22,7 +22,7 @@ export const // uploaderActionTypes
 						 ORDER_TRACKS_BY_FIELD_VALUE = 'order_tracks_by_field_value',
 						 FETCH_DETAIL_VIEW = 'fetsch_detail_view',
 						 FETCH_DETAIL_VIEW_FAILURE = 'fetch_detail_view_failure',
-						 SHOW_DETAIL_VIEW = 'show_detail_view',
+						 FETCH_DETAIL_VIEW_SUCCESS = 'fetch_detail_view_success',
 						 CLOSE_DETAIL_VIEW = 'close_detail_view',
 						 DISMISS_LIBRARY_ERR = 'dismiss_library_err',
 						 // playerActiontypes
@@ -55,4 +55,5 @@ export const // uploaderActionTypes
 						 GET_USER_INFO_SUCCESS = 'get_user_info_success',
 						 GET_USER_INFO_FAILURE = 'get_user_info_failure',
 						 VALIDATION_ERROR='validation_error',
+						 TRIGGER_ERROR_MESSAGE = 'trigger_error_message',
 						 CLEAR_ERROR='clear_error';

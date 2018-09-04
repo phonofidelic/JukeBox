@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { libraryActions, 
+import { 
+  libraryActions, 
   playerActions, 
   authActions 
 } from '../actions';
 import LibraryMobile from '../components/LibraryMobile';
 import LibraryDesktop from '../components/LibraryDesktop';
-import LibraryError from '../components/LibraryError';
 import Loader from '../components/Loader';
+import ErrorMessageContainer from './ErrorMessageContainer';
 
 const actions = { 
   ...libraryActions, 
@@ -124,44 +125,36 @@ export class TrackListContainer extends Component {
       anchorEl,
     } = this.state;
 
-    // const userAgentIsMobile = navigator.userAgent.indexOf('Mobile') > 0;
-
-    // console.log('userAgentIsMobile:', userAgentIsMobile)
-
 		return (
       <div>
-        <LibraryError 
-          error={library.error}
-          handleCloseError={this.handleCloseError.bind(this)}
-        />
-        { 
-          library.loading ? 
-            <Loader /> 
-            : 
+        <ErrorMessageContainer />
+        { library.loading ? 
+          <Loader /> 
+          : 
             userAgentIsMobile ?
-        			<LibraryMobile 
-                library={library} 
-                order={order}
-                orderBy={orderBy}
-                handleUploadTracks={this.handleUploadTracks.bind(this)} 
-                handleOrderBy={this.handleOrderBy.bind(this)}
-                handleCloseDetailView={this.handleCloseDetailView.bind(this)}
-              /> 
-          		:
-              <LibraryDesktop 
-                library={library} 
-                order={order}
-                orderBy={orderBy}
-                anchorEl={anchorEl}
-                userAgentIsMobile={userAgentIsMobile}
-                handleRequestSort={this.handleRequestSort.bind(this)}
-                handleSelectTrack={this.handleSelectTrack.bind(this)}
-                handleOptionsClick={this.handleOptionsClick.bind(this)}
-                handleOptionsClose={this.handleOptionsClose.bind(this)}
-                handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
-                handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
-                handleCloseDetailView={this.handleCloseDetailView.bind(this)}
-              />
+      			<LibraryMobile 
+              library={library} 
+              order={order}
+              orderBy={orderBy}
+              handleUploadTracks={this.handleUploadTracks.bind(this)} 
+              handleOrderBy={this.handleOrderBy.bind(this)}
+              handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+            /> 
+        		:
+            <LibraryDesktop 
+              library={library} 
+              order={order}
+              orderBy={orderBy}
+              anchorEl={anchorEl}
+              userAgentIsMobile={userAgentIsMobile}
+              handleRequestSort={this.handleRequestSort.bind(this)}
+              handleSelectTrack={this.handleSelectTrack.bind(this)}
+              handleOptionsClick={this.handleOptionsClick.bind(this)}
+              handleOptionsClose={this.handleOptionsClose.bind(this)}
+              handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
+              handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
+              handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+            />
         }
       </div>
     );

@@ -47,7 +47,7 @@ class LibraryRowContainer extends Component {
 			track,
 			player,
 			selectedTrack,
-			handleStartNewQueue,
+			// handleStartNewQueue,
 			handleOpenDetailView,
 			handleCloseDetailView,
 		} = this.props;

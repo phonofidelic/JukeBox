@@ -15,14 +15,14 @@ import {
 	ORDER_TRACKS_BY_FIELD_VALUE,
 	FETCH_DETAIL_VIEW,
 	FETCH_DETAIL_VIEW_FAILURE,
-	SHOW_DETAIL_VIEW,
+	FETCH_DETAIL_VIEW_SUCCESS,
 	CLOSE_DETAIL_VIEW,
 	CLEAR_MESSAGE,
 	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
 import { _ } from 'underscore';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	loading: false,
 	tracks: [],
 	selectedTrack: null,
@@ -52,7 +52,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				error: action.error
+				// error: action.error
 			}
 
 		case UPLOAD_SUCCESS:
@@ -180,7 +180,7 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 				error: action.error,
 			}
 
-		case SHOW_DETAIL_VIEW:
+		case FETCH_DETAIL_VIEW_SUCCESS:
 			return {
 				...state,
 				loading: false,

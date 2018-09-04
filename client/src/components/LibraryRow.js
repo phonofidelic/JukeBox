@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LibraryContextMenu from './LibraryContextMenu';
 import {
 	TableRow,
@@ -16,7 +17,7 @@ import { withTheme } from '@material-ui/core/styles';
 import * as moment from 'moment';
 import 'moment-duration-format';
 
-class LibraryRow extends Component {
+export class LibraryRow extends Component {
 	constructor(props) {
 		super(props);
 
@@ -37,6 +38,7 @@ class LibraryRow extends Component {
 	}
 
 	handleToggleEditMode() {
+		console.log('handleToggleEditMode, state:', this.state)
 		this.setState({ ...this.state, editMode: !this.state.editMode });
 	}
 
@@ -182,6 +184,17 @@ class LibraryRow extends Component {
 			</TableRow>
 		);
 	}
+}
+
+LibraryRow.propTypes = {
+	track: PropTypes.object.isRequired,
+	player: PropTypes.object.isRequired,
+	selectedTrack: PropTypes.object,
+	handleSelectTrack: PropTypes.func.isRequired,
+	handleEditTrackData: PropTypes.func.isRequired,
+	handleStartNewQueue: PropTypes.func.isRequired,
+	handleAddToQueue: PropTypes.func.isRequired,
+	handleOpenDetailView: PropTypes.func.isRequired,
 }
 
 export default withTheme()(LibraryRow);

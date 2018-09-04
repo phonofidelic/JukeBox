@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -17,20 +18,19 @@ const renderField = ({
  ...custom 
 }) => (
 	<TextField
-		label={Boolean(touched && error || custom.loginerr) ? error : label}
+		label={Boolean(touched && error) ? error : label}
 		error={Boolean(touched && error)}
 		{...input}
 		{...custom} 
 	/>
 );
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
 	render() {
 		const { 
 			auth,
 			handleLogin,
 			handleSubmit,
-			handleClearError,
 		} = this.props;
 
 
@@ -43,12 +43,11 @@ class LoginForm extends Component {
 			}
 		}
 
-		console.log('LoginForm, auth.loginErr:', Boolean(auth.loginErr))
+		// console.log('LoginForm, auth.loginErr:', Boolean(auth.loginErr))
 		return (
 			<form
 				style={styles.root}
 				onSubmit={handleSubmit(handleLogin)}
-				onChange={auth.loginErr && handleClearError}
 				auth={auth}
 			>
 				<div style={styles.header}>
@@ -62,7 +61,6 @@ class LoginForm extends Component {
 						type="email"
 						name="email"
 						label="Email"
-						loginerr={auth.loginErr}
 						validate={[validation.required, validation.email]}
 						placeholder="Enter your email"
 					/>
@@ -73,7 +71,6 @@ class LoginForm extends Component {
 						type="password"
 						name="password"
 						label="Password"
-						loginerr={auth.loginErr}
 						validate={[validation.required]}
 						placeholder="Enter your password"
 					/>
@@ -90,5 +87,11 @@ class LoginForm extends Component {
 		);
 	}
 }
+
+LoginForm.propTypes = {
+	auth: PropTypes.object.isRequired,
+	handleLogin: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
+};
 
 export default form(LoginForm);

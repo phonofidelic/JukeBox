@@ -3,9 +3,15 @@ const uuidv4 = require('uuid/v4');
 
 // TODO: Handle image sizes and save multiple images for sm/md/lg
 // TODO, BUG: Handle broken images - some images show up as broken image links in ui
+<<<<<<< HEAD
 module.exports.saveImage = (image) => new Promise((resolve, reject) => {
 	// If no embedded image is found for the file, save default image.
 	// 'defaultImage' string tells client to render Album icon.
+||||||| merged common ancestors
+module.exports.saveImage = (image) => new Promise((resolve, reject) => {
+=======
+const saveImage = (image) => new Promise((resolve, reject) => {
+>>>>>>> 31bf30dfbd989aa6c2194f8d8d53a8617ca62989
 	if (!image) {
 		resolve({ format: 'png', src: 'defaultImage' });
 	}
@@ -17,56 +23,103 @@ module.exports.saveImage = (image) => new Promise((resolve, reject) => {
 
 	fs.writeFile(imgPath, image[0].data, (err) => {
 		if (err) {
-			console.error('readFile error', err);
+			console.error('writeFile error:', err);
 			reject(err);
 		};
 		resolve({ format: image[0].format, src:imgPath });
 	});
 });
 
-module.exports.checkArtist = (metaData, Artist, userId) => new Promise((resolve, reject) => {
-	console.
-	log('\n############## metaData.common.artist:', metaData.common.artist);
-	Artist.findOne({ name: metaData.common.artist })
-	.then((artist) => {
-		console.log('\n### @checkArtist, artist:', artist);
-		if (!artist) {
-			console.log('\n### Artist not found in DB, creating new document...');
-			const newArtist = new Artist({
-				userId: userId,
-				name: metaData.common.artist
-			});
-			newArtist.save((err, savedArtist) => {
-				console.log('\n### New Artist saved, savedArtist:', savedArtist);
-				resolve(savedArtist);
-			});
-		} else {
-			console.log('\n### Artist found in db, updating track document...');
-			resolve(artist);
-		}
-	})
-	.catch(err => {
-		reject(err);
+const findArtistByName = (artistName, Artist) => new Promise((resolve, reject) => {
+	Artist.findOne({ name: artistName }, (err, artist) => {
+		if (err) reject(err);
+		resolve(artist);
 	});
 });
 
+// TODO: delete if unused
+module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((resolve, reject) => {
+	Track.findOne({ title: metaData.common.title })
+	.then(track => {
+		resolve(track);
+	})
+	.catch(err => reject(err));
+});
+
+// BUG: Should return an Artist objectId?
+module.exports.checkArtist = (metaData, Artist, userId) => {
+	console.log('### Checking Artist collection for existing document...');
+	return Artist.findOne({ name: metaData.common.artist })
+	.then(artist => {
+		// console.log('\n### @checkArtist, artist:', artist);
+
+		if (!artist) {
+			console.log('\n### Artist not found in DB, creating new document...');
+			return new Artist({
+				userId: userId,
+				name: metaData.common.artist
+			})
+			.save();
+		}
+		console.log('\n### Artist found in db');
+		return artist;
+	})
+	.catch(err =>{
+		return new new Error(err);
+	});
+};
+
+// BUG: Should return an Album objectId?
 module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, reject) => {
+	console.log('### Checking Album collection for existing document...');
 	Album.findOne({ title: metaData.common.album })
 	.then(album => {
-		console.log('\n### @checkAlbum, album:', album);
+		// console.log('\n### @checkAlbum, album:', album);
 		if (!album) {
 			console.log('\n### Album not found in DB, creating new document...');
-			const newAlbum = new Album({
-				userId: userId,
-				title: metaData.common.album,
-				artist: metaData.common.artist
-			});
-			newAlbum.save((err, savedAlbum) => {
-				console.log('\n### New album saved, savedAlbum:', savedAlbum);
-				resolve(savedAlbum);	
+
+			// Save album art 
+			saveImage(metaData.common.picture)
+			.then(image => {
+				console.log('### Saving new Album, image:', image)
+				const newAlbum = new Album({
+					userId: userId,
+					title: metaData.common.album,
+					// artist: metaData.common.artist,
+					artwork: [image]
+				});
+
+				newAlbum.save((err, savedAlbum) => {
+					if (err) return console.error('\n### Could not save Album doc:', err);
+					console.log('\n### New album saved, savedAlbum:', savedAlbum);
+					resolve(savedAlbum);	
+				});
+			})
+			.catch(err => {
+				console.error('\n### Could not save image:', err);
 			});
 		} else {
 			console.log('\n### Album found in db, updating track document...');
+
+			// Check Album doc artwork field
+			// If uploading track has embeded album art...
+			// or
+			// If artork field is empty or if first item is a default image...
+			if (metaData.common.picture && (album.artwork.length < 1 || album.artwork[0].src === 'defaultImage')) {
+				console.log('\n### Saving new album art...')
+				saveImage(metaData.common.picture)
+				.then(image => {
+					album.artwork.unshift(image);
+					album.save((err, savedAlbum) => {
+						if (err) return console.log('\n### Could not update album art:', err);
+						console.log('\n### Album updated with new album art');
+						resolve(savedAlbum);
+					});
+				})
+				.catch(err => {
+					console.error('\n### Could not save image:', err);
+				});
+			}
 			resolve(album);
 		}
 	})
@@ -77,12 +130,13 @@ module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, r
 
 module.exports.loadTracks = (Track, userId) => new Promise((resolve, reject) => {
 	Track.find({ userId: userId })
+	// .populate('artist album')
+	.populate({ path: 'artist', select: 'name' })
+	.populate({ path: 'album', select: 'title' })
 	.sort({ title: 1})
-	.then((tracks) => {
+	.exec((err, tracks) => {
+		if (err) reject(err);
 		resolve(tracks);
-	})
-	.catch(err => {
-		reject(err);
 	});
 });
 
@@ -106,4 +160,4 @@ module.exports.loadAlbums = (Album, userId) =>  new Promise((resolve, reject) =>
 	.catch(err => {
 		reject(err);
 	});
-})
+});
