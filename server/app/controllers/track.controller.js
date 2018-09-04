@@ -34,7 +34,7 @@ module.exports.postTracks = (req, res, next) => {
 					// Check for existing Artist and Album info
 					// Check for embeded image
 					return Promise.all([
-						utils.saveImage(metaData.common.picture),
+						utils.saveImage(metaData.common.picture, Album),
 						utils.checkArtist(metaData, Artist, userId), 
 						utils.checkAlbum(metaData, Album, userId)
 					])

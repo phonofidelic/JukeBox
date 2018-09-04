@@ -4,9 +4,14 @@ const uuidv4 = require('uuid/v4');
 // TODO: Handle image sizes and save multiple images for sm/md/lg
 // TODO, BUG: Handle broken images - some images show up as broken image links in ui
 module.exports.saveImage = (image) => new Promise((resolve, reject) => {
+	// If no embedded image is found for the file, save default image.
+	// 'defaultImage' string tells client to render Album icon.
 	if (!image) {
 		resolve({ format: 'png', src: 'defaultImage' });
 	}
+
+	// TODO: check for an existing image in DB. Check by shared Album id?
+
 	// Create a unique name for the image file and append to pathe for track image location
 	const imgPath = `${process.env.FS_IMAGE}/${uuidv4()}.${image[0].format}`;
 
