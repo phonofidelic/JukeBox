@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --verbose=true",
+    "test": "react-scripts test --env=jsdom --verbose=false",
     "coverage": "react-scripts test --env=jsdom --verbose=true --coverage",
     "eject": "react-scripts eject"
   },

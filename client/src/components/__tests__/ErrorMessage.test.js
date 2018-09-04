@@ -17,7 +17,7 @@ describe('ErrorMessage', () => {
 	let mountedErrorMessage;
 	let muiRenderer;
 
-	const errorMessage = (props) => {
+	const errorMessage = props => {
 		if (!mountedErrorMessage) {
 			mountedErrorMessage = mount(
 				<ErrorMessage {...props} />
@@ -28,7 +28,7 @@ describe('ErrorMessage', () => {
 
 	beforeEach(() => {
 		props = {
-			error: { ...INITIAL_STATE },
+			error: INITIAL_STATE,
 			handleClearError: jest.fn()
 		};
 		mountedErrorMessage = undefined;

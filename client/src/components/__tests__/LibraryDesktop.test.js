@@ -21,7 +21,7 @@ describe('LibraryDesktop', () => {
 	};
 
 	beforeEach(() => {
-		console.log('### INITIAL_STATE:', INITIAL_STATE)
+		// console.log('### INITIAL_STATE:', INITIAL_STATE)
 		props = {
 			library: INITIAL_STATE,
 			order: 'desc',

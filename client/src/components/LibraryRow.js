@@ -17,7 +17,7 @@ import { withTheme } from '@material-ui/core/styles';
 import * as moment from 'moment';
 import 'moment-duration-format';
 
-class LibraryRow extends Component {
+export class LibraryRow extends Component {
 	constructor(props) {
 		super(props);
 

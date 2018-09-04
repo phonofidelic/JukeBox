@@ -12,7 +12,7 @@ import {
 	SEEK,
 } from '../actiontypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	queue: [],
 	showQueue: true,
 	playing: false,
