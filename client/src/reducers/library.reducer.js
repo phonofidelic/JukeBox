@@ -22,7 +22,7 @@ import {
 } from '../actiontypes';
 import { _ } from 'underscore';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	loading: false,
 	tracks: [],
 	selectedTrack: null,

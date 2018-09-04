@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LibraryContextMenu from './LibraryContextMenu';
 import {
 	TableRow,
@@ -183,6 +184,17 @@ class LibraryRow extends Component {
 			</TableRow>
 		);
 	}
+}
+
+LibraryRow.propTypes = {
+	track: PropTypes.object.isRequired,
+	player: PropTypes.object.isRequired,
+	selectedTrack: PropTypes.object,
+	handleSelectTrack: PropTypes.func.isRequired,
+	handleEditTrackData: PropTypes.func.isRequired,
+	handleStartNewQueue: PropTypes.func.isRequired,
+	handleAddToQueue: PropTypes.func.isRequired,
+	handleOpenDetailView: PropTypes.func.isRequired,
 }
 
 export default withTheme()(LibraryRow);

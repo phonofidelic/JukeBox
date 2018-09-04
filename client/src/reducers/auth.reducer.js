@@ -16,7 +16,7 @@ import {
 
 const INITIAL_STATE = {
 	isAuthed: false,
-	userAgentIsMobile: null,
+	userAgentIsMobile: false,
 	loading: false,
 	user: null,
 	token: null, // No need to store token here if storing in localStorage?

@@ -47,6 +47,16 @@ describe('DetailCard', () => {
 		expect(divs).toHaveLength(1);
 	});
 
+	/***
+	 *	Snapshot testing material-ui components needs createRender
+	 *	for tesing rendered Dialog component:
+	 *	https://material-ui.com/guides/testing/#createrender-options-render
+	 *
+	 *	This is needed because material-ui uses React portals to
+	 *	render modals: 
+	 *	https://reactjs.org/docs/portals.html
+	 *	https://github.com/facebook/react/issues/11565
+	 */
 	it('renders a Dialog if detailViewData is present', () => {
 		props.detailViewData = testArtistData;
 

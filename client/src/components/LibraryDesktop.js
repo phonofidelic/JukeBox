@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import LibraryRowContainer from '../containers/LibraryRowContainer';
 import {
 	Table,
@@ -68,10 +69,8 @@ class LibraryDesktop extends Component {
 	render() {
 		const {
 			library,
-			player,
 			order,
 			orderBy,
-			anchorEl,
 			userAgentIsMobile,
 			handleSelectTrack,
 			handleOptionsClick,
@@ -85,7 +84,10 @@ class LibraryDesktop extends Component {
 		const styles = {
 			root: {
 				background: theme.palette.primary.light,
-				marginBottom: userAgentIsMobile ? theme.dimensions.nav.navHeight + theme.dimensions.player.playerHeight : theme.dimensions.player.playerHeight, // TODO: link value to Player + Nav height
+				marginBottom: userAgentIsMobile ? 
+					theme.dimensions.nav.navHeight + theme.dimensions.player.playerHeight 
+					: 
+					theme.dimensions.player.playerHeight,
 				marginLeft: theme.dimensions.navDesktop.navWidth,
 			},
 			tableHead: {
@@ -131,12 +133,6 @@ class LibraryDesktop extends Component {
 					: 
 					null
 				}
-			{
-				// <DetailCard 
-				// 	detailViewData={library.detailViewData}
-				// 	handleCloseDetailView={handleCloseDetailView}
-				// />
-			}
 				<Table style={styles.root}>
 					<TableHead style={styles.tableHead}>
 						<TableRow>
@@ -190,6 +186,20 @@ class LibraryDesktop extends Component {
 			</div>
 		);
 	}
+}
+
+LibraryDesktop.propTypes = {
+	library: PropTypes.object.isRequired,
+	order: PropTypes.string.isRequired,
+	orderBy: PropTypes.string.isRequired,
+	userAgentIsMobile: PropTypes.bool.isRequired,
+	handleSelectTrack: PropTypes.func.isRequired,
+	handleOptionsClick: PropTypes.func.isRequired,
+	handleOptionsClose: PropTypes.func.isRequired,
+	handleMenuOptionClickEdit: PropTypes.func.isRequired,
+	handleMenuOptionClickDelete: PropTypes.func.isRequired,
+	handleCloseDetailView: PropTypes.func.isRequired,
+	theme: PropTypes.object.isRequired,
 }
 
 export default withTheme()(LibraryDesktop);

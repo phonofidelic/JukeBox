@@ -55,7 +55,6 @@ describe('ErrorMessage', () => {
 	 *	https://reactjs.org/docs/portals.html
 	 *	https://github.com/facebook/react/issues/11565
 	 */
-
 	it('renders a Dialog if an error is present', () => {
 		props.error = {
 			showError: true,

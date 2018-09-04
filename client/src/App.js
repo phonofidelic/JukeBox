@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 // import { authActions } from './actions';
 import MessageContainer from './containers/MessageContainer';
-import AlertContainer from './containers/AlertContainer';
+// import AlertContainer from './containers/AlertContainer';
 import PlayerContainer from './containers/PlayerContainer';
 import NavContainer from './containers/NavContainer';
 // import { ConnectedRouter } from 'react-router-redux';
