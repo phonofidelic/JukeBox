@@ -41,6 +41,19 @@ class PlayerProgress extends Component {
 		this.props.handleSeek(segment.pos, player.currentTrack);
 	}
 
+	getSegments() {
+		const { player } = this.props;
+		let segments = [];
+
+		if (player.currentTrack) {
+			for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
+				segments.push({pos: i});
+			}
+		}
+
+		return segments;
+	}
+
 	render() {
 		const { player, theme } = this.props;
 		const styles = {
@@ -61,10 +74,13 @@ class PlayerProgress extends Component {
 			}
 		}
 
-		let segments = [];
-		for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
-			segments.push({pos: i});
-		}
+		// let segments = [];
+		// for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
+		// 	segments.push({pos: i});
+		// }
+
+		const segments = this.getSegments();
+
 		const ww = window.innerWidth;
 		const segWidth = Math.floor(ww/segments.length);
 	

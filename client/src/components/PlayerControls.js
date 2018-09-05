@@ -66,6 +66,14 @@ class PlayerControls extends Component {
 			handleToggleQueue
 		} = this.props;
 
+		const styles = {
+			togglePlayerButton: {
+				position: 'fixed', 
+				right: '0px', 
+				zIndex: '1001'
+			}
+		}
+
 		return (
 			<Grid 
 				container 
@@ -90,7 +98,7 @@ class PlayerControls extends Component {
 						<SkipNext />
 					</IconButton>
 				</Grid>
-				<div style={{position: 'fixed', right: '0px', zIndex: '1001'}}>
+				<div style={styles.togglePlayerButton}>
 					<IconButton 
 						onClick={ handleToggleQueue }
 						onTouchStart={this.handleTouchStart.bind(this)}

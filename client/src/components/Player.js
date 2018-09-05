@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Howl, Howler} from 'howler';
+import PropTypes from 'prop-types';
+// import {Howl, Howler} from 'howler';
 import PlayerProgress from './PlayerProgress';
 import PlayerControls from './PlayerControls';
 import QueueList from './QueueList';
@@ -29,6 +30,7 @@ export class Player extends Component {
 			  position: 'fixed',
 			  bottom: userAgentIsMobile ? theme.dimensions.nav.navHeight : 0, // Makes room for bottom Nav componenet
 			  width: '100%',
+			  // maxWidth: 500,
 			  boxShadow: '0px -1px 20px 1px #ccc',
 			  backgroundColor: theme.palette.secondary.light,
 			  borderBottom: `solid 1px ${theme.palette.primary.main}`,
@@ -75,6 +77,20 @@ export class Player extends Component {
 			</div>
 		);
 	}
+}
+
+Player.propTypes = {
+	player: PropTypes.object.isRequired,
+	selectedTrack: PropTypes.object.isRequired,
+	userAgentIsMobile: PropTypes.bool.isRequired,
+	handlePlayTrack: PropTypes.func.isRequired,
+	handlePauseTrack: PropTypes.func.isRequired,
+	handleStopTrack: PropTypes.func.isRequired,
+	handlePlayNext: PropTypes.func.isRequired,
+	handlePlayPrev: PropTypes.func.isRequired,
+	handleToggleQueue: PropTypes.func.isRequired,
+	handlePlayFromQueue: PropTypes.func.isRequired,
+	handleSeek: PropTypes.func.isRequired,
 }
 
 export default withTheme()(Player);
