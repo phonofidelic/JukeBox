@@ -2,16 +2,9 @@ const fs = require('fs');
 const uuidv4 = require('uuid/v4');
 
 // TODO: Handle image sizes and save multiple images for sm/md/lg
-// TODO, BUG: Handle broken images - some images show up as broken image links in ui
-<<<<<<< HEAD
-module.exports.saveImage = (image) => new Promise((resolve, reject) => {
+const saveImage = (image) => new Promise((resolve, reject) => {
 	// If no embedded image is found for the file, save default image.
 	// 'defaultImage' string tells client to render Album icon.
-||||||| merged common ancestors
-module.exports.saveImage = (image) => new Promise((resolve, reject) => {
-=======
-const saveImage = (image) => new Promise((resolve, reject) => {
->>>>>>> 31bf30dfbd989aa6c2194f8d8d53a8617ca62989
 	if (!image) {
 		resolve({ format: 'png', src: 'defaultImage' });
 	}

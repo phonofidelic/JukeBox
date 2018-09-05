@@ -41,12 +41,6 @@ module.exports.postTracks = (req, res, next) => {
 
 					// Check for existing Artist and Album info
 					return Promise.all([
-<<<<<<< HEAD
-						utils.saveImage(metaData.common.picture, Album),
-||||||| merged common ancestors
-						utils.saveImage(metaData.common.picture),
-=======
->>>>>>> 31bf30dfbd989aa6c2194f8d8d53a8617ca62989
 						utils.checkArtist(metaData, Artist, userId), 
 						utils.checkAlbum(metaData, Album, userId)
 					])
