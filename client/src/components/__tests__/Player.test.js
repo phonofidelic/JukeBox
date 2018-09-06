@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import { createRender } from '@material-ui/core/test-utils';
 
 import Player from '../Player';
 import { INITIAL_STATE } from '../../reducers/player.reducer';

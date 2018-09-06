@@ -65,9 +65,15 @@ describe('ErrorMessage', () => {
 
 		const tree = muiRenderer(<ErrorMessage {...props} />);
 		const dialog = errorMessage(props).find('Dialog');
+		const dialogTitle = errorMessage(props).find('DialogTitle');
+		const dialogContent = errorMessage(props).find('DialogContent');
+		const dialogActions = errorMessage(props).find('DialogActions');
 
 		expect(tree).toMatchSnapshot();
 		expect(dialog).toHaveLength(1);
+		expect(dialogTitle).toHaveLength(1);
+		expect(dialogContent).toHaveLength(1);
+		expect(dialogActions).toHaveLength(1);
 	});
 });
 

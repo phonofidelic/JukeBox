@@ -38,8 +38,13 @@ class ErrorMessage extends Component {
 }
 
 ErrorMessage.propTypes = {
-	error: PropTypes.object.isRequired,
-	handleClearError: PropTypes.func.isRequired,
+	error: PropTypes.shape({
+		showError: PropTypes.bool.isRequired,
+		title: PropTypes.string.isRequired,
+		status: PropTypes.number,
+		message: PropTypes.string.isRequired,
+	}),
+	handleClearError: PropTypes.func.isRequired
 }
 
 export default ErrorMessage;
