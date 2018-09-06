@@ -71,7 +71,6 @@ class PlayerContainer extends Component {
 		return player.queue.length ?
 			<Player 
 				player={ player }
-				selectedTrack={ selectedTrack }
 				userAgentIsMobile={ userAgentIsMobile }
 				handlePlayTrack={ this.handlePlayTrack.bind(this) }
 				handlePauseTrack={ this.handlePauseTrack.bind(this) }

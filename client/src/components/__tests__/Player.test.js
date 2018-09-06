@@ -10,6 +10,16 @@ import { testTrack } from '../../utils';
 
 describe('Player', () => {
 	let props;
+	let mountedPlayer;
+
+	const player = props => {
+		if (!mountedPlayer) {
+			mountedPlayer = mount(
+				<Player {...props} />
+			);
+		}
+		return mountedPlayer;
+	}
 
 	beforeEach(() => {
 		props = {
@@ -25,14 +35,28 @@ describe('Player', () => {
 			handlePlayFromQueue: jest.fn(),
 			handleSeek: jest.fn(),
 			theme: THEME
-		}
+		};
+
+		mountedPlayer = undefined;
+	});
+
+	it('always renders a container div', () => {
+		const divs = player(props).find('div');
+
+		expect(divs.length).toBeGreaterThan(0);
 	});
 
 	it('(desktop mode) renders correctly when no tracks are loaded', () => {
 		const tree = renderer
 			.create( <Player {...props} />)
 			.toJSON();
+		const playerProgress = player(props).find('PlayerProgress');
+		const playerControls = player(props).find('PlayerControls');
+		const queueList = player(props).find('QueueList');
 
+		expect(playerProgress.length).toBe(1);
+		expect(playerControls.length).toBe(1);
+		expect(queueList.length).toBe(1);
 		expect(tree).toMatchSnapshot();
 	});
 
@@ -44,6 +68,13 @@ describe('Player', () => {
 		const tree = renderer
 			.create(<Player {...props} />)
 			.toJSON();
+		const playerProgress = player(props).find('PlayerProgress');
+		const playerControls = player(props).find('PlayerControls');
+		const queueList = player(props).find('QueueList');
+
+		expect(playerProgress.length).toBe(1);
+		expect(playerControls.length).toBe(1);
+		expect(queueList.length).toBe(1);
 
 		expect(tree).toMatchSnapshot();
 	});
@@ -57,6 +88,13 @@ describe('Player', () => {
 		const tree = renderer
 			.create(<Player {...props} />)
 			.toJSON();
+		const playerProgress = player(props).find('PlayerProgress');
+		const playerControls = player(props).find('PlayerControls');
+		const queueList = player(props).find('QueueList');
+
+		expect(playerProgress.length).toBe(1);
+		expect(playerControls.length).toBe(1);
+		expect(queueList.length).toBe(1);
 
 		expect(tree).toMatchSnapshot();
 	});
@@ -66,6 +104,13 @@ describe('Player', () => {
 		const tree = renderer
 			.create( <Player {...props} />)
 			.toJSON();
+		const playerProgress = player(props).find('PlayerProgress');
+		const playerControls = player(props).find('PlayerControls');
+		const queueList = player(props).find('QueueList');
+
+		expect(playerProgress.length).toBe(1);
+		expect(playerControls.length).toBe(1);
+		expect(queueList.length).toBe(1);
 
 		expect(tree).toMatchSnapshot();
 	});
@@ -79,6 +124,13 @@ describe('Player', () => {
 		const tree = renderer
 			.create(<Player {...props} />)
 			.toJSON();
+		const playerProgress = player(props).find('PlayerProgress');
+		const playerControls = player(props).find('PlayerControls');
+		const queueList = player(props).find('QueueList');
+
+		expect(playerProgress.length).toBe(1);
+		expect(playerControls.length).toBe(1);
+		expect(queueList.length).toBe(1);
 
 		expect(tree).toMatchSnapshot();
 	});
@@ -93,6 +145,13 @@ describe('Player', () => {
 		const tree = renderer
 			.create(<Player {...props} />)
 			.toJSON();
+		const playerProgress = player(props).find('PlayerProgress');
+		const playerControls = player(props).find('PlayerControls');
+		const queueList = player(props).find('QueueList');
+
+		expect(playerProgress.length).toBe(1);
+		expect(playerControls.length).toBe(1);
+		expect(queueList.length).toBe(1);
 
 		expect(tree).toMatchSnapshot();
 	});
