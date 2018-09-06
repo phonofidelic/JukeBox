@@ -12,7 +12,7 @@ export class Player extends Component {
 	render() {
 		const { 
 			player, 
-			time,
+			// time,
 			userAgentIsMobile,
 			handleStopTrack,
 			handlePlayTrack,
@@ -81,7 +81,7 @@ export class Player extends Component {
 
 Player.propTypes = {
 	player: PropTypes.object.isRequired,
-	selectedTrack: PropTypes.object.isRequired,
+	// selectedTrack: PropTypes.object.isRequired,
 	userAgentIsMobile: PropTypes.bool.isRequired,
 	handlePlayTrack: PropTypes.func.isRequired,
 	handlePauseTrack: PropTypes.func.isRequired,

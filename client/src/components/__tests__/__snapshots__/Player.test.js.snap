@@ -1,6 +1,3478 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Player renders correctly 1`] = `
+exports[`Player renders correctly when a track is playing 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#ff4081",
+      "borderBottom": "solid 1px #3f51b5",
+      "bottom": 0,
+      "boxShadow": "0px -1px 20px 1px #ccc",
+      "padding": "0",
+      "position": "fixed",
+      "width": "100%",
+      "zIndex": 2,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "background": "#ccc",
+        "height": "10px",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "background": "#f50057",
+          "height": "100%",
+          "width": "0%",
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "height": "10px",
+          "position": "absolute",
+          "top": "0",
+          "width": "100%",
+        }
+      }
+    >
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="MuiGrid-container-1"
+  >
+    <div
+      className="MuiGrid-item-2 MuiGrid-grid-xs-12-39"
+    >
+      <div
+        className="MuiGrid-container-1 MuiGrid-align-items-xs-center-9"
+      >
+        <div
+          className="MuiGrid-item-2 MuiGrid-grid-xs-12-39"
+        >
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M6 6h2v12H6zm3.5 6l8.5 6V6z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "position": "fixed",
+              "right": "0px",
+              "zIndex": "1001",
+            }
+          }
+        >
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchCancel={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiCollapse-container-114 MuiCollapse-entered-115"
+    direction="up"
+    style={
+      Object {
+        "minHeight": "0px",
+      }
+    }
+  >
+    <div
+      className="MuiCollapse-wrapper-116"
+    >
+      <div
+        className="MuiCollapse-wrapperInner-117"
+      >
+        <ul
+          className="MuiList-root-118 MuiList-padding-119"
+          style={
+            Object {
+              "padding": "0",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Player renders correctly when a track paused 1`] = `
+<div
+  style={
+    Object {
+      "backgroundColor": "#ff4081",
+      "borderBottom": "solid 1px #3f51b5",
+      "bottom": 0,
+      "boxShadow": "0px -1px 20px 1px #ccc",
+      "padding": "0",
+      "position": "fixed",
+      "width": "100%",
+      "zIndex": 2,
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "background": "#ccc",
+        "height": "10px",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "background": "#f50057",
+          "height": "100%",
+          "width": "0%",
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "height": "10px",
+          "position": "absolute",
+          "top": "0",
+          "width": "100%",
+        }
+      }
+    >
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+      <span
+        onClick={[Function]}
+        onTouchEnd={[Function]}
+        style={
+          Object {
+            "borderBottom": "none",
+            "borderTop": "none",
+            "flex": "1",
+            "height": "100%",
+            "width": "8px",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="MuiGrid-container-1"
+  >
+    <div
+      className="MuiGrid-item-2 MuiGrid-grid-xs-12-39"
+    >
+      <div
+        className="MuiGrid-container-1 MuiGrid-align-items-xs-center-9"
+      >
+        <div
+          className="MuiGrid-item-2 MuiGrid-grid-xs-12-39"
+        >
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M6 6h2v12H6zm3.5 6l8.5 6V6z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M8 5v14l11-7z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+        </div>
+        <div
+          style={
+            Object {
+              "position": "fixed",
+              "right": "0px",
+              "zIndex": "1001",
+            }
+          }
+        >
+          <button
+            className="MuiButtonBase-root-98 MuiIconButton-root-92"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchCancel={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label-97"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-101"
+                color={undefined}
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path
+                    d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                  />
+                </g>
+              </svg>
+            </span>
+            <span
+              className="MuiTouchRipple-root-107"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiCollapse-container-114 MuiCollapse-entered-115"
+    direction="up"
+    style={
+      Object {
+        "minHeight": "0px",
+      }
+    }
+  >
+    <div
+      className="MuiCollapse-wrapper-116"
+    >
+      <div
+        className="MuiCollapse-wrapperInner-117"
+      >
+        <ul
+          className="MuiList-root-118 MuiList-padding-119"
+          style={
+            Object {
+              "padding": "0",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Player renders correctly when no tracks are loaded 1`] = `
 <div
   style={
     Object {
