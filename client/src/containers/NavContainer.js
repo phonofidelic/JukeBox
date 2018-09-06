@@ -22,7 +22,10 @@ class NavContainer extends Component {
 	render() {
 		const { userAgentIsMobile, location } = this.props;
 
-		return userAgentIsMobile ? <NavMobile location={location} handleSignOut={this.handleSignOut.bind(this)} /> : <NavDesktop location={location} handleSignOut={this.handleSignOut.bind(this)} />
+		return userAgentIsMobile ? 
+			<NavMobile location={location} handleSignOut={this.handleSignOut.bind(this)} /> 
+			: 
+			<NavDesktop location={location} handleSignOut={this.handleSignOut.bind(this)} />
 	}
 }
 

@@ -10,12 +10,8 @@ import {
 	GET_USER_INFO,
 	GET_USER_INFO_SUCCESS,
 	GET_USER_INFO_FAILURE,
-	VALIDATION_ERROR,
-	SET_MESSAGE,
-	CLEAR_ERROR,
 } from '../actiontypes';
 import axios from 'axios';
-// import { history } from '../.';
 import { history } from '../config';
 
 export const checkUserAgent = () => {
@@ -80,17 +76,12 @@ export const login = data => {
 		})
 		.catch(err => {
 			console.log('login error:', err.response);
-			// BUG: 
 			dispatch({
 				type: LOGIN_FAILURE,
 				data: err.response.data,
 				status: err.response.status ,
 				message: err.response.message || err.response.data,
 			});
-			// dispatch({
-			// 	type: SET_MESSAGE,
-			// 	message: {text: `Could not authenticate. Please check that your email and password are correct.`, context: 'danger'}
-			// })
 		});
 	}
 }
@@ -132,14 +123,6 @@ export const getUserInfo = () => {
 				status: err.response.status ,
 				message: err.response.data.message || err.response.data,
 			});
-		})
-	}
-}
-
-export const clearError = () => {
-	return dispatch => {
-		dispatch({
-			type: CLEAR_ERROR
 		})
 	}
 }

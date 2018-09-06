@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   BottomNavigation, 
@@ -80,6 +81,11 @@ class NavDesktop extends Component {
       </Grid>
     );
   };
+}
+
+NavDesktop.Proptypes = {
+  userAgentIsMobile: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default withTheme()(NavDesktop);

@@ -10,8 +10,6 @@ import {
 	GET_USER_INFO,
 	GET_USER_INFO_SUCCESS,
 	GET_USER_INFO_FAILURE,
-	VALIDATION_ERROR,
-	CLEAR_ERROR,
 } from '../actiontypes';
 
 const INITIAL_STATE = {
@@ -22,7 +20,6 @@ const INITIAL_STATE = {
 	token: null, // No need to store token here if storing in localStorage?
 	message: null,
 	error: false,
-	loginErr: null,
 }
 
 const auth = (state = INITIAL_STATE, action) => {
@@ -53,7 +50,7 @@ const auth = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				error: action.error,
+				// error: action.error,
 			}
 
 		case POST_LOGIN:
@@ -76,7 +73,7 @@ const auth = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				error: action.error,
+				// error: action.error,
 			}
 
 		case UNAUTH_USER:
@@ -106,17 +103,17 @@ const auth = (state = INITIAL_STATE, action) => {
 				message: 'Could not retreive user info',
 			}
 
-		case VALIDATION_ERROR:
-			return {
-				...state,
-				error: action.error
-			}
+		// case VALIDATION_ERROR:
+		// 	return {
+		// 		...state,
+		// 		error: action.error
+		// 	}
 
-		case CLEAR_ERROR: 
-			return {
-				...state,
-				loginErr: null
-			}
+		// case CLEAR_ERROR: 
+		// 	return {
+		// 		...state,
+		// 		loginErr: null
+		// 	}
 
 		default: return state
 	}
