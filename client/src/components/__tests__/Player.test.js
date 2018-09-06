@@ -2,8 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { createRender } from '@material-ui/core/test-utils';
+
 import Player from '../Player';
 import { INITIAL_STATE } from '../../reducers/player.reducer';
+import { THEME } from '../../config';
 import { testTrack } from '../../utils';
 
 describe('Player', () => {
@@ -22,10 +24,11 @@ describe('Player', () => {
 			handleToggleQueue: jest.fn(),
 			handlePlayFromQueue: jest.fn(),
 			handleSeek: jest.fn(),
+			theme: THEME
 		}
 	});
 
-	it('renders correctly when no tracks are loaded', () => {
+	it('(desktop mode) renders correctly when no tracks are loaded', () => {
 		const tree = renderer
 			.create( <Player {...props} />)
 			.toJSON();
@@ -33,7 +36,7 @@ describe('Player', () => {
 		expect(tree).toMatchSnapshot();
 	});
 
-	it('renders correctly when a track is playing', () => {
+	it('(desktop mode) renders correctly when a track is playing', () => {
 		props.player.tracks = [ testTrack() ];
 		props.player.currentTrack = testTrack();
 		props.player.playing = true;
@@ -45,7 +48,43 @@ describe('Player', () => {
 		expect(tree).toMatchSnapshot();
 	});
 
-	it('renders correctly when a track paused', () => {
+	it('(desktop mode) renders correctly when a track paused', () => {
+		props.player.tracks = [ testTrack() ];
+		props.player.currentTrack = testTrack();
+		props.player.playing = false;
+		props.player.pausedAt = 500;
+
+		const tree = renderer
+			.create(<Player {...props} />)
+			.toJSON();
+
+		expect(tree).toMatchSnapshot();
+	});
+
+	it('(mobile mode) renders correctly when no tracks are loaded', () => {
+		props.userAgentIsMobile = true;
+		const tree = renderer
+			.create( <Player {...props} />)
+			.toJSON();
+
+		expect(tree).toMatchSnapshot();
+	});
+
+	it('(mobile mode) renders correctly when a track is playing', () => {
+		props.userAgentIsMobile = true;
+		props.player.tracks = [ testTrack() ];
+		props.player.currentTrack = testTrack();
+		props.player.playing = true;
+
+		const tree = renderer
+			.create(<Player {...props} />)
+			.toJSON();
+
+		expect(tree).toMatchSnapshot();
+	});
+
+	it('(mobile mode) renders correctly when a track paused', () => {
+		props.userAgentIsMobile = true;
 		props.player.tracks = [ testTrack() ];
 		props.player.currentTrack = testTrack();
 		props.player.playing = false;
