@@ -32,7 +32,7 @@ class NavContainer extends Component {
 			/> 
 			: 
 			<NavDesktop 
-				location={locationPathname} 
+				locationPathname={locationPathname} 
 				handleSignOut={this.handleSignOut.bind(this)} 
 			/>
 	}
