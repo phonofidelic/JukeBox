@@ -20,20 +20,28 @@ class NavContainer extends Component {
 	}
 
 	render() {
-		const { userAgentIsMobile, location } = this.props;
+		const { 
+			userAgentIsMobile, 
+			locationPathname 
+		} = this.props;
 
 		return userAgentIsMobile ? 
-			<NavMobile location={location} handleSignOut={this.handleSignOut.bind(this)} /> 
+			<NavMobile 
+				locationPathname={locationPathname} 
+				handleSignOut={this.handleSignOut.bind(this)} 
+			/> 
 			: 
-			<NavDesktop location={location} handleSignOut={this.handleSignOut.bind(this)} />
+			<NavDesktop 
+				locationPathname={locationPathname} 
+				handleSignOut={this.handleSignOut.bind(this)} 
+			/>
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		auth: state.auth,
 		userAgentIsMobile: state.auth.userAgentIsMobile,
-		location: state.router.location,
+		locationPathname: state.router.location.pathname,
 	}
 }
 

@@ -16,18 +16,13 @@ import {
 import { withTheme } from '@material-ui/core/styles';
 
 class NavDesktop extends Component {
-  state = {
-    value: '/library',
-  }
-
-  handleChange(event, value) {
-    // console.log(value)
-    this.setState({ value: value });
-  };
-
   render() {
-    const { theme, location } = this.props;
-    const { value } = this.state;
+    const { 
+      locationPathname,
+      handleSignOut,
+      theme, 
+    } = this.props;
+
     const styles = {
       root: {
         position: 'fixed',
@@ -36,18 +31,16 @@ class NavDesktop extends Component {
         height: '100vh',
         width: theme.dimensions.navDesktop.navWidth,
         padding: 10,
-        // height: theme.dimensions.nav.navHeight,
         backgroundColor: theme.palette.secondary.light,
         zIndex: 1,
       },
     }
 
-    // console.log('location:', location)
     return(
       <Grid 
         container
         component={BottomNavigation} 
-        value={location.pathname}
+        value={locationPathname}
         alignContent={'flex-start'}
         style={styles.root}
         showLabels
@@ -74,7 +67,7 @@ class NavDesktop extends Component {
           icon={<FileUpload />} 
         />
         <BottomNavigationAction 
-          onClick={() => this.props.handleSignOut()}
+          onClick={() => handleSignOut()}
           label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
           icon={<ExitToApp />} 
         />
@@ -83,9 +76,8 @@ class NavDesktop extends Component {
   };
 }
 
-NavDesktop.Proptypes = {
-  userAgentIsMobile: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired,
-}
+NavDesktop.propTypes = {
+  locationPathname: PropTypes.string.isRequired
+};
 
 export default withTheme()(NavDesktop);

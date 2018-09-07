@@ -1,0 +1,622 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavDesktop renders as expected with "/library" path 1`] = `
+<div
+  className="MuiBottomNavigation-root-92 MuiGrid-container-1 MuiGrid-align-content-xs-flex-start-14"
+  style={
+    Object {
+      "backgroundColor": "#fafafa",
+      "height": "100vh",
+      "left": "0px",
+      "padding": 10,
+      "position": "fixed",
+      "top": "0px",
+      "width": 80,
+      "zIndex": 1,
+    }
+  }
+>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    href="/"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Home
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93 MuiBottomNavigationAction-selected-94"
+    href="/library"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97 MuiBottomNavigationAction-selected-94"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Library
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    href="/uploader"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Uploader
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <button
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    disabled={undefined}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Sign out
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </button>
+</div>
+`;
+
+exports[`NavDesktop renders as expected with "/uploader" path 1`] = `
+<div
+  className="MuiBottomNavigation-root-92 MuiGrid-container-1 MuiGrid-align-content-xs-flex-start-14"
+  style={
+    Object {
+      "backgroundColor": "#fafafa",
+      "height": "100vh",
+      "left": "0px",
+      "padding": 10,
+      "position": "fixed",
+      "top": "0px",
+      "width": 80,
+      "zIndex": 1,
+    }
+  }
+>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    href="/"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Home
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    href="/library"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Library
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93 MuiBottomNavigationAction-selected-94"
+    href="/uploader"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97 MuiBottomNavigationAction-selected-94"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Uploader
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <button
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    disabled={undefined}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Sign out
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </button>
+</div>
+`;
+
+exports[`NavDesktop renders as expected with default path 1`] = `
+<div
+  className="MuiBottomNavigation-root-92 MuiGrid-container-1 MuiGrid-align-content-xs-flex-start-14"
+  style={
+    Object {
+      "backgroundColor": "#fafafa",
+      "height": "100vh",
+      "left": "0px",
+      "padding": 10,
+      "position": "fixed",
+      "top": "0px",
+      "width": 80,
+      "zIndex": 1,
+    }
+  }
+>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93 MuiBottomNavigationAction-selected-94"
+    href="/"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97 MuiBottomNavigationAction-selected-94"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Home
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    href="/library"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Library
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <a
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    href="/uploader"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Uploader
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </a>
+  <button
+    className="MuiButtonBase-root-98 MuiBottomNavigationAction-root-93"
+    disabled={undefined}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiBottomNavigationAction-wrapper-96"
+    >
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-101"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+          />
+        </g>
+      </svg>
+      <span
+        className="MuiBottomNavigationAction-label-97"
+      >
+        <span
+          className="MuiTypography-root-107 MuiTypography-caption-117 MuiTypography-colorInherit-126"
+        >
+          Sign out
+        </span>
+      </span>
+    </span>
+    <span
+      className="MuiTouchRipple-root-131"
+    />
+  </button>
+</div>
+`;
