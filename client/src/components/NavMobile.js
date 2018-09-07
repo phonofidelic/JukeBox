@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   BottomNavigation,
@@ -14,18 +15,13 @@ import {
 import { withTheme } from '@material-ui/core/styles';
 
 class NavMobile extends Component {
-  state = {
-    value: '/library',
-  }
-
-  handleChange(event, value) {
-    // console.log(value)
-    this.setState({ value: value });
-  };
-
   render() {
-    const { theme, location } = this.props;
-    const { value } = this.state;
+    const { 
+      locationPathname,
+      handleSignOut,
+      theme,
+    } = this.props;
+
     const styles = {
       root: {
         position: 'fixed',
@@ -33,15 +29,13 @@ class NavMobile extends Component {
         width: '100%',
         height: theme.dimensions.nav.navHeight,
         backgroundColor: '#fafafa',
-        // borderTop: `solid 1px ${theme.palette.primary.main}`,
         zIndex: 2,
-      },
+      }
     }
 
-    // console.log('location:', location)
     return(
       <BottomNavigation 
-        value={location.pathname}
+        value={locationPathname}
         style={styles.root}
         showLabels
       >
@@ -67,7 +61,7 @@ class NavMobile extends Component {
           icon={<FileUpload />} 
         />
         <BottomNavigationAction 
-          onClick={() => this.props.handleSignOut()}
+          onClick={() => handleSignOut()}
           label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
           icon={<ExitToApp />} 
         />
@@ -75,5 +69,9 @@ class NavMobile extends Component {
     );
   };
 }
+
+NavMobile.propTypes = {
+  locationPathname: PropTypes.string.isRequired
+};
 
 export default withTheme()(NavMobile);

@@ -40,9 +40,9 @@ class ErrorMessage extends Component {
 ErrorMessage.propTypes = {
 	error: PropTypes.shape({
 		showError: PropTypes.bool.isRequired,
-		title: PropTypes.string.isRequired,
+		title: PropTypes.string,
 		status: PropTypes.number,
-		message: PropTypes.string.isRequired,
+		message: PropTypes.string,
 	}),
 	handleClearError: PropTypes.func.isRequired
 }

@@ -47,7 +47,7 @@ describe('Player', () => {
 
 	it('(desktop mode) renders correctly when no tracks are loaded', () => {
 		const tree = renderer
-			.create( <Player {...props} />)
+			.create(<Player {...props} />)
 			.toJSON();
 		const playerProgress = player(props).find('PlayerProgress');
 		const playerControls = player(props).find('PlayerControls');
