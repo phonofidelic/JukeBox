@@ -18,9 +18,16 @@ const LOGIN_DETAILS = {
 	"password": "test1234"
 };
 
+/***
+ * Gets the source string for an audio file to be used in the "POST /tracks/" test.
+ * Requires there to be a folder in the root project directory containing at least
+ * one audio file.
+ */
+const MOCK_TRACK_SRC = `../mock_assets/${fs.readdirSync('../mock_assets')[0]}`;
+
 const testUserAgent = request.agent(app);
 
-/**
+/***
  * Clear all data from test database and delete 
  * any files created  from previous test runs.
  */
@@ -28,16 +35,13 @@ const clearTestData = async (models) => {
 	const { User, Track, Artist, Album } = models;
 	let audioFiles = [];
 
-	// Delete all documents in test DB
 	await User.remove({}).exec();
 	await Track.remove({}).exec();
 	await Artist.remove({}).exec();
 	await Album.remove({}).exec();
 
-	// Delete all saved test files
 	fs.readdir('./uploads/testFiles', (err, files) => {
 		if (err) throw err;
-		// console.log('### clearTestData, files:', files)
 		files.forEach(file => {
 			fs.unlink(`./uploads/testFiles/${file}`, err => {
 				if (err) throw err;
@@ -45,8 +49,7 @@ const clearTestData = async (models) => {
 			});
 		});
 	});
-
-	console.log('\n\### track.routes.test > clear test DB documents before test');
+	// console.log('\n\### track.routes.test > clear test DB documents before test');
 };
 
 const createTestUser = async (User) => {
@@ -155,6 +158,9 @@ describe('Routes:', () => {
 	});
 
 	describe('POST /tracks/', () => {
+		/***
+		 * BUG: response.body.tracks is an empty array after test is run
+		 */
 		const postTracksResponseBody = {
 			message: STRINGS.tracks_post_success,
 			tracks: []
@@ -180,9 +186,11 @@ describe('Routes:', () => {
 			.post('/tracks/')
 			.set('token', token)
 			.set('userId', userId)
-			.attach('audioFiles', '../mock_assets/The Keggs- To FInd Out.mp3')
+			.attach('audioFiles', MOCK_TRACK_SRC)
 			.then(response => {
 				console.log('### POST /tracks/ respoonse.body:', response.body)
+
+				expect(response.body).toEqual(postTracksResponseBody);
 			})
 			.catch(err => {
 				console.error('### POST /tracks/ err:', err);

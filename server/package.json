@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "DB_CONNECTION=mongodb://localhost:27017/jukeTest nodemon server.js",
-    "test": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --watchAll --coverage",
+    "test": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --watchAll",
+    "coverage": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --coverage",
     "prod": "node index.js",
     "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js"
   },

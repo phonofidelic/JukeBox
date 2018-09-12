@@ -1,5 +1,5 @@
 module.exports = {
-  verbose: true,
+  // verbose: true,
   testPathIgnorePatterns: [
 		'/app/controllers/test/'
   ]
