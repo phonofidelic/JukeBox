@@ -184,7 +184,10 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				loading: false,
-				detailViewData: action.detailViewData,
+				detailViewData: {
+					...action.detailViewData,
+					imgSrc: action.detailViewData.artwork ? action.detailViewData.artwork[0].src : 'defaultImage'
+				},
 			}
 
 		case CLOSE_DETAIL_VIEW:

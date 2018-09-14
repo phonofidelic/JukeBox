@@ -9,8 +9,6 @@ import {
 	Typography,	
 } from '@material-ui/core';
 
-const PLACEHOLDER_IMAGE = `http://placekitten.com/${navigator.userAgent.indexOf('Mobile') > 0 ? window.innerWidth : '600'}/400`;
-
 const DUMMY_TEXT = `Lorem ipsum dolor sit amet, putent sadipscing id qui, vel ubique propriae contentiones ex, mel in nulla option. Eam ut mutat iuvaret, nihil saperet theophrastus sit ne, nulla zril euismod qui cu. Vel id indoctum conceptam rationibus. Prompta civibus eu eos. Purto ignota contentiones vel ne, numquam aliquid an vix, persius menandri delicatissimi mel an. Mea ne debet molestiae assentior, regione tibique antiopam no qui.
 No vivendum voluptaria cum. Vis mucius intellegat ad, erat rationibus quo no, purto augue dolore ne quo. Scripta expetendis cum an, vero rebum interpretaris te eos. Wisi maiestatis his ad, sale scaevola salutatus in has. His ei numquam laboramus, te sea cetero persius, cum at alii adolescens.
 
@@ -40,16 +38,24 @@ Ius feugait detraxit molestiae ut, in nam ocurreret neglegentur, ei placerat med
 
 class DetailCard extends Component {
 	state = {
-		open: false
+		// open: false
+		isMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
 	}
 
 	handleClose() {
-		this.setState({ open: false })
+		// this.setState({ open: false })
 		this.props.handleCloseDetailView();
 	}
 
 	render() {
-		const { detailViewData, handleCloseDetailView } = this.props;
+		const { detailViewData } = this.props;
+
+		const { isMobile } = this.state;
+
+		const imgWidth = isMobile ? window.innerWidth : 600;
+		const imgHeight = isMobile ? window.innerWidth : 600;
+
+		const PLACEHOLDER_IMAGE = `http://placekitten.com/${imgWidth}/${imgHeight}`;
 
 		const styles = {
 			root: {
@@ -78,20 +84,24 @@ class DetailCard extends Component {
 			<div>
 				<Dialog
 					style={styles.dialog}
-					fullScreen={navigator.userAgent.indexOf('Mobile') > 0 ? true : false}
+					fullScreen={isMobile}
 					open={Boolean(detailViewData)}
 					scroll="paper"
 				>
 					{	detailViewData &&
 						<DialogContent style={styles.dialogContent}>
 							<div>
-								<img src={PLACEHOLDER_IMAGE}></img>
+								<img 
+									src={detailViewData.imgSrc !== 'defaultImage' ? detailViewData.imgSrc : PLACEHOLDER_IMAGE} 
+									width={imgWidth}
+									height={imgHeight}
+								/>
 							</div>
 							<DialogTitle>
 								{ detailViewData.name || detailViewData.title }
 							</DialogTitle>
 							<DialogContentText style={styles.dialogText}>
-								{ DUMMY_TEXT }
+								{ detailViewData.description }
 							</DialogContentText>
 						</DialogContent>
 					}
