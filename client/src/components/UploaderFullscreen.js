@@ -65,8 +65,11 @@ class UploaderFullscreen extends Component {
   		input, 
   		theme, 
   		droppedFiles,
+      allDiscogsImport,
   		handleReset,
   		handleRemoveTrack,
+      handleSelectDiscogsImport,
+      handleSelectAllDiscogsImport,
   	} = this.props;
 
   	const styles = {
@@ -106,7 +109,7 @@ class UploaderFullscreen extends Component {
             <TableRow>
               <TableCell>File name</TableCell>
               <TableCell>File size</TableCell>
-              <TableCell numeric>Import meta-data from Discogs?<Checkbox /></TableCell>
+              <TableCell numeric>Import meta-data from Discogs?<Checkbox checked={allDiscogsImport} onChange={() => handleSelectAllDiscogsImport()} /></TableCell>
               <TableCell>Remove</TableCell>
             </TableRow>
           </TableHead>
@@ -121,7 +124,7 @@ class UploaderFullscreen extends Component {
                 <Typography>{file.size} kb</Typography>
               </TableCell>
               <TableCell numeric>
-                <Checkbox />
+                <Checkbox checked={file.importDiscogsData} onChange={() => handleSelectDiscogsImport(i)} />
               </TableCell>
               <TableCell>
 	  					  <IconButton 

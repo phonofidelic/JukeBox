@@ -5,17 +5,24 @@ import Uploader from '../components/Uploader';
 import Loader from '../components/Loader';
 import ErrorMessageContainer from './ErrorMessageContainer';
 
+const DISCOGS_IMPORT_DEFAULT = false;
+
 export class UploaderContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       droppedFiles: [],
+      allDiscogsImport: DISCOGS_IMPORT_DEFAULT,
     }
   }
 
   handleOnDrop(files) {
-    // return console.log('handleOnDrop, files:', files);
+    files = files.map(file => {
+      file.importDiscogsData = DISCOGS_IMPORT_DEFAULT;
+      return file;
+    });
+
     this.setState({
       droppedFiles: [...this.state.droppedFiles, ...files]
     });
@@ -30,6 +37,35 @@ export class UploaderContainer extends Component {
   handleRemoveTrack(index) {
     const updatedFileList = [...this.state.droppedFiles];
     updatedFileList.splice(index, 1);
+
+    this.setState({
+      droppedFiles: updatedFileList
+    });
+  }
+
+  handleSelectAllDiscogsImport() {
+    const updatedFileList = this.state.droppedFiles.map(file => {
+      file.importDiscogsData = !this.state.allDiscogsImport;
+      return file;
+    });
+
+    this.setState({
+      droppedFiles: updatedFileList,
+      allDiscogsImport: !this.state.allDiscogsImport,
+    })
+  }
+
+  handleSelectDiscogsImport(index) {
+    const updatedFileList = this.state.droppedFiles.map((file, i) => {
+      if (i === index) {
+        file.importDiscogsData = !file.importDiscogsData;
+        return file;
+      }
+      return file
+    });
+
+    console.log('file', updatedFileList[index])
+
     this.setState({
       droppedFiles: updatedFileList
     });
@@ -50,7 +86,8 @@ export class UploaderContainer extends Component {
     })
 
     // Dispatch POST action:
-    this.props.uploadTracks(formData);
+    console.log('formData:', formData)
+    // this.props.uploadTracks(formData);
   }
 
 	render() {
@@ -64,11 +101,14 @@ export class UploaderContainer extends Component {
           <Loader />
           :
     			<Uploader 
+            allDiscogsImport={this.state.allDiscogsImport}
+            droppedFiles={this.state.droppedFiles}
             handleUploadTracks={this.handleUploadTracks.bind(this)}
             handleOnDrop={this.handleOnDrop.bind(this)} 
             handleRemoveTrack={this.handleRemoveTrack.bind(this)}
             cleaeDroppedFiles={this.cleaeDroppedFiles.bind(this)}
-            droppedFiles={this.state.droppedFiles}
+            handleSelectDiscogsImport={this.handleSelectDiscogsImport.bind(this)}
+            handleSelectAllDiscogsImport={this.handleSelectAllDiscogsImport.bind(this)}
           />
       }
       </div>

@@ -30,10 +30,13 @@ export class Uploader extends Component {
 		const { 
 			trackName, 
 			droppedFiles,
+      allDiscogsImport,
 			handleOnDrop,
 			handleRemoveTrack,
 			handleUploadTracks,
 			handleSubmit,
+      handleSelectDiscogsImport,
+      handleSelectAllDiscogsImport,
 			reset
 		} = this.props;
 
@@ -51,8 +54,11 @@ export class Uploader extends Component {
             	name={FILE_FIELD_NAME}
             	handleOnDrop={handleOnDrop}
             	droppedFiles={droppedFiles}
+              allDiscogsImport={allDiscogsImport}
             	reset={reset}
             	handleRemoveTrack={handleRemoveTrack}
+              handleSelectDiscogsImport={handleSelectDiscogsImport}
+              handleSelectAllDiscogsImport={handleSelectAllDiscogsImport}
             	handleReset={this.handleReset.bind(this)}
             	component={ (props) => <UploaderFullscreen {...props} /> } 
             />
