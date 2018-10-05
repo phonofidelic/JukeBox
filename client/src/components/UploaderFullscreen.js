@@ -71,6 +71,7 @@ class UploaderFullscreen extends Component {
 	    //   bottom: theme.dimensions.nav.navHeight,
 	    //   left: 0,
         marginBottom: theme.dimensions.nav.navHeight,
+        marginLeft: theme.dimensions.navDesktop.navWidth,
 	      padding: '2.5em 0',
 	      // background: 'rgba(0,0,0,0.5)',
 	      textAlign: 'center',
@@ -82,6 +83,13 @@ class UploaderFullscreen extends Component {
   		listItemText: {
   			// color: theme.palette.primary.light,
   		},
+      controllsContainer: {
+        position: 'fixed',
+        bottom: 0,
+        textAlign: 'center',
+        background: '#fff',
+        width: '100%',
+      },
   		controlls: {
   			margin: '5px',
   			// color: theme.palette.primary.light,
@@ -101,7 +109,7 @@ class UploaderFullscreen extends Component {
 	  			)}
 	  		</List>
 
-	  		<div>
+	  		<div style={styles.controllsContainer}>
 		  		<Button 
 		  			style={styles.controlls}
 		  			type="submit"
