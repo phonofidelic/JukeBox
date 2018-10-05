@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import {
-	Typography, 
+  Button,
+  Checkbox,
+  IconButton,
 	List, 
 	ListItem,
-	Button,
-	IconButton,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+	Typography,
 } from '@material-ui/core';
 import { RemoveCircle } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
@@ -80,9 +86,6 @@ class UploaderFullscreen extends Component {
   		listItem: {
   			padding: '0px 16px',
   		},
-  		listItemText: {
-  			// color: theme.palette.primary.light,
-  		},
       controllsContainer: {
         position: 'fixed',
         bottom: 0,
@@ -98,16 +101,41 @@ class UploaderFullscreen extends Component {
 
   	return (
   		<div style={styles.root}>
-	  		<List>
+	  		<Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>File name</TableCell>
+              <TableCell>File size</TableCell>
+              <TableCell numeric>Import meta-data from Discogs?<Checkbox /></TableCell>
+              <TableCell>Remove</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+
 	  			{droppedFiles.map((file, i) => 
-	  				<ListItem key={i} style={styles.listItem}>
-	  					<Typography style={styles.listItemText}>
-	  						{file.name} | {file.size} kb
-	  					</Typography>
-	  					<IconButton style={{marginLeft: 5}} onClick={() => handleRemoveTrack(i)}><RemoveCircle/></IconButton>
-	  				</ListItem>
+	  				<TableRow hover key={i} style={styles.listItem}>
+              <TableCell>
+  	  					<Typography>{file.name}</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{file.size} kb</Typography>
+              </TableCell>
+              <TableCell numeric>
+                <Checkbox />
+              </TableCell>
+              <TableCell>
+	  					  <IconButton 
+                  style={{marginLeft: 5}} 
+                  onClick={() => handleRemoveTrack(i)}
+                >
+                  <RemoveCircle/>
+                </IconButton>
+              </TableCell>
+	  				</TableRow>
 	  			)}
-	  		</List>
+
+          </TableBody>
+	  		</Table>
 
 	  		<div style={styles.controllsContainer}>
 		  		<Button 
