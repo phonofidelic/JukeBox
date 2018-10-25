@@ -47,7 +47,11 @@ export class Uploader extends Component {
 		}
 
 		return (
-			<form onSubmit={handleSubmit(this.uploadTracksAndReset.bind(this))} style={styles.root}>
+			<form
+        style={styles.root} 
+        encType="multipart/form-data"
+        onSubmit={handleSubmit(this.uploadTracksAndReset.bind(this))} 
+      >
 				<div>
           <label htmlFor={FILE_FIELD_NAME}>
             <Field 

@@ -26,8 +26,8 @@ const TrackSchema = new Schema({
 	}
 });
 
-TrackSchema.statics.findByTitle = function(title) {
-	Track.findOne({ title: title })
+TrackSchema.statics.findMatching = function(match) {
+	Track.findOne(match)
 	.exec((err, track) => {
 		if (err) return new Error(err);
 		return track;

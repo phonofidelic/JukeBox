@@ -58,7 +58,7 @@ export const THEME = {
       navWidth: 80,
     },
     player: {
-      playerHeight: 58,
+      height: 58,
     }
   },
 }

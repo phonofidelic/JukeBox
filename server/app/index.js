@@ -17,7 +17,7 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 
 // Configure db
-mongoose.connect(process.env.DB_CONNECTION);
+mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error'));
 db.on('open', () => console.log('DB connection successfull!'));

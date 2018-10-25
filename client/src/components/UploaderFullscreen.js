@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import { Field } from 'redux-form';
 import {
   Button,
   Checkbox,
@@ -92,6 +93,7 @@ class UploaderFullscreen extends Component {
       controllsContainer: {
         position: 'fixed',
         bottom: 0,
+        paddingBottom: theme.dimensions.player.height,
         textAlign: 'center',
         background: '#fff',
         width: '100%',
@@ -124,7 +126,10 @@ class UploaderFullscreen extends Component {
                 <Typography>{file.size} kb</Typography>
               </TableCell>
               <TableCell numeric>
-                <Checkbox checked={file.importDiscogsData} onChange={() => handleSelectDiscogsImport(i)} />
+                <Checkbox
+                  checked={file.importDiscogsData} 
+                  onChange={() => handleSelectDiscogsImport(i)} 
+                />
               </TableCell>
               <TableCell>
 	  					  <IconButton 

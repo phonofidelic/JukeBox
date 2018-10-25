@@ -82,12 +82,14 @@ export class UploaderContainer extends Component {
     this.state.droppedFiles.forEach(file => {
     	window.URL.revokeObjectURL(file.preview);
       file.preview = 'preview removed';
+      console.log('file:', file)
     	formData.append('audioFiles', file);
+      // formData.append(file.name, JSON.stringify({discogsImport: file.importDiscogsData}));
+      formData.append(file.name, file.importDiscogsData);
     })
 
     // Dispatch POST action:
-    console.log('formData:', formData)
-    // this.props.uploadTracks(formData);
+    this.props.uploadTracks(formData);
   }
 
 	render() {

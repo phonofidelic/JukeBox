@@ -1,5 +1,9 @@
 const fs = require('fs');
 const uuidv4 = require('uuid/v4');
+const mm = require('music-metadata');
+const axios = require('axios');
+
+const DISCOGS_BASE_URL = 'https://api.discogs.com/';
 
 // TODO: Handle image sizes and save multiple images for sm/md/lg
 const saveImage = (image) => new Promise((resolve, reject) => {
@@ -154,3 +158,11 @@ module.exports.loadAlbums = (Album, userId) =>  new Promise((resolve, reject) =>
 		reject(err);
 	});
 });
+
+module.exports.searchDiscogs_album = (albumTitle, token) => new Promise((resolve, reject) => {
+	const queryString = `?q=${albumTitle}`;
+	axios.get(`${DISCOGS_BASE_URL}database/search${queryString}&token=${token}`)
+	.then(response => resolve(response))
+	.catch(err => reject(err));
+});
+
