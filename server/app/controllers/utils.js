@@ -159,9 +159,9 @@ module.exports.loadAlbums = (Album, userId) =>  new Promise((resolve, reject) =>
 	});
 });
 
-module.exports.searchDiscogs_album = (albumTitle, token) => new Promise((resolve, reject) => {
+module.exports.searchDiscogs_album = (albumTitle) => new Promise((resolve, reject) => {
 	const queryString = `?q=${albumTitle}`;
-	axios.get(`${DISCOGS_BASE_URL}database/search${queryString}&token=${token}`)
+	axios.get(`${DISCOGS_BASE_URL}database/search${queryString}&token=${process.env.DISCOGS_TOKEN}`)
 	.then(response => resolve(response))
 	.catch(err => reject(err));
 });
