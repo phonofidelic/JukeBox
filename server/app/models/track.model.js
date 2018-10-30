@@ -13,6 +13,10 @@ const TrackSchema = new Schema({
 		no: { type: Number, default: 0 },
 		of: { type: Number, default: 0 }
 	},
+	disk: {
+		no: { type: Number, default: 0 },
+		of: { type: Number, default: 0 }
+	},
 	image: {
 		format: String,
 		src: String

@@ -1,5 +1,5 @@
 import {
-	UPLOAD_TRACK,
+	UPLOAD_TRACKS,
 	UPLOAD_SUCCESS,
 	UPLOAD_FAILURE,
 	SET_MESSAGE
@@ -13,7 +13,7 @@ export const uploadTracks = (formData) => {
 	console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
 	return dispatch => {
 		dispatch({
-			type: UPLOAD_TRACK
+			type: UPLOAD_TRACKS
 		});
 		axios.post(TRACKS_URL, formData, { 
 			headers: { 

@@ -1,7 +1,9 @@
 const fs = require('fs');
+const util = require('util');
 const uuidv4 = require('uuid/v4');
 const mm = require('music-metadata');
 const axios = require('axios');
+const inspectConfig = {colors: true, depth: null};
 
 const DISCOGS_BASE_URL = 'https://api.discogs.com/';
 
@@ -34,6 +36,84 @@ const findArtistByName = (artistName, Artist) => new Promise((resolve, reject) =
 	});
 });
 
+// Utility function that returns the format of the provided Discogs image url
+const getDiscogsImgFormat = (imgUrl) => {
+	const formatIndex = imgUrl.indexOf('format');
+	const openParenIndex = formatIndex+6;
+	const closeParenIndex = imgUrl.indexOf(')', openParenIndex);
+	return imgUrl.substring(openParenIndex+1, closeParenIndex);
+}
+
+const getArtistImage = async (discogsData) => {
+	if (!discogsData) return { format: 'png', src: 'defaultImage' };
+	const format = getDiscogsImgFormat(discogsData.cover_image);
+	const imgPath = `${process.env.FS_IMAGE}/${uuidv4()}.${format}`;
+	let response;
+	try {
+		response = await axios({
+			method: 'GET',
+			responseType: 'stream',
+			url: discogsData.cover_image
+		});
+	} catch(err) {
+		// console.error('\ngetArtistImage, Discogs request error:', err);
+		return { format: 'png', src: 'defaultImage' }
+	}
+	response.data.pipe(fs.createWriteStream(imgPath));
+	return await new Promise((resolve, reject) => {
+		response.data.on('end', () => {
+			// console.log('*** new image saved ***');
+			resolve({ format: format, src: imgPath });
+		});
+		response.data.on('error', () => {
+			reject(new Error('Could not save new Artist image file'));
+		});
+	});
+};
+
+const getAlbumImage = async (embededImages, discogsData) => {
+	let artwork = [];
+	if (!embededImages && !discogsData) return { format: 'png', src: 'defaultImage' };
+	if (discogsData) {
+		const format = getDiscogsImgFormat(discogsData.cover_image);
+		const imgPath = `${process.env.FS_IMAGE}/${uuidv4()}.${format}`;
+		const response = await axios({
+			method: 'GET',
+			responseType: 'stream',
+			url: discogsData.cover_image
+		});
+		response.data.pipe(fs.createWriteStream(imgPath));
+		await new Promise((resolve, reject) => {
+			response.data.on('end', () => {
+				// console.log('*** new Album image saved ***');
+				resolve({ format: format, src: imgPath });
+			});
+			response.data.on('end', () => {
+				reject(new Error('Could not save new Album image file'));
+			});
+		})
+		.then(image => {
+			artwork.push(image); // TODO: create Image model and use it here
+		})
+		.catch(err => console.log(err));
+	}
+	if (embededImages) {
+		// console.log('*** embededImages:', embededImages)
+		for (let i = 0; i < embededImages.length; i++) {
+			const imgPath = `${process.env.FS_IMAGE}/${uuidv4()}.${embededImages[i].format}`;
+			fs.writeFile(imgPath, embededImages[i].data, (err) => {
+				if (err) {
+					console.error('writeFile error:', err);
+					return new Error('Could not save new Album image file')
+				};
+				artwork.push({ format: embededImages[i].format, src:imgPath });
+			});	
+		}
+	}
+	// console.log('*** getAlbumImage, artwork:', artwork)
+	return artwork;
+};
+
 // TODO: delete if unused
 module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((resolve, reject) => {
 	Track.findOne({ title: metaData.common.title })
@@ -44,86 +124,63 @@ module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((reso
 });
 
 // BUG: Should return an Artist objectId?
-module.exports.checkArtist = (metaData, Artist, userId) => {
-	console.log('### Checking Artist collection for existing document...');
-	return Artist.findOne({ name: metaData.common.artist })
-	.then(artist => {
-		// console.log('\n### @checkArtist, artist:', artist);
-
-		if (!artist) {
-			console.log('\n### Artist not found in DB, creating new document...');
-			return new Artist({
-				userId: userId,
-				name: metaData.common.artist
-			})
-			.save();
+module.exports.checkArtist = async (metadata, Artist, userId, importDiscogs) => {
+	let artistDoc;
+	try {
+		existingArtistDoc = await Artist.findOne({ name: metadata.common.artist });
+		console.log('\n### Checking Artist collection for existing document...');
+		if (existingArtistDoc) {
+			console.log('\n### Artist found in db');
+			return existingArtistDoc;
 		}
-		console.log('\n### Artist found in db');
-		return artist;
-	})
-	.catch(err =>{
-		return new new Error(err);
-	});
+
+		console.log('\n### Artist not found in DB, creating new document...');
+		let artistData = {
+			userId: userId,
+			name: metadata.common.artist
+		};
+		
+		let discogsData;
+		if (importDiscogs) {
+			discogsData = await requestDiscogsData(metadata.common, 'artist');
+			// console.log('\ndiscogsData:', util.inspect(discogsData, inspectConfig));
+		}
+		artistData = {
+			...artistData,
+			artwork: await getArtistImage(discogsData)
+		};
+
+		return await new Artist(artistData).save();
+	} catch(err) {
+		return new Error(err);
+	}
 };
 
-// BUG: Should return an Album objectId?
-module.exports.checkAlbum = (metaData, Album, userId) => new Promise((resolve, reject) => {
-	console.log('### Checking Album collection for existing document...');
-	Album.findOne({ title: metaData.common.album })
-	.then(album => {
-		// console.log('\n### @checkAlbum, album:', album);
-		if (!album) {
-			console.log('\n### Album not found in DB, creating new document...');
+module.exports.checkAlbum = async (metadata, Album, userId, importDiscogs) => {
+	let albumDoc;
+	try {
+		exsistingAlbumDoc = await Album.findOne({ title: metadata.common.album });
+		if (exsistingAlbumDoc) {
+			console.log('\n### Album found in db');
+			return exsistingAlbumDoc;
+		}	
+		console.log('\n### Album not found in DB, creating new document...');
 
-			// Save album art 
-			saveImage(metaData.common.picture)
-			.then(image => {
-				console.log('### Saving new Album, image:', image)
-				const newAlbum = new Album({
-					userId: userId,
-					title: metaData.common.album,
-					// artist: metaData.common.artist,
-					artwork: [image]
-				});
-
-				newAlbum.save((err, savedAlbum) => {
-					if (err) return console.error('\n### Could not save Album doc:', err);
-					console.log('\n### New album saved, savedAlbum:', savedAlbum);
-					resolve(savedAlbum);	
-				});
-			})
-			.catch(err => {
-				console.error('\n### Could not save image:', err);
-			});
-		} else {
-			console.log('\n### Album found in db, updating track document...');
-
-			// Check Album doc artwork field
-			// If uploading track has embeded album art...
-			// or
-			// If artork field is empty or if first item is a default image...
-			if (metaData.common.picture && (album.artwork.length < 1 || album.artwork[0].src === 'defaultImage')) {
-				console.log('\n### Saving new album art...')
-				saveImage(metaData.common.picture)
-				.then(image => {
-					album.artwork.unshift(image);
-					album.save((err, savedAlbum) => {
-						if (err) return console.log('\n### Could not update album art:', err);
-						console.log('\n### Album updated with new album art');
-						resolve(savedAlbum);
-					});
-				})
-				.catch(err => {
-					console.error('\n### Could not save image:', err);
-				});
-			}
-			resolve(album);
+		let discogsData;
+		if (importDiscogs) {
+			discogsData = await requestDiscogsData(metadata.common, 'album');
+			console.log('\nDiscogs album data:', util.inspect(discogsData, inspectConfig));
 		}
-	})
-	.catch(err => {
-		reject(err);
-	});
-});
+
+		return await new Album({
+			userId: userId,
+			title: metadata.common.album,
+			artwork: await getAlbumImage(metadata.common.picture, discogsData)
+		}).save();
+	} catch(err) {
+		return new Error(err);
+	}
+}
 
 module.exports.loadTracks = (Track, userId) => new Promise((resolve, reject) => {
 	Track.find({ userId: userId })
@@ -159,10 +216,34 @@ module.exports.loadAlbums = (Album, userId) =>  new Promise((resolve, reject) =>
 	});
 });
 
-module.exports.searchDiscogs_album = (albumTitle) => new Promise((resolve, reject) => {
-	const queryString = `?q=${albumTitle}`;
-	axios.get(`${DISCOGS_BASE_URL}database/search${queryString}&token=${process.env.DISCOGS_TOKEN}`)
-	.then(response => resolve(response))
-	.catch(err => reject(err));
-});
+module.exports.getTrackImage = async (Album, albumData) => {
+	let trackImage
+	try {
+		let albumDoc = await Album.findById(albumData._id);
+		// console.log('*** albumDoc:', albumDoc)
+		trackImage = albumDoc.artwork[0];
+	} catch(err) {
+		console.error(err);
+		trackImage = { format: 'png', src: 'defaultImage' };
+	}
+	// console.log('\n*** trackImage:', trackImage)
+	return trackImage;
+}
+
+const requestDiscogsData = async (metadataCommon, querryType) => {
+	const albumQueryString = `?q=${metadataCommon.album}&release_title=${metadataCommon.album}&type=release`;
+	const artistQueryString = `?q=${metadataCommon.artist}&type=artist`;
+	const querryTypes = {
+		album: albumQueryString,
+		artist: artistQueryString
+	}
+	let discogsResponse;
+	try {
+		discogsResponse = await axios.get(`${DISCOGS_BASE_URL}database/search${querryTypes[querryType]}&token=${process.env.DISCOGS_TOKEN}`);
+		// Return first result found
+		return discogsResponse.data.results[0];
+	} catch(e) {
+		return e;
+	}
+};
 

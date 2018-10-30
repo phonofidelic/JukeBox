@@ -1,5 +1,5 @@
 export const // uploaderActionTypes
-						 UPLOAD_TRACK = 'upload_track',
+						 UPLOAD_TRACKS = 'upload_trackS',
 						 UPLOAD_SUCCESS = 'upload_success',
 						 UPLOAD_FAILURE = 'upload_failure',
 						 // trackListActiontypes

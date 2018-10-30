@@ -12,7 +12,8 @@ const ArtistSchema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	name: { type: String, default: STRINGS.default_unknown },
 	albums: [ { type: Schema.Types.ObjectId, ref: 'Album' } ],
-	description: { type: String, default: STRINGS.default_noDescription }
+	description: { type: String, default: STRINGS.default_noDescription },
+	artwork: [ { type: Schema.Types.Mixed } ]
 });
 
 ArtistSchema.statics.findOneWithAlbumId = function(albumId) {

@@ -8,7 +8,8 @@
     "test": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --watchAll",
     "coverage": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --coverage",
     "prod": "node index.js",
-    "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js"
+    "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js",
+    "dropLib": "FS_AUDIO=uploads/audio FS_IMAGE=uploads/images DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.dropLib.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "multer": "^1.3.1",
     "music-metadata": "^0.10.2",
     "nodemon": "^1.18.4",
+    "p-iteration": "^1.1.7",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

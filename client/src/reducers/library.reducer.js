@@ -2,7 +2,9 @@ import {
 	LOAD_LIBRARY,
 	LOAD_LIBRARY_SUCCESS,
 	LOAD_LIBRARY_FAILURE,
+	UPLOAD_TRACKS,
 	UPLOAD_SUCCESS,
+	UPLOAD_FAILURE,
 	SELECT_TRACK,
 	POST_TRACK_DATA,
 	POST_TRACK_DATA_SUCCESS,
@@ -55,10 +57,23 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 				// error: action.error
 			}
 
+		case UPLOAD_TRACKS:
+			return {
+				...state,
+				loading: true,
+			}
+
 		case UPLOAD_SUCCESS:
 			return {
 				...state,
+				loading: false,
 				tracks: [...state.tracks, ...action.uploadedTracks]
+			}
+
+		case UPLOAD_FAILURE:
+			return {
+				...state,
+				loading: false,
 			}
 
 		case SELECT_TRACK:

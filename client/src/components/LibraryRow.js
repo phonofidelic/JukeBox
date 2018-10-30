@@ -91,8 +91,9 @@ export class LibraryRow extends Component {
 			},
 		};
 
-		const muinets = Math.floor(track.format.duration/60);
-		const rawSeconds = Math.floor(track.format.duration) - muinets * 60;
+		const duration = track.format ? track.format.duration : 0;
+		const minutes = Math.floor(duration/60);
+		const rawSeconds = Math.floor(duration) - minutes * 60;
 
 		const seconds = rawSeconds <= 9
 			? rawSeconds + '0'
