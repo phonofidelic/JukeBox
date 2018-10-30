@@ -9,6 +9,7 @@ const TrackSchema = new Schema({
 	artist: { type: Schema.Types.ObjectId, required: true, ref: 'Artist' },
 	album: { type: Schema.Types.ObjectId, required: true, ref: 'Album' },
 	genre: [ String ],
+	year: Number,
 	order: {
 		no: { type: Number, default: 0 },
 		of: { type: Number, default: 0 }

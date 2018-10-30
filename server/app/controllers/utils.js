@@ -133,24 +133,19 @@ module.exports.checkArtist = async (metadata, Artist, userId, importDiscogs) => 
 			console.log('\n### Artist found in db');
 			return existingArtistDoc;
 		}
-
 		console.log('\n### Artist not found in DB, creating new document...');
-		let artistData = {
-			userId: userId,
-			name: metadata.common.artist
-		};
-		
+
 		let discogsData;
 		if (importDiscogs) {
 			discogsData = await requestDiscogsData(metadata.common, 'artist');
-			// console.log('\ndiscogsData:', util.inspect(discogsData, inspectConfig));
+			// console.log('\nDiscogs artist data:', util.inspect(discogsData, inspectConfig));
 		}
-		artistData = {
-			...artistData,
-			artwork: await getArtistImage(discogsData)
-		};
 
-		return await new Artist(artistData).save();
+		return await new Artist({
+			userId: userId,
+			name: metadata.common.artist,
+			artwork: await getArtistImage(discogsData)
+		}).save();
 	} catch(err) {
 		return new Error(err);
 	}
@@ -158,6 +153,8 @@ module.exports.checkArtist = async (metadata, Artist, userId, importDiscogs) => 
 
 module.exports.checkAlbum = async (metadata, Album, userId, importDiscogs) => {
 	let albumDoc;
+	let genre = metadata.common.genre || [];
+	let year = metadata.common.year || null;
 	try {
 		exsistingAlbumDoc = await Album.findOne({ title: metadata.common.album });
 		if (exsistingAlbumDoc) {
@@ -169,12 +166,18 @@ module.exports.checkAlbum = async (metadata, Album, userId, importDiscogs) => {
 		let discogsData;
 		if (importDiscogs) {
 			discogsData = await requestDiscogsData(metadata.common, 'album');
-			console.log('\nDiscogs album data:', util.inspect(discogsData, inspectConfig));
+			// console.log('\nDiscogs album data:', util.inspect(discogsData, inspectConfig));
+			if(discogsData) {
+				genre = [...discogsData.style, ...genre];
+				year = discogsData.year || year;
+			}
 		}
 
 		return await new Album({
 			userId: userId,
 			title: metadata.common.album,
+			genre: genre,
+			year: year,
 			artwork: await getAlbumImage(metadata.common.picture, discogsData)
 		}).save();
 	} catch(err) {
@@ -243,6 +246,7 @@ const requestDiscogsData = async (metadataCommon, querryType) => {
 		// Return first result found
 		return discogsResponse.data.results[0];
 	} catch(e) {
+		throw new Error(e)
 		return e;
 	}
 };

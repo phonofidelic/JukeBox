@@ -73,7 +73,9 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			format: metadata.format,
 			file: file,
 			order: metadata.common.track,
-			disk: metadata.common.disk
+			disk: metadata.common.disk,
+			genre: albumData.genre,
+			year: albumData.year
 		}).save();
 		// console.log('\nnewTrack:', util.inspect(newTrack));
 
