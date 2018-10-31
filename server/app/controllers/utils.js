@@ -234,7 +234,7 @@ module.exports.getTrackImage = async (Album, albumData) => {
 }
 
 const requestDiscogsData = async (metadataCommon, querryType) => {
-	const albumQueryString = `?q=${metadataCommon.album}&release_title=${metadataCommon.album}&type=release`;
+	const albumQueryString = `?q=${metadataCommon.artist}&release_title=${metadataCommon.album}&type=release`;
 	const artistQueryString = `?q=${metadataCommon.artist}&type=artist`;
 	const querryTypes = {
 		album: albumQueryString,
