@@ -14,14 +14,14 @@ const assetDirs = [audioPath, imagePath];
 
 function emptyDirs(dirs) {
 	console.log('*** dirs:', dirs)
-	dirs.forEach(dir => {
+	return dirs.forEach(dir => {
 		fs.readdir(dir, (err, files) => {
 			if (err) throw err;
 
 			for (let file of files) {
 				fs.unlink(path.join(dir, file), err => {
 					if (err) throw  err;
-					console.log(`deleted file "${file}`)
+					return console.log(`deleted file "${file}`)
 				});
 			}
 		});
@@ -53,3 +53,5 @@ async function dropLib() {
 	return 0;
 }
 dropLib();
+
+return console.log('done')

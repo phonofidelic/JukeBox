@@ -82,6 +82,7 @@ const getAlbumImage = async (embededImages, discogsData) => {
 			responseType: 'stream',
 			url: discogsData.cover_image
 		});
+		console.log('\n*** getAlbumImage Discogs response:', util.inspect(response, inspectConfig))
 		response.data.pipe(fs.createWriteStream(imgPath));
 		await new Promise((resolve, reject) => {
 			response.data.on('end', () => {
@@ -98,7 +99,7 @@ const getAlbumImage = async (embededImages, discogsData) => {
 		.catch(err => console.log(err));
 	}
 	if (embededImages) {
-		// console.log('*** embededImages:', embededImages)
+		console.log('*** embededImages:', embededImages)
 		for (let i = 0; i < embededImages.length; i++) {
 			const imgPath = `${process.env.FS_IMAGE}/${uuidv4()}.${embededImages[i].format}`;
 			fs.writeFile(imgPath, embededImages[i].data, (err) => {
@@ -106,11 +107,11 @@ const getAlbumImage = async (embededImages, discogsData) => {
 					console.error('writeFile error:', err);
 					return new Error('Could not save new Album image file')
 				};
-				artwork.push({ format: embededImages[i].format, src:imgPath });
-			});	
+			});
+			artwork.push({ format: embededImages[i].format, src: imgPath });	
 		}
 	}
-	// console.log('*** getAlbumImage, artwork:', artwork)
+	console.log('\n*** getAlbumImage, artwork:', artwork)
 	return artwork;
 };
 
@@ -166,7 +167,7 @@ module.exports.checkAlbum = async (metadata, Album, userId, importDiscogs) => {
 		let discogsData;
 		if (importDiscogs) {
 			discogsData = await requestDiscogsData(metadata.common, 'album');
-			// console.log('\nDiscogs album data:', util.inspect(discogsData, inspectConfig));
+			console.log('\nDiscogs album data:', util.inspect(discogsData, inspectConfig));
 			if(discogsData) {
 				genre = [...discogsData.style, ...genre];
 				year = discogsData.year || year;
@@ -223,18 +224,18 @@ module.exports.getTrackImage = async (Album, albumData) => {
 	let trackImage
 	try {
 		let albumDoc = await Album.findById(albumData._id);
-		// console.log('*** albumDoc:', albumDoc)
+		console.log('*** albumDoc:', albumDoc)
 		trackImage = albumDoc.artwork[0];
 	} catch(err) {
 		console.error(err);
-		trackImage = { format: 'png', src: 'defaultImage' };
+		throw err;
 	}
-	// console.log('\n*** trackImage:', trackImage)
+	console.log('\n*** @utils.getTrackImage, trackImage:', trackImage)
 	return trackImage;
 }
 
 const requestDiscogsData = async (metadataCommon, querryType) => {
-	const albumQueryString = `?q=${metadataCommon.artist}&release_title=${metadataCommon.album}&type=release`;
+	const albumQueryString = `?q=${metadataCommon.album}&release_title=${metadataCommon.album}&type=release`;
 	const artistQueryString = `?q=${metadataCommon.artist}&type=artist`;
 	const querryTypes = {
 		album: albumQueryString,
@@ -243,8 +244,9 @@ const requestDiscogsData = async (metadataCommon, querryType) => {
 	let discogsResponse;
 	try {
 		discogsResponse = await axios.get(`${DISCOGS_BASE_URL}database/search${querryTypes[querryType]}&token=${process.env.DISCOGS_TOKEN}`);
+		if (querryType === 'album') console.log(`\n*** requestDiscogsData (${querryType}) response: ${util.inspect(discogsResponse.data, inspectConfig)}`)
 		// Return first result found
-		return discogsResponse.data.results[0];
+		return discogsResponse.data.results.length ? discogsResponse.data.results[0] : false;
 	} catch(e) {
 		throw new Error(e)
 		return e;

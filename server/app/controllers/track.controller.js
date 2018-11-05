@@ -40,8 +40,16 @@ module.exports.handlePostTracks = async (req, res, next) => {
 
 		const importDiscogs = discogsImports[file.originalname] === 'true' ? true : false;
 		
-		const metadata = await mm.parseFile(file.path, mmConfig)
-		console.log('\nmetadata:', util.inspect(metadata, inspectConfig));
+		let metadata
+		try {
+			metadata = await mm.parseFile(file.path, mmConfig);
+			console.log('\nmetadata:', util.inspect(metadata, inspectConfig));
+			if (!metadata) return next(Error('Bajskorv'))
+		} catch(e) {
+			return next(e);
+		}
+
+		
 
 		/***
 		 *	Check if track is already in DB by matching original file name
@@ -69,6 +77,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			artist: artistData,
 			album: albumData,
 			image: await utils.getTrackImage(Album, albumData),
+			// image: albumData.artwork[0],
 			userId: userId,	
 			format: metadata.format,
 			file: file,
@@ -77,7 +86,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			genre: albumData.genre,
 			year: albumData.year
 		}).save();
-		// console.log('\nnewTrack:', util.inspect(newTrack));
+		console.log('\nnewTrack:', util.inspect(newTrack));
 
 		/***
 		 *	Update Artist and Album docks with new track data

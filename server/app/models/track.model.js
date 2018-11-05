@@ -19,8 +19,8 @@ const TrackSchema = new Schema({
 		of: { type: Number, default: 0 }
 	},
 	image: {
-		format: String,
-		src: String
+		format: { type: String, required: true },
+		src: { type: String, required: true }
 	},
 	format: Schema.Types.Mixed,
 	file: {
