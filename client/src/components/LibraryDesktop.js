@@ -97,28 +97,6 @@ class LibraryDesktop extends Component {
 				// width: '100%',
 				backgroundColor: theme.palette.secondary.light,
 			},
-			titleCell: {
-				maxWidth: theme.dimensions.libraryDesktop.titleCellWidth,
-			},
-			artistCell: {
-				maxWidth: theme.dimensions.libraryDesktop.artistCellWidth,
-			},
-			albumCell: {
-				maxWidth: theme.dimensions.libraryDesktop.albumCellWidth,
-			},
-			defaultImgContainer: {
-				width: '32px', 
-				height: '32px', 
-				display: 'flex',
-				background: theme.palette.primary.main,
-			},
-			defaultImg: {
-				margin: 'auto',
-				color: theme.palette.primary.light,
-			},
-			selected: {
-				background: theme.palette.primary.main,
-			},
 		}
 
 		// console.log(`LibraryDesktop, orderBy: ${orderBy}, ${order}`)
