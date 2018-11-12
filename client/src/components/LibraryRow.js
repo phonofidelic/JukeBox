@@ -63,28 +63,40 @@ export class LibraryRow extends Component {
 		const { anchorEl, editMode } = this.state;
 
 		const styles = {
+			root: {
+				cursor: 'pointer',
+			},
+			imageCell: {
+				paddingRight: 10,
+				maxWidth: '50px',
+				textAlign: 'right'
+			},
 			titleCell: {
-				maxWidth: theme.dimensions.libraryDesktop.titleCellWidth,
-			},
-			artistCell: {
-				maxWidth: theme.dimensions.libraryDesktop.artistCellWidth,
-			},
-			albumCell: {
-				maxWidth: theme.dimensions.libraryDesktop.albumCellWidth,
+				paddingLeft: 0,
+				paddingRight: 20,
+				maxWidth: '200px',
 			},
 			durationCell: {
-				maxWidth: theme.dimensions.libraryDesktop.durrationCellWidth,
+				paddingLeft: 20,
+				paddingRight: 20,
+				maxWidth: '50px',
+			},
+			artistCell: {
+				paddingRight: 20,
+				maxWidth: '200px',
+			},
+			albumCell: {
+				paddingLeft: 20,
+				maxWidth: '200px',
 			},
 			defaultImgContainer: {
 				width: '32px', 
 				height: '32px', 
-				display: 'flex',
 				background: theme.palette.primary.main,
 			},
 			defaultImg: {
 				margin: 'auto',
 				color: '#9e9e9e',
-				// background
 			},
 			selected: {
 				background: theme.palette.secondary.light,
@@ -114,12 +126,12 @@ export class LibraryRow extends Component {
 				onDoubleClick={() => handleStartNewQueue(track, player.currentTrack)}
 				style={
 					selectedTrack && selectedTrack._id === track._id
-					? styles.selected
+					? {...styles.root, ...styles.selected}
 					:
-					null
+					{...styles.root}
 				}
 			>
-				<TableCell>
+				<TableCell style={styles.imageCell}>
 				{
 					player.playing && player.currentTrack._id === track._id ? 
 						<div style={styles.defaultImgContainer}>
@@ -135,6 +147,20 @@ export class LibraryRow extends Component {
 				}
 				</TableCell>
 				<TableCell style={styles.titleCell}>
+				
+				{
+					// player.playing && player.currentTrack._id === track._id ? 
+					// 	<div style={styles.defaultImgContainer}>
+					// 		<PlayCircleOutline style={styles.defaultImg} />
+					// 	</div>
+					// : 
+					// 	track.image.src === 'defaultImage' ?
+					// 		<div style={styles.defaultImgContainer}>
+					// 			<Album style={styles.defaultImg} />
+					// 		</div>
+					// 	:
+					// 		<img src={track.image.src} alt="Album art" width="32" height="32" />
+				}
 					<Tooltip 
 						title={track.title} 
 						placement="top-start"
@@ -142,6 +168,7 @@ export class LibraryRow extends Component {
 					>
 						<Typography noWrap>{track.title}</Typography>
 					</Tooltip>
+				
 				</TableCell>
 				<TableCell style={styles.durationCell}>
 					<Typography noWrap>{mDuration}</Typography>

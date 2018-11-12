@@ -5,7 +5,7 @@ import Uploader from '../components/Uploader';
 import Loader from '../components/Loader';
 import ErrorMessageContainer from './ErrorMessageContainer';
 
-const DISCOGS_IMPORT_DEFAULT = false;
+const DISCOGS_IMPORT_DEFAULT = true;
 
 export class UploaderContainer extends Component {
   constructor(props) {

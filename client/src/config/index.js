@@ -30,7 +30,8 @@ export const THEME = {
     primary: {
       main: '#d2d8d8', // accent
       light: '#fff', // background
-      dark: '#222'
+      dark: '#222',
+      hover: '#ededed',
     },
     secondary: {
       main: '#e91e00', // accent
@@ -46,16 +47,13 @@ export const THEME = {
   },
   dimensions: {
     libraryDesktop: {
-      titleCellWidth: 300,
-      durrationCellWidth: 100,
-      artistCellWidth: 100,
-      albumCellWidth: 100,
     },
     nav: {
       navHeight: 56,
     },
     navDesktop: {
       navWidth: 80,
+      marginTop: 58,
     },
     player: {
       height: 58,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LibraryRowContainer from '../containers/LibraryRowContainer';
 import {
+	Paper,
 	Table,
 	TableHead,
 	TableRow,
@@ -19,14 +20,17 @@ import DetailCard from './DetailCard';
 
 
 const columnData = [
-	// { id: 'empty', numeric: false, disablePadding: true, label: ''},
-	{ id: 'title', numeric: false, disablePadding: false, label: 'Title', labelText: 'Title' },
-	{ id: 'duration', numeric: false, disablePadding: false, label: <Schedule />, labelText: 'Duration' },
-	{ id: 'artist', numeric: false, disablePadding: false, label: 'Artist', labelText: 'Artist' },
-	{ id: 'album', numeric: false, disablePadding: false, label: 'Album', labelText: 'Album' },
+	// { id: 'empty', numeric: false, disablePadding: true, label: '', labelText: '', width: '1%' },
+	{ id: 'title', numeric: false, disablePadding: false, label: 'Title', labelText: 'Title', span: 2 },
+	{ id: 'duration', numeric: false, disablePadding: false, label: <Schedule />, labelText: 'Duration', width: '1%', span: 1 },
+	{ id: 'artist', numeric: false, disablePadding: false, label: 'Artist', labelText: 'Artist', width: '1%', span: 1 },
+	{ id: 'album', numeric: false, disablePadding: false, label: 'Album', labelText: 'Album', width: '1%', span: 1 },
 ]
 
 class LibraryDesktop extends Component {
+	state = {
+		hoveredCell: null
+	}
   createSortHandler = columnId => e => {
     this.props.handleRequestSort(e, columnId);
   };
@@ -83,12 +87,13 @@ class LibraryDesktop extends Component {
 
 		const styles = {
 			root: {
+				// maxWidth: 1000,
 				background: theme.palette.primary.light,
-				marginBottom: userAgentIsMobile ? 
-					theme.dimensions.nav.navHeight + theme.dimensions.player.playerHeight 
-					: 
-					theme.dimensions.player.playerHeight,
-				marginLeft: theme.dimensions.navDesktop.navWidth,
+				marginTop: theme.dimensions.navDesktop.marginTop,
+				marginLeft: theme.dimensions.navDesktop.navWidth+20,
+				marginBottom: theme.dimensions.player.height + 20,
+				marginRight: theme.dimensions.navDesktop.navWidth+20,
+				overflowX: 'auto',
 			},
 			tableHead: {
 				// position: 'fixed',
@@ -96,6 +101,7 @@ class LibraryDesktop extends Component {
 				// // height: '50px',
 				// width: '100%',
 				backgroundColor: theme.palette.secondary.light,
+				cursor: 'pointer',
 			},
 		}
 
@@ -111,17 +117,30 @@ class LibraryDesktop extends Component {
 					: 
 					null
 				}
-				<Table style={styles.root}>
+				<Paper style={styles.root}>
+				<Table  padding="none">
+					{
+						// <colgroup>
+						// 	{columnData.map((col, i) => (<col key={'col_'+i} width={col.width} />))}
+						// </colgroup>
+					}
 					<TableHead style={styles.tableHead}>
 						<TableRow>
-							<TableCell></TableCell>
+							{/*<TableCell></TableCell>*/}
 							{
 								columnData.map(column => (
 									<TableCell
+										style={this.state.hoveredCell === column.id ? { backgroundColor: theme.palette.primary.hover } : { backgroundColor: theme.palette.secondary.light }}
+										scope="col"
+										colSpan={column.span}
+										onMouseEnter={() => this.setState({ hoveredCell: column.id })}
+										onMouseLeave={() => this.setState({ hoveredCell: null })}
 										key={column.id}
 										numeric={column.numeric}
-		                padding={column.disablePadding ? 'none' : 'default'}
+										// width={column.widt}
+		                // padding={column.disablePadding ? 'none' : 'default'}
 		                sortDirection={orderBy === column.id ? order : false}
+		                onClick={this.createSortHandler(column.id)}
 		              >
 		             		<Tooltip
 	              			title={column.labelText}
@@ -131,7 +150,6 @@ class LibraryDesktop extends Component {
 			              	<TableSortLabel
 			              		active={orderBy === column.id}
 			              		direction={order}
-			              		onClick={this.createSortHandler(column.id)}
 			              	>
 			              		{column.label}
 			              	</TableSortLabel>
@@ -161,6 +179,7 @@ class LibraryDesktop extends Component {
 						)}
 					</TableBody>
 				</Table>
+				</Paper>
 			</div>
 		);
 	}

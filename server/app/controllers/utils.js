@@ -235,7 +235,7 @@ module.exports.getTrackImage = async (Album, albumData) => {
 }
 
 const requestDiscogsData = async (metadataCommon, querryType) => {
-	const albumQueryString = `?q=${metadataCommon.album}&release_title=${metadataCommon.album}&type=release`;
+	const albumQueryString = `?q=${metadataCommon.artist}&release_title=${metadataCommon.album}&type=release`;
 	const artistQueryString = `?q=${metadataCommon.artist}&type=artist`;
 	const querryTypes = {
 		album: albumQueryString,
@@ -244,7 +244,7 @@ const requestDiscogsData = async (metadataCommon, querryType) => {
 	let discogsResponse;
 	try {
 		discogsResponse = await axios.get(`${DISCOGS_BASE_URL}database/search${querryTypes[querryType]}&token=${process.env.DISCOGS_TOKEN}`);
-		if (querryType === 'album') console.log(`\n*** requestDiscogsData (${querryType}) response: ${util.inspect(discogsResponse.data, inspectConfig)}`)
+		// if (querryType === 'album') console.log(`\n*** requestDiscogsData (${querryType}) response: ${util.inspect(discogsResponse.data, inspectConfig)}`)
 		// Return first result found
 		return discogsResponse.data.results.length ? discogsResponse.data.results[0] : false;
 	} catch(e) {
