@@ -16,18 +16,29 @@ const form = reduxForm({
 const renderField = ({
  input, 
  label, 
- meta: { touched, error }, 
+ meta: { pristine, touched, error }, 
  children, 
  ...custom 
 }) => (
 	<TextField
 		label={label}
 		{...input}
-		{...custom} 
+		{...custom}
 	/>
 );
 
 class EditTrackForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			values: {
+				title: props.track.title,
+				artist: props.track.artist,
+				album: props.track.album,
+			}
+		}	
+	}
+	
 	render() {
 		const { 
 			track, 
@@ -36,7 +47,7 @@ class EditTrackForm extends Component {
 			handleToggleEditMode,
 			theme,
 		} = this.props;
-
+		console.log('form:', form.fields)
 		const styles = {
 			save: {
 				color: theme.palette.context.success

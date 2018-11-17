@@ -127,7 +127,7 @@ class TrackListItemControls extends Component {
 					}
 					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.SHOW_DETAIL, { id: track.artist._id, type: 'artist' })}>View Artist Details</MenuItem>
 					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.SHOW_DETAIL, { id: track.album._id, type: 'album' })}>View Album Details</MenuItem>
-					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.EDIT_INFO)}>Edit info</MenuItem>
+					{/*<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.EDIT_INFO)}>Edit info</MenuItem>*/}
 					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.DELETE_TRACK, { track: track })}>
 						Delete track
 						{/*<AlertDialog 
