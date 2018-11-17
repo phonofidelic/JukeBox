@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EditTrackForm from './EditTrackForm';
 import TrackListItemControls from './TrackListItemControls';
+import playingThumb from './playing_thumb.svg';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
@@ -43,14 +44,16 @@ class TrackListItem extends Component {
 
 		const { editMode } = this.state;
 
+		const isSelected = selectedTrack && track._id === selectedTrack._id;
+
 		const styles = {
 			root: {
 				// borderBottom: `1px solid ${theme.palette.primary.main}`,
 				// padding: '10px'
-				borderLeft: `solid ${theme.palette.primary.light} 5px`,
+				// borderLeft: `solid ${theme.palette.primary.light} 5px`,
 			},
 			selected: {
-				// background: theme.palette.primary.main,
+				background: theme.palette.primary.selected,
 				// // height: '50px',
 				// lineHeight: '50px',
 				// verticalAlign: 'middle,'
@@ -66,9 +69,12 @@ class TrackListItem extends Component {
 				color: theme.palette.primary.light,
 			},
 			playing: {
-				borderLeft: `solid ${theme.palette.secondary.main} 5px`,
+				// borderLeft: `solid ${theme.palette.secondary.main} 5px`,
 				// background: theme.palette.secondary.main,
 				// backgroundSize: '50px'
+				zIndex: 2,
+				position: 'absolute',
+				backgroundColor: 'rgba(0, 0, 0, .5)',
 			},
 		};
 	
@@ -77,20 +83,12 @@ class TrackListItem extends Component {
 				onClick={() => handleSelectTrack(track)}
 				divider
 				style={
-					(selectedTrack && track._id === selectedTrack._id ? 
+					isSelected ? 
 					styles.selected
-					: 
-					styles.root, player.currentTrack && player.currentTrack._id === track._id ?
-					{...styles.playing}
 					:
-					null)
+					styles.root	
 				}
-				dense={
-					selectedTrack && track._id === selectedTrack._id ? 
-					false
-					: 
-					true
-				}
+				dense={true}
 			>
 				{
 					editMode ?
@@ -108,19 +106,20 @@ class TrackListItem extends Component {
 						
 						>
 						<Grid item xs={2}>
+							<div>
 							{
-								track.image.src === 'defaultImage' ?
-								<div style={styles.defaultImgContainer}><Album style={styles.defaultImg} /></div>
-								:
-								<img src={track.image.src} alt="Album art" width="50" height="50" />
+								(player.playing && player.currentTrack._id === track._id) && 
+								<img src={playingThumb} style={styles.playing} alt="Playing..." width="50" height="50" />
 							}
+							<img src={track.image.src} alt="Album art" width="50" height="50" />
+							</div>
 						</Grid>
 						<Grid item xs={6}>
 							<Grid container direction="column">
 								<div><Typography noWrap>{ track.title }</Typography></div>
 								<div><Typography noWrap variant="caption">{ track.artist.name }</Typography></div>
 								<div><Typography noWrap variant="caption">{ track.album.title }</Typography></div>
-								{ (selectedTrack && track._id === selectedTrack._id) && <div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div>}
+								{/* isSelected && <div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div> */}
 							</Grid>
 						</Grid>
 						{ 

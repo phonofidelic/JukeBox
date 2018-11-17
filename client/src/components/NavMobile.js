@@ -27,9 +27,9 @@ class NavMobile extends Component {
         position: 'fixed',
         bottom: '0px',
         width: '100%',
-        height: theme.dimensions.nav.navHeight,
+        height: theme.dimensions.navMobile.height,
         backgroundColor: '#fafafa',
-        zIndex: 2,
+        zIndex: theme.dimensions.navMobile.zIndex,
       }
     }
 

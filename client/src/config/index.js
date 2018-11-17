@@ -32,6 +32,7 @@ export const THEME = {
       light: '#fff', // background
       dark: '#222',
       hover: '#ededed',
+      selected: '#dbdbdb',
     },
     secondary: {
       main: '#e91e00', // accent
@@ -54,6 +55,11 @@ export const THEME = {
     navDesktop: {
       navWidth: 80,
       marginTop: 58,
+      zIndex: 3,
+    },
+    navMobile: {
+      height: 56,
+      zIndex: 3,
     },
     player: {
       height: 58,

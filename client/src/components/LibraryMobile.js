@@ -41,7 +41,7 @@ export class LibraryMobile extends Component {
 
 		const styles = {
 			root: {
-				background: theme.palette.primary.light,
+				background: theme.palette.secondary.light,
 				borderTop: `1px solid ${theme.palette.primary.main}`,
 				padding: '0px',
 				paddingTop: '45px',

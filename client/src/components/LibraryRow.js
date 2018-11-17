@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LibraryContextMenu from './LibraryContextMenu';
+import playingThumb from './playing_thumb.svg';
 import {
 	TableRow,
 	TableCell,
@@ -47,6 +48,32 @@ export class LibraryRow extends Component {
 		this.props.handleDeleteTrack(this.props.track);
 	}
 
+	renderTrackThumb() {
+		const {
+			track, 
+			player,
+			theme,
+		} = this.props;
+
+		const styles = {
+			playing: {
+				zIndex: 2,
+				position: 'absolute',
+				backgroundColor: 'rgba(0, 0, 0, .5)',
+			}
+		}
+
+		return (
+			<div>
+			{
+				(player.playing && player.currentTrack._id === track._id) && 
+				<img src={playingThumb} style={styles.playing} alt="Playing..." width="32" height="32" />
+			}
+			<img src={track.image.src} alt="Album art" width="32" height="32" />
+			</div>
+		)
+	}
+
 	render() {
 		const { 
 			track,
@@ -68,7 +95,7 @@ export class LibraryRow extends Component {
 			},
 			imageCell: {
 				paddingRight: 10,
-				maxWidth: '50px',
+				maxWidth: '32px',
 				textAlign: 'right'
 			},
 			titleCell: {
@@ -88,15 +115,6 @@ export class LibraryRow extends Component {
 			albumCell: {
 				paddingLeft: 20,
 				maxWidth: '200px',
-			},
-			defaultImgContainer: {
-				width: '32px', 
-				height: '32px', 
-				background: theme.palette.primary.main,
-			},
-			defaultImg: {
-				margin: 'auto',
-				color: '#9e9e9e',
 			},
 			selected: {
 				background: theme.palette.secondary.light,
@@ -132,35 +150,9 @@ export class LibraryRow extends Component {
 				}
 			>
 				<TableCell style={styles.imageCell}>
-				{
-					player.playing && player.currentTrack._id === track._id ? 
-						<div style={styles.defaultImgContainer}>
-							<PlayCircleOutline style={styles.defaultImg} />
-						</div>
-					: 
-						track.image.src === 'defaultImage' ?
-							<div style={styles.defaultImgContainer}>
-								<Album style={styles.defaultImg} />
-							</div>
-						:
-							<img src={track.image.src} alt="Album art" width="32" height="32" />
-				}
+					{ this.renderTrackThumb() }
 				</TableCell>
 				<TableCell style={styles.titleCell}>
-				
-				{
-					// player.playing && player.currentTrack._id === track._id ? 
-					// 	<div style={styles.defaultImgContainer}>
-					// 		<PlayCircleOutline style={styles.defaultImg} />
-					// 	</div>
-					// : 
-					// 	track.image.src === 'defaultImage' ?
-					// 		<div style={styles.defaultImgContainer}>
-					// 			<Album style={styles.defaultImg} />
-					// 		</div>
-					// 	:
-					// 		<img src={track.image.src} alt="Album art" width="32" height="32" />
-				}
 					<Tooltip 
 						title={track.title} 
 						placement="top-start"

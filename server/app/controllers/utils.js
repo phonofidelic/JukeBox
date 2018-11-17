@@ -5,6 +5,8 @@ const mm = require('music-metadata');
 const axios = require('axios');
 const inspectConfig = {colors: true, depth: null};
 
+const DEFAULT_ALBUM_IMAGE_URL = `${process.env.FS_IMAGE}/default_album_img.svg`;
+const DEFAULT_ARTIST_IMAGE_URL = `${process.env.FS_IMAGE}/default_artist_img.svg`;
 const DISCOGS_BASE_URL = 'https://api.discogs.com/';
 
 // TODO: Handle image sizes and save multiple images for sm/md/lg
@@ -45,7 +47,7 @@ const getDiscogsImgFormat = (imgUrl) => {
 }
 
 const getArtistImage = async (discogsData) => {
-	if (!discogsData) return { format: 'png', src: 'defaultImage' };
+	if (!discogsData) return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL };
 	const format = getDiscogsImgFormat(discogsData.cover_image);
 	const imgPath = `${process.env.FS_IMAGE}/${uuidv4()}.${format}`;
 	let response;
@@ -56,8 +58,8 @@ const getArtistImage = async (discogsData) => {
 			url: discogsData.cover_image
 		});
 	} catch(err) {
-		// console.error('\ngetArtistImage, Discogs request error:', err);
-		return { format: 'png', src: 'defaultImage' }
+		console.error('\ngetArtistImage, Discogs request error:', err);
+		return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL }
 	}
 	response.data.pipe(fs.createWriteStream(imgPath));
 	return await new Promise((resolve, reject) => {
@@ -73,7 +75,7 @@ const getArtistImage = async (discogsData) => {
 
 const getAlbumImage = async (embededImages, discogsData) => {
 	let artwork = [];
-	if (!embededImages && !discogsData) return { format: 'png', src: 'defaultImage' };
+	if (!embededImages && !discogsData) return { format: 'png', src: DEFAULT_ALBUM_IMAGE_URL };
 	if (discogsData) {
 		const format = getDiscogsImgFormat(discogsData.cover_image);
 		const imgPath = `${process.env.FS_IMAGE}/${uuidv4()}.${format}`;
