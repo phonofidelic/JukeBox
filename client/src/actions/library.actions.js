@@ -19,6 +19,7 @@ import {
 	CLOSE_DETAIL_VIEW,
 	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
+import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
 import { URLS } from '../config';
 
@@ -26,33 +27,40 @@ const { TRACK_URL, ARTIST_URL, ALBUM_URL} = URLS;
 
 export const loadLibrary = () => {
 	// console.log('loadLibrary called')
-	return dispatch => {
+	return async (dispatch) => {
 		dispatch({
 			type: LOAD_LIBRARY
 		});
-
-		axios.get('/library', {
-			headers: { 
-				token: localStorage.getItem('JWT'),
-				userId: localStorage.getItem('userId')
+		// Ceck indexedDB for stored track data
+		let tracks = await idbTrack.getAll();
+		console.log('tdb tracks:', tracks)
+		// If indexedDB is empty, fetch tracks from network
+		if (!tracks || tracks.length < 1) {
+			try {
+				tracks = await axios.get('/library', {
+					headers: { 
+						token: localStorage.getItem('JWT'),
+						userId: localStorage.getItem('userId')
+					}
+				});
+				idbTrack.setAll(tracks);
+				dispatch({
+					type: LOAD_LIBRARY_SUCCESS,
+					tracks: tracks,
+				});
+			} catch(err) {
+				console.error(err);
+				dispatch({
+					type: LOAD_LIBRARY_FAILURE,
+					data: err.response.data,
+					status: err.response.status ,
+					message: err.response.data.message || err.response.data, 
+				});
 			}
-		})
-		.then(response => {
-			console.log('loadLibrary response:', response);
-
-			dispatch({
-				type: LOAD_LIBRARY_SUCCESS,
-				tracks: response.data.library
-			});
-		})
-		.catch(err => {
-			console.error(err);
-			dispatch({
-				type: LOAD_LIBRARY_FAILURE,
-				data: err.response.data,
-				status: err.response.status ,
-				message: err.response.data.message || err.response.data, 
-			});
+		}
+		dispatch({
+			type: LOAD_LIBRARY_SUCCESS,
+			tracks: tracks,
 		});
 	}
 }
