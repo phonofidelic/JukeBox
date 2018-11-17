@@ -30,7 +30,6 @@ export const idbTrack = {
     dbPromise.then(db => {
       const tx = db.transaction('tracks', 'readwrite');
       data.forEach(item => {
-      	console.log('idb item:', item)
         tx.objectStore('tracks').put(item);
       });
       return tx.complete;

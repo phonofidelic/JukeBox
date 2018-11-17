@@ -31,18 +31,18 @@ export const loadLibrary = () => {
 		dispatch({
 			type: LOAD_LIBRARY
 		});
-		// Ceck indexedDB for stored track data
+		// Ceck IndexedDB for stored track data
 		let tracks = await idbTrack.getAll();
-		console.log('tdb tracks:', tracks)
-		// If indexedDB is empty, fetch tracks from network
+		// If IndexedDB is empty, fetch tracks from network
 		if (!tracks || tracks.length < 1) {
 			try {
-				tracks = await axios.get('/library', {
+				let response = await axios.get('/library', {
 					headers: { 
 						token: localStorage.getItem('JWT'),
 						userId: localStorage.getItem('userId')
 					}
 				});
+				tracks = response.data.library;
 				idbTrack.setAll(tracks);
 				dispatch({
 					type: LOAD_LIBRARY_SUCCESS,
@@ -58,6 +58,7 @@ export const loadLibrary = () => {
 				});
 			}
 		}
+		// Otherwise load data retrieved from IndexedDB
 		dispatch({
 			type: LOAD_LIBRARY_SUCCESS,
 			tracks: tracks,
