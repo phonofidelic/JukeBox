@@ -33,36 +33,39 @@ export const loadLibrary = () => {
 		});
 		// Ceck IndexedDB for stored track data
 		let tracks = await idbTrack.getAll();
-		// If IndexedDB is empty, fetch tracks from network
+		// If IndexedDB is empty, or (TODO:) last fetch was made > some time limit,
+		// fetch tracks from network
 		if (!tracks || tracks.length < 1) {
-			try {
-				let response = await axios.get('/library', {
-					headers: { 
-						token: localStorage.getItem('JWT'),
-						userId: localStorage.getItem('userId')
-					}
-				});
-				tracks = response.data.library;
+			axios.get('/library', {
+				headers: { 
+					token: localStorage.getItem('JWT'),
+					userId: localStorage.getItem('userId')
+				}
+			})
+			.then(response => {
+				const tracks = response.data.library;
 				idbTrack.setAll(tracks);
 				dispatch({
 					type: LOAD_LIBRARY_SUCCESS,
 					tracks: tracks,
 				});
-			} catch(err) {
+			})
+			.catch(err => {
 				console.error(err);
 				dispatch({
 					type: LOAD_LIBRARY_FAILURE,
 					data: err.response.data,
-					status: err.response.status ,
-					message: err.response.data.message || err.response.data, 
+					status: err.response.status,
+					message: err.response.data.message || err.response.data,
 				});
-			}
+			});
+		} else {
+			// Otherwise load data retrieved from IndexedDB
+			dispatch({
+				type: LOAD_LIBRARY_SUCCESS,
+				tracks: tracks,
+			});
 		}
-		// Otherwise load data retrieved from IndexedDB
-		dispatch({
-			type: LOAD_LIBRARY_SUCCESS,
-			tracks: tracks,
-		});
 	}
 }
 
