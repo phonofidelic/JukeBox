@@ -111,7 +111,7 @@ module.exports.editTrack = (req, res, next) => {
 		if (err) return next(err);
 		console.log('PUT /tracks/:trackId response:\n', updatedTrack);
 		// TODO: change to: res.json({ message: 'Track removed', updatedTrack: updatedTrack });
-		res.json({ message: 'Track updated', data: updatedTrack });
+		res.json({ message: 'Track updated', updatedTrack: updatedTrack });
 	});
 };
 
@@ -119,24 +119,24 @@ module.exports.editTrack = (req, res, next) => {
 // DELETE /tracks/:trackId
 module.exports.removeTrack = (req, res, next) => {
 	const trackId = req.params.trackId;
-	Track.findByIdAndRemove(trackId, (err, removedTrack) => {
+	Track.findByIdAndRemove(trackId, (err, deletedTrack) => {
 		if (err) return next(err);
 		// Delete audio file in uploads/audio
-		fs.unlink(removedTrack.file.path, (err) => {
+		fs.unlink(deletedTrack.file.path, (err) => {
 			if (err) return next(err);
-			console.log(`\n### Deleted audio file ${removedTrack.file.path}`);
+			console.log(`\n### Deleted audio file ${deletedTrack.file.path}`);
 		});
 
 		// If an image file exists, delete it from uploads/images
-		if (removedTrack.image.src && removedTrack.image.src !== 'defaultImage') {
-			fs.unlink(removedTrack.image.src, (err) => {
-				if (err) return next(err);
-				console.log(`\n### Deleted image file ${removedTrack.image.src}`);
-			});
-		}
+		// if (deletedTrack.image.src && deletedTrack.image.src !== 'defaultImage') {
+		// 	fs.unlink(deletedTrack.image.src, (err) => {
+		// 		if (err) return next(err);
+		// 		console.log(`\n### Deleted image file ${deletedTrack.image.src}`);
+		// 	});
+		// }
 
-		// TODO: change to: res.json({ message: 'Track removed', removedTrack: removedTrack });
-		res.json({ message: 'Track removed', data: removedTrack });
+		// TODO: change to: res.json({ message: 'Track removed', deletedTrack: deletedTrack });
+		res.json({ message: 'Track removed', deletedTrack: deletedTrack });
 	});
 	// TODO: Delete track in file system, otherwise there will be lots of
 	// 			 files with no reference in the DB

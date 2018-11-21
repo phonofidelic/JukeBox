@@ -44,7 +44,7 @@ export const loadLibrary = () => {
 			})
 			.then(response => {
 				const tracks = response.data.library;
-				idbTrack.putAll(tracks);
+				idbTrack.putMany(tracks);
 				dispatch({
 					type: LOAD_LIBRARY_SUCCESS,
 					tracks: tracks,
@@ -104,14 +104,16 @@ export const editTrack = (formData, trackData) => {
 		})
 		.then(response => {
 			console.log('postTrackData response:', response)
+			const updatedTrack = response.data.updatedTrack;
+			idbTrack.put(updatedTrack);
 			dispatch({
 				type: POST_TRACK_DATA_SUCCESS,
-				updatedTrack: response.data.data,
+				updatedTrack: updatedTrack,
 				message: {text: 'Track data saved!', context: 'success'} //TODO: return message from response
 			});
 			dispatch({
 				type: SET_MESSAGE,
-				message: {text: `${response.data.data.title} updated!`, context: 'success'}
+				message: {text: `${response.data.updatedTrack.title} updated!`, context: 'success'}
 			});
 		})
 		.catch(err => {
@@ -148,14 +150,16 @@ export const deleteTrackConfirm = track => {
 		})
 		.then(response => {
 			console.log('deleteTrack response:', response);
+			const deletedTrack = response.data.deletedTrack;
+			idbTrack.delete(deletedTrack._id)
 			dispatch({
 				type: DELETE_TRACK_SUCCESS,
-				deletedTrack: response.data.data,
+				deletedTrack: deletedTrack,
 				message: {text: 'Track was deleted', context: 'success'}
 			});
 			dispatch({
 				type: SET_MESSAGE,
-				message: {text: `${response.data.data.title} was deleted`, context: 'success'}
+				message: {text: `${deletedTrack.title} was deleted`, context: 'success'}
 			})
 		})
 		.catch(err => {

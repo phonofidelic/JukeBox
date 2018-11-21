@@ -26,12 +26,26 @@ export const idbTrack = {
       })
       .catch(err => console.error(err));
   },
-  putAll: data => {
+  putMany: data => {
     dbPromise.then(db => {
       const tx = db.transaction('tracks', 'readwrite');
       data.forEach(item => {
         tx.objectStore('tracks').put(item);
       });
+      return tx.complete;
+    });
+  },
+  put: data => {
+    dbPromise.then(db => {
+      const tx = db.transaction('tracks', 'readwrite');
+      tx.objectStore('tracks').put(data);
+      return tx.complete;
+    });
+  },
+  delete: id => {
+    dbPromise.then(db => {
+      const tx = db.transaction('tracks', 'readwrite');
+      tx.objectStore('tracks').delete(id);
       return tx.complete;
     });
   }
