@@ -44,7 +44,7 @@ export const loadLibrary = () => {
 			})
 			.then(response => {
 				const tracks = response.data.library;
-				idbTrack.setAll(tracks);
+				idbTrack.putAll(tracks);
 				dispatch({
 					type: LOAD_LIBRARY_SUCCESS,
 					tracks: tracks,

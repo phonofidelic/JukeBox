@@ -26,7 +26,7 @@ export const idbTrack = {
       })
       .catch(err => console.error(err));
   },
-  setAll: data => {
+  putAll: data => {
     dbPromise.then(db => {
       const tx = db.transaction('tracks', 'readwrite');
       data.forEach(item => {
