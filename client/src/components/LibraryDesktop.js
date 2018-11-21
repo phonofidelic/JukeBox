@@ -15,7 +15,6 @@ import {
 import { Album, Schedule } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import { _ } from 'underscore';
-import LibraryContextMenu from './LibraryContextMenu';
 import DetailCard from './DetailCard';
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LibraryContextMenu from './LibraryContextMenu';
-import playingThumb from './playing_thumb.svg';
+import playingThumb from '../assets/playing_thumb.svg';
 import {
 	TableRow,
 	TableCell,

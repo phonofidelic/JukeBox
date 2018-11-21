@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EditTrackForm from './EditTrackForm';
 import TrackListItemControls from './TrackListItemControls';
-import playingThumb from './playing_thumb.svg';
+import playingThumb from '../assets/playing_thumb.svg';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';

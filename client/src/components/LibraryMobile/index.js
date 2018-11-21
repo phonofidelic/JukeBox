@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import TrackListItemContainer from '../containers/TrackListItemContainer';
-import DetailCard from './DetailCard';
+import TrackListItemContainer from '../../containers/TrackListItemContainer';
+import DetailCard from '../DetailCard';
 import LibraryControls from './LibraryControls';
 import {
 	Typography, 
