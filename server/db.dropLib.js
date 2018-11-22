@@ -19,6 +19,8 @@ function emptyDirs(dirs) {
 			if (err) throw err;
 
 			for (let file of files) {
+				// console.log('file:', file)
+				if (file !== 'default_album_img.svg') // !!!!!!!!!!!!! HARDCODED !!!!!
 				fs.unlink(path.join(dir, file), err => {
 					if (err) throw  err;
 					return console.log(`deleted file "${file}`)
