@@ -30,25 +30,25 @@ class LibraryControls extends Component {
 		const styles = {
 			root: {
 				position: 'fixed',
-				height: 52,
-				top: 0,
+				height: theme.dimensions.libraryControls.height,
+				top: theme.dimensions.topNav.height,
 				zIndex: 1,
 				background: theme.palette.secondary.light,
 				// borderBottom: `1px solid ${theme.palette.primary.dark}`
 			},
 			orderByLabel: {
-				height: 52,
-				lineHeight: '52px',
+				height: theme.dimensions.libraryControls.height,
+				lineHeight: `${theme.dimensions.libraryControls.height}px`,
 				verticalAlign: 'middle',
 				paddingLeft: 10,
 			}
 		}
 		return (
 			<Grid container style={styles.root}>
-				<Grid item>
+	{/*			<Grid item>
 					<Typography style={styles.orderByLabel}>Order by: </Typography>
-				</Grid>
-				<Grid item>
+				</Grid>*/}
+				{/*<Grid item>*/}
 					<Select
 						value={this.props.orderBy} 
 						onChange={this.handleChange.bind(this)}>
@@ -56,7 +56,7 @@ class LibraryControls extends Component {
 						<MenuItem value={FIELD_VALUES.ARTIST}>Artist</MenuItem>
 						<MenuItem value={FIELD_VALUES.ALBUM}>Album</MenuItem>
 					</Select>
-				</Grid>
+				{/*</Grid>*/}
 			</Grid>
 		);
 	}

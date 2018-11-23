@@ -49,6 +49,9 @@ export const THEME = {
   dimensions: {
     libraryDesktop: {
     },
+    libraryControls: {
+      height: 32,
+    },
     nav: {
       navHeight: 56,
     },
@@ -60,6 +63,9 @@ export const THEME = {
     navMobile: {
       height: 56,
       zIndex: 3,
+    },
+    topNav: {
+      height: 30,
     },
     player: {
       height: 58,

@@ -44,7 +44,7 @@ export class LibraryMobile extends Component {
 				background: theme.palette.secondary.light,
 				borderTop: `1px solid ${theme.palette.primary.main}`,
 				padding: '0px',
-				paddingTop: '45px',
+				paddingTop: theme.dimensions.topNav.height + theme.dimensions.libraryControls.height,
 				paddingBottom: '104px' // TODO: link value to Player + Nav height
 			}
 		};

@@ -27,7 +27,7 @@ export class Player extends Component {
 		const styles = {
 			root: {
 			  position: 'fixed',
-			  bottom: userAgentIsMobile ? theme.dimensions.nav.navHeight : 0, // Makes room for bottom Nav componenet
+			  bottom: 0,
 			  width: '100%',
 			  // maxWidth: 500,
 			  boxShadow: '0px -1px 20px 1px #ccc',

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { authActions } from '../actions';
 import NavMobile from '../components/NavMobile';
 import NavDesktop from '../components/NavDesktop';
+import TopNav from '../components/TopNav';
 
 
 class NavContainer extends Component {
@@ -26,7 +27,7 @@ class NavContainer extends Component {
 		} = this.props;
 
 		return userAgentIsMobile ? 
-			<NavMobile 
+			<TopNav 
 				locationPathname={locationPathname} 
 				handleSignOut={this.handleSignOut.bind(this)} 
 			/> 
