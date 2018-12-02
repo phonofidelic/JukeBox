@@ -66,7 +66,7 @@ export const THEME = {
       zIndex: 4,
     },
     topNav: {
-      height: 30,
+      height: '30px',
     },
     player: {
       height: 58,

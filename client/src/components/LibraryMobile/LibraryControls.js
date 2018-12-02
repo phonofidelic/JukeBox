@@ -64,8 +64,9 @@ class LibraryControls extends Component {
 					onClose={this.handleToggle}
 				>
 					<MenuList className={classes.menuList}>
-						{orderMenu.map(orderItem => (
+						{orderMenu.map((orderItem, i) => (
 							<MenuItem 
+								key={i}
 								className={classes.menuItem} 
 								value={orderItem.type}
 								onClick={() => this.handleSelection(orderItem.type)}

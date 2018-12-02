@@ -12,7 +12,6 @@ class NavContainer extends Component {
     this.props.checkUserAgent();
 	}
 	handleSignOut() {
-		console.log('handleSignOut, this.props:', this.props)
 		const confirm = window.confirm('Are you sure you want to sign out?');
 		if (confirm === true) {
 			return this.props.logoutUser();

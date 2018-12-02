@@ -45,7 +45,17 @@ export class Player extends Component {
 		// * render QueueList with queue and currentTrack props inside MUI Collapse component.
 		// Otherwise: Player component is an empty div.
 		return (
-			<div style={styles.root}>		
+			<div style={styles.root}>
+				<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
+					<QueueList 
+						queue={player.queue} 
+						queueIndex={player.queueIndex}
+						currentTrack={player.currentTrack} 
+						handleStopTrack={handleStopTrack}
+						handlePlayTrack={handlePlayTrack}
+						handlePlayFromQueue={handlePlayFromQueue}
+					/>
+				</Collapse>
 				<PlayerProgress 
 					player={player}
 					handleSeek={handleSeek}
@@ -63,16 +73,7 @@ export class Player extends Component {
 						/>
 					</Grid>
 				</Grid>
-				<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
-					<QueueList 
-						queue={player.queue} 
-						queueIndex={player.queueIndex}
-						currentTrack={player.currentTrack} 
-						handleStopTrack={handleStopTrack}
-						handlePlayTrack={handlePlayTrack}
-						handlePlayFromQueue={handlePlayFromQueue}
-					/>
-				</Collapse>
+				
 			</div>
 		);
 	}
