@@ -128,7 +128,10 @@ class LibraryDesktop extends Component {
 							{
 								columnData.map(column => (
 									<TableCell
-										style={this.state.hoveredCell === column.id ? { backgroundColor: theme.palette.primary.hover } : { backgroundColor: theme.palette.secondary.light }}
+										style={{ 
+											backgroundColor: this.state.hoveredCell === column.id ? theme.palette.primary.hover : theme.palette.secondary.light,
+											paddingLeft: 20,
+										}}
 										scope="col"
 										colSpan={column.span}
 										onMouseEnter={() => this.setState({ hoveredCell: column.id })}

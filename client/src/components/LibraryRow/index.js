@@ -97,9 +97,10 @@ export class LibraryRow extends Component {
 				cursor: 'pointer',
 			},
 			imageCell: {
+				paddingLeft: 20,
 				paddingRight: 10,
 				maxWidth: '32px',
-				textAlign: 'right'
+				// textAlign: 'right'
 			},
 			titleCell: {
 				paddingLeft: 0,
@@ -112,6 +113,7 @@ export class LibraryRow extends Component {
 				maxWidth: '50px',
 			},
 			artistCell: {
+				paddingLeft: 20,
 				paddingRight: 20,
 				maxWidth: '200px',
 			},
