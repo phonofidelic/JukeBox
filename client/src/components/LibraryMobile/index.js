@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 
-const FIELD_VALUES = {
+const ORDER_TYPES = {
 	TITLE: 'title',
 	ARTIST: 'artist',
 	ALBUM: 'album'
@@ -21,12 +21,12 @@ const FIELD_VALUES = {
 
 export class LibraryMobile extends Component {
 	state = {
-		orderBy: FIELD_VALUES.TITLE,
+		orderBy: ORDER_TYPES.TITLE,
 	}
 
-	setFilter(filter) {
+	setOrder(type) {
 		this.setState({
-			orderBy: filter
+			orderBy: type
 		});
 	}
 
@@ -60,7 +60,7 @@ export class LibraryMobile extends Component {
 				}
 				<LibraryControls 
 					orderBy={this.state.orderBy} 
-					setFilter={this.setFilter.bind(this)} 
+					setOrder={this.setOrder.bind(this)} 
 					handleOrderBy={handleOrderBy}
 				/>
 				<List>

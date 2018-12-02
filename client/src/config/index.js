@@ -10,6 +10,7 @@ export const URLS = {
 
 export const THEME = {
 	typography: {
+    useNextVariants: true,
     // Use the system font over Roboto.
     fontFamily:
       '-apple-system,system-ui,BlinkMacSystemFont,' +
@@ -62,7 +63,7 @@ export const THEME = {
     },
     navMobile: {
       height: 56,
-      zIndex: 3,
+      zIndex: 4,
     },
     topNav: {
       height: 30,

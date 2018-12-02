@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { 
   Home,
-  FileUpload,
+  CloudUpload,
   Storage,
   ExitToApp,
 } from '@material-ui/icons';
@@ -66,7 +66,7 @@ class NavDesktop extends Component {
           to="/uploader" 
           label={<Typography color="inherit" variant="caption">Uploader</Typography>}
           value="/uploader" 
-          icon={<FileUpload />} 
+          icon={<CloudUpload />} 
         />
         <BottomNavigationAction 
           onClick={() => handleSignOut()}

@@ -14,7 +14,7 @@ const LandingView = (props) => {
 
 	return (
 		<div>
-			<Typography variant="display1">jukebox</Typography>
+			<Typography variant="h1">jukebox</Typography>
 			<AuthContainer />
 		</div>
 	);
