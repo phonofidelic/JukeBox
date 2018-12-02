@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Upload from 'material-ui-upload/Upload';
-import Dropzone from 'react-dropzone';
-import Button from '@material-ui/core/Button';
+// import Upload from 'material-ui-upload/Upload';
+// import Dropzone from 'react-dropzone';
+// import Button from '@material-ui/core/Button';
 import UploaderFullscreen from './UploaderFullscreen';
 
 const FILE_FIELD_NAME = 'audioFiles';
@@ -15,7 +15,7 @@ const form = reduxForm({
 export class Uploader extends Component {
   uploadTracksAndReset(files) {
   	console.log('uploadTracksAndReset, files:', files)
-  	const { handleUploadTracks, reset } = this.props;
+  	const { handleUploadTracks } = this.props;
   	handleUploadTracks(files);
   	this.handleReset();
   }
@@ -28,16 +28,16 @@ export class Uploader extends Component {
 
 	render() {
 		const { 
-			trackName, 
+			// trackName, 
 			droppedFiles,
       allDiscogsImport,
 			handleOnDrop,
 			handleRemoveTrack,
-			handleUploadTracks,
+			// handleUploadTracks,
 			handleSubmit,
       handleSelectDiscogsImport,
       handleSelectAllDiscogsImport,
-			reset
+			// reset,
 		} = this.props;
 
 		const styles = {
@@ -59,7 +59,6 @@ export class Uploader extends Component {
             	handleOnDrop={handleOnDrop}
             	droppedFiles={droppedFiles}
               allDiscogsImport={allDiscogsImport}
-            	reset={reset}
             	handleRemoveTrack={handleRemoveTrack}
               handleSelectDiscogsImport={handleSelectDiscogsImport}
               handleSelectAllDiscogsImport={handleSelectAllDiscogsImport}

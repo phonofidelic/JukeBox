@@ -18,7 +18,7 @@ class Dashboard extends Component {
 		return (
 			<div className={classes.root}>
 				<Typography>email: { user && user.email }</Typography>
-				<Button onClick={() => handleSignOut()}>Sign out</Button>
+				<Button variant="outlined" onClick={() => handleSignOut()}>Sign out</Button>
 			</div>
 		);
 	}

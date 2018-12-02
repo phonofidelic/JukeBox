@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UploaderContainer from '../containers/UploaderContainer';
 
 const UploaderView = (props) => {

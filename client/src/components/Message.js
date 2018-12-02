@@ -11,7 +11,7 @@ class Message extends Component {
 		const { 
 			open,
 			text,
-			context, 
+			// context, 
 			handleClearMessage,
 			theme
 		} = this.props;

@@ -5,11 +5,6 @@ import LibraryControls from './LibraryControls';
 import {
 	Typography, 
 	List, 
-	ListItem,
-	Select,
-	MenuItem,
-	Grid,
-	GridItem,
 } from '@material-ui/core';
 import { withTheme } from '@material-ui/core/styles';
 
@@ -33,7 +28,6 @@ export class LibraryMobile extends Component {
 	render() {
 		const { 
 			library,
-			artistList,
 			handleOrderBy,
 			handleCloseDetailView,
 			theme,

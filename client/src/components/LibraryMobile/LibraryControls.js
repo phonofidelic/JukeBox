@@ -44,7 +44,6 @@ class LibraryControls extends Component {
 	render() {
 		const { 
 			orderBy, 
-			theme,
 			classes
 		} = this.props;
 

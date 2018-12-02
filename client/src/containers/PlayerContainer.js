@@ -4,10 +4,10 @@ import * as actions from '../actions/player.actions';
 import { getSelectedTrack } from '../selectors';
 import Player from '../components/Player';
 
-function precisionRound(number, precision) {
-  var factor = Math.pow(10, precision);
-  return Math.round(number * factor) / factor;
-}
+// function precisionRound(number, precision) {
+//   var factor = Math.pow(10, precision);
+//   return Math.round(number * factor) / factor;
+// }
 
 class PlayerContainer extends Component {
 	componentDidMount() {
@@ -62,10 +62,10 @@ class PlayerContainer extends Component {
 
 	render() {
 		const { 
-			trackList, 
+			// trackList, 
 			player, 
-			selectedTrack, 
-			queueIndex,
+			// selectedTrack, 
+			// queueIndex,
 			userAgentIsMobile 
 		} = this.props;
 		return player.queue.length ?

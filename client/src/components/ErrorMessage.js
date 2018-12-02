@@ -5,7 +5,7 @@ import {
 	Dialog,
 	DialogTitle,
 	DialogContent,
-	DialogContentText,
+	// DialogContentText,
 	DialogActions,
 	Typography,	
 } from '@material-ui/core';

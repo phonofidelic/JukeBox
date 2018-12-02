@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { Field } from 'redux-form';
+// import { Field } from 'redux-form';
 import {
   Button,
   Checkbox,
   IconButton,
-	List, 
-	ListItem,
+	// List, 
+	// ListItem,
   Table,
   TableHead,
   TableRow,
@@ -63,7 +63,7 @@ class UploaderFullscreen extends Component {
 
   renderUploadList() {
   	const { 
-  		input, 
+  		// input, 
   		theme, 
   		droppedFiles,
       allDiscogsImport,
@@ -162,7 +162,7 @@ class UploaderFullscreen extends Component {
   render() {
     const { 
       input, 
-      name, 
+      // name, 
       droppedFiles, 
       handleOnDrop, 
       theme,

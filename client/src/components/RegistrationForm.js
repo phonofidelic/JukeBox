@@ -67,7 +67,6 @@ class RegistrationForm extends Component {
 						type="password"
 						name="password"
 						label="Password"
-						label="Password"
 						placeholder="Choose a password"
 						validate={[validation.required]}
 					/>

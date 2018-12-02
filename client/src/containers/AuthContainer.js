@@ -71,11 +71,10 @@ class AuthContainer extends Component {
 	render() {
 		const { auth, from } = this.props;
 
-		if (auth.isAuthed) {
-			<Redirect to={from} />
-		}
-
-		return (
+		return auth.isAuthed ? 
+		( <Redirect to={from} /> )
+		:
+		(
 			<div>
 				<ErrorMessageContainer />
 				{ auth.loading ?

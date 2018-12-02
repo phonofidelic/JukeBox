@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { libraryActions, playerActions } from '../actions';
 import { getSelectedTrack } from '../selectors';
 import LibraryRow from '../components/LibraryRow';
-import { TableRow } from '@material-ui/core';
 
 const actions = { ...libraryActions, ...playerActions };
 
@@ -48,8 +47,8 @@ class LibraryRowContainer extends Component {
 			player,
 			selectedTrack,
 			// handleStartNewQueue,
-			handleOpenDetailView,
-			handleCloseDetailView,
+			// handleOpenDetailView,
+			// handleCloseDetailView,
 		} = this.props;
 
 		return (

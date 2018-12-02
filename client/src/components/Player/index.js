@@ -12,7 +12,7 @@ export class Player extends Component {
 	render() {
 		const { 
 			player, 
-			userAgentIsMobile,
+			// userAgentIsMobile,
 			handleStopTrack,
 			handlePlayTrack,
 			handlePauseTrack,

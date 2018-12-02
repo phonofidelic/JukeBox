@@ -6,7 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { 
 	PlayArrow,
-	Queue,
+	// Queue,
 	MoreVert
 } from '@material-ui/icons';
 
@@ -20,12 +20,12 @@ const menuOptions = {
 
 }
 
-const deleteTrackAlert = {
-	headerText: 'Are you sure you want to delete this track?',
-	bodyText: 'Confirming will permanently delete the selected track. This action cannot be undone.',
-	cancleButtonText: 'Cancel',
-	confirmButtonText: 'Confirm'
-}
+// const deleteTrackAlert = {
+// 	headerText: 'Are you sure you want to delete this track?',
+// 	bodyText: 'Confirming will permanently delete the selected track. This action cannot be undone.',
+// 	cancleButtonText: 'Cancel',
+// 	confirmButtonText: 'Confirm'
+// }
 
 class TrackListItemControls extends Component {
 	state = {
@@ -85,10 +85,7 @@ class TrackListItemControls extends Component {
 			track,
 			player,
 			handleStartNewQueue,
-			handleAddToQueue,
-			handleDeleteTrack,
-			handleToggleEditMode,
-			handleOpenDetailView,
+			// handleDeleteTrack,
 		} = this.props;
 
 		const { anchorEl } = this.state;

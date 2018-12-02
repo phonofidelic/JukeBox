@@ -5,9 +5,6 @@ import playingThumb from '../assets/playing_thumb.svg';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
-import { 
-	Album
-} from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 
 
@@ -37,7 +34,7 @@ class TrackListItem extends Component {
 			handleStartNewQueue,
 			handleAddToQueue,
 			handleDeleteTrack,
-			handleToggleEditMode,
+			// handleToggleEditMode,
 			handleOpenDetailView,
 			theme
 		} = this.props;

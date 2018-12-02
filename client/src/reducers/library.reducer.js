@@ -19,7 +19,7 @@ import {
 	FETCH_DETAIL_VIEW_FAILURE,
 	FETCH_DETAIL_VIEW_SUCCESS,
 	CLOSE_DETAIL_VIEW,
-	CLEAR_MESSAGE,
+	// CLEAR_MESSAGE,
 	DISMISS_LIBRARY_ERR,
 } from '../actiontypes';
 import { _ } from 'underscore';
@@ -175,11 +175,6 @@ const library_reducer = (state = INITIAL_STATE, action) => {
 					...state,
 					tracks: action.order === 'desc' ? BY_TITLE : BY_TITLE.reverse(),
 				};
-			}
-
-			return {
-				...state,
-				tracks: tracksToSort
 			}
 
 		case FETCH_DETAIL_VIEW:

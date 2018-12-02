@@ -5,15 +5,15 @@ import playingThumb from '../assets/playing_thumb.svg';
 import {
 	TableRow,
 	TableCell,
-	TableBody,
-	TableSortLabel,
+	// TableBody,
+	// TableSortLabel,
 	Typography,
 	Tooltip,
 } from '@material-ui/core';
-import { 
-	Album,
-	PlayCircleOutline,
-} from '@material-ui/icons';
+// import { 
+// 	Album,
+// 	PlayCircleOutline,
+// } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import * as moment from 'moment';
 import 'moment-duration-format';
@@ -52,7 +52,7 @@ export class LibraryRow extends Component {
 		const {
 			track, 
 			player,
-			theme,
+			// theme,
 		} = this.props;
 
 		const styles = {
@@ -80,14 +80,17 @@ export class LibraryRow extends Component {
 			player,
 			selectedTrack,
 			handleSelectTrack,
-			handleEditTrackData,
+			// handleEditTrackData,
 			handleStartNewQueue,
 			handleAddToQueue,
 			handleOpenDetailView,
 			theme,
 		} = this.props;
 
-		const { anchorEl, editMode } = this.state;
+		const { 
+			anchorEl, 
+			// editMode 
+		} = this.state;
 
 		const styles = {
 			root: {
@@ -121,16 +124,16 @@ export class LibraryRow extends Component {
 			},
 		};
 
-		const duration = track.format ? track.format.duration : 0;
-		const minutes = Math.floor(duration/60);
-		const rawSeconds = Math.floor(duration) - minutes * 60;
+		// const duration = track.format ? track.format.duration : 0;
+		// const minutes = Math.floor(duration/60);
+		// const rawSeconds = Math.floor(duration) - minutes * 60;
 
-		const seconds = rawSeconds <= 9
-			? rawSeconds + '0'
-			: rawSeconds;
+		// const seconds = rawSeconds <= 9
+		// 	? rawSeconds + '0'
+		// 	: rawSeconds;
 
 		// console.log('editMode:', editMode);
-		var dateTest = new Date();
+		// var dateTest = new Date();
 		// console.log('moment.duration:', moment.duration(track.format.duration, 'seconds'));
 		const mDuration = moment.duration(Math.floor(track.format.duration), 'seconds').format('mm:ss', { forceLength: false });
 		// console.log('mDuration:', mDuration)

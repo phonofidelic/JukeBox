@@ -9,10 +9,10 @@ import {
 	TableCell,
 	TableBody,
 	TableSortLabel,
-	Typography,
+	// Typography,
 	Tooltip,
 } from '@material-ui/core';
-import { Album, Schedule } from '@material-ui/icons';
+import { Schedule } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import { _ } from 'underscore';
 import DetailCard from './DetailCard';
@@ -74,12 +74,11 @@ class LibraryDesktop extends Component {
 			library,
 			order,
 			orderBy,
-			userAgentIsMobile,
-			handleSelectTrack,
-			handleOptionsClick,
-			handleOptionsClose,
-			handleMenuOptionClickEdit,
-			handleMenuOptionClickDelete,
+			// handleSelectTrack,
+			// handleOptionsClick,
+			// handleOptionsClose,
+			// handleMenuOptionClickEdit,
+			// handleMenuOptionClickDelete,
 			handleCloseDetailView,
 			theme,
 		} = this.props;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { 
-	Backdrop,
 	CircularProgress,
 } from '@material-ui/core';
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { libraryActions, playerActions, messageActions } from '../actions';
 import { getSelectedTrack } from '../selectors';
 import TrackListItem from '../components/TrackListItem';
-import { TableRow } from '@material-ui/core';
 
 const actions = { ...libraryActions, ...playerActions, ...messageActions };
 

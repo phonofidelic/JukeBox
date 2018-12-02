@@ -1,7 +1,7 @@
 import { 
 	CLEAR_MESSAGE, 
-	CLEAR_ALERT,
-	SET_ALERT
+	// CLEAR_ALERT,
+	// SET_ALERT
 } from '../actiontypes';
 
 export const clearMessage = () => {

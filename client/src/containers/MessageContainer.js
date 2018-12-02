@@ -30,18 +30,18 @@ class MessageContainer extends Component {
 	}
 }
 
-// Selector checks for current message
-const getMessage = state => {
-	for (const reducer in state) {
-		if (state[reducer].message) {
-			return state[reducer].message
-		}
-	}
-}
+// // Selector checks for current message
+// const getMessage = state => {
+// 	for (const reducer in state) {
+// 		if (state[reducer].message) {
+// 			return state[reducer].message
+// 		}
+// 	}
+// }
 
-const getMessages = state => {
+// const getMessages = state => {
 
-}
+// }
 
 const mapStateToProps = state => {
 	return {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { authActions } from '../actions';
-import NavMobile from '../components/NavMobile';
+// import NavMobile from '../components/NavMobile';
 import NavDesktop from '../components/NavDesktop';
 import TopNav from '../components/TopNav';
 

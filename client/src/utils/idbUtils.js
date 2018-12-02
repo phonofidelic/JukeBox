@@ -3,6 +3,7 @@ import idb from 'idb';
 const IDB_VERSION = 1;
 
 const dbPromise = idb.open('jukebox', IDB_VERSION, upgradeDb => {
+  // eslint-disable-next-line
   switch (upgradeDb.oldVersion) {
     case 0:
       upgradeDb.createObjectStore('tracks', {

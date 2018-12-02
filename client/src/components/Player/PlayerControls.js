@@ -6,8 +6,8 @@ import {
 	PlayArrow, 
 	SkipPrevious, 
 	SkipNext,
-	MoreVert,
-	MoreHoriz,
+	// MoreVert,
+	// MoreHoriz,
 	ExpandMore,
 	ExpandLess
 } from '@material-ui/icons';
@@ -43,11 +43,11 @@ class PlayerControls extends Component {
 		if(e.targetTouches.length && this.state.touch - e.targetTouches[0].clientY > 0) {
 			console.log('OPEN');
 			// If queue is not already opoen, open it
-			!player.showQueue ? handleToggleQueue() : null;
+			return !player.showQueue ? handleToggleQueue() : null;
 		} else if(e.targetTouches.length && this.state.touch - e.targetTouches[0].clientY < 0){
 			console.log('CLOSE');
 			// If queue is not already closed, close it
-			player.showQueue ? handleToggleQueue() : null;
+			return player.showQueue ? handleToggleQueue() : null;
 		}
 	}
 
@@ -58,7 +58,7 @@ class PlayerControls extends Component {
 	render() {
 		const {
 			player,
-			handleStopTrack,
+			// handleStopTrack,
 			handlePlayTrack,
 			handlePauseTrack,
 			handlePlayNext,
