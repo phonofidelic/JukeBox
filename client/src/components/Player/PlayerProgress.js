@@ -57,9 +57,9 @@ class PlayerProgress extends Component {
 	render() {
 		const { player, theme } = this.props;
 		const styles = {
-			progressContainer: {
+			root: {
 				height: '10px',
-				width: '100%',
+				width: theme.dimensions.libraryDesktop.maxWidth,
 				background: '#ccc',
 			},
 			progress: {
@@ -69,9 +69,6 @@ class PlayerProgress extends Component {
 					? `${this.state.timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`
 					: 0,
 			},
-			segment: {
-				background: 'green'
-			}
 		}
 
 		// let segments = [];
@@ -102,7 +99,7 @@ class PlayerProgress extends Component {
 		}
 		return (
 			// <span>time: {this.state.timeElapsed / player.currentTrack.format.duration * 100 }</span>
-			<div style={styles.progressContainer}>
+			<div style={styles.root}>
 				<div style={styles.progress}></div>
 				<div style={segContainerStyle}>
 				{

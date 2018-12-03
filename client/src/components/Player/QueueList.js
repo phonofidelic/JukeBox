@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './QueueList.styles'
 import {
 	List,
 	ListItem, 
@@ -6,7 +7,7 @@ import {
 	Typography, 
 	Collapse,
 } from '@material-ui/core/';
-import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 // const styles = theme => ({
 //   root: {
@@ -36,30 +37,19 @@ class QueueList extends Component {
 			showQueue,
 			queue, 
 			currentTrack, 
-			theme,
+			classes,
 		} = this.props;
-
-		const styles = {
-			root: {
-				// display: 'fixed',
-				// bottom: theme.dimensions.player.height,
-				padding: '0'
-			},
-			playing: {
-				background: theme.palette.primary.main,
-			}
-		}
 
 		return (
 			<Collapse direction="up" in={showQueue} collapsedHeight="0px">
-				<List style={styles.root}>
+				<List className={classes.root}>
 					{
 						queue.map((track, i) => (
 							<ListItem 
+								className={ currentTrack.queueId === track.queueId ? classes.playing : null }
 								key={ track.queueId }
 								divider={ currentTrack.queueId !== track.queueId ? true : false }
 								dense={true}
-								style={ currentTrack.queueId === track.queueId ? styles.playing : null }
 								onClick={() => this.handleQueueItemClick(i, track)}
 							>
 								<Grid container>
@@ -85,4 +75,4 @@ class QueueList extends Component {
 	}
 }
 
-export default withTheme()(QueueList);
+export default withStyles(styles)(QueueList);

@@ -85,12 +85,16 @@ class LibraryDesktop extends Component {
 
 		const styles = {
 			root: {
-				// maxWidth: 1000,
+				width: '100%',
+			},
+			container: {
+				maxWidth: 900,
 				background: theme.palette.primary.light,
 				marginTop: theme.dimensions.navDesktop.marginTop,
-				marginLeft: theme.dimensions.navDesktop.navWidth+20,
+				// marginLeft: theme.dimensions.navDesktop.navWidth+20,
 				marginBottom: theme.dimensions.player.height + 20,
-				marginRight: theme.dimensions.navDesktop.navWidth+20,
+				// marginRight: theme.dimensions.navDesktop.navWidth+20,
+				margin: '0 auto',
 				overflowX: 'auto',
 			},
 			tableHead: {
@@ -105,7 +109,7 @@ class LibraryDesktop extends Component {
 
 		// console.log(`LibraryDesktop, orderBy: ${orderBy}, ${order}`)
 		return (
-			<div>
+			<div style={styles.root}>
 				{
 					library.detailViewData ? 
 					<DetailCard 
@@ -115,7 +119,7 @@ class LibraryDesktop extends Component {
 					: 
 					null
 				}
-				<Paper style={styles.root}>
+				<Paper style={styles.container}>
 				<Table  padding="none">
 					{
 						// <colgroup>

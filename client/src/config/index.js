@@ -49,6 +49,7 @@ export const THEME = {
   },
   dimensions: {
     libraryDesktop: {
+      maxWidth: 900,
     },
     libraryControls: {
       height: 32,
@@ -66,7 +67,7 @@ export const THEME = {
       zIndex: 4,
     },
     topNav: {
-      height: '30px',
+      height: 30,
     },
     player: {
       height: 58,
