@@ -33,6 +33,7 @@ class QueueList extends Component {
 
 	render() {
 		const { 
+			// player
 			showQueue,
 			queue, 
 			currentTrack, 
@@ -51,36 +52,36 @@ class QueueList extends Component {
 		}
 
 		return (
-			<Collapse direction="up" in={showQueue} collapsedHeight="0px">
-				<List style={styles.root}>
-					{
-						queue.map((track, i) => (
-							<ListItem 
-								key={ track.queueId }
-								divider={ currentTrack.queueId !== track.queueId ? true : false }
-								dense={true}
-								style={ currentTrack.queueId === track.queueId ? styles.playing : null }
-								onClick={() => this.handleQueueItemClick(i, track)}
-							>
-								<Grid container>
-									<Grid item>
-										<div><Typography noWrap>{ track.title }</Typography></div>
-										{ 
-											currentTrack.queueId === track.queueId ?
-											<div>
-												<div><Typography noWrap variant="caption">{ track.artist.name }</Typography></div>
-												<div><Typography noWrap variant="caption">{ track.album.title }</Typography></div>
-											</div>
-											:
-											null
-									}
-									</Grid>
+			{/*<Collapse direction="up" in={showQueue} collapsedHeight="0px">*/}
+			<List style={styles.root}>
+				{
+					queue.map((track, i) => (
+						<ListItem 
+							key={ track.queueId }
+							divider={ currentTrack.queueId !== track.queueId ? true : false }
+							dense={true}
+							style={ currentTrack.queueId === track.queueId ? styles.playing : null }
+							onClick={() => this.handleQueueItemClick(i, track)}
+						>
+							<Grid container>
+								<Grid item>
+									<div><Typography noWrap>{ track.title }</Typography></div>
+									{ 
+										currentTrack.queueId === track.queueId ?
+										<div>
+											<div><Typography noWrap variant="caption">{ track.artist.name }</Typography></div>
+											<div><Typography noWrap variant="caption">{ track.album.title }</Typography></div>
+										</div>
+										:
+										null
+								}
 								</Grid>
-							</ListItem>
-						))
-					}
-				</List>
-			</Collapse>
+							</Grid>
+						</ListItem>
+					))
+				}
+			</List>
+			// </Collapse>
 		);
 	}
 }

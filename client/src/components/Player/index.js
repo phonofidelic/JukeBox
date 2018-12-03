@@ -5,7 +5,7 @@ import PlayerProgress from './PlayerProgress';
 import PlayerControls from './PlayerControls';
 import QueueList from './QueueList';
 import Grid from '@material-ui/core/Grid';
-import Collapse from '@material-ui/core/Collapse';
+// import Collapse from '@material-ui/core/Collapse';
 import { withTheme } from '@material-ui/core/styles';
 
 export class Player extends Component {
@@ -46,16 +46,15 @@ export class Player extends Component {
 		// Otherwise: Player component is an empty div.
 		return (
 			<div style={styles.root}>
-				<Collapse direction="up" in={player.showQueue} collapsedHeight="0px">
-					<QueueList 
-						queue={player.queue} 
-						queueIndex={player.queueIndex}
-						currentTrack={player.currentTrack} 
-						handleStopTrack={handleStopTrack}
-						handlePlayTrack={handlePlayTrack}
-						handlePlayFromQueue={handlePlayFromQueue}
-					/>
-				</Collapse>
+				<QueueList 
+					queue={player.queue}
+					queueIndex={player.queueIndex}
+					currentTrack={player.currentTrack} 
+					handleStopTrack={handleStopTrack}
+					handlePlayTrack={handlePlayTrack}
+					handlePlayFromQueue={handlePlayFromQueue}
+					showQueue={player.showQueue}
+				/>
 				<PlayerProgress 
 					player={player}
 					handleSeek={handleSeek}

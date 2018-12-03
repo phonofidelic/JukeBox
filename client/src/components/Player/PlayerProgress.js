@@ -89,7 +89,7 @@ class PlayerProgress extends Component {
 			position: 'absolute',
 			height: '10px',
 			width: '100%',
-			top: '0',
+			bottom: `${theme.dimensions.player.height - 10}px`,
 		}
 		const segStyle = {
 			// background: 'green',
