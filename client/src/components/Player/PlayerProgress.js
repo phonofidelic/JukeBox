@@ -91,8 +91,8 @@ class PlayerProgress extends Component {
 			cursor: 'pointer',
 		}
 		const segStyle = {
-			// background: 'green',
-			border: '1px solid #fff', // TODO: Remove all borders, just there for development
+			// background: 'green', // ONLY FOR DEBUG
+			// border: '1px solid #fff', // ONLY FOR DEBUG
 			borderTop: 'none',
 			borderBottom: 'none',
 			height: '100%',

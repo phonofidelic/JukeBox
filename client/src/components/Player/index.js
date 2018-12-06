@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import PlayerProgress from './PlayerProgress';
 import PlayerControls from './PlayerControls';
 import QueueList from './QueueList';
-import Grid from '@material-ui/core/Grid';
 // import Collapse from '@material-ui/core/Collapse';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -41,20 +40,15 @@ export class Player extends Component {
 						player={player}
 						handleSeek={handleSeek}
 					 />
-					<Grid container>
-						<Grid item xs={12}>
-							<PlayerControls 
-								player={player}
-								handleStopTrack={handleStopTrack}
-								handlePlayTrack={handlePlayTrack}
-								handlePauseTrack={handlePauseTrack}
-								handlePlayNext={handlePlayNext}
-								handlePlayPrev={handlePlayPrev}
-								handleToggleQueue={handleToggleQueue}
-							/>
-						</Grid>
-					</Grid>
-					
+					<PlayerControls 
+						player={player}
+						handleStopTrack={handleStopTrack}
+						handlePlayTrack={handlePlayTrack}
+						handlePauseTrack={handlePauseTrack}
+						handlePlayNext={handlePlayNext}
+						handlePlayPrev={handlePlayPrev}
+						handleToggleQueue={handleToggleQueue}
+					/>
 				</div>
 			</div>
 		);
