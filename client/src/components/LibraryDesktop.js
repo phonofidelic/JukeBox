@@ -90,11 +90,11 @@ class LibraryDesktop extends Component {
 			container: {
 				maxWidth: 900,
 				background: theme.palette.primary.light,
-				marginTop: theme.dimensions.navDesktop.marginTop,
+				marginTop: `${theme.dimensions.navDesktop.marginTop}px`,
 				// marginLeft: theme.dimensions.navDesktop.navWidth+20,
 				marginBottom: theme.dimensions.player.height + 20,
 				// marginRight: theme.dimensions.navDesktop.navWidth+20,
-				margin: '0 auto',
+				margin: `${theme.dimensions.navDesktop.marginTop}px auto ${theme.dimensions.navDesktop.marginTop * 2}px auto`,
 				overflowX: 'auto',
 			},
 			tableHead: {

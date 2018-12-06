@@ -13,7 +13,7 @@ export class Player extends Component {
 	render() {
 		const { 
 			player, 
-			// userAgentIsMobile,
+			userAgentIsMobile,
 			handleStopTrack,
 			handlePlayTrack,
 			handlePauseTrack,
@@ -27,7 +27,7 @@ export class Player extends Component {
 
 		return (
 			<div className={classes.root}>
-				<div className={classes.container}>
+				<div className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}>
 					<QueueList 
 						queue={player.queue}
 						queueIndex={player.queueIndex}

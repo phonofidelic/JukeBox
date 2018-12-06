@@ -37,8 +37,10 @@ class PlayerProgress extends Component {
 	handlePosClick(segment) {
 		const { player } = this.props;
 
-		console.log('pos:', segment.pos)
-		this.props.handleSeek(segment.pos, player.currentTrack);
+		// console.log('pos:', segment.pos)
+		// this.props.handleSeek(segment.pos, player.currentTrack);
+		console.log('pos:', segment)
+		this.props.handleSeek(segment, player.currentTrack);
 	}
 
 	getSegments() {
@@ -47,9 +49,11 @@ class PlayerProgress extends Component {
 
 		if (player.currentTrack) {
 			for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
-				segments.push({pos: i});
+				// segments.push({pos: i});
+				segments.push(i);
 			}
 		}
+		console.log('segments:', segments)
 
 		return segments;
 	}
@@ -71,26 +75,24 @@ class PlayerProgress extends Component {
 			},
 		}
 
-		// let segments = [];
-		// for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
-		// 	segments.push({pos: i});
-		// }
-
 		const segments = this.getSegments();
 
-		const ww = window.innerWidth;
-		const segWidth = Math.floor(ww/segments.length);
+		const windowWidth = window.innerWidth; // For full-width player
+		let playerWidth = theme.dimensions.player.width; // For fixed width player
+		console.log('playerWidth:', playerWidth)
+		const segWidth = Math.floor(playerWidth/segments.length);
 	
 		const segContainerStyle = {
 			display: 'flex',
 			position: 'absolute',
 			height: '10px',
-			width: '100%',
+			width: `${playerWidth}px`,
 			bottom: `${theme.dimensions.player.height - 10}px`,
+			cursor: 'pointer',
 		}
 		const segStyle = {
 			// background: 'green',
-			// border: '1px solid #fff', // TODO: Remove all borders, their just there for development
+			border: '1px solid #fff', // TODO: Remove all borders, just there for development
 			borderTop: 'none',
 			borderBottom: 'none',
 			height: '100%',

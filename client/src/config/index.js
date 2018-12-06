@@ -70,6 +70,7 @@ export const THEME = {
       height: 30,
     },
     player: {
+      width: 900,
       height: 58,
     }
   },

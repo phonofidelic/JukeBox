@@ -30,6 +30,7 @@
     "redux-form": "^7.3.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
+    "source-map-explorer": "^1.6.0",
     "underscore": "^1.9.1"
   },
   "scripts": {
@@ -37,6 +38,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --verbose=true",
     "coverage": "react-scripts test --env=jsdom --verbose=true --coverage",
+    "analyze": "source-map-explorer build/static/js/main.*",
     "eject": "react-scripts eject"
   },
   "jest": {
