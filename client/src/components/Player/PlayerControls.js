@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './PlayerControls.styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import { 
@@ -11,6 +12,7 @@ import {
 	ExpandMore,
 	ExpandLess
 } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
 
 class PlayerControls extends Component {
 	state = {
@@ -63,7 +65,8 @@ class PlayerControls extends Component {
 			handlePauseTrack,
 			handlePlayNext,
 			handlePlayPrev,
-			handleToggleQueue
+			handleToggleQueue,
+			classes,
 		} = this.props;
 
 		const styles = {
@@ -77,8 +80,11 @@ class PlayerControls extends Component {
 		return (
 			<Grid 
 				container 
-				alignItems="center">
-				<Grid item xs={8}>
+				alignItems="center"
+			>
+				<Grid item xs={4}>
+				</Grid>
+				<Grid item xs={4}>
 					<IconButton disabled={player.queueIndex === 0} onClick={ handlePlayPrev }>
 						<SkipPrevious />
 					</IconButton>
@@ -99,7 +105,7 @@ class PlayerControls extends Component {
 					</IconButton>
 				</Grid>
 				{/*<div style={styles.togglePlayerButton}>*/}
-				<Grid item xs={4}>
+				<Grid item xs={4} className={classes.toggleButtonContainer}>
 					<IconButton 
 						onClick={ handleToggleQueue }
 						onTouchStart={this.handleTouchStart.bind(this)}
@@ -116,4 +122,4 @@ class PlayerControls extends Component {
 	}
 }
 
-export default PlayerControls;
+export default withStyles(styles)(PlayerControls);
