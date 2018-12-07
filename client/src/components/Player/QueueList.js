@@ -53,13 +53,13 @@ class QueueList extends Component {
 								onClick={() => this.handleQueueItemClick(i, track)}
 							>
 								<Grid container>
-									<Grid item>
-										<div><Typography noWrap>{ track.title }</Typography></div>
+									<Grid item style={{width: '100%'}}>
+										<Typography noWrap>{ track.title }</Typography>
 										{ 
 											currentTrack.queueId === track.queueId ?
 											<div>
-												<div><Typography noWrap variant="caption">{ track.artist.name }</Typography></div>
-												<div><Typography noWrap variant="caption">{ track.album.title }</Typography></div>
+												<Typography noWrap variant="caption">{ track.artist.name }</Typography>
+												<Typography noWrap variant="caption">{ track.album.title }</Typography>
 											</div>
 											:
 											null

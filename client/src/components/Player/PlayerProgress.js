@@ -36,10 +36,6 @@ class PlayerProgress extends Component {
 
 	handlePosClick(segment) {
 		const { player } = this.props;
-
-		// console.log('pos:', segment.pos)
-		// this.props.handleSeek(segment.pos, player.currentTrack);
-		console.log('pos:', segment)
 		this.props.handleSeek(segment, player.currentTrack);
 	}
 
@@ -49,12 +45,9 @@ class PlayerProgress extends Component {
 
 		if (player.currentTrack) {
 			for (let i=0; i < Math.round(player.currentTrack.format.duration); i++) {
-				// segments.push({pos: i});
 				segments.push(i);
 			}
 		}
-		console.log('segments:', segments)
-
 		return segments;
 	}
 
@@ -79,7 +72,6 @@ class PlayerProgress extends Component {
 
 		const windowWidth = window.innerWidth; // For full-width player
 		let playerWidth = theme.dimensions.player.width; // For fixed width player
-		console.log('playerWidth:', playerWidth)
 		const segWidth = Math.floor(playerWidth/segments.length);
 	
 		const segContainerStyle = {

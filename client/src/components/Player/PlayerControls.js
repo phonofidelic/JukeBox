@@ -78,7 +78,7 @@ class PlayerControls extends Component {
 			<Grid 
 				container 
 				alignItems="center">
-				<Grid item xs={12}>
+				<Grid item xs={8}>
 					<IconButton disabled={player.queueIndex === 0} onClick={ handlePlayPrev }>
 						<SkipPrevious />
 					</IconButton>
@@ -98,7 +98,8 @@ class PlayerControls extends Component {
 						<SkipNext />
 					</IconButton>
 				</Grid>
-				<div style={styles.togglePlayerButton}>
+				{/*<div style={styles.togglePlayerButton}>*/}
+				<Grid item xs={4}>
 					<IconButton 
 						onClick={ handleToggleQueue }
 						onTouchStart={this.handleTouchStart.bind(this)}
@@ -108,7 +109,8 @@ class PlayerControls extends Component {
 					>
 						{ player.showQueue ? <ExpandMore /> : <ExpandLess /> }
 					</IconButton>
-				</div>
+				</Grid>
+				{/*</div>*/}
 			</Grid>
 		);
 	}
