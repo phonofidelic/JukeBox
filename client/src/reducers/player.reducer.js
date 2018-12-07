@@ -14,7 +14,7 @@ import {
 
 export const INITIAL_STATE = {
 	queue: [],
-	showQueue: true,
+	showQueue: false,
 	playing: false,
 	queueIndex: null,
 	currentTrack: null,

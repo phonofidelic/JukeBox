@@ -69,7 +69,7 @@ class TrackListItem extends Component {
 				// borderLeft: `solid ${theme.palette.secondary.main} 5px`,
 				// background: theme.palette.secondary.main,
 				// backgroundSize: '50px'
-				zIndex: 2,
+				zIndex: 0,
 				position: 'absolute',
 				backgroundColor: 'rgba(0, 0, 0, .5)',
 			},

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import styles from './PlayerControls.styles';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
+import {
+	Grid,
+	IconButton,
+	Typography,
+} from '@material-ui/core';
 import { 
 	Pause, 
 	PlayArrow, 
@@ -13,6 +16,7 @@ import {
 	ExpandLess
 } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
+import { THEME } from '../../config';
 
 class PlayerControls extends Component {
 	state = {
@@ -69,22 +73,36 @@ class PlayerControls extends Component {
 			classes,
 		} = this.props;
 
-		const styles = {
-			togglePlayerButton: {
-				position: 'fixed', 
-				right: '0px', 
-				zIndex: '1001'
-			}
-		}
+		// const styles = {
+		// 	togglePlayerButton: {
+		// 		position: 'fixed', 
+		// 		right: '0px', 
+		// 		zIndex: '1001'
+		// 	}
+		// }
 
 		return (
 			<Grid 
 				container 
 				alignItems="center"
 			>
-				<Grid item xs={4}>
+				<Grid item xs={5} className={classes.currentTrackContainer}>
+					<Grid container>
+						<Grid item xs={5}>
+							<img 
+								src={player.currentTrack.image.src} 
+								alt="Album art" 
+								width={THEME.dimensions.player.height - THEME.dimensions.playerProgress.height} 
+								height={THEME.dimensions.player.height - THEME.dimensions.playerProgress.height} 
+							/>
+						</Grid>
+						<Grid item xs={7}>
+							<Typography noWrap>{player.currentTrack.title}</Typography>
+							<Typography noWrap variant="caption">{player.currentTrack.artist.name}</Typography>
+						</Grid>
+					</Grid>
 				</Grid>
-				<Grid item xs={4}>
+				<Grid item xs={'auto'} md={4}>
 					<IconButton disabled={player.queueIndex === 0} onClick={ handlePlayPrev }>
 						<SkipPrevious />
 					</IconButton>
@@ -105,7 +123,7 @@ class PlayerControls extends Component {
 					</IconButton>
 				</Grid>
 				{/*<div style={styles.togglePlayerButton}>*/}
-				<Grid item xs={4} className={classes.toggleButtonContainer}>
+				<Grid item xs={'auto'} md={4} className={classes.toggleButtonContainer}>
 					<IconButton 
 						onClick={ handleToggleQueue }
 						onTouchStart={this.handleTouchStart.bind(this)}

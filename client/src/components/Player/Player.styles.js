@@ -10,9 +10,9 @@ const styles = theme => ({
 		margin: '0 auto',
 		boxShadow: '0px -1px 20px 1px #ccc',
 	  backgroundColor: theme.palette.secondary.light,
-	  borderBottom: `solid 1px ${theme.palette.primary.main}`,
+	  // borderBottom: `solid 1px ${theme.palette.primary.main}`,
 	  padding: '0',
-	  zIndex: 2,
+	  zIndex: 3,
 	},
 	containerDesktop: {
 		width: theme.dimensions.player.width,
@@ -22,7 +22,7 @@ const styles = theme => ({
 	  backgroundColor: theme.palette.secondary.light,
 	  borderBottom: `solid 1px ${theme.palette.primary.main}`,
 	  padding: '0',
-	  zIndex: 2,
+	  zIndex: 3,
 	},
 });
 

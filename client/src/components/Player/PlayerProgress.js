@@ -77,7 +77,7 @@ class PlayerProgress extends Component {
 		const segContainerStyle = {
 			display: 'flex',
 			position: 'absolute',
-			height: '10px',
+			height: `${theme.dimensions.playerProgress.height}px`,
 			width: `${playerWidth}px`,
 			bottom: `${theme.dimensions.player.height - 10}px`,
 			cursor: 'pointer',

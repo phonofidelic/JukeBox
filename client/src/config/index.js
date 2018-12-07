@@ -72,6 +72,9 @@ export const THEME = {
     player: {
       width: 900,
       height: 58,
+    },
+    playerProgress: {
+      height: 10,
     }
   },
 }
