@@ -11,17 +11,21 @@ import {
 	PLAY_FROM_QUEUE,
 	SEEK,
 } from '../actiontypes';
+import { mockQueue } from '../utils';
+
+const useMockQueue = false;
 
 export const INITIAL_STATE = {
-	queue: [],
+	// queue: mockQueue.map((track, i) => (track.queuId = i)),
+	queue: useMockQueue ? mockQueue : [],
 	showQueue: false,
 	playing: false,
 	queueIndex: null,
-	currentTrack: null,
+	currentTrack: useMockQueue ? mockQueue[4] : null,
 	time: 0,
 	pausedAt: null,
 	intervalId: null,
-	message: null
+	message: null,
 };
 
 const player = (state = INITIAL_STATE, action) => {

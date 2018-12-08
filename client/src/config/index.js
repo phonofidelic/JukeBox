@@ -64,7 +64,7 @@ export const THEME = {
     },
     navMobile: {
       height: 56,
-      zIndex: 4,
+      zIndex: 3,
     },
     topNav: {
       height: 30,

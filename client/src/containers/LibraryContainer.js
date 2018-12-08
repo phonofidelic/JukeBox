@@ -116,7 +116,8 @@ export class TrackListContainer extends Component {
 	render() {
 		const { 
       library, 
-      userAgentIsMobile ,
+      userAgentIsMobile,
+      queueIsOpen,
     } = this.props;
 
     const {
@@ -136,6 +137,7 @@ export class TrackListContainer extends Component {
               library={library} 
               order={order}
               orderBy={orderBy}
+              queueIsOpen={queueIsOpen}
               handleUploadTracks={this.handleUploadTracks.bind(this)} 
               handleOrderBy={this.handleOrderBy.bind(this)}
               handleCloseDetailView={this.handleCloseDetailView.bind(this)}
@@ -165,6 +167,7 @@ const mapStateToProps = state => {
 	return {
 		library: state.library,
     userAgentIsMobile: state.auth.userAgentIsMobile,
+    queueIsOpen: state.player.showQueue,
 	}
 }
 

@@ -102,7 +102,7 @@ class PlayerControls extends Component {
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item xs={'auto'} md={4}>
+				<Grid item xs={'auto'}>
 					<IconButton disabled={player.queueIndex === 0} onClick={ handlePlayPrev }>
 						<SkipPrevious />
 					</IconButton>
@@ -123,7 +123,7 @@ class PlayerControls extends Component {
 					</IconButton>
 				</Grid>
 				{/*<div style={styles.togglePlayerButton}>*/}
-				<Grid item xs={'auto'} md={4} className={classes.toggleButtonContainer}>
+				<Grid item xs={'auto'} className={classes.toggleButtonContainer}>
 					<IconButton 
 						onClick={ handleToggleQueue }
 						onTouchStart={this.handleTouchStart.bind(this)}

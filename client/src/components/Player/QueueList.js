@@ -8,6 +8,7 @@ import {
 	Collapse,
 } from '@material-ui/core/';
 import { withStyles } from '@material-ui/core/styles';
+import { THEME } from '../../config';
 
 // const styles = theme => ({
 //   root: {
@@ -41,8 +42,13 @@ class QueueList extends Component {
 		} = this.props;
 
 		return (
-			<Collapse direction="up" in={showQueue} collapsedHeight="0px">
-				<List className={classes.root}>
+			<Collapse 
+				direction="up" 
+				in={showQueue} 
+				collapsedHeight="0px"
+				timeout="auto"
+			>
+				<List className={classes.root} style={{height: window.innerHeight - THEME.dimensions.player.height}}>
 					{
 						queue.map((track, i) => (
 							<ListItem 
@@ -53,8 +59,8 @@ class QueueList extends Component {
 								onClick={() => this.handleQueueItemClick(i, track)}
 							>
 								<Grid container>
-									<Grid item style={{width: '100%'}}>
-										<Typography noWrap>{ track.title }</Typography>
+									<Grid item >
+										<Typography noWrap>{i+1}. { track.title }</Typography>
 										{ 
 											currentTrack.queueId === track.queueId ?
 											<div>
