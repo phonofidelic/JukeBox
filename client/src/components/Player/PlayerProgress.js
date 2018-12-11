@@ -70,7 +70,7 @@ class PlayerProgress extends Component {
 
 		const segments = this.getSegments();
 
-		const windowWidth = window.innerWidth; // For full-width player
+		// const windowWidth = window.innerWidth; // For full-width player
 		let playerWidth = theme.dimensions.player.width; // For fixed width player
 		const segWidth = Math.floor(playerWidth/segments.length);
 	

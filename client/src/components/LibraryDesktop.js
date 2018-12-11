@@ -28,8 +28,10 @@ const columnData = [
 
 class LibraryDesktop extends Component {
 	state = {
-		hoveredCell: null
+		hoveredCell: null,
+		windowWidth: null,
 	}
+
   createSortHandler = columnId => e => {
     this.props.handleRequestSort(e, columnId);
   };
@@ -86,22 +88,18 @@ class LibraryDesktop extends Component {
 		const styles = {
 			root: {
 				width: '100%',
+				display: 'flex',
+			},
+			navSpacer: {
+				minWidth: `${theme.dimensions.navDesktop.width + 2}px`,
 			},
 			container: {
-				maxWidth: 900,
+				width: '100%',
 				background: theme.palette.primary.light,
-				marginTop: `${theme.dimensions.navDesktop.marginTop}px`,
-				// marginLeft: theme.dimensions.navDesktop.navWidth+20,
-				marginBottom: theme.dimensions.player.height + 20,
-				// marginRight: theme.dimensions.navDesktop.navWidth+20,
 				margin: `${theme.dimensions.navDesktop.marginTop}px auto ${theme.dimensions.navDesktop.marginTop * 2}px auto`,
 				overflowX: 'auto',
 			},
 			tableHead: {
-				// position: 'fixed',
-				// top: 0,
-				// // height: '50px',
-				// width: '100%',
 				backgroundColor: theme.palette.secondary.light,
 				cursor: 'pointer',
 			},
@@ -119,72 +117,74 @@ class LibraryDesktop extends Component {
 					: 
 					null
 				}
+				<div style={styles.navSpacer}></div>
 				<Paper style={styles.container}>
-				<Table  padding="none">
-					{
-						// <colgroup>
-						// 	{columnData.map((col, i) => (<col key={'col_'+i} width={col.width} />))}
-						// </colgroup>
-					}
-					<TableHead style={styles.tableHead}>
-						<TableRow>
-							{/*<TableCell></TableCell>*/}
-							{
-								columnData.map(column => (
-									<TableCell
-										style={{ 
-											backgroundColor: this.state.hoveredCell === column.id ? theme.palette.primary.hover : theme.palette.secondary.light,
-											paddingLeft: 20,
-										}}
-										scope="col"
-										colSpan={column.span}
-										onMouseEnter={() => this.setState({ hoveredCell: column.id })}
-										onMouseLeave={() => this.setState({ hoveredCell: null })}
-										key={column.id}
-										numeric={column.numeric}
-										// width={column.widt}
-		                // padding={column.disablePadding ? 'none' : 'default'}
-		                sortDirection={orderBy === column.id ? order : false}
-		                onClick={this.createSortHandler(column.id)}
-		              >
-		             		<Tooltip
-	              			title={column.labelText}
-	              			placement="bottom-start"
-	              			enterDelay={300}
-	              		>
-			              	<TableSortLabel
-			              		active={orderBy === column.id}
-			              		direction={order}
-			              	>
-			              		{column.label}
-			              	</TableSortLabel>
-		              	</Tooltip>
-		              </TableCell>
-								))
-							}
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{library.tracks.length > 0 ? 
-							this.sortByField(library.tracks, order, orderBy)
-							.map(track => (
-							<LibraryRowContainer
-								key={track._id}
-								track={track}
-								selectedTrack={library.selectedTrack}
-							/>
-						))
-						:
-						(
+					<Table padding="none">
+						{
+							// <colgroup>
+							// 	{columnData.map((col, i) => (<col key={'col_'+i} width={col.width} />))}
+							// </colgroup>
+						}
+						<TableHead style={styles.tableHead}>
 							<TableRow>
-								<TableCell>
-									No tracks in Library
-								</TableCell>
+								{/*<TableCell></TableCell>*/}
+								{
+									columnData.map(column => (
+										<TableCell
+											style={{ 
+												backgroundColor: this.state.hoveredCell === column.id ? theme.palette.primary.hover : theme.palette.secondary.light,
+												paddingLeft: 20,
+											}}
+											scope="col"
+											colSpan={column.span}
+											onMouseEnter={() => this.setState({ hoveredCell: column.id })}
+											onMouseLeave={() => this.setState({ hoveredCell: null })}
+											key={column.id}
+											numeric={column.numeric}
+											// width={column.widt}
+			                // padding={column.disablePadding ? 'none' : 'default'}
+			                sortDirection={orderBy === column.id ? order : false}
+			                onClick={this.createSortHandler(column.id)}
+			              >
+			             		<Tooltip
+		              			title={column.labelText}
+		              			placement="bottom-start"
+		              			enterDelay={300}
+		              		>
+				              	<TableSortLabel
+				              		active={orderBy === column.id}
+				              		direction={order}
+				              	>
+				              		{column.label}
+				              	</TableSortLabel>
+			              	</Tooltip>
+			              </TableCell>
+									))
+								}
 							</TableRow>
-						)}
-					</TableBody>
-				</Table>
+						</TableHead>
+						<TableBody>
+							{library.tracks.length > 0 ? 
+								this.sortByField(library.tracks, order, orderBy)
+								.map(track => (
+								<LibraryRowContainer
+									key={track._id}
+									track={track}
+									selectedTrack={library.selectedTrack}
+								/>
+							))
+							:
+							(
+								<TableRow>
+									<TableCell>
+										No tracks in Library
+									</TableCell>
+								</TableRow>
+							)}
+						</TableBody>
+					</Table>
 				</Paper>
+				<div style={styles.navSpacer}></div>
 			</div>
 		);
 	}

@@ -16,7 +16,7 @@ const actions = {
   ...authActions 
 };
 
-export class TrackListContainer extends Component {
+export class LibraryContainer extends Component {
 	constructor(props) {
 		super(props);
     this.props.checkUserAgent();
@@ -171,4 +171,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, actions)(TrackListContainer);
+export default connect(mapStateToProps, actions)(LibraryContainer);

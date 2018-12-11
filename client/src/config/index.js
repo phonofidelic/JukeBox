@@ -58,7 +58,8 @@ export const THEME = {
       navHeight: 56,
     },
     navDesktop: {
-      navWidth: 80,
+      navWidth: 80, // TODO: Find usage of this and change to 'width'
+      width: 80,
       marginTop: 58,
       zIndex: 3,
     },
