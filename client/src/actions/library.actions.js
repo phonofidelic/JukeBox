@@ -25,6 +25,32 @@ import { URLS } from '../config';
 
 const { TRACK_URL, ARTIST_URL, ALBUM_URL} = URLS;
 
+const fetchLibrary = dispatch => {
+	axios.get('/library', {
+		headers: { 
+			token: localStorage.getItem('JWT'),
+			userId: localStorage.getItem('userId')
+		}
+	})
+	.then(response => {
+		const tracks = response.data.library;
+		idbTrack.putMany(tracks);
+		dispatch({
+			type: LOAD_LIBRARY_SUCCESS,
+			tracks: tracks,
+		});
+	})
+	.catch(err => {
+		console.error(err);
+		dispatch({
+			type: LOAD_LIBRARY_FAILURE,
+			data: err.response.data,
+			status: err.response.status,
+			message: err.response.data.message || err.response.data,
+		});
+	});
+}
+
 export const loadLibrary = () => {
 	// console.log('loadLibrary called')
 	return async (dispatch) => {
@@ -33,32 +59,11 @@ export const loadLibrary = () => {
 		});
 		// Ceck IndexedDB for stored track data
 		let tracks = await idbTrack.getAll();
+		// tracks = false
 		// If IndexedDB is empty, or (TODO:) last fetch was made > some time limit,
 		// fetch tracks from network
 		if (!tracks || tracks.length < 1) {
-			axios.get('/library', {
-				headers: { 
-					token: localStorage.getItem('JWT'),
-					userId: localStorage.getItem('userId')
-				}
-			})
-			.then(response => {
-				const tracks = response.data.library;
-				idbTrack.putMany(tracks);
-				dispatch({
-					type: LOAD_LIBRARY_SUCCESS,
-					tracks: tracks,
-				});
-			})
-			.catch(err => {
-				console.error(err);
-				dispatch({
-					type: LOAD_LIBRARY_FAILURE,
-					data: err.response.data,
-					status: err.response.status,
-					message: err.response.data.message || err.response.data,
-				});
-			});
+			fetchLibrary(dispatch);
 		} else {
 			// Otherwise load data retrieved from IndexedDB
 			dispatch({

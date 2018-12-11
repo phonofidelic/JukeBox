@@ -16,7 +16,6 @@ import { mockQueue } from '../utils';
 const useMockQueue = false;
 
 export const INITIAL_STATE = {
-	// queue: mockQueue.map((track, i) => (track.queuId = i)),
 	queue: useMockQueue ? mockQueue : [],
 	showQueue: false,
 	playing: false,
