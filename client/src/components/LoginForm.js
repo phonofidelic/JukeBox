@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { 
+	Button,
+	TextField,
+	Typography
+} from '@material-ui/core';
 import { validation } from '../utils';
 
 const form = reduxForm({

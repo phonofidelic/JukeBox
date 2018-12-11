@@ -7,27 +7,59 @@ import LoginForm from '../components/LoginForm';
 import RegistrationForm from '../components/RegistrationForm';
 import Loader from '../components/Loader';
 import ErrorMessageContainer from './ErrorMessageContainer';
+import posed from 'react-pose';
 import { Button, Typography } from '@material-ui/core';
 
 const actions = {
 	...authActions,
 	...errorActions,
-}
+};
 
 const STRINGS = {
 	errorTitle_registration: 'Registration Error',
 	errorMsg_passwordRequired: 'Please enter a password',
 	errorMsg_passwordMissmatch: 'Passwords do not match',
 	errorMsg_passwordLength: 'Password must be at least 8 characters long',
-}
+};
+
+// const Section = posed.div({
+//   visible: { opacity: 1 },
+//   hidden: { opacity: 0 }
+// });
+
+const Reveal = posed.div({
+  visible: { 
+  	height: '100%', 
+  	opacity: 1,
+  },
+  hidden: { 
+  	height: '0px',
+  	opacity: 0,
+  }
+});
 
 class AuthContainer extends Component {
 	state = {
 		showLogin: false,
-		showRegistration: false
+		showRegistration: false,
 	}
+
 	componentDidCatch(err, info) {
 		console.log('AuthContainer componentDidCatch, err:', err)
+	}
+
+	handleSignInReveal = () => {
+		this.setState(state => ({
+			showLogin: true,
+			showRegistration: false,
+		}));
+	}
+
+	handleRegistrationReveal = () => {
+		this.setState(state => ({
+			showLogin: false,
+			showRegistration: true,
+		}));
 	}
 
 	handleNewRegistration(formData) {
@@ -79,30 +111,28 @@ class AuthContainer extends Component {
 		( <Redirect to={from} /> )
 		:
 		(
-			<div style={{paddingTop: '50px'}}>
+			<div style={{paddingTop: '50px', paddingBottom: '50px'}}>
 				<ErrorMessageContainer />
 				{ auth.loading ?
 					<Loader />
 					:
 					<div>
-						{ this.state.showLogin ?
-							<LoginForm
-								auth={auth}
-								from={from}
-								handleLogin={this.handleLogin.bind(this)}
-							/>
-							:
-							<Button>Sign in</Button>
-						}
+						<Reveal pose={this.state.showLogin ? 'visible' : 'hidden' }>
+								<LoginForm
+									auth={auth}
+									from={from}
+									handleLogin={this.handleLogin.bind(this)}
+								/>
+						</Reveal>
+						{ !this.state.showLogin && <Button onClick={() => this.handleSignInReveal()}>Sign in</Button> }
 						<Typography style={{marginTop: '50px', marginBottom: '50px', fontStyle: 'italic'}}>- or -</Typography>
-						{ this.state.showRegistration ?
+						<Reveal pose={this.state.showRegistration ? 'visible' : 'hidden' }>
 							<RegistrationForm 
 								auth={auth}
 								handleNewRegistration={this.handleNewRegistration.bind(this)}
 							/>
-							:
-							<Button>Regeister</Button>
-						}
+						</Reveal>
+						{ !this.state.showRegistration && <Button onClick={() => this.handleRegistrationReveal()}>Regeister</Button> }
 					</div>
 				}
 			</div>

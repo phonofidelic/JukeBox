@@ -79,7 +79,8 @@ const auth = (state = INITIAL_STATE, action) => {
 		case UNAUTH_USER:
 			return {
 				...state,
-				message: 'User successfully logged out'	
+				isAuthed: false,
+				message: 'User successfully logged out',
 			}
 
 		case GET_USER_INFO:
