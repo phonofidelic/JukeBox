@@ -118,13 +118,19 @@ class AuthContainer extends Component {
 					:
 					<div>
 						<Reveal pose={this.state.showLogin ? 'visible' : 'hidden' }>
-								<LoginForm
-									auth={auth}
-									from={from}
-									handleLogin={this.handleLogin.bind(this)}
-								/>
+							<LoginForm
+								auth={auth}
+								from={from}
+								handleLogin={this.handleLogin.bind(this)}
+							/>
 						</Reveal>
-						{ !this.state.showLogin && <Button onClick={() => this.handleSignInReveal()}>Sign in</Button> }
+						{ !this.state.showLogin && 
+							<Button 
+								onClick={() => this.handleSignInReveal()} 
+								data-cy="signInReveal"
+							>Sign in
+							</Button> 
+						}
 						<Typography style={{marginTop: '50px', marginBottom: '50px', fontStyle: 'italic'}}>- or -</Typography>
 						<Reveal pose={this.state.showRegistration ? 'visible' : 'hidden' }>
 							<RegistrationForm 
@@ -132,7 +138,13 @@ class AuthContainer extends Component {
 								handleNewRegistration={this.handleNewRegistration.bind(this)}
 							/>
 						</Reveal>
-						{ !this.state.showRegistration && <Button onClick={() => this.handleRegistrationReveal()}>Regeister</Button> }
+						{ !this.state.showRegistration && 
+							<Button 
+								onClick={() => this.handleRegistrationReveal()}
+								data-cy="registrationInReveal"
+							>Regeister
+							</Button> 
+						}
 					</div>
 				}
 			</div>
