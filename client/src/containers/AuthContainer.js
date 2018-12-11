@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { authActions, errorActions } from '../actions';
 import { getRedirectReferrer } from '../selectors';
-import Typography from '@material-ui/core/Typography';
-import { Redirect } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 import RegistrationForm from '../components/RegistrationForm';
 import Loader from '../components/Loader';
 import ErrorMessageContainer from './ErrorMessageContainer';
+import { Button, Typography } from '@material-ui/core';
 
 const actions = {
 	...authActions,
@@ -22,6 +22,10 @@ const STRINGS = {
 }
 
 class AuthContainer extends Component {
+	state = {
+		showLogin: false,
+		showRegistration: false
+	}
 	componentDidCatch(err, info) {
 		console.log('AuthContainer componentDidCatch, err:', err)
 	}
@@ -75,22 +79,30 @@ class AuthContainer extends Component {
 		( <Redirect to={from} /> )
 		:
 		(
-			<div>
+			<div style={{paddingTop: '50px'}}>
 				<ErrorMessageContainer />
 				{ auth.loading ?
 					<Loader />
 					:
 					<div>
-						<LoginForm
-							auth={auth}
-							from={from}
-							handleLogin={this.handleLogin.bind(this)}
-						/>
-						<Typography style={{marginTop: '50px', fontStyle: 'italic'}}>- or -</Typography>
-						<RegistrationForm 
-							auth={auth}
-							handleNewRegistration={this.handleNewRegistration.bind(this)}
-						/>
+						{ this.state.showLogin ?
+							<LoginForm
+								auth={auth}
+								from={from}
+								handleLogin={this.handleLogin.bind(this)}
+							/>
+							:
+							<Button>Sign in</Button>
+						}
+						<Typography style={{marginTop: '50px', marginBottom: '50px', fontStyle: 'italic'}}>- or -</Typography>
+						{ this.state.showRegistration ?
+							<RegistrationForm 
+								auth={auth}
+								handleNewRegistration={this.handleNewRegistration.bind(this)}
+							/>
+							:
+							<Button>Regeister</Button>
+						}
 					</div>
 				}
 			</div>
