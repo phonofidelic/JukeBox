@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import { validation } from '../utils';
+import { 
+	Button,
+	TextField,
+	Typography
+} from '@material-ui/core';
+import { validation } from '../../utils';
 
 const form = reduxForm({
-	form: 'registrationForm'
+	form: 'loginForm'
 });
 
 const renderField = ({
@@ -17,38 +20,41 @@ const renderField = ({
  ...custom 
 }) => (
 	<TextField
-		label={label}
+		label={Boolean(touched && error) ? error : label}
 		error={Boolean(touched && error)}
 		{...input}
 		{...custom} 
 	/>
 );
 
-class RegistrationForm extends Component {
+export class LoginForm extends Component {
 	render() {
 		const { 
-			handleNewRegistration,
+			auth,
+			handleLogin,
 			handleSubmit,
 		} = this.props;
 
+
 		const styles = {
 			root: {
-				marginTop: 50,
-				marginBottom: 40,
+				marginTop: '50px'
 			},
 			header: {
-				margin: '10px',
+				margin: '10px'
 			}
 		}
 
+		// console.log('LoginForm, auth.loginErr:', Boolean(auth.loginErr))
 		return (
 			<form
 				style={styles.root}
-				onSubmit={handleSubmit(handleNewRegistration)}
+				onSubmit={handleSubmit(handleLogin)}
+				auth={auth}
 			>
 				<div style={styles.header}>
 					<Typography>
-		        Create a new account:
+		        Sign in:
 		      </Typography>
 				</div>
 				<div>
@@ -57,8 +63,8 @@ class RegistrationForm extends Component {
 						type="email"
 						name="email"
 						label="Email"
+						validate={[validation.required, validation.email]}
 						placeholder="Enter your email"
-						validate={[validation.required]}
 					/>
 				</div>
 				<div>
@@ -67,18 +73,8 @@ class RegistrationForm extends Component {
 						type="password"
 						name="password"
 						label="Password"
-						placeholder="Choose a password"
 						validate={[validation.required]}
-					/>
-				</div>
-				<div>
-					<Field 
-						component={renderField}
-						type="password"
-						name="password_confirm"
-						label="Confirm password"
-						placeholder="Confirm password"
-						validate={[validation.required]}
+						placeholder="Enter your password"
 					/>
 				</div>
 				<div style={{marginTop: '20px'}}>
@@ -86,7 +82,7 @@ class RegistrationForm extends Component {
 						variant="outlined"
 						type="submit"
 					>
-						Register
+						Sign in
 					</Button>
 				</div>
 			</form>
@@ -94,4 +90,10 @@ class RegistrationForm extends Component {
 	}
 }
 
-export default form(RegistrationForm);
+LoginForm.propTypes = {
+	auth: PropTypes.object.isRequired,
+	handleLogin: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func.isRequired,
+};
+
+export default form(LoginForm);
