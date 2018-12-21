@@ -65,6 +65,7 @@ export class LoginForm extends Component {
 						label="Email"
 						validate={[validation.required, validation.email]}
 						placeholder="Enter your email"
+						data-cy="signInEmail"
 					/>
 				</div>
 				<div>
@@ -75,12 +76,14 @@ export class LoginForm extends Component {
 						label="Password"
 						validate={[validation.required]}
 						placeholder="Enter your password"
+						data-cy="signInPassword"
 					/>
 				</div>
 				<div style={{marginTop: '20px'}}>
 					<Button 
 						variant="outlined"
 						type="submit"
+						data-cy="signInButton"
 					>
 						Sign in
 					</Button>

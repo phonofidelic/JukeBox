@@ -23,3 +23,23 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (email, password) => {
+	cy.request('POST', '/auth/login', {email, password})
+	.then(response => {
+		console.log('cy login response:', response)
+	});
+});
+
+Cypress.Commands.add('clearLoginInputs', () => {
+	cy.get('[data-cy=signInEmail]')
+	.within(fieldDiv => {
+		cy.get('input')
+		.clear();
+	});
+	cy.get('[data-cy=signInPassword]')
+	.within(fieldDiv => {
+		cy.get('input')
+		.clear();
+	});
+})
