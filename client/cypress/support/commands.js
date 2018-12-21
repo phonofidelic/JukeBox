@@ -30,16 +30,3 @@ Cypress.Commands.add('login', (email, password) => {
 		console.log('cy login response:', response)
 	});
 });
-
-Cypress.Commands.add('clearLoginInputs', () => {
-	cy.get('[data-cy=signInEmail]')
-	.within(fieldDiv => {
-		cy.get('input')
-		.clear();
-	});
-	cy.get('[data-cy=signInPassword]')
-	.within(fieldDiv => {
-		cy.get('input')
-		.clear();
-	});
-})
