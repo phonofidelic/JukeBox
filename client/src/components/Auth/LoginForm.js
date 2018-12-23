@@ -59,21 +59,25 @@ export class LoginForm extends Component {
 				</div>
 				<div>
 					<Field 
+						id="signin-email"
 						component={renderField}
 						type="email"
 						name="email"
 						label="Email"
+						aria-label="Email"
 						validate={[validation.required, validation.email]}
 						placeholder="Enter your email"
 						data-cy="signInEmail"
 					/>
 				</div>
 				<div>
-					<Field 
+					<Field
+						id="signin-password"
 						component={renderField}
 						type="password"
 						name="password"
 						label="Password"
+						aria-label="Password"
 						validate={[validation.required]}
 						placeholder="Enter your password"
 						data-cy="signInPassword"

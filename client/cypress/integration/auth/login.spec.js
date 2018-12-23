@@ -1,10 +1,13 @@
 describe('Auth', () => {
 	it('baseUrl shows Login page', () => {
 		cy.visit('/')
+		.injectAxe()
+		.checkA11y();
 	});
 
 	it('"Sign in" button reveals the sign in form', () => {
-		cy.get('[data-cy=signInReveal]').click();	
+		cy.get('[data-cy=signInReveal]').click()
+		.checkA11y();
 	});
 
 	it('Clicks "Sign in" button with empty email and password fields', () => {
@@ -25,8 +28,9 @@ describe('Auth', () => {
 				cy.get('input')
 				.type(userData.password);
 			})
-			.get('[data-cy=signInButton').click();
+			.get('[data-cy=signInButton').click()
 			// TODO: Assert email error message
+			.checkA11y(); // BUG(?): throws color contrast issue, triggered by MUI component?
 		});
 	});	
 
@@ -48,6 +52,7 @@ describe('Auth', () => {
 			.get('[data-cy=signInButton').click()
 			// BUG #1: view state resets to default	
 			// TODO: Assert 401 alert
+			.checkA11y()
 			.get('button')
 			.contains('Ok')
 			.click();
@@ -71,7 +76,7 @@ describe('Auth', () => {
 				.type(userData.password);
 			})
 			.get('[data-cy=signInButton]')
-			.click();
+			.click()
 			// TODO: Assert user is authenticated and directed to Home view
 		});
 	});

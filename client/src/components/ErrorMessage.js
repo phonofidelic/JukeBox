@@ -29,7 +29,12 @@ class ErrorMessage extends Component {
 						<Typography>{error.status && `${error.status} - `}{error.message}</Typography>
 					</DialogContent>
 					<DialogActions>
-						<Button onClick={() => handleClearError()}>Ok</Button>
+						<Button 
+							variant="outlined" 
+							onClick={() => handleClearError()}
+						>
+							Ok
+						</Button>
 					</DialogActions>
 				</Dialog>
 			</div>

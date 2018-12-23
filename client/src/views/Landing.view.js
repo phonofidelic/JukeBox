@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 const LandingView = (props) => {
 
 	return (
-		<div>
+		<main role="main">
 			<Typography variant="h1">jukebox</Typography>
 			<AuthContainer />
-		</div>
+		</main>
 	);
 }
 

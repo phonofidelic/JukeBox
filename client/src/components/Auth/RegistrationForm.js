@@ -53,6 +53,7 @@ class RegistrationForm extends Component {
 				</div>
 				<div>
 					<Field 
+						id="registration-email"
 						component={renderField}
 						type="email"
 						name="email"
@@ -63,6 +64,7 @@ class RegistrationForm extends Component {
 				</div>
 				<div>
 					<Field 
+						id="registration-password"
 						component={renderField}
 						type="password"
 						name="password"
@@ -73,6 +75,7 @@ class RegistrationForm extends Component {
 				</div>
 				<div>
 					<Field 
+						id="registration-password-confirm"
 						component={renderField}
 						type="password"
 						name="password_confirm"
