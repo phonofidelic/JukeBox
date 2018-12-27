@@ -49,5 +49,16 @@ export const idbTrack = {
       tx.objectStore('tracks').delete(id);
       return tx.complete;
     });
-  }
+  },
+  clear: () => {
+    dbPromise.then(db => {
+      const tx = db.transaction('tracks', 'readwrite');
+      tx.objectStore('tracks').clear();
+      return tx.complete;
+    });
+  },
 };
+
+export const clearIdb = () => {
+
+}

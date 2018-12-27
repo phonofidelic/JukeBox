@@ -11,6 +11,7 @@ import {
 	GET_USER_INFO_SUCCESS,
 	GET_USER_INFO_FAILURE,
 } from '../actiontypes';
+import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
 import { history } from '../config';
 
@@ -90,6 +91,7 @@ export const logoutUser = () => {
 	return dispatch => {
 		localStorage.removeItem('JWT');
 		localStorage.removeItem('userId');
+		// idbTrack.clear();
 		history.push('/');
 		dispatch({
 			type: UNAUTH_USER

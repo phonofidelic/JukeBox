@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import {
+	Button,
+	TextField,
+	Typography,
+} from '@material-ui/core';
 import { validation } from '../../utils';
 
 const form = reduxForm({
@@ -17,7 +19,7 @@ const renderField = ({
  ...custom 
 }) => (
 	<TextField
-		label={label}
+		label={Boolean(touched && error) ? error : label}
 		error={Boolean(touched && error)}
 		{...input}
 		{...custom} 
@@ -53,41 +55,45 @@ class RegistrationForm extends Component {
 				</div>
 				<div>
 					<Field 
+						component={renderField}
+						data-cy="registration-email"
 						id="registration-email"
-						component={renderField}
-						type="email"
-						name="email"
 						label="Email"
+						name="email"
 						placeholder="Enter your email"
+						type="email"
 						validate={[validation.required]}
 					/>
 				</div>
 				<div>
 					<Field 
+						component={renderField}
+						data-cy="registration-password"
 						id="registration-password"
-						component={renderField}
-						type="password"
-						name="password"
 						label="Password"
+						name="password"
 						placeholder="Choose a password"
+						type="password"
 						validate={[validation.required]}
 					/>
 				</div>
 				<div>
 					<Field 
-						id="registration-password-confirm"
 						component={renderField}
-						type="password"
-						name="password_confirm"
+						data-cy="registration-password-confirm"
+						id="registration-password-confirm"
 						label="Confirm password"
+						name="password_confirm"
 						placeholder="Confirm password"
+						type="password"
 						validate={[validation.required]}
 					/>
 				</div>
 				<div style={{marginTop: '20px'}}>
 					<Button 
-						variant="outlined"
+						data-cy="registration-button"
 						type="submit"
+						variant="outlined"
 					>
 						Register
 					</Button>

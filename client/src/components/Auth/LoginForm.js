@@ -67,7 +67,7 @@ export class LoginForm extends Component {
 						aria-label="Email"
 						validate={[validation.required, validation.email]}
 						placeholder="Enter your email"
-						data-cy="signInEmail"
+						data-cy="signin-email"
 					/>
 				</div>
 				<div>
@@ -80,14 +80,14 @@ export class LoginForm extends Component {
 						aria-label="Password"
 						validate={[validation.required]}
 						placeholder="Enter your password"
-						data-cy="signInPassword"
+						data-cy="signin-password"
 					/>
 				</div>
 				<div style={{marginTop: '20px'}}>
 					<Button 
 						variant="outlined"
 						type="submit"
-						data-cy="signInButton"
+						data-cy="signin-button"
 					>
 						Sign in
 					</Button>

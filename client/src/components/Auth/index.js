@@ -102,7 +102,7 @@ class Auth extends Component {
 				{ !this.state.showLogin && 
 					<Button 
 						onClick={() => this.handleSignInReveal()} 
-						data-cy="signInReveal"
+						data-cy="signin-reveal"
 					>Sign in
 					</Button> 
 				}
@@ -116,7 +116,7 @@ class Auth extends Component {
 				{ !this.state.showRegistration && 
 					<Button 
 						onClick={() => this.handleRegistrationReveal()}
-						data-cy="registrationInReveal"
+						data-cy="registration-reveal"
 					>Regeister
 					</Button> 
 				}

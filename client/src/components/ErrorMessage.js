@@ -30,6 +30,7 @@ class ErrorMessage extends Component {
 					</DialogContent>
 					<DialogActions>
 						<Button 
+							data-cy="error-dismiss-button"
 							variant="outlined" 
 							onClick={() => handleClearError()}
 						>
