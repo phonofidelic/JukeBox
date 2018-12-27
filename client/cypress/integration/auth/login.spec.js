@@ -1,11 +1,21 @@
 describe('Login', () => {
 	before(() => {
-		cy.visit('/')
-		.injectAxe()
-		.get('[data-cy=registration-reveal]')
-		.click();
+		cy.fixture('user').then(userData => {
+			cy.task('db:removeTestUser', userData.email)
+			cy.request('POST', '/auth/register', {
+						email: userData.email, 
+						password: userData.password
+				})
+				.then(response => {
+					console.log('cy register response:', response)
+				})
+				.visit('/')
+				.injectAxe()
+				.get('[data-cy=registration-reveal]')
+				.click();
+		});
 	});
-
+		
 	it('Clicks "Sign in" button with empty email and password fields', () => {
 		cy.get('[data-cy=signin-button').click();
 		// TODO: Assert "Required" messages

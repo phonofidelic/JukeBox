@@ -1,4 +1,8 @@
 describe('Registration', () => {
+	beforeEach(() => {
+		cy.fixture('user').as('userData');
+	})
+
 	before(() => {
 		cy.task('db:removeTestUser', 'test@example.com')
 		.visit('/')
@@ -13,7 +17,7 @@ describe('Registration', () => {
 		// .checkA11y();
 	});
 
-	it('Enters invalid email', () => {
+	it('Enters invalid email', function() {
 		cy.get('[data-cy=registration-email]')
 		.within(fieldDiv => {
 			cy.get('input')
@@ -23,22 +27,22 @@ describe('Registration', () => {
 		.get('[data-cy=registration-password]')
 		.within(fieldDiv => {
 			cy.get('input')
-			.type('p@ssw0rd');
+			.type(this.userData.password);
 		})
 		.get('[data-cy=registration-password-confirm]')
 		.within(fieldDiv => {
 			cy.get('input')
-			.type('p@ssw0rd{enter}')
+			.type(`${this.userData.password}{enter}`)
 			.checkA11y();
 		});
 	});
 
-	it('Enters invalid password', () => {
+	it('Enters invalid password', function() {
 		cy.get('[data-cy=registration-email]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('test@example.com');
+			.type(this.userData.email);
 		})
 		.get('[data-cy=registration-password]')
 		.within(fieldDiv => {
@@ -58,24 +62,24 @@ describe('Registration', () => {
 		.click();
 	});
 
-	it('Enters mismatching passwords', () => {
+	it('Enters mismatching passwords', function() {
 		cy.get('[data-cy=registration-email]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('test@example.com');
+			.type(this.userData.email);
 		})
 		.get('[data-cy=registration-password]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('p@ssw0rd');
+			.type(this.userData.password);
 		})
 		.get('[data-cy=registration-password-confirm]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('p@ssw0rdX{enter}');
+			.type(`${this.userData.password}X{enter}`);
 		})
 		.checkA11y()
 		// TODO: Assert error message
@@ -83,24 +87,41 @@ describe('Registration', () => {
 		.click();
 	});
 
-	it('Enters existing users email', () => {
+	before(() => {
+		cy.fixture('user').then(userData => {
+			cy.task('db:removeTestUser', userData.email)
+			cy.request('POST', '/auth/register', {
+						email: userData.email, 
+						password: userData.password
+				})
+				.then(response => {
+					console.log('cy register response:', response)
+				})
+				.visit('/')
+				.injectAxe()
+				.get('[data-cy=registration-reveal]')
+				.click();
+		});
+	});
+
+	it('Enters existing users email', function() {
 		cy.get('[data-cy=registration-email]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('test@test.test');
+			.type(this.userData.email);
 		})
 		.get('[data-cy=registration-password]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('p@ssw0rd');
+			.type(this.userData.password);
 		})
 		.get('[data-cy=registration-password-confirm]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('p@ssw0rd{enter}');
+			.type(`${this.userData.password}{enter}`);
 		})
 		.checkA11y()
 		// TODO: Assert error message
@@ -108,24 +129,29 @@ describe('Registration', () => {
 		.click();
 	});
 
-	it('Registers a new user when valid data is entered', () => {
-		cy.get('[data-cy=registration-email]')
+	// before(() => {
+	// 	cy.task('db:removeTestUser', 'test@example.com');
+	// });
+
+	it('Registers a new user when valid data is entered', function() {
+		cy.task('db:removeTestUser', this.userData.email)
+		.get('[data-cy=registration-email]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('test@example.com');
+			.type(this.userData.email);
 		})
 		.get('[data-cy=registration-password]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('p@ssw0rd');
+			.type(this.userData.password);
 		})
 		.get('[data-cy=registration-password-confirm]')
 		.within(fieldDiv => {
 			cy.get('input')
 			.clear()
-			.type('p@ssw0rd{enter}');
+			.type(`${this.userData.password}{enter}`);
 		});
 	});
 });
