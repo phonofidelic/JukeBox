@@ -11,7 +11,7 @@ import {
 	GET_USER_INFO_SUCCESS,
 	GET_USER_INFO_FAILURE,
 } from '../actiontypes';
-import { idbTrack } from '../utils/idbUtils';
+// import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
 import { history } from '../config';
 
@@ -44,11 +44,11 @@ export const postRegistration = data => {
 			});
 		})
 		.catch(err => {
-			console.log('postRegistration error:', err);
+			console.log('postRegistration error:', err.response);
 			dispatch({
 				type: REGISTRATION_FAILURE,
 				data: err.response.data,
-				status: err.response.status ,
+				status: err.response.status,
 				message: err.response.data.message || err.response.data,
 			});
 		});

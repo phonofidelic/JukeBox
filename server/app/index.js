@@ -10,6 +10,9 @@ const libraryRoutes = require('./routes/library.routes');
 
 // const PORT = process.env.PORT;
 // const DB_CONNECTION = process.env.DB_CONNECTION;
+const STRINGS = {
+	default_server_error: 'Something broke!'
+};
 
 const app = express();
 
@@ -58,7 +61,7 @@ app.use('/*', (req, res) => {
 
 app.use((err, req, res, next) => {
 	console.error('### FROM ERROR HANDLER:', err);
-	res.status(500).json({message: err.message || 'Something broke!'});
+	res.status(500).json({message: err.message || STRINGS.default_server_error});
 })
 
 // app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));

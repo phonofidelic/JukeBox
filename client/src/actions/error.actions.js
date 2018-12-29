@@ -23,7 +23,7 @@ export const triggerErrorMessage = (err, title) => {
 			type: TRIGGER_ERROR_MESSAGE,
 			data: err,
 			title: title,
-			status: '' ,
+			status: 400,
 			message: err.message
 		});
 	}

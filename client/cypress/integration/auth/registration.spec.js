@@ -1,7 +1,7 @@
 describe('Registration', () => {
 	beforeEach(() => {
 		cy.fixture('user').as('userData');
-	})
+	});
 
 	before(() => {
 		cy.task('db:removeTestUser', 'test@example.com')
@@ -128,10 +128,6 @@ describe('Registration', () => {
 		.get('[data-cy=error-dismiss-button]')
 		.click();
 	});
-
-	// before(() => {
-	// 	cy.task('db:removeTestUser', 'test@example.com');
-	// });
 
 	it('Registers a new user when valid data is entered', function() {
 		cy.task('db:removeTestUser', this.userData.email)
