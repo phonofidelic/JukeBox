@@ -7,6 +7,7 @@ const logger = require('morgan');
 const authRoutes = require('./routes/auth.routes');
 const trackRoutes = require('./routes/track.routes');
 const libraryRoutes = require('./routes/library.routes');
+const userRoutes = require('./routes/user.routes');
 
 // const PORT = process.env.PORT;
 // const DB_CONNECTION = process.env.DB_CONNECTION;
@@ -29,6 +30,9 @@ db.on('open', () => console.log('DB connection successfull!'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Set view engine
+app.set('view engine', 'pug');
+
 // Configure access-control headers
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -50,6 +54,7 @@ app.use('/uploads', express.static('./uploads'));
 app.use('/tracks', trackRoutes);
 app.use('/auth', authRoutes);
 app.use('/library', libraryRoutes);
+app.use('/user', userRoutes);
 
 // Serve static client files
 app.use(express.static(process.env.CLIENT_DIR));
