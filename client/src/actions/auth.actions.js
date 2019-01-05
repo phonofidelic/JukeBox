@@ -10,6 +10,12 @@ import {
 	GET_USER_INFO,
 	GET_USER_INFO_SUCCESS,
 	GET_USER_INFO_FAILURE,
+	INIT_GDRIVE_CONNECT,
+	INIT_GDRIVE_CONNECT_SUCCESS,
+	INIT_GDRIVE_CONNECT_FAILURE,
+	POST_GDRIVE_CODE,
+	POST_GDRIVE_CODE_SUCCESS,
+	POST_GDRIVE_CODE_FAILURE,
 } from '../actiontypes';
 // import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
@@ -125,6 +131,52 @@ export const getUserInfo = () => {
 				status: err.response.status ,
 				message: err.response.data.message || err.response.data,
 			});
-		})
+		});
 	}
 }
+
+export const connectGDriveAccount = () => {
+	const userId = localStorage.getItem('userId')
+	console.log('connectGDriveAccount, userId:', userId)
+	return dispatch => {
+		dispatch({
+			type: INIT_GDRIVE_CONNECT,
+		});
+		axios.post(`user/gdrive/authURL`, { userId: userId })
+		.then(response => {
+			console.log('user/gdrive/authURL response:', response);
+			window.open(response.data.authURL)
+			dispatch({
+				type: INIT_GDRIVE_CONNECT_SUCCESS,
+			});
+		})
+		.catch(err => {
+			console.error('user/gdrive/authURL, error:', err);
+			dispatch({
+				type: INIT_GDRIVE_CONNECT_FAILURE,
+			});
+		});
+	}
+}
+
+// export const submitGDSecCode = (formData) => {
+// 	console.log('submitGDSecCode, formData:', formData);
+// 	return dispatch => {
+// 		dispatch({
+// 			type: POST_GDRIVE_CODE
+// 		});
+// 		axios.post('user/gdrive/seccode', { GDSecCode: formData.GDSecCode })
+// 		.then(response => {
+// 			console.log('POST user/gdrive/seccode, response:', response);
+// 			dispatch({
+// 				type: POST_GDRIVE_CODE_SUCCESS
+// 			})
+// 		})
+// 		.catch(err => {
+// 			console.log('POST /gdrive/seccode, error:', err);
+// 			dispatch({
+// 				type: POST_GDRIVE_CODE_FAILURE
+// 			})
+// 		})
+// 	}
+// }

@@ -5,20 +5,38 @@ import {
 	Typography
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import SecCodeForm from './SecCodeForm';
 
 class Dashboard extends Component {
+	state = {
+		showSecCodeForm: false
+	}
+
+	handleGDButtonClick = () => {
+		this.setState({showSecCodeForm: true});
+		this.props.handleGDriveConnect();
+	}
 
 	render() {
 		const { 
 			user,
 			classes,
-			handleSignOut
+			handleSignOut,
+			handleSubmitGDSecCode,
 		} = this.props;
 
 		return (
 			<div className={classes.root}>
 				<Typography>email: { user && user.email }</Typography>
-				<Button variant="outlined" onClick={() => handleSignOut()}>Sign out</Button>
+				<div>
+					<Button variant="outlined" onClick={() => this.handleGDButtonClick()}>Connect Google Drive</Button>
+				</div>
+				{/*<div>
+					{this.state.showSecCodeForm && <SecCodeForm handleSubmitGDSecCode={handleSubmitGDSecCode} />}
+				</div>*/}
+				<div>
+					<Button variant="outlined" onClick={() => handleSignOut()}>Sign out</Button>
+				</div>
 			</div>
 		);
 	}
