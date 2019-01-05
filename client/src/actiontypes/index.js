@@ -58,7 +58,4 @@ export const // uploaderActionTypes
 						 CLEAR_ERROR='clear_error',
 						 INIT_GDRIVE_CONNECT='init_gdrive_connect',
 						 INIT_GDRIVE_CONNECT_SUCCESS='init_gdrive_connect_success',
-						 INIT_GDRIVE_CONNECT_FAILURE='init_gdrive_connect_failure',
-						 POST_GDRIVE_CODE='post_gdrive_code',
-						 POST_GDRIVE_CODE_SUCCESS='post_gdrive_code_success',
-						 POST_GDRIVE_CODE_FAILURE='post_gdrtive_code_failure';
+						 INIT_GDRIVE_CONNECT_FAILURE='init_gdrive_connect_failure';

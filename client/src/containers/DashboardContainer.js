@@ -22,11 +22,6 @@ class DashboardContainer extends Component {
 		this.props.connectGDriveAccount()
 	}
 
-	// handleSubmitGDSecCode = (formData) => {
-	// 	console.log('handleSubmitGDSecCode, formData:', formData)
-	// 	this.props.submitGDSecCode(formData);
-	// }
-
 	render() {
 		const { auth } = this.props;
 		return (
@@ -39,7 +34,6 @@ class DashboardContainer extends Component {
 						user={auth.user} 
 						handleSignOut={this.handleSignOut}
 						handleGDriveConnect={this.handleGDriveConnect}
-						// handleSubmitGDSecCode={this.handleSubmitGDSecCode}
 					/>	
 				}
 			</div>

@@ -13,9 +13,6 @@ import {
 	INIT_GDRIVE_CONNECT,
 	INIT_GDRIVE_CONNECT_SUCCESS,
 	INIT_GDRIVE_CONNECT_FAILURE,
-	POST_GDRIVE_CODE,
-	POST_GDRIVE_CODE_SUCCESS,
-	POST_GDRIVE_CODE_FAILURE,
 } from '../actiontypes';
 // import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
@@ -142,7 +139,11 @@ export const connectGDriveAccount = () => {
 		dispatch({
 			type: INIT_GDRIVE_CONNECT,
 		});
-		axios.post(`user/gdrive/authURL`, { userId: userId })
+		axios.get(`user/gdrive/authURL`, {
+			headers: { 
+				userId: userId 
+			}
+		})
 		.then(response => {
 			console.log('user/gdrive/authURL response:', response);
 			window.open(response.data.authURL)
@@ -158,25 +159,3 @@ export const connectGDriveAccount = () => {
 		});
 	}
 }
-
-// export const submitGDSecCode = (formData) => {
-// 	console.log('submitGDSecCode, formData:', formData);
-// 	return dispatch => {
-// 		dispatch({
-// 			type: POST_GDRIVE_CODE
-// 		});
-// 		axios.post('user/gdrive/seccode', { GDSecCode: formData.GDSecCode })
-// 		.then(response => {
-// 			console.log('POST user/gdrive/seccode, response:', response);
-// 			dispatch({
-// 				type: POST_GDRIVE_CODE_SUCCESS
-// 			})
-// 		})
-// 		.catch(err => {
-// 			console.log('POST /gdrive/seccode, error:', err);
-// 			dispatch({
-// 				type: POST_GDRIVE_CODE_FAILURE
-// 			})
-// 		})
-// 	}
-// }
