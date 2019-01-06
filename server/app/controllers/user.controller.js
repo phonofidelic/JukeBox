@@ -3,6 +3,11 @@ const User = require('../models/user.model');
 const {google} = require('googleapis');
 const inspectConfig = {colors: true, depth: null};
 
+STRINGS = {
+	gdAuthConfirmationTitle: 'Google Drive authorization confirmation',
+	gdAuthConfirmationMessage: 'Jukebox has been authorized to store audio files on your Google Drive account.'
+};
+
 let oauth2Client;
 
 // GET /gdrive/authURL
@@ -19,7 +24,9 @@ module.exports.getGDriveAuthURL = (req, res, next) => {
 	const authURL = oauth2Client.generateAuthUrl({
 		scope: 'https://www.googleapis.com/auth/drive.file'
 	})
-	res.status(200).json({message: 'Successfully grnerated authURL', authURL: authURL});
+	res.status(200).json({
+		message: 'Successfully grnerated authURL', authURL: authURL
+	});
 };
 
 // GET /gdrive/authcode
@@ -40,6 +47,24 @@ module.exports.gdOauthcallback = async (req, res, next) => {
 	});
 
 	// TODO: respond with success/failure message
-	// res.status(200).render('gdConfirmation', {message: 'Server response: gdOauthcallback'})
-	res.status(200).json({message: 'auth code recieved', ...req.query})
+	res.status(200).render('gdAuthConfirmation', 
+		{
+			title: STRINGS.gdAuthConfirmationTitle, 
+			message: STRINGS.gdAuthConfirmationMessage 
+		}
+		// (err, html) => {
+		// 	if (err) return next(err);
+		// 	res.send(html);
+		// }
+	);
+	// res.status(200).json({message: 'auth code recieved', ...req.query})
 };
+
+module.exports.test_gdAuthConfirmationPage = (req, res, next) => {
+	res.status(200).render('gdAuthConfirmation', 
+		{
+			title: STRINGS.gdAuthConfirmationTitle, 
+			message: STRINGS.gdAuthConfirmationMessage 
+		}
+	);
+}

@@ -1,0 +1,19 @@
+html
+	head
+		title= title
+		meta(
+			name='viewport'
+			content='width=device-width, initial-scale=1, shrink-to-fit=no'
+		)
+		link(
+			href='https://fonts.googleapis.com/css?family=Roboto'
+			rel='stylesheet'
+		)
+		style 
+			include styles.css
+	body
+		div(class='message-container')
+			h1 Success!
+			p #{message} Click 'Ok' to close this tab and return to the app.
+			button(class='confirmation-button' onclick='window.close()') 
+				span(class='button-label') Ok

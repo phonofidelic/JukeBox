@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set view engine
 app.set('view engine', 'pug');
+app.set('views', './app/views');
 
 // Configure access-control headers
 app.use((req, res, next) => {
