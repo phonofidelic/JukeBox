@@ -90,12 +90,3 @@ module.exports.gdOauthcallback = async (req, res, next) => {
 		}
 	);
 };
-
-module.exports.test_gdAuthConfirmationPage = (req, res, next) => {
-	res.status(200).render('gdAuthConfirmation', 
-		{
-			title: STRINGS.gdAuthConfirmationTitle, 
-			message: STRINGS.gdAuthConfirmationMessage 
-		}
-	);
-};

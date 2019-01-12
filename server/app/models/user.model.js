@@ -9,6 +9,7 @@ const STRINGS = {
 
 // Validation adapted from https://stackoverflow.com/questions/18022365/mongoose-validate-email-syntax/18022766#18022766
 const UserSchema = new Schema({
+	created: { type: Date, default: Date.now },
 	email: { 
 		type: String, 
 		required: 'A valid email address is required',
@@ -22,12 +23,15 @@ const UserSchema = new Schema({
 		match: [emailRegex, STRINGS.email_validation_msg]
 	},
 	password: { type: String, required: true },
-	gdTokenData: {
-		access_token: { type: String, required: true },
-		refresh_token: { type: String, required: true },
-		scope: { type: String, required: true },
-		token_type: { type: String, required: true },
-		expiry_date: { type: Number, required: true }
+	gDrive: {
+		folderID: String,
+		gdTokenData: {
+			access_token: String,
+			refresh_token: String,
+			scope: String,
+			token_type: String,
+			expiry_date: Number
+		}
 	}
 });
 
