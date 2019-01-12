@@ -24,7 +24,11 @@ const UserSchema = new Schema({
 	},
 	password: { type: String, required: true },
 	gDrive: {
-		folderID: String,
+		gdFolder: {
+			id: String,
+			name: String,
+			mimeType: String
+		},
 		gdTokenData: {
 			access_token: String,
 			refresh_token: String,

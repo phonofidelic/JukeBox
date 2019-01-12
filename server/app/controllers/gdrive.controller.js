@@ -72,16 +72,24 @@ module.exports.gdOauthcallback = async (req, res, next) => {
 	oauth2Client.setCredentials(tokens);
 
 	console.log('gdAuth token:', util.inspect(tokens, inspectConfig));
+
+	// Create 'Jukebox library' folder in users Drive account
+	const gdFolder = await createLibFolder(oauth2Client, next);
+	console.log('createLibFolder, gdFolder:', util.inspect(gdFolder, inspectConfig))
+
 	// Save tokens to User doc in DB
-	await User.findByIdAndUpdate(userId, { gdTokenData: tokens }, { new: true }, (err, updatedUserData) => {
+	await User.findByIdAndUpdate(userId, {
+		gDrive: { 
+			gdTokenData: tokens,
+			gdFolder: gdFolder
+		} 
+	}, { new: true }, (err, updatedUserData) => {
 		// TODO: if err, respond with error page
 		if (err) return next(err);
 		console.log('Successfully updated users Google Drive token data:', updatedUserData);
 	});
 
-	// Create 'Jukebox library' folder in users Drive account
-	const gdFolder = await createLibFolder(oauth2Client, next);
-	console.log('createLibFolder, gdFolder:', util.inspect(gdFolder, inspectConfig))
+	
 
 	res.status(200).render('gdAuthConfirmation', 
 		{
