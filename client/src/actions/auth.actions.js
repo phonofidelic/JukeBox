@@ -139,20 +139,20 @@ export const connectGDriveAccount = () => {
 		dispatch({
 			type: INIT_GDRIVE_CONNECT,
 		});
-		axios.get(`user/gdrive/authURL`, {
+		axios.get(`gdrive/authURL`, {
 			headers: { 
 				userId: userId 
 			}
 		})
 		.then(response => {
-			console.log('user/gdrive/authURL response:', response);
+			console.log('gdrive/authURL response:', response);
 			window.open(response.data.authURL)
 			dispatch({
 				type: INIT_GDRIVE_CONNECT_SUCCESS,
 			});
 		})
 		.catch(err => {
-			console.error('user/gdrive/authURL, error:', err);
+			console.error('gdrive/authURL, error:', err);
 			dispatch({
 				type: INIT_GDRIVE_CONNECT_FAILURE,
 			});

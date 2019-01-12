@@ -7,7 +7,7 @@ const logger = require('morgan');
 const authRoutes = require('./routes/auth.routes');
 const trackRoutes = require('./routes/track.routes');
 const libraryRoutes = require('./routes/library.routes');
-const userRoutes = require('./routes/user.routes');
+const gdriveRoutes = require('./routes/gdrive.routes');
 
 // const PORT = process.env.PORT;
 // const DB_CONNECTION = process.env.DB_CONNECTION;
@@ -55,7 +55,7 @@ app.use('/uploads', express.static('./uploads'));
 app.use('/tracks', trackRoutes);
 app.use('/auth', authRoutes);
 app.use('/library', libraryRoutes);
-app.use('/user', userRoutes);
+app.use('/gdrive', gdriveRoutes);
 
 // Serve static client files
 app.use(express.static(process.env.CLIENT_DIR));
