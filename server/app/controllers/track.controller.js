@@ -3,13 +3,14 @@ const mm = require('music-metadata');
 const isFile = require('is-file');
 const path = require('path');
 const util = require('util');
-// const Track = require('../models').TrackModel;
+const User = require('../models/user.model');
 const Track = require('../models/track.model');
 const Artist = require('../models/artist.model');
 const Album = require('../models/album.model');
 const utils = require('./utils');
 const storage = require('../../config/storage_config');
 const { mapSeries } = require('p-iteration');
+const {google} = require('googleapis');
 
 const inspectConfig = {colors: true, depth: null};
 
@@ -28,7 +29,19 @@ module.exports.handlePostTracks = async (req, res, next) => {
 		duration: true
 	};
 
-	console.log('\n*** discogsImports:', discogsImports);
+	// Configure Google Drive 
+	const gdUser = await User.findById(userId, 'gDrive')
+	console.log('\nuser gDrive.gdTokenData:', gdUser)
+	const oauth2Client = new google.auth.OAuth2(
+		process.env.G_CLIENT_ID,
+		process.env.G_CLIENT_SECRET,
+	);
+	oauth2Client.setCredentials(gdUser.gDrive.gdTokenData);
+	const drive = google.drive({
+		version: 'v3',
+		auth: oauth2Client
+	});
+
 	/***
 	 *	Using p-iteration library's mapSeries to execute map callback consecutively
 	 * 	for each file in req.files, returning an array of saved Track documents.
@@ -49,7 +62,34 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			return next(e);
 		}
 
-		
+		// TODO: Abstract to a "storage" module/interface. 
+		// 			 Storage interface should be able to handle multiple storage solutions
+		// 			 and abstract away their differences from the perspectiv of the track controller
+
+		// Upload file to Google Drive
+		const gdUpload = await drive.files.create({
+			requestBody: {
+				name: file.originalname,
+				mimeType: file.mimetype,
+				parents: [gdUser.gDrive.gdFolder.id],
+				writersCanShare: true
+			},
+			media: {
+				mimeType: file.mimetype,
+				body: fs.createReadStream(file.path)
+			}
+		});
+		/** gdUpload.data:
+		{ kind: 'drive#file',
+		  id: '1qH8gjaM1KbBVAwUXAtVukUv2BLxEIiJa',
+		  name: "03 You Ain't No Friend Of Mine.mp3",
+		  mimeType: 'audio/mp3' 
+		}
+		**/
+		console.log('\ngdUpload.data:', gdUpload.data)
+
+		// const gdFile = await drive.files.get({ fileId: gdUpload.data.id });
+		// console.log('\ngdLink:', gdFile.data)
 
 		/***
 		 *	Check if track is already in DB by matching original file name
@@ -67,8 +107,8 @@ module.exports.handlePostTracks = async (req, res, next) => {
 		/***
 		 *	Check DB for existing Artist and Album doc
 		 */
-		const artistData = await utils.checkArtist(metadata, Artist, userId, importDiscogs);
-		const albumData = await utils.checkAlbum(metadata, Album, userId, importDiscogs);
+		const artistData = await utils.checkArtist(metadata, Artist, userId, importDiscogs, next);
+		const albumData = await utils.checkAlbum(metadata, Album, userId, importDiscogs, next);
 		console.log('\n artistData:', util.inspect(artistData, inspectConfig));
 		console.log('\n albumData:', util.inspect(albumData, inspectConfig));
 
@@ -80,7 +120,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			// image: albumData.artwork[0],
 			userId: userId,	
 			format: metadata.format,
-			file: file,
+			file: {...file, gdId: gdUpload.data.id},
 			order: metadata.common.track,
 			disk: metadata.common.disk,
 			genre: albumData.genre,
@@ -91,8 +131,8 @@ module.exports.handlePostTracks = async (req, res, next) => {
 		/***
 		 *	Update Artist and Album docks with new track data
 		 */
-		await Artist.findOneAndUpdate(artistData._id, {$push: {albums: albumData._id}});
-		await Album.findOneAndUpdate(albumData._id, {artist: artistData._id});
+		await Artist.findOneAndUpdate(artistData._id, { $addToSet: { albums: albumData._id } });
+		await Album.findOneAndUpdate(albumData._id, { artist: artistData._id });
 
 		return newTrack;
 	});

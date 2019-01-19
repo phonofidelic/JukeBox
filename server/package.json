@@ -9,7 +9,7 @@
     "coverage": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --coverage",
     "prod": "node index.js",
     "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js",
-    "dropLib": "FS_AUDIO=uploads/audio FS_IMAGE=uploads/images DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.dropLib.js"
+    "dropLib": "FS_AUDIO=uploads/audio FS_IMAGE=uploads/images TMP=./tmp DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.dropLib.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "datauri": "^1.1.0",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "googleapis": "^36.0.0",

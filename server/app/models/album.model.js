@@ -9,6 +9,7 @@ const STRINGS = {
 };
 
 const AlbumSchema = new Schema({
+	created: { type: Date, default: Date.now },
 	userId: { type: Schema.Types.ObjectId, required: true },
 	title: { type: String, default: STRINGS.default_unknown },
 	artist: { type: Schema.Types.ObjectId, ref: 'Artist' },

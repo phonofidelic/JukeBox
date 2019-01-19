@@ -58,7 +58,7 @@ const getArtistImage = async (discogsData) => {
 			url: discogsData.cover_image
 		});
 	} catch(err) {
-		console.error('\ngetArtistImage, Discogs request error:', err);
+		console.error('\ngetArtistImage, Discogs request error:', err.message);
 		return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL }
 	}
 	response.data.pipe(fs.createWriteStream(imgPath));
@@ -84,7 +84,7 @@ const getAlbumImage = async (embededImages, discogsData) => {
 			responseType: 'stream',
 			url: discogsData.cover_image
 		});
-		console.log('\n*** getAlbumImage Discogs response:', util.inspect(response, inspectConfig))
+		// console.log('\n*** getAlbumImage Discogs response:', util.inspect(response, inspectConfig))
 		response.data.pipe(fs.createWriteStream(imgPath));
 		await new Promise((resolve, reject) => {
 			response.data.on('end', () => {
@@ -127,8 +127,8 @@ module.exports.checkTrack = (metaData, file, Track, userId) => new Promise((reso
 });
 
 // BUG: Should return an Artist objectId?
-module.exports.checkArtist = async (metadata, Artist, userId, importDiscogs) => {
-	let artistDoc;
+module.exports.checkArtist = async (metadata, Artist, userId, importDiscogs, next) => {
+	// let artistDoc;
 	try {
 		existingArtistDoc = await Artist.findOne({ name: metadata.common.artist });
 		console.log('\n### Checking Artist collection for existing document...');
@@ -140,8 +140,12 @@ module.exports.checkArtist = async (metadata, Artist, userId, importDiscogs) => 
 
 		let discogsData;
 		if (importDiscogs) {
-			discogsData = await requestDiscogsData(metadata.common, 'artist');
-			// console.log('\nDiscogs artist data:', util.inspect(discogsData, inspectConfig));
+			try {
+				discogsData = await requestDiscogsData(metadata.common, 'artist');	
+			} catch(err) {
+				return next(err)
+			}
+			console.log('\nDiscogs artist data:', util.inspect(discogsData, inspectConfig));
 		}
 
 		return await new Artist({
@@ -150,11 +154,11 @@ module.exports.checkArtist = async (metadata, Artist, userId, importDiscogs) => 
 			artwork: await getArtistImage(discogsData)
 		}).save();
 	} catch(err) {
-		return new Error(err);
+		return next(err);
 	}
 };
 
-module.exports.checkAlbum = async (metadata, Album, userId, importDiscogs) => {
+module.exports.checkAlbum = async (metadata, Album, userId, importDiscogs, next) => {
 	let albumDoc;
 	let genre = metadata.common.genre || [];
 	let year = metadata.common.year || null;
@@ -184,7 +188,7 @@ module.exports.checkAlbum = async (metadata, Album, userId, importDiscogs) => {
 			artwork: await getAlbumImage(metadata.common.picture, discogsData)
 		}).save();
 	} catch(err) {
-		return new Error(err);
+		return next(err);
 	}
 }
 
@@ -237,11 +241,9 @@ module.exports.getTrackImage = async (Album, albumData) => {
 }
 
 const requestDiscogsData = async (metadataCommon, querryType) => {
-	const albumQueryString = `?q=${metadataCommon.artist}&release_title=${metadataCommon.album}&type=release`;
-	const artistQueryString = `?q=${metadataCommon.artist}&type=artist`;
 	const querryTypes = {
-		album: albumQueryString,
-		artist: artistQueryString
+		album: `?q=${metadataCommon.artist}&release_title=${metadataCommon.album}&type=release`,
+		artist: `?q=${metadataCommon.artist}&type=artist`
 	}
 	let discogsResponse;
 	try {

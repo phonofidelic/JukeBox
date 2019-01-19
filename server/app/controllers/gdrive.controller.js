@@ -1,3 +1,4 @@
+const fs = require('fs');
 const util = require('util');
 const User = require('../models/user.model');
 const {google} = require('googleapis');
@@ -56,10 +57,9 @@ module.exports.getGDriveAuthURL = (req, res, next) => {
 		process.env.G_CLIENT_SECRET,
 		process.env.G_REDIRECT_URI+`?userId=${userId}`
 	);
-
 	const authURL = oauth2Client.generateAuthUrl({
 		scope: 'https://www.googleapis.com/auth/drive.file'
-	})
+	});
 	res.status(200).json({
 		message: 'Successfully grnerated authURL', authURL: authURL
 	});
@@ -89,8 +89,6 @@ module.exports.gdOauthcallback = async (req, res, next) => {
 		console.log('Successfully updated users Google Drive token data:', updatedUserData);
 	});
 
-	
-
 	res.status(200).render('gdAuthConfirmation', 
 		{
 			title: STRINGS.gdAuthConfirmationTitle, 
@@ -98,3 +96,53 @@ module.exports.gdOauthcallback = async (req, res, next) => {
 		}
 	);
 };
+
+module.exports.getStream = async (req, res, next) => {
+	// res.set('content-type', 'audio/mp3');
+ //  res.set('accept-ranges', 'bytes');
+	console.log('@getStream, req.params', req.params)
+	const { gdId } = req.params;
+	const userId = req.get('userId')
+	const mimetype = req.get('mimetype')
+	const ext = req.get('ext')
+	console.log('userId:', userId)
+	const gdUser = await User.findById(userId, 'gDrive')
+
+	oauth2Client = new google.auth.OAuth2(
+		process.env.G_CLIENT_ID,
+		process.env.G_CLIENT_SECRET,
+	);
+	oauth2Client.setCredentials(gdUser.gDrive.gdTokenData);
+	const drive = await google.drive({
+		version: 'v3',
+		auth: oauth2Client
+	});
+
+	console.log('*** gdId:', gdId, mimetype, ext)
+
+	const dest = fs.createWriteStream(`${process.env.TMP}/${gdId}.${ext}`);
+	// console.log('*** dest:', dest)
+	const gdRes = await drive.files.get({
+	  fileId: gdId,
+	  mimeType: mimetype,
+	  parents: [gdUser.gDrive.gdFolder.id],
+	  alt: 'media',
+	}, {responseType: 'stream'});
+  
+  gdRes.data
+  .on('data', (chunk) => {
+  	// res.write(chunk)
+  })
+  .on('end', () => {
+  	console.log('### Done')
+  	// res.end()
+  	res.status(200).json({ message: 'Stream created', src: dest.path.slice(2) });
+  })
+  .on('error', (err) => console.error('stream error:', err))
+  .pipe(dest);
+
+  // console.log('gdRes.data:', gdRes.data)
+  // console.log('\nstream dest:', dest.path)
+  // res.status(200).json({ message: 'Stream created', src: dest.path });
+}
+

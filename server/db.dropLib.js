@@ -9,8 +9,9 @@ const utils = require('./app/controllers/utils');
 
 const audioPath = process.env.FS_AUDIO;
 const imagePath = process.env.FS_IMAGE;
+const tmpPath = process.env.TMP;
 
-const assetDirs = [audioPath, imagePath];
+const assetDirs = [audioPath, imagePath, tmpPath];
 
 function emptyDirs(dirs) {
 	console.log('*** dirs:', dirs)
@@ -20,7 +21,7 @@ function emptyDirs(dirs) {
 
 			for (let file of files) {
 				// console.log('file:', file)
-				if (file !== 'default_album_img.svg') // !!!!!!!!!!!!! HARDCODED !!!!!
+				if (file !== 'default_album_img.svg' && file !== 'default_artist_img.svg') // !!!!!!!!!!!!! HARDCODED !!!!!
 				fs.unlink(path.join(dir, file), err => {
 					if (err) throw  err;
 					return console.log(`deleted file "${file}`)

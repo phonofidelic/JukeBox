@@ -52,6 +52,7 @@ app.use((req, res, next) => {
 
 // Configure routers
 app.use('/uploads', express.static('./uploads'));
+app.use('/tmp', express.static('./tmp'));
 app.use('/tracks', trackRoutes);
 app.use('/auth', authRoutes);
 app.use('/library', libraryRoutes);
@@ -66,7 +67,7 @@ app.use('/*', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-	console.error('### FROM ERROR HANDLER:', err);
+	console.error('\n### FROM ERROR HANDLER:', err);
 	res.status(500).json({message: err.message || STRINGS.default_server_error});
 })
 

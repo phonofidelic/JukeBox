@@ -13,6 +13,7 @@ import {
 	SEEK
 } from '../actiontypes';
 import { Howl } from 'howler';
+import axios from 'axios';
 
 // Set up global event diapatchers for howl events
 const howlOnPlay = track => {
@@ -42,18 +43,34 @@ export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
 	// This creates a queuItem by coppying the passed track item
 	// and adding a queueId and howl prop.
 	const queueId = Math.trunc(Math.random() * Date.now());
-	return dispatch => {
+	return async dispatch => {
+		const stream = await axios.get(`/gdrive/stream/${track.file.gdId}`, {
+			headers: {
+				userId: localStorage.getItem('userId'),
+				mimetype: track.file.mimetype,
+				ext: track.file.originalname.split('.')[1]
+			}
+		});
+		console.log('sendToQueueAndPlay, stream:', stream)
 		dispatch({
 			type: sameQueue? UNSHIFT_TO_QUEUE : START_NEW_QUEUE,
 			track: { 
 				...track, 
 				queueId: queueId,
 				howl: new Howl({ 
-					src: [track.file.path], 
+					src: [
+					// track.file.path
+					stream.data.src
+					// stream.data
+					],
+					// format: ['stream'],
 					autoplay: true,
+					onload: () => console.log('Howl onload'),
 					onplay: () => howlOnPlay(track),
 					onpause: () => howlOnPause(track),
-					onend: () => howlOnEnd(track)
+					onend: () => howlOnEnd(track),
+					// onloaderror: (err) => console.error('Howl onloaderror:', `http://localhost:3001/${stream.data.src.slice(2)}`),
+					onplayerror: () => console.error('Howl onplayerror')
 				})
 			}
 		});
@@ -66,14 +83,24 @@ export const addToQueue = track => {
 	const queueId = Math.trunc(Math.random() * Date.now());
 	const message = { text: `"${track.title}" added to queue`, context: 'info' };
 	
-	return dispatch => {
+	return async dispatch => {
+		const stream = await axios.get(`/gdrive/stream/${track.file.gdId}`, {
+			headers: {
+				userId: localStorage.getItem('userId'),
+				mimetype: track.file.mimetype,
+				ext: track.file.originalname.split('.')[1]
+			}
+		});
 		dispatch({
 			type: ADD_TRACK_TO_QUEUE,
 			track:{ 
 				...track,
 				queueId: queueId,
 				howl: new Howl({ 
-					src: [track.file.path], 
+					src: [
+					// track.file.path,
+					stream.data.src
+					], 
 					// autoplay: true,
 					onplay: () => howlOnPlay(track),
 					onpause: () => howlOnPause(track),

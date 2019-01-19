@@ -4,6 +4,7 @@ const Artist = require('./artist.model');
 const Album = require('./album.model');
 
 const TrackSchema = new Schema({
+	created: { type: Date, default: Date.now },
 	userId: { type: Schema.Types.ObjectId, required: true },
 	title: { type: String, default: 'Unknown' },
 	artist: { type: Schema.Types.ObjectId, required: true, ref: 'Artist' },
@@ -27,7 +28,8 @@ const TrackSchema = new Schema({
 		path: { type: String, required: true },
 		originalname: String,
 		mimetype: String,
-		size: Number
+		size: Number,
+		gdId: String
 	}
 });
 
