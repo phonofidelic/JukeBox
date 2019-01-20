@@ -13,6 +13,9 @@ const AlbumSchema = new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	title: { type: String, default: STRINGS.default_unknown },
 	artist: { type: Schema.Types.ObjectId, ref: 'Artist' },
+	/* TODO:
+	tracks: [ { type: Schema.Types.ObjectId, ref: 'Tracks' } ],
+	*/
 	label: Schema.Types.Mixed,
 	year: { type: Number },
 	genre: [ String ],

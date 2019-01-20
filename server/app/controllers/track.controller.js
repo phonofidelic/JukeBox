@@ -57,9 +57,9 @@ module.exports.handlePostTracks = async (req, res, next) => {
 		try {
 			metadata = await mm.parseFile(file.path, mmConfig);
 			console.log('\nmetadata:', util.inspect(metadata, inspectConfig));
-			if (!metadata) return next(Error('Bajskorv'))
-		} catch(e) {
-			return next(e);
+			if (!metadata) return next(new Error(`Could not read metadata for file ${file.originalname}`))
+		} catch(err) {
+			return next(err);
 		}
 
 		// TODO: Abstract to a "storage" module/interface. 

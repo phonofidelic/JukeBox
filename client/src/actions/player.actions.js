@@ -29,6 +29,11 @@ const howlOnEnd = (track) => {
 	window.dispatchEvent(new Event('howl_end'));
 }
 
+const getExt = (originalname) => {
+	const split = originalname.split('.');
+	return split[split.length-1];
+}
+
 export const unshiftToQueueAndPlay = (track, currentTrack) => {
 
 }
@@ -48,7 +53,7 @@ export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
 			headers: {
 				userId: localStorage.getItem('userId'),
 				mimetype: track.file.mimetype,
-				ext: track.file.originalname.split('.')[1]
+				ext: getExt(track.file.originalname)
 			}
 		});
 		console.log('sendToQueueAndPlay, stream:', stream)
@@ -88,7 +93,7 @@ export const addToQueue = track => {
 			headers: {
 				userId: localStorage.getItem('userId'),
 				mimetype: track.file.mimetype,
-				ext: track.file.originalname.split('.')[1]
+				ext: getExt(track.file.originalname)
 			}
 		});
 		dispatch({
