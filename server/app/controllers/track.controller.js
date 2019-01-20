@@ -69,7 +69,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 		// Upload file to Google Drive
 		const gdUpload = await drive.files.create({
 			requestBody: {
-				name: file.originalname,
+				name: file.filename,
 				mimeType: file.mimetype,
 				parents: [gdUser.gDrive.gdFolder.id],
 				writersCanShare: true
