@@ -62,11 +62,39 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			return next(err);
 		}
 
+		
+
+		// const gdFile = await drive.files.get({ fileId: gdUpload.data.id });
+		// console.log('\ngdLink:', gdFile.data)
+
+		/***
+		 *	Check if track is already in DB by matching original file name
+		 */
+		const matchParams = {
+			userId: userId,
+			'file.originalname': file.originalname
+		};
+		const matchedTrack = await Track.findOne(matchParams)
+		.populate('artist', 'name')
+		.populate('album', 'title');
+		if (matchedTrack) {
+			console.log(`\nMatch found for "${file.originalname}":`);
+			console.log(util.inspect(matchedTrack, inspectConfig))
+			return matchedTrack;
+		}
+
+		/***
+		 *	Upload audio file to Google Drive
+		 *	gdUpload.data:
+		 *	{ kind: 'drive#file',
+		 *	  id: '1qH8gjaM1KbBVAwUXAtVukUv2BLxEIiJa',
+		 *	  name: "03 You Ain't No Friend Of Mine.mp3",
+		 *	  mimeType: 'audio/mp3' 
+		 *	}
+		 */
 		// TODO: Abstract to a "storage" module/interface. 
 		// 			 Storage interface should be able to handle multiple storage solutions
 		// 			 and abstract away their differences from the perspectiv of the track controller
-
-		// Upload file to Google Drive
 		const gdUpload = await drive.files.create({
 			requestBody: {
 				name: file.filename,
@@ -79,38 +107,15 @@ module.exports.handlePostTracks = async (req, res, next) => {
 				body: fs.createReadStream(file.path)
 			}
 		});
-		/** gdUpload.data:
-		{ kind: 'drive#file',
-		  id: '1qH8gjaM1KbBVAwUXAtVukUv2BLxEIiJa',
-		  name: "03 You Ain't No Friend Of Mine.mp3",
-		  mimeType: 'audio/mp3' 
-		}
-		**/
-		console.log('\ngdUpload.data:', gdUpload.data)
-
-		// const gdFile = await drive.files.get({ fileId: gdUpload.data.id });
-		// console.log('\ngdLink:', gdFile.data)
-
-		/***
-		 *	Check if track is already in DB by matching original file name
-		 */
-		const matchParams = {
-			userId: userId,
-			'file.originalname': file.originalname
-		};
-		const matchedTrack = await Track.findOne(matchParams);
-		if (matchedTrack) {
-			console.log(`Match found for "${file.originalname}"`);
-			return matchedTrack;
-		}
+		console.log('\ngdUpload.data:', gdUpload.data);
 
 		/***
 		 *	Check DB for existing Artist and Album doc
 		 */
 		const artistData = await utils.checkArtist(metadata, Artist, userId, importDiscogs, next);
 		const albumData = await utils.checkAlbum(metadata, Album, userId, importDiscogs, next);
-		console.log('\n artistData:', util.inspect(artistData, inspectConfig));
-		console.log('\n albumData:', util.inspect(albumData, inspectConfig));
+		console.log('\nartistData:', util.inspect(artistData, inspectConfig));
+		console.log('\nalbumData:', util.inspect(albumData, inspectConfig));
 
 		const newTrack = await Track({
 			title: metadata.common.title,
@@ -126,7 +131,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			genre: albumData.genre,
 			year: albumData.year
 		}).save();
-		console.log('\nnewTrack:', util.inspect(newTrack));
+		console.log('\nnewTrack:', util.inspect(newTrack, inspectConfig));
 
 		/***
 		 *	Update Artist and Album docks with new track data
