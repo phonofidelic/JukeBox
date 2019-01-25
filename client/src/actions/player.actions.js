@@ -49,14 +49,14 @@ export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
 	// and adding a queueId and howl prop.
 	const queueId = Math.trunc(Math.random() * Date.now());
 	return async dispatch => {
-		const stream = await axios.get(`/gdrive/stream/${track.file.gdId}`, {
+		const { data } = await axios.get(`/gdrive/stream/${track.file.gdId}`, {
 			headers: {
 				userId: localStorage.getItem('userId'),
 				mimetype: track.file.mimetype,
 				ext: getExt(track.file.originalname)
 			}
 		});
-		console.log('sendToQueueAndPlay, stream:', stream)
+		console.log('sendToQueueAndPlay, data:', data)
 		dispatch({
 			type: sameQueue? UNSHIFT_TO_QUEUE : START_NEW_QUEUE,
 			track: { 
@@ -65,7 +65,7 @@ export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
 				howl: new Howl({ 
 					src: [
 					// track.file.path
-					stream.data.src
+					data.src
 					// stream.data
 					],
 					// format: ['stream'],
