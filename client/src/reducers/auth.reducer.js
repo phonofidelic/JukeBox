@@ -17,7 +17,6 @@ const INITIAL_STATE = {
 	userAgentIsMobile: false,
 	loading: false,
 	user: null,
-	token: null, // No need to store token here if storing in localStorage?
 	message: null,
 	error: false,
 }
@@ -42,7 +41,6 @@ const auth = (state = INITIAL_STATE, action) => {
 				loading: false,
 				isAuthed: true,
 				user: action.user,
-				token: action.token,
 				message: action.message,
 			}
 
@@ -65,7 +63,6 @@ const auth = (state = INITIAL_STATE, action) => {
 				loading: false,
 				isAuthed: true,
 				user: action.user,
-				token: action.token,
 				message: action.message,
 			}
 

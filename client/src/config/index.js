@@ -5,7 +5,8 @@ export const history = createBrowserHistory();
 export const URLS = {
 	TRACK_URL: '/tracks',
   ARTIST_URL: '/library/artists',
-  ALBUM_URL: '/library/albums'
+  ALBUM_URL: '/library/albums',
+  STREAM_URL: '/stream',
 }
 
 export const THEME = {

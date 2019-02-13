@@ -8,7 +8,6 @@ const Track = require('../models/track.model');
 const Artist = require('../models/artist.model');
 const Album = require('../models/album.model');
 const utils = require('./utils');
-const storage = require('../../config/storage_config');
 const { mapSeries } = require('p-iteration');
 const {google} = require('googleapis');
 
@@ -64,7 +63,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 
 		
 
-		// const gdFile = await drive.files.get({ fileId: gdUpload.data.id });
+		// const gdFile = await drive.files.get({ fileId: gdUploadRes.data.id });
 		// console.log('\ngdLink:', gdFile.data)
 
 		/***
@@ -78,14 +77,14 @@ module.exports.handlePostTracks = async (req, res, next) => {
 		.populate('artist', 'name')
 		.populate('album', 'title');
 		if (matchedTrack) {
-			console.log(`\nMatch found for "${file.originalname}":`);
-			console.log(util.inspect(matchedTrack, inspectConfig))
+			console.log(`\n*** Match found for "${file.originalname}":`);
+			console.log('\n', util.inspect(matchedTrack, inspectConfig));
 			return matchedTrack;
 		}
 
 		/***
 		 *	Upload audio file to Google Drive
-		 *	gdUpload.data:
+		 *	gdUploadRes.data:
 		 *	{ kind: 'drive#file',
 		 *	  id: '1qH8gjaM1KbBVAwUXAtVukUv2BLxEIiJa',
 		 *	  name: "03 You Ain't No Friend Of Mine.mp3",
@@ -95,7 +94,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 		// TODO: Abstract to a "storage" module/interface. 
 		// 			 Storage interface should be able to handle multiple storage solutions
 		// 			 and abstract away their differences from the perspectiv of the track controller
-		const gdUpload = await drive.files.create({
+		const gdUploadRes = await drive.files.create({
 			requestBody: {
 				name: file.filename,
 				mimeType: file.mimetype,
@@ -107,7 +106,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 				body: fs.createReadStream(file.path)
 			}
 		});
-		console.log('\ngdUpload.data:', gdUpload.data);
+		console.log('\ngdUpload.data:', gdUploadRes.data);
 
 		/***
 		 *	Check DB for existing Artist and Album doc
@@ -125,7 +124,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 			// image: albumData.artwork[0],
 			userId: userId,	
 			format: metadata.format,
-			file: {...file, gdId: gdUpload.data.id},
+			file: {...file, gdId: gdUploadRes.data.id}, // TODO: change to generic name (fileId)
 			order: metadata.common.track,
 			disk: metadata.common.disk,
 			genre: albumData.genre,

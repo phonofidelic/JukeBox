@@ -14,6 +14,8 @@ import {
 } from '../actiontypes';
 import { Howl } from 'howler';
 import axios from 'axios';
+import { URLS } from '../config';
+const { STREAM_URL } = URLS;
 
 // Set up global event diapatchers for howl events
 const howlOnPlay = track => {
@@ -49,7 +51,7 @@ export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
 	// and adding a queueId and howl prop.
 	const queueId = Math.trunc(Math.random() * Date.now());
 	return async dispatch => {
-		const { data } = await axios.get(`/gdrive/stream/${track.file.gdId}`, {
+		const { data } = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
 			headers: {
 				userId: localStorage.getItem('userId'),
 				mimetype: track.file.mimetype,
@@ -89,7 +91,7 @@ export const addToQueue = track => {
 	const message = { text: `"${track.title}" added to queue`, context: 'info' };
 	
 	return async dispatch => {
-		const stream = await axios.get(`/gdrive/stream/${track.file.gdId}`, {
+		const stream = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
 			headers: {
 				userId: localStorage.getItem('userId'),
 				mimetype: track.file.mimetype,

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const passport = require('passport');
 const logger = require('morgan');
@@ -8,6 +9,7 @@ const authRoutes = require('./routes/auth.routes');
 const trackRoutes = require('./routes/track.routes');
 const libraryRoutes = require('./routes/library.routes');
 const gdriveRoutes = require('./routes/gdrive.routes');
+const streamRoutes = require('./routes/stream.routes');
 
 // const PORT = process.env.PORT;
 // const DB_CONNECTION = process.env.DB_CONNECTION;
@@ -29,6 +31,7 @@ db.on('open', () => console.log('DB connection successfull!'));
 // Configure middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Set view engine
 app.set('view engine', 'pug');
@@ -57,6 +60,7 @@ app.use('/tracks', trackRoutes);
 app.use('/auth', authRoutes);
 app.use('/library', libraryRoutes);
 app.use('/gdrive', gdriveRoutes);
+app.use('/stream', streamRoutes);
 
 // Serve static client files
 app.use(express.static(process.env.CLIENT_DIR));

@@ -69,6 +69,7 @@ export const login = data => {
 		.then(response => {
 			console.log('login response:', response);
 			localStorage.setItem('JWT', response.data.token);
+			localStorage.setItem('RF', response.data.refreshToken);
 			localStorage.setItem('userId', response.data.user._id);
 			history.push('/'); // TODO: push referrer instead of static 'home'
 			dispatch({
@@ -87,6 +88,36 @@ export const login = data => {
 				message: err.response.message || err.response.data,
 			});
 		});
+	}
+}
+
+export const refreshToken = () => {
+	return dispatch => {
+		dispatch({
+			type: 'refresh_token'
+		});
+		axios.get('/auth/token', {
+			headers: {
+				token: localStorage.getItem('JWT'),
+				userId: localStorage.getItem('userId')
+			}
+		})
+		.then(response => {
+			console.log('refreshToken response:', response);
+			localStorage.setItem('JWT', response.data.token)
+			dispatch({
+				type: 'refresh_token_success',
+			})
+		})
+		.catch(err => {
+			console.error('refreshToken error:', err)
+			dispatch({
+				type: 'refresh_token_failure',
+				data: err.response.data,
+				status: err.response.status,
+				message: err.response.data.message || err.response.data,
+			})
+		})
 	}
 }
 
@@ -110,6 +141,7 @@ export const getUserInfo = () => {
 		axios.get(`/auth/user`, { 
 			headers: {
 				token: localStorage.getItem('JWT'),
+				refreshToken: localStorage.getItem('RF'),
 				userId: localStorage.getItem('userId')
 			}
 		})
