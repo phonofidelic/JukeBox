@@ -19,34 +19,13 @@ let refreshTokens = {};
 
 const generateToken = user => {
 	return jwt.sign(user, process.env.JWT_SECRET, {
-		expiresIn: '5s',	// TODO: Set expiration time in env variable
-		audience: process.env.AUD, 
-		issuer: process.env.ISS, 
+		expiresIn: process.env.JWT_EXP,
+		audience: process.env.JWT_AUD, 
+		issuer: process.env.JWT_ISS, 
 		jwtid: uuidv4(), 
 		subject: String(user._id)
 	});
 };
-
-// const generateToken = user => tokenGenerator.sign(
-// 	user, 
-// 	{
-// 		audience: process.env.AUD, 
-// 		issuer: process.env.ISS, 
-// 		jwtid: uuidv4(), 
-// 		subject: String(user._id)
-// 	}
-// );
-
-// Rename -> refreshToken ?
-// const generateRefreshToken = token => {
-// 	return tokenGenerator.refresh(token, {
-// 		verify: {
-// 			audience: process.env.AUD, 
-// 			issuer: process.env.ISS
-// 		},
-// 		jwtid: uuidv4()
-// 	});
-// };
 
 const setUserInfo = user => {
 	return {
