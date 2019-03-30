@@ -139,11 +139,11 @@ export const getUserInfo = () => {
 			type: GET_USER_INFO,
 		});
 		axios.get(`/auth/user`, { 
-			headers: {
-				token: localStorage.getItem('JWT'),
-				refreshToken: localStorage.getItem('RF'),
-				userId: localStorage.getItem('userId')
-			}
+			// headers: {
+			// 	token: localStorage.getItem('JWT'),
+			// 	refreshToken: localStorage.getItem('RF'),
+			// 	userId: localStorage.getItem('userId')
+			// }
 		})
 		.then(response => {
 			console.log('getUserInfo, response:', response)

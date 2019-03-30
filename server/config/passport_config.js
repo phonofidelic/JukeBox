@@ -4,6 +4,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../app/models/user.model');
 const jwt = require('jsonwebtoken');
+const CustomStrategy = require('passport-custom');
 
 const localOptions = { usernameField: 'email' };
 const jwtOptions = {
@@ -34,6 +35,21 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 		return done(null, false);
 	});
 });
+
+// const jwtAuthWithRefresh = new CustomStrategy((req, done) => {
+// 	const token = req.cookies['JWT'];
+// 	jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
+// 		if (err && err.name === 'TokenExpiredError') {
+// 			handleExpiredToken(token)
+// 		}
+// 		User.findById(payload._id, (err, user) => {
+// 			if (err) return done(err, false); 
+// 			if (user) return done(null, user);
+// 			return done(null, false);
+// 		});
+// 	})
+
+// })
 
 passport.use(localLogin);
 passport.use(jwtLogin);
