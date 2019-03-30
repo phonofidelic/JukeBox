@@ -91,36 +91,6 @@ export const login = data => {
 	}
 }
 
-export const refreshToken = () => {
-	return dispatch => {
-		dispatch({
-			type: 'refresh_token'
-		});
-		axios.get('/auth/token', {
-			headers: {
-				token: localStorage.getItem('JWT'),
-				userId: localStorage.getItem('userId')
-			}
-		})
-		.then(response => {
-			console.log('refreshToken response:', response);
-			localStorage.setItem('JWT', response.data.token)
-			dispatch({
-				type: 'refresh_token_success',
-			})
-		})
-		.catch(err => {
-			console.error('refreshToken error:', err)
-			dispatch({
-				type: 'refresh_token_failure',
-				data: err.response.data,
-				status: err.response.status,
-				message: err.response.data.message || err.response.data,
-			})
-		})
-	}
-}
-
 export const logoutUser = () => {
 	return dispatch => {
 		localStorage.removeItem('JWT');
