@@ -16,3 +16,4 @@ docker-compose.yml
 server/client_build
 .commit_notes
 **/coverage
+github_dl_test
