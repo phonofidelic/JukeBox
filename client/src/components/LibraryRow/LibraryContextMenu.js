@@ -31,7 +31,7 @@ class LibraryContextMenu extends Component {
 				onClose={handleContextMenuClose}
 			>
 				<MenuItem onClick={() => handleAddToQueue(track)}>Add to queue</MenuItem>
-				<MenuItem onClick={handleToggleEditMode}>Edit info</MenuItem>
+				{/*<MenuItem onClick={handleToggleEditMode}>Edit info</MenuItem>*/}
 				<MenuItem onClick={handleMenuOptionClickDelete}>Delete track</MenuItem>
 			</Menu>
 		);
