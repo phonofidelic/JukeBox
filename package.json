@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && yarn start\"",
-    "build": "cd client && npm run build && cp -R build ../server/client_build && cd .. && docker build -t phonofidelic/jukebox .",
+    "build": "cd client && yarn build && cp -R build ../server/client_build && cd .. && docker build -t phonofidelic/jukebox .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && npm run prod",
     "prodinstall": "cd server && npm install",
