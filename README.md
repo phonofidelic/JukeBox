@@ -1,6 +1,8 @@
 # What this is:
 A web-app for uploading and streaming audio files.
 
+The application connects to the users Google Drive account, using it to store audio files to be streamed to the Jukebox client. Users can upload files through the client and have the option of letting the app use Discogs to add any missing metadata like cover art, artist/album into etc. This data is saved to a MongoDB database and can be edited by the user through the client interface.
+
 ## Instalation and setup:
 1. `git clone https://github.com/phonofidelic/JukeBox.git && cd JukeBox && npm install`
 
