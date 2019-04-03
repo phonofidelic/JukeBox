@@ -55,7 +55,7 @@ exports.registerNewUser = (req, res, next) => {
 			const token = generateToken(userInfo);
 			const refreshToken = uuidv4();
 			// TODO: Set refresh token in DB
-			refreshTokens[refreshToken] = req.user._id;
+			refreshTokens[refreshToken] = savedUser._id;
 			console.log('\n*** refreshTokens:', refreshTokens)
 
 			res.cookie('JWT', token, { httpOnly: true, secure: process.env.PRODUCTION });
@@ -63,7 +63,7 @@ exports.registerNewUser = (req, res, next) => {
 
 			res.json({
 				message: STRINGS.user_registration_success,
-				token: generateToken(userInfo),
+				token: token,
 				user: userInfo
 			});
 		});
