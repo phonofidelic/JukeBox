@@ -9,7 +9,7 @@ A web-app for uploading and streaming audio files.
 ```
 PORT=3001
 JWT_SECRET=<your JWT secret>
-JWT_EXP=<token lifetime (eg, 15m)>
+JWT_EXP=<token lifetime (eg. 15m)>
 JWT_AUD=jukebox_client
 JWT_ISS=jukebox_api
 DB_CONNECTION=<your mondodb server connection address (for production environment)>
@@ -27,3 +27,25 @@ A tmp folder needs to be created in the server directory.
 4. In `JukeBox/client` run `yarn`
 5. Start a local mongoDB server by running `mongod`
 6. From the root project directory run `npm run dev`
+
+## Build:
+1. Create a Dockerfile in the root directory (substitute <...> with appropriate values):
+```
+FROM node:carbon
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+
+COPY . .
+
+RUN npm run prodinstall
+
+EXPOSE 8080
+
+<enter environment variables here in the format 'ENV {key}={value}'>
+
+CMD [ "npm", "start" ]
+```
+
+2. Run `npm run build`
