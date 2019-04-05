@@ -5,15 +5,9 @@ import playingThumb from '../assets/playing_thumb.svg';
 import {
 	TableRow,
 	TableCell,
-	// TableBody,
-	// TableSortLabel,
 	Typography,
 	Tooltip,
 } from '@material-ui/core';
-// import { 
-// 	Album,
-// 	PlayCircleOutline,
-// } from '@material-ui/icons';
 import { withTheme } from '@material-ui/core/styles';
 import * as moment from 'moment';
 import 'moment-duration-format';
@@ -25,17 +19,27 @@ export class LibraryRow extends Component {
 		this.state = {
 			editMode: false,
 			anchorEl: null,
+			contextMenuIsOpen: false,
+			contextPos: { x: 0, y: 0},
 		}
 	}
 
-	handleContextMenu(e) {
+	handleContextMenuOpen = e => {
 		e.preventDefault();
-		console.log('# options click #\n', e.currentTarget)
-		this.setState({ ...this.state, anchorEl: e.currentTarget });
+		// console.log('handleContextMenuOpen, e:', e)
+		this.setState({ 
+			...this.state, 
+			contextMenuIsOpen: true,
+			contextPos: { x: e.clientX, y: e.clientY }
+		});
 	}
 
 	handleContextMenuClose() {
-		this.setState({ ...this.state, anchorEl: null });
+		this.setState({
+		 ...this.state,
+		 contextMenuIsOpen: false,
+		 contextPos: { x: 0, y: 0},
+		});
 	}
 
 	handleToggleEditMode() {
@@ -43,9 +47,14 @@ export class LibraryRow extends Component {
 		this.setState({ ...this.state, editMode: !this.state.editMode });
 	}
 
+	handleMenuOptionAddToQueue = () => {
+		this.props.handleAddToQueue(this.props.track);
+		this.handleContextMenuClose();
+	}
+
 	handleMenuOptionClickDelete() {
-		this.setState({ ...this.state, anchorEl: null });
 		this.props.handleDeleteTrack(this.props.track);
+		this.handleContextMenuClose();
 	}
 
 	renderTrackThumb() {
@@ -82,13 +91,13 @@ export class LibraryRow extends Component {
 			handleSelectTrack,
 			// handleEditTrackData,
 			handleStartNewQueue,
-			handleAddToQueue,
 			handleOpenDetailView,
 			theme,
 		} = this.props;
 
 		const { 
-			anchorEl, 
+			contextMenuIsOpen,
+			contextPos,
 			// editMode 
 		} = this.state;
 
@@ -126,26 +135,14 @@ export class LibraryRow extends Component {
 			},
 		};
 
-		// const duration = track.format ? track.format.duration : 0;
-		// const minutes = Math.floor(duration/60);
-		// const rawSeconds = Math.floor(duration) - minutes * 60;
-
-		// const seconds = rawSeconds <= 9
-		// 	? rawSeconds + '0'
-		// 	: rawSeconds;
-
-		// console.log('editMode:', editMode);
-		// var dateTest = new Date();
-		// console.log('moment.duration:', moment.duration(track.format.duration, 'seconds'));
 		const mDuration = moment.duration(Math.floor(track.format.duration), 'seconds').format('mm:ss', { forceLength: false });
-		// console.log('mDuration:', mDuration)
 
 		return (
 			<TableRow 
 				key={track._id} 
 				hover
 				onClick={() => handleSelectTrack(track)}
-				onContextMenu={this.handleContextMenu.bind(this)}
+				onContextMenu={this.handleContextMenuOpen}
 				onDoubleClick={() => handleStartNewQueue(track, player.currentTrack)}
 				style={
 					selectedTrack && selectedTrack._id === track._id
@@ -198,14 +195,14 @@ export class LibraryRow extends Component {
 						</Typography>
 					</Tooltip>
 				</TableCell>
-				<LibraryContextMenu 
-					track={track}
-					anchorEl={anchorEl}
+				{<LibraryContextMenu 
+					contextMenuIsOpen={contextMenuIsOpen}
+					contextPos={contextPos}
 					handleContextMenuClose={this.handleContextMenuClose.bind(this)}
+					handleMenuOptionAddToQueue={this.handleMenuOptionAddToQueue}
 					handleToggleEditMode={this.handleToggleEditMode.bind(this)}
 					handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
-					handleAddToQueue={handleAddToQueue}
-				/>
+				/>}
 			</TableRow>
 		);
 	}

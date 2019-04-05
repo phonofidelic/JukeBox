@@ -17,7 +17,7 @@ import NotFound from './views/NotFound.view';
 
 const AuthenticatedRoute = ({ component: Component, ...rest }) => {
   // console.log('AuthenticatedRoute, JWT:', localStorage.getItem('JWT'))
-  console.log('rest:', rest)
+  // console.log('rest:', rest)
   return <Route {...rest} render={(props) => (
     // rest.isAuthed === true
     localStorage.getItem('JWT') ? 

@@ -30,6 +30,7 @@ class LibraryDesktop extends Component {
 	state = {
 		hoveredCell: null,
 		windowWidth: null,
+		contextPos: null,
 	}
 
   createSortHandler = columnId => e => {
@@ -69,6 +70,16 @@ class LibraryDesktop extends Component {
   	e.preventDefault();
   	console.log('handleRowClick', e)
   	// this.props.handleSelectTrack(track)
+  }
+
+  handleContextMenu = e => {
+  	e.preventDefault();
+  	console.log('LibraryDesktop, handleContextMenu, e:', e)
+  	this.setState({ 
+			...this.state, 
+			// anchorEl: e.currentTarget,
+			contextPos: { x: e.clientX, y: e.clientY }
+		});
   }
 
 	render() {

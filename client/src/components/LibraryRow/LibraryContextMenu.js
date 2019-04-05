@@ -7,31 +7,34 @@ import {
 class LibraryContextMenu extends Component {
 	render() {
 		const { 
-			track,
-			anchorEl,
+			contextMenuIsOpen,
+			contextPos,
+			handleMenuOptionAddToQueue,
 			handleContextMenuClose,
 			handleToggleEditMode,
 			handleMenuOptionClickDelete,
-			handleAddToQueue,
 		} = this.props;
 
 		const styles = {
 			root: {
-				padding: '0px'
+				padding: '0px',
+				position: 'fixed',
+				transformOrigin: 0,
 			}
 		}
 
-		// console.log('LibraryContextMenu, anchorEl:', anchorEl)
+		// console.log('LibraryContextMenu, contextPos:', contextPos)
 		return (
 			<Menu
 				style={styles.root}
 				id="options-menu"
-				anchorEl={anchorEl}
-				open={Boolean(anchorEl)}
+				getContentAnchorEl={null}
+				open={Boolean(contextMenuIsOpen)}
+				anchorOrigin={{vertical: contextPos.y + window.scrollY, horizontal: contextPos.x}}
 				onClose={handleContextMenuClose}
 			>
-				<MenuItem onClick={() => handleAddToQueue(track)}>Add to queue</MenuItem>
-				{/*<MenuItem onClick={handleToggleEditMode}>Edit info</MenuItem>*/}
+				<MenuItem onClick={handleMenuOptionAddToQueue}>Add to queue</MenuItem>
+				<MenuItem onClick={handleToggleEditMode}>Edit info</MenuItem>
 				<MenuItem onClick={handleMenuOptionClickDelete}>Delete track</MenuItem>
 			</Menu>
 		);
