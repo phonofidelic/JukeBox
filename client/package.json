@@ -62,5 +62,11 @@
     "react-test-renderer": "^16.4.2",
     "redux-mock-store": "^1.5.1",
     "to-regex": "^3.0.2"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
