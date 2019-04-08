@@ -34,7 +34,7 @@ const fetchLibrary = dispatch => {
 	})
 	.then(response => {
 		const tracks = response.data.library;
-		idbTrack.putMany(tracks);
+		idbTrack.addMany(tracks);
 		dispatch({
 			type: LOAD_LIBRARY_SUCCESS,
 			tracks: tracks,
@@ -59,7 +59,8 @@ export const loadLibrary = () => {
 		});
 		// Ceck IndexedDB for stored track data
 		let tracks = await idbTrack.getAll();
-		// tracks = false
+
+		// let tracks = false
 		// If IndexedDB is empty, or (TODO:) last fetch was made > some time limit,
 		// fetch tracks from network
 		if (!tracks || tracks.length < 1) {

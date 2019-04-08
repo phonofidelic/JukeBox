@@ -1,62 +1,37 @@
-import idb from 'idb';
+import { openDB } from 'idb';
 
 const IDB_VERSION = 1;
 
-const dbPromise = idb.open('jukebox', IDB_VERSION, upgradeDb => {
-  // eslint-disable-next-line
-  switch (upgradeDb.oldVersion) {
-    case 0:
-      upgradeDb.createObjectStore('tracks', {
-        keyPath: '_id'
-      });
-  }
+const db = openDB('jukebox', IDB_VERSION, {
+	upgrade(db) {
+		const store = db.createObjectStore('tracks', {
+			keyPath: '_id'
+		});
+		store.createIndex('title', 'title')
+	}
 });
 
 export const idbTrack = {
-  getAll: () => {
-    return dbPromise
-      .then(db => {
-        return db
-          .transaction('tracks')
-          .objectStore('tracks')
-          .getAll();
-      })
-      .then(tracks => {
-        // console.log('idbFeatures.getAll, routes:', routes);
-        return tracks;
-      })
-      .catch(err => console.error(err));
-  },
-  putMany: data => {
-    dbPromise.then(db => {
-      const tx = db.transaction('tracks', 'readwrite');
-      data.forEach(item => {
-        tx.objectStore('tracks').put(item);
-      });
-      return tx.complete;
+	getAll: async () => {
+		return (await db).getAllFromIndex('tracks', 'title');
+	},
+	addMany: async data => {
+    const tx = (await db).transaction('tracks', 'readwrite');
+    data.forEach(item => {
+      tx.store.add(item);
     });
-  },
-  put: data => {
-    dbPromise.then(db => {
-      const tx = db.transaction('tracks', 'readwrite');
-      tx.objectStore('tracks').put(data);
-      return tx.complete;
-    });
-  },
-  delete: id => {
-    dbPromise.then(db => {
-      const tx = db.transaction('tracks', 'readwrite');
-      tx.objectStore('tracks').delete(id);
-      return tx.complete;
-    });
-  },
-  clear: () => {
-    dbPromise.then(db => {
-      const tx = db.transaction('tracks', 'readwrite');
-      tx.objectStore('tracks').clear();
-      return tx.complete;
-    });
-  },
+    await tx.done;
+	},
+	put: async data => {
+		const tx = (await db).transaction('tracks', 'readwrite');
+		tx.store.put(data);
+		await tx.done;
+	},
+	delete: async id => {
+		const tx = (await db).transaction('tracks', 'readwrite');
+		tx.store.delete(id);
+		await tx.done;
+	}
 };
 
 export const clearIdb = () => {

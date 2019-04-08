@@ -26,7 +26,7 @@ export const uploadTracks = (formData) => {
 			});
 			console.log('uploadTrack response:', response);
 			// document.dispatchEvent(new Event('library-update'));
-			idbTrack.putMany(response.data.tracks);
+			idbTrack.addMany(response.data.tracks);
 			dispatch({
 				type: UPLOAD_SUCCESS,
 				uploadedTracks: response.data.tracks
