@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {
 	Menu,
-	MenuItem
+	MenuItem,
+	Tooltip,
+	Typography,
 } from '@material-ui/core';
 
 class LibraryContextMenu extends Component {
@@ -34,7 +36,16 @@ class LibraryContextMenu extends Component {
 				onClose={handleContextMenuClose}
 			>
 				<MenuItem onClick={handleMenuOptionAddToQueue}>Add to queue</MenuItem>
-				<MenuItem onClick={handleToggleEditMode}>Edit info</MenuItem>
+				<Tooltip
+					title="Feature coming soon"
+					enterDelay={200}
+				>
+					<MenuItem 
+						style={{cursor: 'not-allowed'}} 
+						onClick={handleToggleEditMode}>
+						<Typography color={'textSecondary'}>Edit info</Typography>
+					</MenuItem>
+				</Tooltip>
 				<MenuItem onClick={handleMenuOptionClickDelete}>Delete track</MenuItem>
 			</Menu>
 		);
