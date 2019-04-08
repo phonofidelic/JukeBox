@@ -9,7 +9,9 @@ The application connects to the users Google Drive account, using it to store au
 2. In `Jukebox/sever` run `npm install`
 3. Create a .env file in the server directory (substitute <...> with appropriate values):
 ```
+
 PORT=3001
+PROD_API_ROOT=<root URL for production API>
 JWT_SECRET=<your JWT secret>
 JWT_EXP=<token lifetime (eg. 15m)>
 JWT_AUD=jukebox_client
@@ -21,7 +23,7 @@ CLIENT_DIR=../client/build
 DISCOGS_TOKEN=<your discogs api key>
 G_CLIENT_ID=<google client ID>
 G_CLIENT_SECRET=<google client sectret>
-G_REDIRECT_URI=http://localhost:3001/gdrive/authcode
+G_REDIRECT_URI=gdrive/authcode
 TMP=tmp
 ```
 A tmp folder needs to be created in the server directory.
