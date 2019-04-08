@@ -51,13 +51,20 @@ const createLibFolder = async (oauth2Client, next) => {
 
 // GET /gdrive/authURL
 module.exports.getGDriveAuthURL = (req, res, next) => {
+	// console.log('\n*** process.env:', process.env)
 	const userId = req.get('userId');
 	console.log('getGDriveAuthURL, userId:', userId);
 
 	oauth2Client = new google.auth.OAuth2(
 		process.env.G_CLIENT_ID,
 		process.env.G_CLIENT_SECRET,
-		process.env.G_REDIRECT_URI+`?userId=${userId}`
+		// process.env.G_REDIRECT_URI+`?userId=${userId}`
+		(
+			process.env.PROD ? 
+			`${process.env.PROD_API_ROOT}/${process.env.G_REDIRECT_URI}?userId=${userId}`
+			:
+			`http://localhost:${process.env.PORT}/${process.env.G_REDIRECT_URI}?userId=${userId}`
+		)
 	);
 	const authURL = oauth2Client.generateAuthUrl({
 		scope: 'https://www.googleapis.com/auth/drive.file'

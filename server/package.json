@@ -7,7 +7,7 @@
     "dev": "DB_CONNECTION=mongodb://localhost:27017/jukeTest nodemon server.js",
     "test": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --watchAll",
     "coverage": "DB_CONNECTION=mongodb://localhost:27017/test FS_AUDIO=uploads/testFiles jest --coverage",
-    "prod": "node server.js",
+    "prod": "PROD=true node server.js",
     "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js",
     "dropLib": "FS_AUDIO=uploads/audio FS_IMAGE=uploads/images TMP=./tmp DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.dropLib.js"
   },
