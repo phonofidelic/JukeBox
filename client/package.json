@@ -25,7 +25,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
-    "react-scripts": "1.1.1",
+    "react-scripts": "^2.1.8",
     "react-touch": "^0.4.3",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
