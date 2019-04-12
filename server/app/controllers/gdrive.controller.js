@@ -56,7 +56,7 @@ module.exports.getGDriveAuthURL = (req, res, next) => {
 		(process.env.PROD ? process.env.PROD_G_CLIENT_SECRET : process.env.G_CLIENT_SECRET),
 		(
 			process.env.PROD ? 
-			`${process.env.PROD_API_ROOT}/${process.env.G_REDIRECT_URI}?`
+			`${process.env.PROD_API_ROOT}/${process.env.G_REDIRECT_URI}`
 			:
 			`http://localhost:${process.env.PORT}/${process.env.G_REDIRECT_URI}`
 		)
