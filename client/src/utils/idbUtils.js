@@ -4,6 +4,7 @@ const IDB_VERSION = 1;
 
 const db = openDB('jukebox', IDB_VERSION, {
 	upgrade(db) {
+		console.log('upgrade db')
 		const store = db.createObjectStore('tracks', {
 			keyPath: '_id'
 		});
@@ -13,6 +14,7 @@ const db = openDB('jukebox', IDB_VERSION, {
 
 export const idbTrack = {
 	getAll: async () => {
+		console.log('idbTrack.getAll')
 		return (await db).getAllFromIndex('tracks', 'title');
 	},
 	addMany: async data => {

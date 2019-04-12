@@ -52,7 +52,6 @@ const fetchLibrary = dispatch => {
 }
 
 export const loadLibrary = () => {
-	// console.log('loadLibrary called')
 	return async (dispatch) => {
 		dispatch({
 			type: LOAD_LIBRARY
@@ -60,9 +59,10 @@ export const loadLibrary = () => {
 		// Ceck IndexedDB for stored track data
 		let tracks = await idbTrack.getAll();
 
-		// let tracks = false
 		// If IndexedDB is empty, or (TODO:) last fetch was made > some time limit,
-		// fetch tracks from network
+		// or last update was made from another device, fetch tracks from network. 
+		// This because, if tracks were added from another device, they will not show 
+		// up on the current device until a new nerwork request is made.
 		if (!tracks || tracks.length < 1) {
 			fetchLibrary(dispatch);
 		} else {
