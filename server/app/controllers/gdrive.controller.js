@@ -51,18 +51,14 @@ const createLibFolder = async (oauth2Client, next) => {
 
 // GET /gdrive/authURL
 module.exports.getGDriveAuthURL = (req, res, next) => {
-	// console.log('\n*** process.env:', process.env)
-	const userId = req.get('userId');
-	console.log('getGDriveAuthURL, userId:', userId);
-
 	oauth2Client = new google.auth.OAuth2(
 		(process.env.PROD ? process.env.PROD_G_CLIENT_ID : process.env.G_CLIENT_ID),
 		(process.env.PROD ? process.env.PROD_G_CLIENT_SECRET : process.env.G_CLIENT_SECRET),
 		(
 			process.env.PROD ? 
-			`${process.env.PROD_API_ROOT}/${process.env.G_REDIRECT_URI}?userId=${userId}`
+			`${process.env.PROD_API_ROOT}/${process.env.G_REDIRECT_URI}?`
 			:
-			`http://localhost:${process.env.PORT}/${process.env.G_REDIRECT_URI}?userId=${userId}`
+			`http://localhost:${process.env.PORT}/${process.env.G_REDIRECT_URI}`
 		)
 	);
 	const authURL = oauth2Client.generateAuthUrl({
@@ -75,7 +71,9 @@ module.exports.getGDriveAuthURL = (req, res, next) => {
 
 // GET /gdrive/authcode
 module.exports.gdOauthcallback = async (req, res, next) => {	
-	const { code, userId } = req.query;
+	const { code } = req.query;
+	const userId = req.userId;
+	console.log('*** gdOauthcallback, userId:', userId)
 	const { tokens } = await oauth2Client.getToken(code);
 	oauth2Client.setCredentials(tokens);
 
