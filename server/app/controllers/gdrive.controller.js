@@ -56,9 +56,8 @@ module.exports.getGDriveAuthURL = (req, res, next) => {
 	console.log('getGDriveAuthURL, userId:', userId);
 
 	oauth2Client = new google.auth.OAuth2(
-		process.env.G_CLIENT_ID,
-		process.env.G_CLIENT_SECRET,
-		// process.env.G_REDIRECT_URI+`?userId=${userId}`
+		(process.env.PROD ? process.env.PROD_G_CLIENT_ID : process.env.G_CLIENT_ID),
+		(process.env.PROD ? process.env.PROD_G_CLIENT_SECRET : process.env.G_CLIENT_SECRET),
 		(
 			process.env.PROD ? 
 			`${process.env.PROD_API_ROOT}/${process.env.G_REDIRECT_URI}?userId=${userId}`
