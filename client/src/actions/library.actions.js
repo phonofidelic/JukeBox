@@ -56,7 +56,7 @@ export const loadLibrary = () => {
 		dispatch({
 			type: LOAD_LIBRARY
 		});
-		// Ceck IndexedDB for stored track data
+		// Check IndexedDB for stored track data
 		let tracks = await idbTrack.getAll();
 
 		// If IndexedDB is empty, or (TODO:) last fetch was made > some time limit,
