@@ -3,10 +3,13 @@ import createBrowserHistory from 'history/createBrowserHistory';
 export const history = createBrowserHistory();
 
 export const URLS = {
-	TRACK_URL: '/tracks',
-  ARTIST_URL: '/library/artists',
-  ALBUM_URL: '/library/albums',
-  STREAM_URL: '/stream',
+  LIBRARY_URL: 'api/library',
+	TRACK_URL: '/api/tracks',
+  ARTIST_URL: '/api/library/artists',
+  ALBUM_URL: '/api/library/albums',
+  STREAM_URL: '/api/stream',
+  AUTH_URL: '/api/auth',
+  GDRIVE_URL: '/api/gdrive',
 }
 
 export const THEME = {

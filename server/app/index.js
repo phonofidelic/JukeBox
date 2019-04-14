@@ -54,16 +54,19 @@ app.use((req, res, next) => {
 // app.set('X-Powered-By', false);
 
 // Configure routers
+// Static files
 app.use('/uploads', express.static('./uploads'));
 app.use('/tmp', express.static('./tmp'));
-app.use('/tracks', trackRoutes);
-app.use('/auth', authRoutes);
-app.use('/library', libraryRoutes);
-app.use('/gdrive', gdriveRoutes);
-app.use('/stream', streamRoutes);
+// API
+app.use('/api/tracks', trackRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/library', libraryRoutes);
+app.use('/api/gdrive', gdriveRoutes);
+app.use('/api/stream', streamRoutes);
 
 // Serve static client files
 app.use(express.static(process.env.CLIENT_DIR));
+app.use('/*', express.static(process.env.CLIENT_DIR));
 
 // Catch all unhandled routes
 app.use('/*', (req, res) => {

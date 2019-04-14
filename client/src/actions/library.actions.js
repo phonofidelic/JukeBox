@@ -23,10 +23,15 @@ import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
 import { URLS } from '../config';
 
-const { TRACK_URL, ARTIST_URL, ALBUM_URL} = URLS;
+const { 
+	LIBRARY_URL,
+	TRACK_URL, 
+	ARTIST_URL, 
+	ALBUM_URL
+} = URLS;
 
 const fetchLibrary = dispatch => {
-	axios.get('/library', {
+	axios.get(LIBRARY_URL, {
 		headers: { 
 			token: localStorage.getItem('JWT'),
 			userId: localStorage.getItem('userId')

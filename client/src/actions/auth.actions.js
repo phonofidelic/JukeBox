@@ -16,7 +16,8 @@ import {
 } from '../actiontypes';
 // import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
-import { history } from '../config';
+import { history, URLS } from '../config';
+const { AUTH_URL, GDRIVE_URL } = URLS;
 
 export const checkUserAgent = () => {
 	return dispatch => {
@@ -33,9 +34,8 @@ export const postRegistration = data => {
 			type: POST_REGISTRATION
 		});
 		// TOTO: Validate data
-		axios.post('/auth/register', data)
+		axios.post(`${AUTH_URL}/register`, data)
 		.then(response => {
-			console.log('postRegistration response:', response);
 			localStorage.setItem('JWT', response.data.token);
 			localStorage.setItem('userId', response.data.user._id);
 			history.push('/'); // TODO: push referrer instead of static 'home'
@@ -47,7 +47,6 @@ export const postRegistration = data => {
 			});
 		})
 		.catch(err => {
-			console.log('postRegistration error:', err.response);
 			dispatch({
 				type: REGISTRATION_FAILURE,
 				data: err.response.data,
@@ -65,9 +64,8 @@ export const login = data => {
 		});
 		// console.log('login, data:', data)
 		// TODO: 	Validate data
-		axios.post('/auth/login', data)
+		axios.post(`${AUTH_URL}/login`, data)
 		.then(response => {
-			console.log('login response:', response);
 			localStorage.setItem('JWT', response.data.token);
 			localStorage.setItem('RF', response.data.refreshToken);
 			localStorage.setItem('userId', response.data.user._id);
@@ -80,7 +78,6 @@ export const login = data => {
 			});
 		})
 		.catch(err => {
-			console.log('login error:', err.response);
 			dispatch({
 				type: LOGIN_FAILURE,
 				data: err.response.data,
@@ -108,15 +105,9 @@ export const getUserInfo = () => {
 		dispatch({
 			type: GET_USER_INFO,
 		});
-		axios.get(`/auth/user`, { 
-			// headers: {
-			// 	token: localStorage.getItem('JWT'),
-			// 	refreshToken: localStorage.getItem('RF'),
-			// 	userId: localStorage.getItem('userId')
-			// }
+		axios.get(`${AUTH_URL}/user`, { 
 		})
 		.then(response => {
-			console.log('getUserInfo, response:', response)
 			dispatch({
 				type: GET_USER_INFO_SUCCESS,
 				user: response.data.user,
@@ -136,25 +127,22 @@ export const getUserInfo = () => {
 
 export const connectGDriveAccount = () => {
 	const userId = localStorage.getItem('userId')
-	console.log('connectGDriveAccount, userId:', userId)
 	return dispatch => {
 		dispatch({
 			type: INIT_GDRIVE_CONNECT,
 		});
-		axios.get(`gdrive/authURL`, {
+		axios.get(`${GDRIVE_URL}/authURL`, {
 			headers: { 
 				userId: userId 
 			}
 		})
 		.then(response => {
-			console.log('gdrive/authURL response:', response);
 			window.open(response.data.authURL)
 			dispatch({
 				type: INIT_GDRIVE_CONNECT_SUCCESS,
 			});
 		})
 		.catch(err => {
-			console.error('gdrive/authURL, error:', err);
 			dispatch({
 				type: INIT_GDRIVE_CONNECT_FAILURE,
 			});
