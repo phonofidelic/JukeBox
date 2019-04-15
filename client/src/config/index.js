@@ -2,14 +2,19 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 export const history = createBrowserHistory();
 
+const API_ROOT = process.env.NODE_ENV === 'production' ? 
+  'http://ec2-35-164-241-235.us-west-2.compute.amazonaws.com'
+  :
+  '';
+
 export const URLS = {
-  LIBRARY_URL: 'api/library',
-	TRACK_URL: '/api/tracks',
-  ARTIST_URL: '/api/library/artists',
-  ALBUM_URL: '/api/library/albums',
-  STREAM_URL: '/api/stream',
-  AUTH_URL: '/api/auth',
-  GDRIVE_URL: '/api/gdrive',
+  LIBRARY_URL: `${API_ROOT}/api/library`,
+	TRACK_URL: `${API_ROOT}/api/tracks`,
+  ARTIST_URL: `${API_ROOT}/api/library/artists`,
+  ALBUM_URL: `${API_ROOT}/api/library/albums`,
+  STREAM_URL: `${API_ROOT}/api/stream`,
+  AUTH_URL: `${API_ROOT}/api/auth`,
+  GDRIVE_URL: `${API_ROOT}/api/gdrive`,
 }
 
 export const THEME = {
