@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LibraryContextMenu from './LibraryContextMenu';
 import playingThumb from '../assets/playing_thumb.svg';
-import {
-	TableRow,
-	TableCell,
-	Typography,
-	Tooltip,
-} from '@material-ui/core';
-import { withTheme } from '@material-ui/core/styles';
+
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
+import withTheme from '@material-ui/core/styles/withTheme';
+
 import * as moment from 'moment';
 import 'moment-duration-format';
 

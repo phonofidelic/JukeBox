@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import styles from './PlayerControls.styles';
-import {
-	Grid,
-	IconButton,
-	Typography,
-} from '@material-ui/core';
-import { 
-	Pause, 
-	PlayArrow, 
-	SkipPrevious, 
-	SkipNext,
-	// MoreVert,
-	// MoreHoriz,
-	ExpandMore,
-	ExpandLess
-} from '@material-ui/icons';
-import { withStyles } from '@material-ui/core/styles';
+
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Pause from '@material-ui/icons/Pause';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import SkipPrevious from '@material-ui/icons/SkipPrevious';
+import SkipNext from '@material-ui/icons/SkipNext';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import withStyles from '@material-ui/core/styles/withStyles';
+
 import { THEME } from '../../config';
 
 class PlayerControls extends Component {

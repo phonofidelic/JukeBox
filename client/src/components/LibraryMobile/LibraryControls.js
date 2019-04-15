@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import styles from './LibraryControls.styles';
-import {
-	Button,
-	Drawer,
-	MenuList,
-	MenuItem,
-} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+
+import Button from '@material-ui/core/Button';
+import Drawer from '@material-ui/core/Drawer';
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 const ORDER_TYPES = {
 	TITLE: 'title',

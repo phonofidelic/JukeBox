@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {
-	Snackbar,
-	Typography,
-} from '@material-ui/core';
-import { withTheme } from '@material-ui/core/styles';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import Typography from '@material-ui/core/Typography';
+import withTheme from '@material-ui/core/styles/withTheme';
 
 class Message extends Component {
 

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {
-	Button,
-	TextField,
-	Typography,
-} from '@material-ui/core';
 import { validation } from '../../utils';
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 const form = reduxForm({
 	form: 'registrationForm'

@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LibraryRowContainer from '../containers/LibraryRowContainer';
-import {
-	Paper,
-	Table,
-	TableHead,
-	TableRow,
-	TableCell,
-	TableBody,
-	TableSortLabel,
-	// Typography,
-	Tooltip,
-} from '@material-ui/core';
-import { Schedule } from '@material-ui/icons';
-import { withTheme } from '@material-ui/core/styles';
+
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableBody from '@material-ui/core/TableBody';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Tooltip from '@material-ui/core/Tooltip';
+import Schedule from '@material-ui/icons/Schedule';
+import withTheme from '@material-ui/core/styles/withTheme';
+
 import { _ } from 'underscore';
 import DetailCard from './DetailCard';
 

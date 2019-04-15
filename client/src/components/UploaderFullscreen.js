@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-// import { Field } from 'redux-form';
-import {
-  Button,
-  Checkbox,
-  IconButton,
-	// List, 
-	// ListItem,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-	Typography,
-} from '@material-ui/core';
-import { RemoveCircle } from '@material-ui/icons';
-import { withTheme } from '@material-ui/core/styles';
+
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableBody from '@material-ui/core/TableBody';
+import Typography from '@material-ui/core/Typography';
+import RemoveCircle from '@material-ui/icons/RemoveCircle';
+import withTheme from '@material-ui/core/styles/withTheme';
 
 class UploaderFullscreen extends Component {
   state = {

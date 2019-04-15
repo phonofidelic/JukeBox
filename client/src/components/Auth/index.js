@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import posed from 'react-pose';
-import { Button, Typography } from '@material-ui/core';
+
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const STRINGS = {
 	errorTitle_registration: 'Registration Error',

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { 
-	CircularProgress,
-} from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Loader extends Component {
 	render() {

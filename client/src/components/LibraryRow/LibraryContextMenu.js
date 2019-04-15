@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {
-	Menu,
-	MenuItem,
-	Tooltip,
-	Typography,
-} from '@material-ui/core';
+
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 
 class LibraryContextMenu extends Component {
 	render() {

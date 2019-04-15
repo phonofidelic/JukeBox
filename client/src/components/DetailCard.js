@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {
-	Button,
-	Dialog,
-	DialogTitle,
-	DialogContent,
-	DialogContentText,
-	DialogActions,
-} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
 
 // const DUMMY_TEXT = `Lorem ipsum dolor sit amet, putent sadipscing id qui, vel ubique propriae contentiones ex, mel in nulla option. Eam ut mutat iuvaret, nihil saperet theophrastus sit ne, nulla zril euismod qui cu. Vel id indoctum conceptam rationibus. Prompta civibus eu eos. Purto ignota contentiones vel ne, numquam aliquid an vix, persius menandri delicatissimi mel an. Mea ne debet molestiae assentior, regione tibique antiopam no qui.
 // No vivendum voluptaria cum. Vis mucius intellegat ad, erat rationibus quo no, purto augue dolore ne quo. Scripta expetendis cum an, vero rebum interpretaris te eos. Wisi maiestatis his ad, sale scaevola salutatus in has. His ei numquam laboramus, te sea cetero persius, cum at alii adolescens.

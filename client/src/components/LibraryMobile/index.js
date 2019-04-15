@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import TrackListItemContainer from '../../containers/TrackListItemContainer';
 import DetailCard from '../DetailCard';
 import LibraryControls from './LibraryControls';
-import {
-	Typography, 
-	List, 
-} from '@material-ui/core';
-import { withTheme } from '@material-ui/core/styles';
+
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import withTheme from '@material-ui/core/styles/withTheme';
 
 const ORDER_TYPES = {
 	TITLE: 'title',

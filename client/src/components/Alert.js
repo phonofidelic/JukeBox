@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@material-ui/core/Dialog';
+import Dialog from '@material-ui/core/Dialog'; 
+import DialogActions from '@material-ui/core/Dialog/DialogActions',
+import DialogContent from '@material-ui/core/Dialog/DialogContent',
+import DialogContentText from '@material-ui/core/Dialog/DialogContentText',
+import DialogTitle from '@material-ui/core/Dialog/DialogTitle',
 
 class Alert extends Component {
 	handleClose() {

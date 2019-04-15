@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Typography,
-} from '@material-ui/core';
-import { 
-  Home,
-  CloudUpload,
-  Storage,
-  ExitToApp,
-} from '@material-ui/icons';
-import { withTheme } from '@material-ui/core/styles';
+
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Typography from '@material-ui/core/Typography';
+import Home from '@material-ui/icons/Home';
+import CloudUpload from '@material-ui/icons/CloudUpload';
+import Storage from '@material-ui/icons/Storage';
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import withTheme from '@material-ui/core/styles/withTheme';
 
 class NavMobile extends Component {
   render() {

@@ -6,7 +6,7 @@ import PlayerProgress from './PlayerProgress';
 import PlayerControls from './PlayerControls';
 import QueueList from './QueueList';
 // import Collapse from '@material-ui/core/Collapse';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 export class Player extends Component {
 	render() {

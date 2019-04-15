@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styles from './Dashboard.styles';
-import {
-	Button,
-	Typography
-} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 class Dashboard extends Component {
 	handleGDButtonClick = () => {

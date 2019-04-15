@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { withTheme } from '@material-ui/core/styles';
+
+import withTheme from '@material-ui/core/styles/withTheme';
 
 class TopNav extends Component {
 	render() {
