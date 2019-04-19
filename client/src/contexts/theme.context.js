@@ -1,25 +1,6 @@
-// import createBrowserHistory from 'history/createBrowserHistory';
-// const createBrowserHistory = require("history").createBrowserHistory;
-import { createBrowserHistory } from 'history'
+import React from 'react';
 
-export const history = createBrowserHistory();
-
-const API_ROOT = process.env.NODE_ENV === 'production' ? 
-  'http://ec2-35-164-241-235.us-west-2.compute.amazonaws.com'
-  :
-  '';
-
-export const URLS = {
-  LIBRARY_URL: `${API_ROOT}/api/library`,
-	TRACK_URL: `${API_ROOT}/api/tracks`,
-  ARTIST_URL: `${API_ROOT}/api/library/artists`,
-  ALBUM_URL: `${API_ROOT}/api/library/albums`,
-  STREAM_URL: `${API_ROOT}/api/stream`,
-  AUTH_URL: `${API_ROOT}/api/auth`,
-  GDRIVE_URL: `${API_ROOT}/api/gdrive`,
-}
-
-export const THEME = {
+export const theme = {
 	typography: {
     useNextVariants: true,
     // Use the system font over Roboto.
@@ -89,4 +70,21 @@ export const THEME = {
       height: 10,
     }
   },
+}
+
+export const getTopNavHeight = props => props.theme.dimensions.topNav.height;
+
+export const ThemeContext = React.createContext(
+	theme
+);
+
+export class ThemeProvider extends React.Component {
+	static contextType = ThemeContext;
+	render() {
+		return (
+			<ThemeContext.Provider value={theme}>
+				{this.props.children}
+			</ThemeContext.Provider>
+		);
+	}
 }

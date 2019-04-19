@@ -15,8 +15,8 @@
     "mui-redux-alerts": "^0.2.0",
     "popper.js": "^1.14.5",
     "prop-types": "^15.6.2",
-    "react": "^16.3.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-dropzone": "^4.2.9",
     "react-hammerjs": "^1.0.1",
     "react-howler": "^3.7.1",
@@ -32,6 +32,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "source-map-explorer": "^1.6.0",
+    "styled-components": "^4.2.0",
     "underscore": "^1.9.1"
   },
   "scripts": {

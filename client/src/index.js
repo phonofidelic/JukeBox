@@ -12,6 +12,7 @@ import registerServiceWorker from './registerServiceWorker';
 // import { history } from './config';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import { history, THEME } from './config';
+import { ThemeProvider } from './contexts/theme.context';
 
 // export const history = createBrowserHistory();
 
@@ -29,9 +30,11 @@ const theme = createMuiTheme(THEME);
 ReactDOM.render(
 	<Provider store={store}>
     <ConnectedRouter history={history}>
-  		<MuiThemeProvider theme={theme}>
-        <App />
-  		</MuiThemeProvider>
+      <ThemeProvider>
+    		<MuiThemeProvider theme={theme}>
+          <App />
+    		</MuiThemeProvider>
+      </ThemeProvider>
     </ConnectedRouter>
 	</Provider>, document.getElementById('root'));
 // registerServiceWorker();

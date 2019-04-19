@@ -1,6 +1,6 @@
 const styles = theme => ({
 	root: {
-		paddingTop: theme.dimensions.topNav.height
+		paddingTop: theme.dimensions.topNav.height,
 	},
 });
 
