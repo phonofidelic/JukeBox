@@ -6,7 +6,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const Container = styled.div`
-	padding-top: ${getTopNavHeight}px;
+	margin-top: ${getTopNavHeight}px;
+	padding-top: 25%;
 `
 
 const Dashboard = props => {
