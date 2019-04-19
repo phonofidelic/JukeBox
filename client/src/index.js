@@ -7,14 +7,10 @@ import reducer from './reducers/index';
 import './index.css';
 import App from './App';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import registerServiceWorker from './registerServiceWorker';
-// import createBrowserHistory from 'history/createBrowserHistory';
-// import { history } from './config';
+// import registerServiceWorker from './registerServiceWorker';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import { history, THEME } from './config';
 import { ThemeProvider } from './contexts/theme.context';
-
-// export const history = createBrowserHistory();
 
 const store = createStore(
 	reducer,
