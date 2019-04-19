@@ -19,6 +19,7 @@ export const URLS = {
   GDRIVE_URL: `${API_ROOT}/api/gdrive`,
 }
 
+// TODO: transistion to use theme.context instead
 export const THEME = {
 	typography: {
     useNextVariants: true,
