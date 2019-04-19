@@ -10,6 +10,10 @@ const Container = styled.div`
 	padding-top: 25%;
 `
 
+const ButtonContainer = styled.div`
+	margin: 10px;
+`
+
 const Dashboard = props => {
 	const theme = useContext(ThemeContext);
 	const { 
@@ -20,12 +24,12 @@ const Dashboard = props => {
 	return (
 		<Container theme={theme}>
 			<Typography>email: { user && user.email }</Typography>
-			<div>
+			<ButtonContainer>
 				<Button variant="outlined" onClick={() => this.handleGDButtonClick()}>Connect Google Drive</Button>
-			</div>
-			<div>
+			</ButtonContainer>
+			<ButtonContainer>
 				<Button variant="outlined" onClick={() => handleSignOut()}>Sign out</Button>
-			</div>
+			</ButtonContainer>
 		</Container>
 	);
 }
