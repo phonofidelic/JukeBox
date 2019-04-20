@@ -1,9 +1,9 @@
 const styles = theme => ({
 	root: {
 	  position: 'fixed',
-	  bottom: 0,
+	  bottom: theme.dimensions.navMobile.height,
 	  width: '100%',
-	  zIndex: 4,
+	  zIndex: 2,
 	},
 	containerMobile: {
 		width: '100%',

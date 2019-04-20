@@ -76,11 +76,14 @@ export const THEME = {
       zIndex: 3,
     },
     navMobile: {
-      height: 56,
+      // height: 56,
+      height: 0,
       zIndex: 3,
     },
     topNav: {
-      height: 30,
+      height: 56,
+      // height: 30,
+      // height: 0,
     },
     player: {
       width: 900,

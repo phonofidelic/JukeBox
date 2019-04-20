@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { ThemeContext, getTopNavHeight } from '../../contexts/theme.context'
+import { ThemeContext, getTopNavHeight } from '../../contexts/theme.context';
 
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';

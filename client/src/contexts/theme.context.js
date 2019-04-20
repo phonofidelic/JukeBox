@@ -56,15 +56,18 @@ export const theme = {
       zIndex: 3,
     },
     navMobile: {
-      height: 56,
+      // height: 56,
+      height: 0,
       zIndex: 3,
     },
     topNav: {
-      height: 30,
+    	height: 56,
+      // height: 30,
+      // height: 0,
     },
     player: {
       width: 900,
-      height: 58,
+      height: 62,
     },
     playerProgress: {
       height: 10,
@@ -72,7 +75,11 @@ export const theme = {
   },
 }
 
+export const getColorPrimaryDark = props => props.theme.palette.primary.dark;
+export const getSecondaryBackgroundColor = props => props.theme.palette.secondary.light;
 export const getTopNavHeight = props => props.theme.dimensions.topNav.height;
+export const getNavMobileZIndex = props => props.theme.dimensions.navMobile.zIndex;
+export const getPlayerHeight = props => props.theme.dimensions.player.height;
 
 export const ThemeContext = React.createContext(
 	theme

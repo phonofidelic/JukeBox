@@ -57,11 +57,11 @@ class NavMobile extends Component {
           value="/uploader" 
           icon={<CloudUpload />} 
         />
-        <BottomNavigationAction 
+        {/*<BottomNavigationAction 
           onClick={() => handleSignOut()}
           label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
           icon={<ExitToApp />} 
-        />
+        />*/}
       </BottomNavigation>
     );
   };

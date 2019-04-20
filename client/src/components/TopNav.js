@@ -1,58 +1,122 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { 
+	ThemeContext, 
+	getTopNavHeight,
+	getColorPrimaryDark,
+	getSecondaryBackgroundColor,
+	getNavMobileZIndex,
+} from '../contexts/theme.context';
+import styled from 'styled-components';
 
-import withTheme from '@material-ui/core/styles/withTheme';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Typography from '@material-ui/core/Typography';
+import Home from '@material-ui/icons/Home';
+import CloudUpload from '@material-ui/icons/CloudUpload';
+import Storage from '@material-ui/icons/Storage';
 
-class TopNav extends Component {
-	render() {
-		const { theme } = this.props;
-		const styles = {
-			root: {
-				position: 'fixed',
-        top: '0px',
-        width: '100%',
-        height: theme.dimensions.topNav.height,
-        lineHeight: `${theme.dimensions.topNav.height}px`,
-        backgroundColor: '#fafafa',
-        zIndex: theme.dimensions.navMobile.zIndex,
-			},
-			navPoint: {
-				border: `solid ${theme.palette.primary.dark} 1px`,
-				borderRadius: '100%',
-				height: '10px',
-				width: '10px',
-				display: 'inline-block',
-				
-				verticalAlign: 'middle',
-				margin: '5px',
-			},
-			active: {
-				backgroundColor: theme.palette.primary.dark,
-			}
-		}
-		return (
-			<div style={styles.root}>
-				<NavLink 
-					to="/"
-					style={styles.navPoint}
-					activeStyle={styles.active}
-					exact={true}
-				></NavLink>
-				<NavLink 
-					to="/library"
-					style={styles.navPoint}
-					activeStyle={styles.active}
-					exact={true}
-				></NavLink>
-				<NavLink 
-					to="/uploader"
-					style={styles.navPoint}
-					activeStyle={styles.active}
-					exact={true}
-				></NavLink>
-			</div>
-		);
-	}
+// const Container = styled.div`
+// 	position: fixed;
+// 	top: 0px;
+// 	width: 100%;
+// 	height: ${getTopNavHeight}px;
+// 	line-height: ${getTopNavHeight}px;
+// 	background-color: ${getSecondaryBackgroundColor};
+// 	z-index: ${getNavMobileZIndex};
+// `
+
+// const NavPoint = styled(NavLink)`
+// 	border: solid ${getColorPrimaryDark} 1px;
+// 	border-radius: 100%;
+// 	height: 10px;
+// 	width: 10px;
+// 	display: inline-block;
+// 	vertical-align: middle;
+// 	margin: 5px;
+// `
+
+const Container = styled(BottomNavigation)`
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	// height: ${getTopNavHeight}px;
+	// line-height: ${getTopNavHeight}px;
+	background-color: ${getSecondaryBackgroundColor};
+	z-index: ${getNavMobileZIndex};
+`
+
+const NavPoint = styled(NavLink)`
+	border: solid ${getColorPrimaryDark} 1px;
+	border-radius: 100%;
+	height: 10px;
+	width: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 5px;
+`
+
+const TopNav = props => {
+	const theme = useContext(ThemeContext);
+	const { locationPathname } = props;
+
+	// return (
+	// 	<Container theme={theme}>
+	// 		<NavPoint
+	// 			theme={theme}
+	// 			to="/"
+	// 			activeStyle={{'backgroundColor': '#222'}}
+	// 			exact={true}
+	// 		/>
+	// 		<NavPoint
+	// 			theme={theme}
+	// 			to="/library"
+	// 			activeStyle={{'backgroundColor': '#222'}}
+	// 			exact={true}
+	// 		/>
+	// 		<NavPoint
+	// 			theme={theme}
+	// 			to="/uploader"
+	// 			activeStyle={{'backgroundColor': '#222'}}
+	// 			exact={true}
+	// 		/>
+	// 	</Container>
+	// );
+
+	return(
+    <Container 
+      value={locationPathname}
+      showLabels
+      theme={theme}
+    >
+      <BottomNavigationAction 
+        component={NavLink} 
+        to="/"
+        label={<Typography color="inherit" variant="caption">Home</Typography>}
+        value="/" 
+        icon={<Home />} 
+      />
+      <BottomNavigationAction 
+        component={NavLink} 
+        to="/library"
+        label={<Typography color="inherit" variant="caption">Library</Typography>}
+        value="/library" 
+        icon={<Storage />} 
+      />
+      <BottomNavigationAction 
+        component={NavLink}
+        to="/uploader" 
+        label={<Typography color="inherit" variant="caption">Uploader</Typography>}
+        value="/uploader" 
+        icon={<CloudUpload />} 
+      />
+      {/*<BottomNavigationAction 
+        onClick={() => handleSignOut()}
+        label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
+        icon={<ExitToApp />} 
+      />*/}
+    </Container>
+  );
 }
 
-export default withTheme()(TopNav);
+export default TopNav;
