@@ -19,10 +19,10 @@ import DetailCard from './DetailCard';
 
 const columnData = [
 	// { id: 'empty', numeric: false, disablePadding: true, label: '', labelText: '', width: '1%' },
-	{ id: 'title', numeric: false, disablePadding: false, label: 'Title', labelText: 'Title', span: 2 },
-	{ id: 'duration', numeric: false, disablePadding: false, label: <Schedule />, labelText: 'Duration', width: '1%', span: 1 },
-	{ id: 'artist', numeric: false, disablePadding: false, label: 'Artist', labelText: 'Artist', width: '1%', span: 1 },
-	{ id: 'album', numeric: false, disablePadding: false, label: 'Album', labelText: 'Album', width: '1%', span: 1 },
+	{ id: 'title', disablePadding: false, label: 'Title', labelText: 'Title', span: 2 },
+	{ id: 'duration', disablePadding: false, label: <Schedule />, labelText: 'Duration', width: '1%', span: 1 },
+	{ id: 'artist', disablePadding: false, label: 'Artist', labelText: 'Artist', width: '1%', span: 1 },
+	{ id: 'album', disablePadding: false, label: 'Album', labelText: 'Album', width: '1%', span: 1 },
 ]
 
 class LibraryDesktop extends Component {
@@ -150,7 +150,6 @@ class LibraryDesktop extends Component {
 											onMouseEnter={() => this.setState({ hoveredCell: column.id })}
 											onMouseLeave={() => this.setState({ hoveredCell: null })}
 											key={column.id}
-											numeric={column.numeric}
 											// width={column.widt}
 			                // padding={column.disablePadding ? 'none' : 'default'}
 			                sortDirection={orderBy === column.id ? order : false}
