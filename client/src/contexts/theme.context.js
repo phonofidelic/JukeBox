@@ -75,6 +75,7 @@ export const theme = {
   },
 }
 
+export const getColorPrimaryMain = props => props.theme.palette.primary.main;
 export const getColorPrimaryDark = props => props.theme.palette.primary.dark;
 export const getSecondaryBackgroundColor = props => props.theme.palette.secondary.light;
 export const getTopNavHeight = props => props.theme.dimensions.topNav.height;

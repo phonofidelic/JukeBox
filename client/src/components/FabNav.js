@@ -5,8 +5,9 @@ import posed, { PoseGroup } from 'react-pose';
 import { 
 	ThemeContext, 
 	// getTopNavHeight,
-	// getColorPrimaryDark,
-	// getSecondaryBackgroundColor,
+	getColorPrimaryMain,
+	getColorPrimaryDark,
+	getSecondaryBackgroundColor,
 	// getNavMobileZIndex,
 	getPlayerHeight,
 } from '../contexts/theme.context';
@@ -35,8 +36,8 @@ const NavItem = styled(posed.div({
   enter: { y: 0, opacity: 1 },
   exit: { y: 50, opacity: 0 }
 }))`
-	border: 1px solid red;
-	background: green;
+	border: 1px solid ${getColorPrimaryMain};
+	background: ${getSecondaryBackgroundColor};
 	width: 56px;
 	height: 56px;
 	line-height: 68px;
@@ -63,7 +64,11 @@ const FabNav = props => {
 	const [showNav, toggleNav] = useState(false);
 	const { locationPathname } = props;
 
-	console.log('*** locationPathname:', locationPathname)
+	const styles = {
+		navLink: {
+			color: '#b5b9bb',
+		}
+	}
 
 	return (
 		<ClickAwayListener onClickAway={() => toggleNav(false)}>
@@ -71,8 +76,12 @@ const FabNav = props => {
 				<NavList>
 					<PoseGroup>
 						{	showNav && [
-							<NavItem key="home"> 
+							<NavItem 
+								key="home" 
+								theme={theme}
+							> 
 								<NavLink
+									style={styles.navLink}
 					        to="/"
 					        value="/"
 					        onClick={() => toggleNav(false)}
@@ -80,8 +89,12 @@ const FabNav = props => {
 									<Home />
 								</NavLink>
 							</NavItem>,
-							<NavItem key="library">
-								<NavLink 
+							<NavItem 
+								key="library"
+								theme={theme}
+							>
+								<NavLink
+									style={styles.navLink}
 					        to="/library"
 					        value="/library"
 					        onClick={() => toggleNav(false)}
@@ -89,8 +102,12 @@ const FabNav = props => {
 									<Storage />
 								</NavLink>
 							</NavItem>,
-							<NavItem key="uploader">
-								<NavLink 
+							<NavItem 
+								key="uploader"
+								theme={theme}
+							>
+								<NavLink
+									style={styles.navLink}
 					        to="/uploader"
 					        value="/uploader"
 					        onClick={() => toggleNav(false)}
