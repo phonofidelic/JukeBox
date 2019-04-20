@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, forwardRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import posed, { PoseGroup } from 'react-pose';
 import { 
 	ThemeContext, 
 	// getTopNavHeight,
@@ -30,57 +31,82 @@ const NavList = styled.ul`
 	padding: 0;
 `
 
+const NavItem = styled(posed.div({
+  enter: { y: 0, opacity: 1 },
+  exit: { y: 50, opacity: 0 }
+}))`
+	border: 1px solid red;
+	background: green;
+	width: 56px;
+	height: 56px;
+	line-height: 68px;
+	padding: auto;
+	border-radius: 100%;
+	margin-top: 10px;
+`
+
+const renderLocationIcon = location => {
+	switch(location) {
+		case '/':
+			return <Home />
+		case '/library':
+			return <Storage />
+		case '/uploader':
+			return <CloudUpload />
+
+		default: return <Apps />
+	}
+}
+
 const FabNav = props => {
 	const theme = useContext(ThemeContext);
 	const [showNav, toggleNav] = useState(false);
-	const styles = {
-		navItem: {
-			marginTop: '10px',
-		}
-	}
+	const { locationPathname } = props;
+
+	console.log('*** locationPathname:', locationPathname)
 
 	return (
 		<ClickAwayListener onClickAway={() => toggleNav(false)}>
 			<Container theme={theme}>
-				{
-					showNav &&
-					<NavList>
-						<Fab 
-							style={styles.navItem}
-							component={NavLink} 
-			        to="/"
-			        value="/"
-			        onClick={() => toggleNav(false)}
-						>
-							<Home />
-						</Fab>
-						<Fab 
-							style={styles.navItem}
-							component={NavLink} 
-			        to="/library"
-			        value="/library"
-			        onClick={() => toggleNav(false)}
-						>
-							<Storage />
-						</Fab>
-						<Fab 
-							style={styles.navItem}
-							component={NavLink} 
-			        to="/uploader"
-			        value="/uploader"
-			        onClick={() => toggleNav(false)}
-						>
-							<CloudUpload />
-						</Fab>
-					</NavList>
-				}
-
+				<NavList>
+					<PoseGroup>
+						{	showNav && [
+							<NavItem key="home"> 
+								<NavLink
+					        to="/"
+					        value="/"
+					        onClick={() => toggleNav(false)}
+								>
+									<Home />
+								</NavLink>
+							</NavItem>,
+							<NavItem key="library">
+								<NavLink 
+					        to="/library"
+					        value="/library"
+					        onClick={() => toggleNav(false)}
+								>
+									<Storage />
+								</NavLink>
+							</NavItem>,
+							<NavItem key="uploader">
+								<NavLink 
+					        to="/uploader"
+					        value="/uploader"
+					        onClick={() => toggleNav(false)}
+								>
+									<CloudUpload />
+								</NavLink>
+							</NavItem>
+						]}
+					</PoseGroup>
+				</NavList>
 				<Fab 
 					color="primary"
 					aria-label="Sow nav"
 					onClick={() => toggleNav(!showNav)}
 				>
-					<Apps />
+					{renderLocationIcon(locationPathname)}
 				</Fab>
 			</Container>
 		</ClickAwayListener>
