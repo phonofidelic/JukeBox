@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LibraryRowContainer from '../containers/LibraryRowContainer';
+import LibraryRowContainer from '../../containers/LibraryRowContainer';
+import DetailCard from '../DetailCard';
 
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -14,12 +15,10 @@ import Schedule from '@material-ui/icons/Schedule';
 import withTheme from '@material-ui/core/styles/withTheme';
 
 import { _ } from 'underscore';
-import DetailCard from './DetailCard';
-
 
 const columnData = [
 	// { id: 'empty', numeric: false, disablePadding: true, label: '', labelText: '', width: '1%' },
-	{ id: 'title', disablePadding: false, label: 'Title', labelText: 'Title', span: 2 },
+	{ id: 'title', disablePadding: false, label: 'Title', labelText: 'Title', span: 1 },
 	{ id: 'duration', disablePadding: false, label: <Schedule />, labelText: 'Duration', width: '1%', span: 1 },
 	{ id: 'artist', disablePadding: false, label: 'Artist', labelText: 'Artist', width: '1%', span: 1 },
 	{ id: 'album', disablePadding: false, label: 'Album', labelText: 'Album', width: '1%', span: 1 },
@@ -137,7 +136,7 @@ class LibraryDesktop extends Component {
 						}
 						<TableHead style={styles.tableHead}>
 							<TableRow>
-								{/*<TableCell></TableCell>*/}
+								<TableCell></TableCell>
 								{
 									columnData.map(column => (
 										<TableCell
@@ -153,6 +152,7 @@ class LibraryDesktop extends Component {
 											// width={column.widt}
 			                // padding={column.disablePadding ? 'none' : 'default'}
 			                sortDirection={orderBy === column.id ? order : false}
+
 			                onClick={this.createSortHandler(column.id)}
 			              >
 			             		<Tooltip
