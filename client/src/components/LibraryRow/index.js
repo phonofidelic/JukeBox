@@ -52,6 +52,11 @@ export class LibraryRow extends Component {
 		this.setState({ ...this.state, editMode: !this.state.editMode });
 	}
 
+	handleMenuOptionStartNewQueue = () => {
+		this.props.handleStartNewQueue(this.props.track);
+		this.handleContextMenuClose();
+	}
+
 	handleMenuOptionAddToQueue = () => {
 		this.props.handleAddToQueue(this.props.track);
 		this.handleContextMenuClose();
@@ -202,9 +207,11 @@ export class LibraryRow extends Component {
 					</Tooltip>
 				</TableCell>
 				{<LibraryContextMenu 
+					queue={player.queue}
 					contextMenuIsOpen={contextMenuIsOpen}
 					contextPos={contextPos}
 					handleContextMenuClose={this.handleContextMenuClose.bind(this)}
+					handleMenuOptionStartNewQueue={this.handleMenuOptionStartNewQueue}
 					handleMenuOptionAddToQueue={this.handleMenuOptionAddToQueue}
 					handleToggleEditMode={this.handleToggleEditMode.bind(this)}
 					handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
