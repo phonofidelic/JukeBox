@@ -131,6 +131,8 @@ const handleExpiredToken = (req, res, next) => {
 	} else {
 		console.log('\n*** NO VALID REFRESH TOKEN FOUND, NEW LOGIN REQUIRED ***')
 		// TODO: Redirect to login?
+		// 			 and/or:
+		//			 delete refreshTokens[req.cookies.RT];
 		res.status(401).json({ message: 'Sign-in required' });
 	}
 }
