@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { ThemeContext } from '../contexts/theme.context';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 import withTheme from '@material-ui/core/styles/withTheme';
 
 class Message extends Component {
+	static contextType = ThemeContext;
 
 	render() {
 		const { 
@@ -12,8 +14,9 @@ class Message extends Component {
 			text,
 			// context, 
 			handleClearMessage,
-			theme
 		} = this.props;
+
+		const theme = this.context;
 
 		const styles = {
 			root: {

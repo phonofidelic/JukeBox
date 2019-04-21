@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import { ThemeContext } from '../../contexts/theme.context';
+
 import LibraryRowContainer from '../../containers/LibraryRowContainer';
 import DetailCard from '../DetailCard';
 import LibraryTableHead from './LibraryTableHead';
 
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Tooltip from '@material-ui/core/Tooltip';
-import Schedule from '@material-ui/icons/Schedule';
 import withTheme from '@material-ui/core/styles/withTheme';
 
 import { _ } from 'underscore';
 
 class LibraryDesktop extends Component {
+	static contextType = ThemeContext;
 	state = {
 		hoveredCell: null,
 		windowWidth: null,
@@ -76,8 +76,9 @@ class LibraryDesktop extends Component {
 			orderBy,
 			handleRequestSort,
 			handleCloseDetailView,
-			theme,
 		} = this.props;
+
+		const theme = this.context;
 
 		const styles = {
 			root: {
@@ -94,6 +95,8 @@ class LibraryDesktop extends Component {
 				overflowX: 'auto',
 			},
 		}
+
+		console.log('*** LibraryDesktop, this.context:', this.context)
 
 		return (
 			<div style={styles.root}>

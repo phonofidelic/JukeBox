@@ -1,14 +1,11 @@
-import React, { useState, useContext, forwardRef } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import posed, { PoseGroup } from 'react-pose';
 import { 
 	ThemeContext, 
-	// getTopNavHeight,
 	getColorPrimaryMain,
-	getColorPrimaryDark,
 	getSecondaryBackgroundColor,
-	// getNavMobileZIndex,
 	getPlayerHeight,
 } from '../contexts/theme.context';
 

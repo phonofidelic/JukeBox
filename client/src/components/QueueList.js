@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { ThemeContext } from '../contexts/theme.context';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +19,8 @@ import withTheme from '@material-ui/core/styles/withTheme';
 // });
 
 class QueueList extends Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 		this.handleQueueItemClick = this.handleQueueItemClick.bind(this)
@@ -36,8 +40,9 @@ class QueueList extends Component {
 			showQueue,
 			queue, 
 			currentTrack, 
-			theme,
 		} = this.props;
+
+		const theme = this.context;
 
 		const styles = {
 			root: {

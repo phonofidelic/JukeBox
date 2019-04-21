@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { ThemeContext } from '../../contexts/theme.context';
+
 import TrackListItemContainer from '../../containers/TrackListItemContainer';
 import DetailCard from '../DetailCard';
 import LibraryControls from './LibraryControls';
@@ -14,6 +17,8 @@ const ORDER_TYPES = {
 };
 
 export class LibraryMobile extends Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 		this.trackListNode = React.createRef();
@@ -42,8 +47,9 @@ export class LibraryMobile extends Component {
 			library,
 			handleOrderBy,
 			handleCloseDetailView,
-			theme,
 		} = this.props;
+
+		const theme = this.context;
 
 		const styles = {
 			root: {

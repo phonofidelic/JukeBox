@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { ThemeContext } from '../contexts/theme.context';
+
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Typography from '@material-ui/core/Typography';
@@ -12,12 +14,15 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 import withTheme from '@material-ui/core/styles/withTheme';
 
 class NavMobile extends Component {
+  static contextType = ThemeContext;
+
   render() {
     const { 
       locationPathname,
       handleSignOut,
-      theme,
     } = this.props;
+
+    const theme = this.context;
 
     const styles = {
       root: {

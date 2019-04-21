@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Dropzone from 'react-dropzone';
 
+import { ThemeContext } from '../contexts/theme.context';
+
+import Dropzone from 'react-dropzone';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,6 +16,8 @@ import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import withTheme from '@material-ui/core/styles/withTheme';
 
 class UploaderFullscreen extends Component {
+  static contextType = ThemeContext;
+
   state = {
     dropzoneActive: false,
   }
@@ -31,7 +35,8 @@ class UploaderFullscreen extends Component {
   }
 
   renderOverlay() {
-  	const { theme }  = this.props;
+    const theme = this.context;
+
   	const styles = {
 	  	root: {
 	      position: 'absolute',
@@ -59,8 +64,6 @@ class UploaderFullscreen extends Component {
 
   renderUploadList() {
   	const { 
-  		// input, 
-  		theme, 
   		droppedFiles,
       allDiscogsImport,
   		handleReset,
@@ -68,6 +71,8 @@ class UploaderFullscreen extends Component {
       handleSelectDiscogsImport,
       handleSelectAllDiscogsImport,
   	} = this.props;
+
+    const theme = this.context;
 
   	const styles = {
   		root: {

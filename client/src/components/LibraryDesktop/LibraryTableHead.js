@@ -9,7 +9,6 @@ import {
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import TableBody from '@material-ui/core/TableBody';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import Schedule from '@material-ui/icons/Schedule';

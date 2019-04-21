@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+
+import { ThemeContext } from '../../contexts/theme.context';
+
 import { withTheme } from '@material-ui/core/styles';
 
 class PlayerProgress extends Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -52,7 +57,10 @@ class PlayerProgress extends Component {
 	}
 
 	render() {
-		const { player, theme } = this.props;
+		const { player } = this.props;
+
+		const theme = this.context;
+
 		const styles = {
 			root: {
 				height: '10px',

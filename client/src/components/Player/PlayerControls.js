@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { ThemeContext } from '../../contexts/theme.context';
+
 import styles from './PlayerControls.styles';
 
 import Grid from '@material-ui/core/Grid';
@@ -12,9 +15,9 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { THEME } from '../../config';
-
 class PlayerControls extends Component {
+	static contextType = ThemeContext;
+
 	state = {
 		touch: null
 	}
@@ -69,6 +72,8 @@ class PlayerControls extends Component {
 			classes,
 		} = this.props;
 
+		const theme = this.context;
+
 		// const styles = {
 		// 	togglePlayerButton: {
 		// 		position: 'fixed', 
@@ -88,8 +93,8 @@ class PlayerControls extends Component {
 							<img 
 								src={player.currentTrack.image.src} 
 								alt="Album art" 
-								width={THEME.dimensions.player.height - THEME.dimensions.playerProgress.height} 
-								height={THEME.dimensions.player.height - THEME.dimensions.playerProgress.height} 
+								width={theme.dimensions.player.height - theme.dimensions.playerProgress.height} 
+								height={theme.dimensions.player.height - theme.dimensions.playerProgress.height} 
 							/>
 						</Grid>
 						<Grid item xs={7}>

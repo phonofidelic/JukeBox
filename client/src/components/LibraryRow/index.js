@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import { ThemeContext } from '../../contexts/theme.context';
+
 import LibraryContextMenu from './LibraryContextMenu';
 import playingThumb from '../assets/playing_thumb.svg';
 
@@ -13,6 +16,8 @@ import * as moment from 'moment';
 import 'moment-duration-format';
 
 export class LibraryRow extends Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 
@@ -92,7 +97,6 @@ export class LibraryRow extends Component {
 			// handleEditTrackData,
 			handleStartNewQueue,
 			handleOpenDetailView,
-			theme,
 		} = this.props;
 
 		const { 
@@ -100,6 +104,8 @@ export class LibraryRow extends Component {
 			contextPos,
 			// editMode 
 		} = this.state;
+
+		const theme = this.context;
 
 		const styles = {
 			root: {

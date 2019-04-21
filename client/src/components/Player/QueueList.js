@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { ThemeContext } from '../../contexts/theme.context';
+
 import styles from './QueueList.styles'
 import {
 	List,
@@ -8,7 +11,6 @@ import {
 	Collapse,
 } from '@material-ui/core/';
 import { withStyles } from '@material-ui/core/styles';
-import { THEME } from '../../config';
 
 // const styles = theme => ({
 //   root: {
@@ -20,6 +22,8 @@ import { THEME } from '../../config';
 // });
 
 class QueueList extends Component {
+	static contextType = ThemeContext;
+
 	constructor(props) {
 		super(props);
 		this.handleQueueItemClick = this.handleQueueItemClick.bind(this)
@@ -41,6 +45,8 @@ class QueueList extends Component {
 			classes,
 		} = this.props;
 
+		const theme = this.context;
+
 		return (
 			<Collapse 
 				direction="up" 
@@ -48,7 +54,7 @@ class QueueList extends Component {
 				collapsedHeight="0px"
 				timeout="auto"
 			>
-				<List className={classes.root} style={{height: window.innerHeight - THEME.dimensions.player.height}}>
+				<List className={classes.root} style={{height: window.innerHeight - theme.dimensions.player.height}}>
 					{
 						queue.map((track, i) => (
 							<ListItem 
