@@ -97,16 +97,20 @@ class TrackListItemControls extends Component {
 		}
 
 		return (
-			<Grid container justify="flex-end">
-				<IconButton title="Start new queue" onClick={ () => { handleStartNewQueue(track, player.currentTrack) }} >
-				<PlayArrow />
-				</IconButton>
+			<div style={{
+				display: 'flex', 
+				height: '100%',
+				justifyContent: 'center',
+			}}>
+				{/*<IconButton title="Start new queue" onClick={ () => { handleStartNewQueue(track, player.currentTrack) }} >
+					<PlayArrow />
+				</IconButton>*/}
 				<IconButton 
 					title="Options"
 					aria-owns={anchorEl ? 'options-menu' : null}
 					aria-haspopup="true"
 					onClick={this.handleOptionsClick.bind(this)}
-					>
+				>
 					<MoreVert />
 				</IconButton>
 				<Menu
@@ -118,27 +122,26 @@ class TrackListItemControls extends Component {
 				>
 					{ 
 						player.queue.length > 0 ?
-						<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.ADD_TO_QUEUE, { track: track })}>Add to queue</MenuItem>
+						<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.ADD_TO_QUEUE, { track: track })}>
+							Add to queue
+						</MenuItem>
 						:
-						<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.START_NEW_QUEUE, { track: track, currentTrack: player.currentTrack })}>Play track</MenuItem>
+						<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.START_NEW_QUEUE, { track: track, currentTrack: player.currentTrack })}>
+							Start new queue
+						</MenuItem>
 					}
-					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.SHOW_DETAIL, { id: track.artist._id, type: 'artist' })}>View Artist Details</MenuItem>
-					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.SHOW_DETAIL, { id: track.album._id, type: 'album' })}>View Album Details</MenuItem>
+					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.SHOW_DETAIL, { id: track.artist._id, type: 'artist' })}>
+						View Artist Details
+					</MenuItem>
+					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.SHOW_DETAIL, { id: track.album._id, type: 'album' })}>
+						View Album Details
+					</MenuItem>
 					{/*<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.EDIT_INFO)}>Edit info</MenuItem>*/}
 					<MenuItem onClick={() => this.handleMenuOptionClick(menuOptions.DELETE_TRACK, { track: track })}>
 						Delete track
-						{/*<AlertDialog 
-							onAlertClose={this.handleOptionsClose.bind(this)}
-							triggerButtonText="Delete"
-							headerText="Are you sure you want to delete this track?" 
-							bodyText={'Confirming will permanently delete the selected track. This action cannot be undone.'} 
-							actionCancelButtonText="Cancel"
-							actionConfirmButtonText="Confirm"
-							handleActionConfirm={() => handleDeleteTrack(track)}
-						/>*/}
 					</MenuItem>
 				</Menu>
-			</Grid>
+			</div>
 		);
 	}
 }

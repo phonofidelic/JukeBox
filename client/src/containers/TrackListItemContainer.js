@@ -8,6 +8,7 @@ const actions = { ...libraryActions, ...playerActions, ...messageActions };
 
 class TrackListItemContainer extends Component {
 	handleSelectTrack(track) {
+		console.log('handleSelectTrack, track:', track)
 		this.props.selectTrack(track);
 	}
 
