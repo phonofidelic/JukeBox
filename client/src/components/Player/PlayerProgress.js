@@ -11,6 +11,7 @@ class PlayerProgress extends Component {
 		super(props);
 		this.state = {
 			timeElapsed: 0,
+			isMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
 		}
 	}
 
@@ -58,13 +59,14 @@ class PlayerProgress extends Component {
 
 	render() {
 		const { player } = this.props;
+		const { isMobile } = this.state;
 
 		const theme = this.context;
 
 		const styles = {
 			root: {
 				height: '10px',
-				width: theme.dimensions.libraryDesktop.maxWidth,
+				width: isMobile ? '100%' : theme.dimensions.libraryDesktop.maxWidth,
 				background: '#ccc',
 			},
 			progress: {
@@ -78,8 +80,11 @@ class PlayerProgress extends Component {
 
 		const segments = this.getSegments();
 
-		// const windowWidth = window.innerWidth; // For full-width player
-		let playerWidth = theme.dimensions.player.width; // For fixed width player
+		let playerWidth = isMobile ? 
+			window.innerWidth // For full-width playe
+			: 
+			theme.dimensions.libraryDesktop.maxWidth; // For fixed width player
+			
 		const segWidth = Math.floor(playerWidth/segments.length);
 	
 		const segContainerStyle = {
