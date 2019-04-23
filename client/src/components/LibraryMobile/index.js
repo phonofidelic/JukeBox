@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { ThemeContext } from '../../contexts/theme.context';
 
 import TrackListItemContainer from '../../containers/TrackListItemContainer';
-import DetailCard from '../DetailCard';
 import LibraryControls from './LibraryControls';
 
 import Typography from '@material-ui/core/Typography';
@@ -64,13 +63,7 @@ export class LibraryMobile extends Component {
 
 		return (
 			<div style={styles.root} ref={this.trackListNode}>
-				{
-					library.detailViewData &&
-					<DetailCard 
-						detailViewData={library.detailViewData}
-						handleCloseDetailView={handleCloseDetailView}
-					/>
-				}
+				
 				<LibraryControls 
 					orderBy={this.state.orderBy} 
 					setOrder={this.setOrder.bind(this)} 

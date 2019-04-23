@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { ThemeContext } from '../../contexts/theme.context';
 
 import LibraryRowContainer from '../../containers/LibraryRowContainer';
-import DetailCard from '../DetailCard';
 import LibraryTableHead from './LibraryTableHead';
 
 import Paper from '@material-ui/core/Paper';
@@ -100,15 +99,6 @@ class LibraryDesktop extends Component {
 
 		return (
 			<div style={styles.root}>
-				{
-					library.detailViewData ? 
-					<DetailCard 
-						detailViewData={library.detailViewData}
-						handleCloseDetailView={handleCloseDetailView}
-					 /> 
-					: 
-					null
-				}
 				<div style={styles.navSpacer}></div>
 				<Paper style={styles.tableContainer}>
 					<Table padding="none">

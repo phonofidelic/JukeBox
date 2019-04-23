@@ -7,6 +7,7 @@ import {
 } from '../actions';
 import LibraryMobile from '../components/LibraryMobile';
 import LibraryDesktop from '../components/LibraryDesktop';
+import DetailCard from '../components/DetailCard';
 import Loader from '../components/Loader';
 import ErrorMessageContainer from './ErrorMessageContainer';
 
@@ -129,6 +130,10 @@ export class LibraryContainer extends Component {
 		return (
       <div>
         <ErrorMessageContainer />
+        <DetailCard 
+          detailViewData={library.detailViewData}
+          handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+        /> 
         { library.loading ? 
           <Loader /> 
           : 
