@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-// import AlertDialog from './AlertDialog';
-import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { 
-	PlayArrow,
-	// Queue,
 	MoreVert
 } from '@material-ui/icons';
 
@@ -84,8 +80,6 @@ class TrackListItemControls extends Component {
 		const {
 			track,
 			player,
-			handleStartNewQueue,
-			// handleDeleteTrack,
 		} = this.props;
 
 		const { anchorEl } = this.state;
@@ -102,9 +96,6 @@ class TrackListItemControls extends Component {
 				height: '100%',
 				justifyContent: 'center',
 			}}>
-				{/*<IconButton title="Start new queue" onClick={ () => { handleStartNewQueue(track, player.currentTrack) }} >
-					<PlayArrow />
-				</IconButton>*/}
 				<IconButton 
 					title="Options"
 					aria-owns={anchorEl ? 'options-menu' : null}

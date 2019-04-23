@@ -45,7 +45,6 @@ export class LibraryMobile extends Component {
 		const { 
 			library,
 			handleOrderBy,
-			handleCloseDetailView,
 		} = this.props;
 
 		const theme = this.context;

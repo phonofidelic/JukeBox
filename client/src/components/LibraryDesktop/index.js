@@ -74,7 +74,6 @@ class LibraryDesktop extends Component {
 			order,
 			orderBy,
 			handleRequestSort,
-			handleCloseDetailView,
 		} = this.props;
 
 		const theme = this.context;

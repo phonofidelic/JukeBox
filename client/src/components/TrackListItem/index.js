@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { 
 	ThemeContext,
 	getColorPrimaryLight,
-	getColorPrimaryMain,
 	getPrimarySelected,
 } from '../../contexts/theme.context';
 
