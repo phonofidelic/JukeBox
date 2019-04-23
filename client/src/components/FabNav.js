@@ -19,8 +19,8 @@ import Storage from '@material-ui/icons/Storage';
 const Container = styled.div`
 	position: fixed;
 	bottom: ${getPlayerHeight}px;
-	margin-bottom: 10px;
-	right: 10px;
+	margin-bottom: 16px;
+	right: 16px;
 `
 
 const NavList = styled.ul`
