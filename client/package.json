@@ -17,6 +17,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-draggable": "^3.3.0",
     "react-dropzone": "^4.2.9",
     "react-hammerjs": "^1.0.1",
     "react-howler": "^3.7.1",
