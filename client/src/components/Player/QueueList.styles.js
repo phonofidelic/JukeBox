@@ -1,12 +1,12 @@
 const styles = theme => ({
 	root: {
-		// maxWidth: `${theme.dimensions.libraryDesktop.maxWidth}px`,
+		background: theme.palette.secondary.light,
+		position: 'fixed',
+		width: 'inherit',
+		top: theme.dimensions.player.height,
+		bottom: 0,
+		overflowY: 'scroll',
 		padding: 0,
-		// marginTop: '50px',
-		// position: 'relative',
-		// overflow: 'auto',
-		overflowY: 'auto',
-		// maxHeight: '100%',
 	},
 	playing: {
 		background: theme.palette.primary.main,

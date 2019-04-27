@@ -61,7 +61,13 @@ export class LibraryMobile extends Component {
 				padding: '0px',
 				// paddingTop: theme.dimensions.topNav.height + theme.dimensions.libraryControls.height,
 				paddingTop: theme.dimensions.libraryControls.height,
-				paddingBottom: '104px' // TODO: link value to Player + Nav height
+				paddingBottom: theme.dimensions.player.height, // TODO: link value to Player + Nav height
+				position: 'fixed',
+				width: '100%',
+				top: 0,
+				bottom: 0,
+				overflowY: 'scroll',
+				// WebkitOverflowScrolling: 'touch', // BUG: Causes LibraryControls to jerk
 			}
 		};
 
@@ -69,7 +75,7 @@ export class LibraryMobile extends Component {
 			<div 
 				style={styles.root} 
 				// ref={this.trackListNode}
-				onTouchMove={this.handleDrag}
+				// onTouchMove={this.handleDrag}
 			>
 				<LibraryControls 
 					orderBy={this.state.orderBy} 

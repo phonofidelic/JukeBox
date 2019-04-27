@@ -15,6 +15,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
 
+const PREVENT_DEFAULT = (e) => e.preventDefault();
+
 export class Player extends Component {
 	static contextType = ThemeContext;
 
@@ -33,20 +35,22 @@ export class Player extends Component {
 		// return true;
 	}
 
-	handleDrag = (e) => {
+	handleDrag = (e, data) => {
 		// e.stopImmediatePropagation();
-		// console.log('*** draging', e)
-		// return true;
+		// e.preventDefault();
+		console.log('*** draging', data)
+		return true;
 	}
 
 	handleDragStop = (e, data) => {
 		// e.stopImmediatePropagation();
+		// e.preventDefault()
 		const { isOpen } = this.state;
 
-		const touchPos = data.y;
+		const touchPos = data.y
 
 		console.log('*** drag end', touchPos, WINDOW_TOP)
-		if (!isOpen && touchPos < TRIGGER_DRAG_DISTANCE || isOpen && touchPos < TRIGGER_DRAG_DISTANCE * 2) {
+		if (!isOpen & touchPos < TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE * 2) {
 			this.setState({
 				isOpen: true,
 				position: WINDOW_TOP + this.context.dimensions.player.height,
@@ -55,10 +59,23 @@ export class Player extends Component {
 		}
 		this.setState({
 			isOpen: false,
-			position: 0
+			position: 0,
 		});
 		console.log('DOWN')
 		// return true;
+	}
+
+	handleTouchStart = e => {
+		console.log('Player - handleTouchStart, e:', e)
+	}
+
+	handleTouchMove = e => {
+		console.log('Player - handleTouchMove, e:', e)
+		// this.setState({position: })
+	}
+
+	handleTouchEnd = e => {
+		console.log('Player - handleTouchEnd, e:', e)
 	}
 
 	render() {
@@ -77,9 +94,9 @@ export class Player extends Component {
 		} = this.props;
 
 		const { position } = this.state;
-
+		console.log('classes.root', classes.root)
 		return (
-			<Draggable 
+			<Draggable
 				axis="y"
 				defaultPosition={{x: 0, y: 0}}
         position={{x: 0, y: position}}
@@ -87,22 +104,16 @@ export class Player extends Component {
 				onStart={this.handleDragStart}
 				onDrag={this.handleDrag}
 				onStop={this.handleDragStop}
+				// onTouchStart={this.handleTouchStart}
 			>
-				<div className={classes.root}>
+				<div 
+					className={classes.root}
+				>
 					<div className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}>
-						<QueueList 
-							queue={player.queue}
-							queueIndex={player.queueIndex}
-							currentTrack={player.currentTrack} 
-							handleStopTrack={handleStopTrack}
-							handlePlayTrack={handlePlayTrack}
-							handlePlayFromQueue={handlePlayFromQueue}
-							showQueue={player.showQueue}
-						/>
 						<PlayerProgress 
 							player={player}
 							handleSeek={handleSeek}
-						 />
+						/>
 						<PlayerControls 
 							player={player}
 							handleStopTrack={handleStopTrack}
@@ -112,7 +123,17 @@ export class Player extends Component {
 							handlePlayPrev={handlePlayPrev}
 							handleToggleQueue={handleToggleQueue}
 						/>
+						<QueueList 
+						queue={player.queue}
+						queueIndex={player.queueIndex}
+						currentTrack={player.currentTrack} 
+						handleStopTrack={handleStopTrack}
+						handlePlayTrack={handlePlayTrack}
+						handlePlayFromQueue={handlePlayFromQueue}
+						showQueue={player.showQueue}
+					/>
 					</div>
+					
 				</div>
 			</Draggable>
 		);

@@ -67,7 +67,8 @@ export const theme = {
     },
     player: {
       width: 900,
-      height: 62,
+      // height: 62,
+      height: 56,
     },
     playerProgress: {
       height: 10,

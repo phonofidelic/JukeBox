@@ -48,12 +48,12 @@ class QueueList extends Component {
 		const theme = this.context;
 
 		return (
-			<Collapse 
-				direction="up" 
-				in={showQueue} 
-				collapsedHeight="0px"
-				timeout="auto"
-			>
+			//<Collapse 
+				//direction="up" 
+				//in={showQueue} 
+				//collapsedHeight="0px"
+				//timeout="auto"
+			//>
 				<List className={classes.root} style={{height: window.innerHeight - theme.dimensions.player.height}}>
 					{
 						queue.map((track, i) => (
@@ -82,7 +82,7 @@ class QueueList extends Component {
 						))
 					}
 				</List>
-			</Collapse>
+			//</Collapse>
 		);
 	}
 }
