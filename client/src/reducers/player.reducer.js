@@ -7,7 +7,6 @@ import {
 	ADD_TRACK_TO_QUEUE,
 	PLAY_NEXT,
 	PLAY_PREV,
-	TOGGLE_QUEUE_VISIBILITY,
 	PLAY_FROM_QUEUE,
 	SEEK,
 } from '../actiontypes';
@@ -89,12 +88,6 @@ const player = (state = INITIAL_STATE, action) => {
 				playing: true,
 				queueIndex: state.queueIndex - 1,
 				currentTrack: state.queue[state.queueIndex - 1]
-			}
-
-		case TOGGLE_QUEUE_VISIBILITY:
-			return {
-				...state,
-				showQueue: !state.showQueue
 			}
 
 		case PLAY_FROM_QUEUE:

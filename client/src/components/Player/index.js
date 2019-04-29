@@ -63,6 +63,23 @@ export class Player extends Component {
 		// return true;
 	}
 
+	handlePlayerToggle = () => {
+		const { isOpen } = this.state;
+
+		if (!isOpen) {
+			this.setState({
+				isOpen: true,
+				position: WINDOW_TOP + this.context.dimensions.player.height,
+			});
+			return console.log('UP')
+		}
+		this.setState({
+			isOpen: false,
+			position: 0,
+		});
+		console.log('DOWN')
+	}
+
 	render() {
 		const { 
 			player, 
@@ -72,14 +89,13 @@ export class Player extends Component {
 			handlePauseTrack,
 			handlePlayNext,
 			handlePlayPrev,
-			handleToggleQueue,
 			handlePlayFromQueue,
 			handleSeek,
 			classes,
 		} = this.props;
 
-		const { position } = this.state;
-		console.log('classes.root', classes.root)
+		const { position, isOpen } = this.state;
+
 		return (
 			<Draggable
 				axis="y"
@@ -100,25 +116,24 @@ export class Player extends Component {
 						/>
 						<PlayerControls 
 							player={player}
+							playerIsOpen={isOpen}
 							userAgentIsMobile={userAgentIsMobile}
 							handleStopTrack={handleStopTrack}
 							handlePlayTrack={handlePlayTrack}
 							handlePauseTrack={handlePauseTrack}
 							handlePlayNext={handlePlayNext}
 							handlePlayPrev={handlePlayPrev}
-							handleToggleQueue={handleToggleQueue}
+							handlePlayerToggle={this.handlePlayerToggle}
 						/>
 						<QueueList 
-						queue={player.queue}
-						queueIndex={player.queueIndex}
-						currentTrack={player.currentTrack} 
-						handleStopTrack={handleStopTrack}
-						handlePlayTrack={handlePlayTrack}
-						handlePlayFromQueue={handlePlayFromQueue}
-						showQueue={player.showQueue}
-					/>
+							queue={player.queue}
+							queueIndex={player.queueIndex}
+							currentTrack={player.currentTrack} 
+							handleStopTrack={handleStopTrack}
+							handlePlayTrack={handlePlayTrack}
+							handlePlayFromQueue={handlePlayFromQueue}
+						/>
 					</div>
-					
 				</div>
 			</Draggable>
 		);
@@ -133,7 +148,6 @@ Player.propTypes = {
 	handleStopTrack: PropTypes.func.isRequired,
 	handlePlayNext: PropTypes.func.isRequired,
 	handlePlayPrev: PropTypes.func.isRequired,
-	handleToggleQueue: PropTypes.func.isRequired,
 	handlePlayFromQueue: PropTypes.func.isRequired,
 	handleSeek: PropTypes.func.isRequired,
 }

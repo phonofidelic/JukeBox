@@ -34,7 +34,6 @@ export const // uploaderActionTypes
 						 ADD_TRACK_TO_QUEUE = 'add_track_to_queue',
 						 PLAY_NEXT = 'play_next',
 						 PLAY_PREV = 'play_prev',
-						 TOGGLE_QUEUE_VISIBILITY = 'toggle_queue_visibility',
 						 PLAY_FROM_QUEUE = 'play_from_queue',
 						 SEEK = 'seek',
 						 // messageActiontypes

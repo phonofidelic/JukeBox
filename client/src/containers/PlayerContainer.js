@@ -48,10 +48,6 @@ class PlayerContainer extends Component {
 		this.props.playPrev(player.queue, player.queueIndex);
 	}
 
-	handleToggleQueue() {
-		this.props.toggleQueue();
-	}
-
 	handlePlayFromQueue(queue, prevQueueIndex, queueIndex, track) {
 		this.props.playFromQueue(queue, prevQueueIndex, queueIndex, track);
 	}
@@ -77,7 +73,6 @@ class PlayerContainer extends Component {
 				handleStopTrack={ this.handleStopTrack.bind(this) }
 				handlePlayNext={ this.handlePlayNext.bind(this) }
 				handlePlayPrev={ this.handlePlayPrev.bind(this) }
-				handleToggleQueue={ this.handleToggleQueue.bind(this) }
 				handlePlayFromQueue={ this.handlePlayFromQueue.bind(this) }
 				handleSeek={ this.handleSeek.bind(this) }
 			/>

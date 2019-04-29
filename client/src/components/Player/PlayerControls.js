@@ -5,7 +5,6 @@ import { ThemeContext, getPlayerHeight } from '../../contexts/theme.context';
 
 import styles from './PlayerControls.styles';
 
-import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Pause from '@material-ui/icons/Pause';
@@ -63,12 +62,13 @@ class PlayerControls extends Component {
 		const {
 			player,
 			// handleStopTrack,
+			playerIsOpen,
 			userAgentIsMobile,
 			handlePlayTrack,
 			handlePauseTrack,
 			handlePlayNext,
 			handlePlayPrev,
-			handleToggleQueue,
+			handlePlayerToggle,
 			classes,
 		} = this.props;
 
@@ -127,9 +127,9 @@ class PlayerControls extends Component {
 				{ !userAgentIsMobile &&
 					<ToggleButtonContainer>
 						<IconButton 
-							onClick={ handleToggleQueue }
+							onClick={ handlePlayerToggle }
 						>
-							{ player.showQueue ? <ExpandMore /> : <ExpandLess /> }
+							{ playerIsOpen ? <ExpandMore /> : <ExpandLess /> }
 						</IconButton>
 					</ToggleButtonContainer>
 				}

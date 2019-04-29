@@ -4,7 +4,6 @@ import {
 	STOP_TRACK,
 	PLAY_NEXT,
 	PLAY_PREV,
-	TOGGLE_QUEUE_VISIBILITY,
 	PLAY_FROM_QUEUE,
 	START_NEW_QUEUE,
 	UNSHIFT_TO_QUEUE,
@@ -172,15 +171,6 @@ export const playPrev = (queue, queueIndex) => {
 	return dispatch => {
 		dispatch({
 			type: PLAY_PREV
-		});
-	};
-}
-
-export const toggleQueue = () => {
-	console.log('toggle')
-	return dispatch => {
-		dispatch({
-			type: TOGGLE_QUEUE_VISIBILITY
 		});
 	};
 }
