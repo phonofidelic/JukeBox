@@ -8,7 +8,7 @@ import {
 	ListItem, 
 	Grid, 
 	Typography, 
-	Collapse,
+	// Collapse,
 } from '@material-ui/core/';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -39,7 +39,7 @@ class QueueList extends Component {
 
 	render() {
 		const { 
-			showQueue,
+			// showQueue,
 			queue, 
 			currentTrack, 
 			classes,

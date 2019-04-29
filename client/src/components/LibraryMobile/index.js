@@ -18,32 +18,14 @@ const ORDER_TYPES = {
 export class LibraryMobile extends Component {
 	static contextType = ThemeContext;
 
-	constructor(props) {
-		super(props);
-		// this.trackListNode = React.createRef();
-	}
 	state = {
 		orderBy: ORDER_TYPES.TITLE,
 	}
-
-	// componentDidMount() {
-	// 	const { queueIsOpen } = this.props;
-	// 	console.log('this.trackListNode:', this.trackListNode)
-	// 	queueIsOpen && this.trackListNode.current.addEventListener('touchmove', e => {
-	// 		console.log('trackListNode scroll, e:', e)
-	// 		e.preventDefault();
-	// 	}, false);
-	// }
 
 	setOrder(type) {
 		this.setState({
 			orderBy: type
 		});
-	}
-
-	handleDrag(e) {
-		// e.preventDefault()
-		console.log('draaaag')
 	}
 
 	render() {
@@ -74,8 +56,6 @@ export class LibraryMobile extends Component {
 		return (
 			<div 
 				style={styles.root} 
-				// ref={this.trackListNode}
-				// onTouchMove={this.handleDrag}
 			>
 				<LibraryControls 
 					orderBy={this.state.orderBy} 

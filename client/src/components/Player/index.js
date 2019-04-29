@@ -15,8 +15,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
 
-const PREVENT_DEFAULT = (e) => e.preventDefault();
-
 export class Player extends Component {
 	static contextType = ThemeContext;
 
@@ -65,19 +63,6 @@ export class Player extends Component {
 		// return true;
 	}
 
-	handleTouchStart = e => {
-		console.log('Player - handleTouchStart, e:', e)
-	}
-
-	handleTouchMove = e => {
-		console.log('Player - handleTouchMove, e:', e)
-		// this.setState({position: })
-	}
-
-	handleTouchEnd = e => {
-		console.log('Player - handleTouchEnd, e:', e)
-	}
-
 	render() {
 		const { 
 			player, 
@@ -104,7 +89,6 @@ export class Player extends Component {
 				onStart={this.handleDragStart}
 				onDrag={this.handleDrag}
 				onStop={this.handleDragStop}
-				// onTouchStart={this.handleTouchStart}
 			>
 				<div 
 					className={classes.root}
@@ -116,6 +100,7 @@ export class Player extends Component {
 						/>
 						<PlayerControls 
 							player={player}
+							userAgentIsMobile={userAgentIsMobile}
 							handleStopTrack={handleStopTrack}
 							handlePlayTrack={handlePlayTrack}
 							handlePauseTrack={handlePauseTrack}

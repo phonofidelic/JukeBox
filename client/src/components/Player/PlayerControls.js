@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import { ThemeContext } from '../../contexts/theme.context';
+import { ThemeContext, getPlayerHeight } from '../../contexts/theme.context';
 
 import styles from './PlayerControls.styles';
 
@@ -15,6 +16,46 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+const Container = styled.div`
+	display: flex;
+	width: 100%;
+`
+
+const CurrentTrackContainer = styled.div`
+	display: flex;
+	height: ${getPlayerHeight}
+`
+
+const ControlsContainer = styled.div`
+	display: flex;
+	height: ${getPlayerHeight}px;
+	justify-content: center;
+	width: 100%;
+
+	// & > button {
+	// 	flex: auto;
+	// }
+`
+
+const ToggleButtonContainer = styled.div`
+	// display: flex;
+`
+
+const Control = styled.div`
+	flex: auto;
+	max-width: 80px;
+`
+
+const CurrentTrackImage = styled.div`
+
+`
+
+const CurrentTrackInfo = styled.div`
+	// flex: initial;
+	width: 120px;
+	padding-left: 8px;
+`
+
 class PlayerControls extends Component {
 	static contextType = ThemeContext;
 
@@ -22,6 +63,7 @@ class PlayerControls extends Component {
 		const {
 			player,
 			// handleStopTrack,
+			userAgentIsMobile,
 			handlePlayTrack,
 			handlePauseTrack,
 			handlePlayNext,
@@ -33,33 +75,35 @@ class PlayerControls extends Component {
 		const theme = this.context;
 
 		return (
-			<Grid 
-				container 
-				alignItems="center"
-			>
-				<Grid item xs={5} className={classes.currentTrackContainer}>
-					<Grid container>
-						<Grid item xs={5}>
-							<img 
-								src={player.currentTrack.image.src} 
-								alt="Album art" 
-								width={theme.dimensions.player.height - theme.dimensions.playerProgress.height} 
-								height={theme.dimensions.player.height - theme.dimensions.playerProgress.height} 
-							/>
-						</Grid>
-						<Grid item xs={7}>
-							<Typography noWrap>{player.currentTrack.title}</Typography>
-							<Typography noWrap variant="caption">{player.currentTrack.artist.name}</Typography>
-						</Grid>
-					</Grid>
-				</Grid>
-				<Grid 
-					item xs={'auto'} 
-					style={{height: '56px'}}
+			<Container>
+				<CurrentTrackContainer 
+					theme={theme}
+					item xs={5} 
+					className={classes.currentTrackContainer}
+					style={{height: theme.dimensions.player.height}}
 				>
-					<IconButton disabled={player.queueIndex === 0} onClick={ handlePlayPrev }>
-						<SkipPrevious />
-					</IconButton>
+					<CurrentTrackImage theme={theme}>
+						<img 
+							src={player.currentTrack.image.src} 
+							alt="Album art" 
+							width={theme.dimensions.player.height - theme.dimensions.playerProgress.height} 
+							height={theme.dimensions.player.height - theme.dimensions.playerProgress.height} 
+						/>
+					</CurrentTrackImage>
+					<CurrentTrackInfo theme={theme}>
+						<Typography noWrap>{player.currentTrack.title}</Typography>
+						<Typography noWrap variant="caption">{player.currentTrack.artist.name}</Typography>
+					</CurrentTrackInfo>
+				</CurrentTrackContainer>
+				<ControlsContainer
+					theme={theme} 
+				>
+					<Control>
+						<IconButton disabled={player.queueIndex === 0} onClick={ handlePlayPrev }>
+							<SkipPrevious />
+						</IconButton>
+					</Control>
+					<Control>
 					{
 						!player.playing ? 
 						<IconButton onClick={ handlePlayTrack }>
@@ -70,26 +114,26 @@ class PlayerControls extends Component {
 							<Pause />
 						</IconButton>
 					}
-					<IconButton 
-						disabled={player.queueIndex+1 === player.queue.length} 
-						onClick={ handlePlayNext }>
-						<SkipNext />
-					</IconButton>
-				</Grid>
-				{/*<div style={styles.togglePlayerButton}>*/}
-				<Grid 
-					item xs={'auto'} 
-					className={classes.toggleButtonContainer}
-					style={{height: '56px'}}
-				>
-					<IconButton 
-						onClick={ handleToggleQueue }
-					>
-						{ player.showQueue ? <ExpandMore /> : <ExpandLess /> }
-					</IconButton>
-				</Grid>
-				{/*</div>*/}
-			</Grid>
+					</Control>
+					<Control>
+						<IconButton 
+							disabled={player.queueIndex+1 === player.queue.length} 
+							onClick={ handlePlayNext }>
+							<SkipNext />
+						</IconButton>
+					</Control>
+					
+				</ControlsContainer>
+				{ !userAgentIsMobile &&
+					<ToggleButtonContainer>
+						<IconButton 
+							onClick={ handleToggleQueue }
+						>
+							{ player.showQueue ? <ExpandMore /> : <ExpandLess /> }
+						</IconButton>
+					</ToggleButtonContainer>
+				}
+			</Container>
 		);
 	}
 }
