@@ -127,6 +127,7 @@ export class Player extends Component {
 						/>
 						<QueueList 
 							queue={player.queue}
+							playerIsOpen={isOpen}
 							queueIndex={player.queueIndex}
 							currentTrack={player.currentTrack} 
 							handleStopTrack={handleStopTrack}
