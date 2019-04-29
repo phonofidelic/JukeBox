@@ -5,7 +5,7 @@ const styles = theme => ({
 		width: 'inherit',
 		top: theme.dimensions.player.height,
 		bottom: 0,
-		overflowY: 'scroll',
+		overflowY: 'auto',
 		padding: 0,
 	},
 	playing: {
