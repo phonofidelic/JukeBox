@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
-import { ThemeContext } from '../../contexts/theme.context';
+import { 
+	ThemeContext, 
+	getSecondaryBackgroundColor,
+} from '../../contexts/theme.context';
 
-import { withTheme } from '@material-ui/core/styles';
+import { Slider } from 'material-ui-slider';
 
 class PlayerProgress extends Component {
 	static contextType = ThemeContext;
@@ -11,6 +14,7 @@ class PlayerProgress extends Component {
 		super(props);
 		this.state = {
 			timeElapsed: 0,
+			sliderValue: 0,
 			isMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
 		}
 	}
@@ -18,15 +22,7 @@ class PlayerProgress extends Component {
 	componentDidMount() {
 		window.addEventListener('howl_play', e => {
 			// console.log('howl_play event', e);
-			const { player } = this.props;
-
-			if (this.intervalID) clearInterval(this.intervalID);
-
-			this.intervalID = setInterval(() => {
-				this.setState({
-					timeElapsed: player.currentTrack.howl.seek() || 0
-				})
-			}, 1)
+			this.startTimer();
 		});
 
 		window.addEventListener('howl_pause', e => {
@@ -40,9 +36,15 @@ class PlayerProgress extends Component {
 		});
 	}
 
-	handlePosClick(segment) {
+	startTimer() {
 		const { player } = this.props;
-		this.props.handleSeek(segment, player.currentTrack);
+		if (this.intervalID) clearInterval(this.intervalID);
+
+		this.intervalID = setInterval(() => {
+			this.setState({
+				timeElapsed: player.currentTrack.howl.seek() || 0,
+			})
+		}, 1000);
 	}
 
 	getSegments() {
@@ -57,74 +59,72 @@ class PlayerProgress extends Component {
 		return segments;
 	}
 
+	handleChange(value) {
+		// console.log('PlayerProgress - handleChange, value:', value)
+		clearInterval(this.intervalID)
+	}
+
+	handleChangeComplete(value) {
+		const { 
+			player, 
+			handleSeek,
+		} = this.props;
+
+		// Convert 'value' (percentage) to time position
+		const pos = player.currentTrack.format.duration * (value / 100);
+		handleSeek(pos, player.currentTrack);
+
+		this.startTimer();
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.intervalID)
+	}
+
 	render() {
-		const { player } = this.props;
-		const { isMobile } = this.state;
+		const { 
+			player, 
+			playerIsOpen,
+		} = this.props;
+
+		const { 
+			isMobile,
+			timeElapsed,
+		} = this.state;
 
 		const theme = this.context;
 
 		const styles = {
 			root: {
-				height: '10px',
+				height: playerIsOpen ? 'inherit' : '4px',
 				width: isMobile ? '100%' : theme.dimensions.libraryDesktop.maxWidth,
-				background: '#ccc',
+				background: playerIsOpen ? getSecondaryBackgroundColor({theme}) : 'none',
 			},
 			progress: {
 				background: theme.palette.secondary.main,
 				height: '100%',
 				width: player.currentTrack 
-					? `${this.state.timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`
+					? `${timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`
 					: 0,
 			},
 		}
 
-		const segments = this.getSegments();
-
-		let playerWidth = isMobile ? 
-			window.innerWidth // For full-width playe
-			: 
-			theme.dimensions.libraryDesktop.maxWidth; // For fixed width player
-			
-		const segWidth = Math.floor(playerWidth/segments.length);
-	
-		const segContainerStyle = {
-			display: 'flex',
-			position: 'absolute',
-			height: `${theme.dimensions.playerProgress.height}px`,
-			width: `${playerWidth}px`,
-			bottom: `${theme.dimensions.player.height - 10}px`,
-			cursor: 'pointer',
-		}
-		const segStyle = {
-			// background: 'green', // ONLY FOR DEBUG
-			// border: '1px solid #fff', // ONLY FOR DEBUG
-			borderTop: 'none',
-			borderBottom: 'none',
-			height: '100%',
-			width: `${segWidth}px`,
-			flex: '1',
-		}
 		return (
-			// <span>time: {this.state.timeElapsed / player.currentTrack.format.duration * 100 }</span>
 			<div style={styles.root}>
-				<div style={styles.progress}></div>
-				<div style={segContainerStyle}>
-				{
-					segments.map((segment, i) => {
-						return (
-							<span 
-								key={i} 
-								style={segStyle} 
-								onClick={() => this.handlePosClick(segment)}
-								onTouchEnd={() => this.handlePosClick(segment)}
-							/>
-						)
-					})
+				{ playerIsOpen ?
+					<Slider
+						style={{backgroundColor: getSecondaryBackgroundColor({theme})}}
+						value={timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}
+						onChange={this.handleChange.bind(this)}
+						onChangeComplete={this.handleChangeComplete.bind(this)}
+						color="#e62118"
+					/>
+					:
+					<div style={styles.progress}></div>
 				}
-				</div>
 			</div>
 		);
 	}
 }
 
-export default withTheme()(PlayerProgress);
+export default PlayerProgress;

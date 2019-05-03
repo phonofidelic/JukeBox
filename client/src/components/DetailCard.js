@@ -31,7 +31,7 @@ class DetailCard extends Component {
 		const styles = {
 			root: {
 				top: 0,
-				// zIndex: 1,
+				zIndex: 3000,
 			},
 			cardMedia: {
 				width: 600,
@@ -52,7 +52,7 @@ class DetailCard extends Component {
 		}
 
 		return (
-			<div>
+			<div style={styles.root}>
 				<Dialog
 					style={styles.dialog}
 					fullScreen={isMobile}

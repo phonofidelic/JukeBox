@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import styles from './Player.styles';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '../../contexts/theme.context';
-// import {Howl, Howler} from 'howler';
+import {
+	ThemeContext,
+	getSecondaryBackgroundColor,
+} from '../../contexts/theme.context';
+
+import PlayerBar from './PlayerBar';
 import PlayerProgress from './PlayerProgress';
 import PlayerControls from './PlayerControls';
 import QueueList from './QueueList';
 
 import Draggable from 'react-draggable';
 
-// import Collapse from '@material-ui/core/Collapse';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const WINDOW_TOP = window.innerHeight * -1;
@@ -22,6 +25,7 @@ export class Player extends Component {
 		super(props)
 		this.state = {
 			isOpen: false,
+			isDragging: false,
 			position: 0,
 		}
 	}
@@ -36,8 +40,9 @@ export class Player extends Component {
 	handleDrag = (e, data) => {
 		// e.stopImmediatePropagation();
 		// e.preventDefault();
-		console.log('*** draging', data)
-		return true;
+		// console.log('*** draging', data)
+		// return true;
+		this.setState({isDragging: true})
 	}
 
 	handleDragStop = (e, data) => {
@@ -51,12 +56,14 @@ export class Player extends Component {
 		if (!isOpen & touchPos < TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE * 2) {
 			this.setState({
 				isOpen: true,
+				isDragging: false,
 				position: WINDOW_TOP + this.context.dimensions.player.height,
 			});
 			return console.log('UP')
 		}
 		this.setState({
 			isOpen: false,
+			isDragging: false,
 			position: 0,
 		});
 		console.log('DOWN')
@@ -94,27 +101,31 @@ export class Player extends Component {
 			classes,
 		} = this.props;
 
-		const { position, isOpen } = this.state;
+		const {
+			isOpen,
+			isDragging,
+			position,
+		} = this.state;
+
+		const theme = this.context;
 
 		return (
-			<Draggable
-				axis="y"
-				defaultPosition={{x: 0, y: 0}}
-        position={{x: 0, y: position}}
-        scale={1}
-				onStart={this.handleDragStart}
-				onDrag={this.handleDrag}
-				onStop={this.handleDragStop}
+			<div 
+				style={{zIndex: isOpen || isDragging ? 1 : 0}}
+				className={classes.root}
 			>
-				<div 
-					className={classes.root}
+				<Draggable
+					disabled={!userAgentIsMobile}
+					axis="y"
+					defaultPosition={{x: 0, y: 0}}
+	        position={{x: 0, y: position}}
+	        scale={1}
+					onStart={this.handleDragStart}
+					onDrag={this.handleDrag}
+					onStop={this.handleDragStop}
 				>
 					<div className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}>
-						<PlayerProgress 
-							player={player}
-							handleSeek={handleSeek}
-						/>
-						<PlayerControls 
+						<PlayerBar
 							player={player}
 							playerIsOpen={isOpen}
 							userAgentIsMobile={userAgentIsMobile}
@@ -134,9 +145,43 @@ export class Player extends Component {
 							handlePlayTrack={handlePlayTrack}
 							handlePlayFromQueue={handlePlayFromQueue}
 						/>
+						<div style={{
+							backgroundColor: getSecondaryBackgroundColor({theme}), 
+							position: 'fixed',
+							width: '100%',
+							bottom: !isOpen ? theme.dimensions.player.height : (window.innerHeight - (theme.dimensions.player.height * 2)) * -1,
+							zIndex: 1000,
+						}}>
+							<PlayerProgress 
+								player={player}
+								playerIsOpen={isOpen}
+								handleSeek={handleSeek}
+							/>
+						</div>
+						{ isOpen &&
+							<div style={{
+									backgroundColor: getSecondaryBackgroundColor({theme}), 
+									position: 'fixed',
+									width: '100%',
+									bottom: (window.innerHeight - theme.dimensions.player.height) * -1,
+									// zIndex: 1000,
+								}}
+							>
+								<PlayerControls
+									player={player}
+									playerIsOpen={isOpen}
+									userAgentIsMobile={userAgentIsMobile}
+									handlePlayTrack={handlePlayTrack}
+									handlePauseTrack={handlePauseTrack}
+									handlePlayNext={handlePlayNext}
+									handlePlayPrev={handlePlayPrev}
+									handlePlayerToggle={this.handlePlayerToggle}
+								/>
+							</div>
+						}
 					</div>
-				</div>
-			</Draggable>
+				</Draggable>
+			</div>
 		);
 	}
 }

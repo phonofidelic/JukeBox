@@ -45,7 +45,6 @@ class QueueList extends Component {
 		const { 
 			queue, 
 			currentTrack,
-			playerIsOpen,
 			classes,
 		} = this.props;
 
@@ -58,7 +57,6 @@ class QueueList extends Component {
 			<List 
 				className={classes.root} 
 				style={{height: windowHeight - theme.dimensions.player.height}}
-				// style={{display: playerIsOpen ? 'block' : 'none', transform: `translateY(${theme.dimensions.player.height}px)`}}
 			>
 				{
 					queue.map((track, i) => (

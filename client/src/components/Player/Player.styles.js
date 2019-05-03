@@ -1,14 +1,14 @@
 const styles = theme => ({
 	root: {
 	  position: 'fixed',
-	  bottom: theme.dimensions.navMobile.height - 10,
+	  bottom: 0,
 	  width: '100%',
-	  zIndex: 2000,
+	  // zIndex: 2000,
 	},
 	containerMobile: {
 		backgroundColor: theme.palette.secondary.light,
 		width: '100%',
-		height: theme.dimensions.player.height + 10,
+		// height: theme.dimensions.player.height + 10,
 		margin: '0 auto',
 		boxShadow: '0px -1px 20px 1px #ccc',
 	  padding: '0',
