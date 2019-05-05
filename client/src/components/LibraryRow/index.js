@@ -76,7 +76,7 @@ export class LibraryRow extends Component {
 
 		const styles = {
 			playing: {
-				zIndex: 2,
+				// zIndex: 2,
 				position: 'absolute',
 				backgroundColor: 'rgba(0, 0, 0, .5)',
 			}

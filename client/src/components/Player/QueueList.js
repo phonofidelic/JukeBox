@@ -15,29 +15,9 @@ class QueueList extends Component {
 	constructor(props) {
 		super(props);
 		this.handleQueueItemClick = this.handleQueueItemClick.bind(this)
-
-		this.state = {
-			windowHeight: window.innerHeight,
-		}
-	}
-
-	componentDidMount() {
-		window.addEventListener('resize', this.handleWindowResize);
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.handleWindowResize)
-	}
-
-	handleWindowResize = e => {
-		this.setState({windowHeight: e.target.innerHeight})
 	}
 
 	handleQueueItemClick(newQueueIndex, track) {
-		// console.log('handleQueueItemClick, track:', track)
-		console.log('handleQueueItemClick, newQueueIndex:', newQueueIndex)
-		// console.log('handleQueueItemClick, currentTrack:', currentTrack)
-		
 		this.props.handlePlayFromQueue(this.props.queue, this.props.queueIndex, newQueueIndex, track);
 	}
 
@@ -48,15 +28,9 @@ class QueueList extends Component {
 			classes,
 		} = this.props;
 
-		const { windowHeight } = this.state;
-		console.log('windowHeight:', windowHeight)
-
-		const theme = this.context;
-
 		return (
 			<List 
 				className={classes.root} 
-				// style={{height: windowHeight - theme.dimensions.player.height}}
 			>
 				{
 					queue.map((track, i) => (

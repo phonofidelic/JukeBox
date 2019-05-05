@@ -6,6 +6,8 @@ import {
 	getSecondaryBackgroundColor,
 } from '../../contexts/theme.context';
 
+import Backdrop from '../Backdrop'
+
 import PlayerBar from './PlayerBar';
 import PlayerProgress from './PlayerProgress';
 import PlayerControls from './PlayerControls';
@@ -28,27 +30,31 @@ export class Player extends Component {
 			isDragging: false,
 			showQueue: true,
 			position: 0,
+			windowHeight: window.innerHeight,
 		}
+	}
+
+	componentDidMount() {
+		window.addEventListener('resize', this.handleWindowResize);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.handleWindowResize);
+	}
+
+	handleWindowResize = e => {
+		this.setState({windowHeight: e.target.innerHeight});
 	}
 	
 	handleDragStart = (e) => {
-		// e.preventDefault()
-		// e.stopImmediatePropagation();
 		console.log('*** drag start', e)
-		// return true;
 	}
 
 	handleDrag = (e, data) => {
-		// e.stopImmediatePropagation();
-		// e.preventDefault();
-		// console.log('*** draging', data)
-		// return true;
-		this.setState({isDragging: true})
+		this.setState({isDragging: true});
 	}
 
 	handleDragStop = (e, data) => {
-		// e.stopImmediatePropagation();
-		// e.preventDefault()
 		const { isOpen } = this.state;
 
 		const touchPos = data.y
@@ -93,6 +99,10 @@ export class Player extends Component {
 		this.setState({showQueue: !this.state.showQueue})
 	}
 
+	testFunk = () => {
+		console.log('click')
+	}
+
 	render() {
 		const { 
 			player, 
@@ -112,15 +122,20 @@ export class Player extends Component {
 			isDragging,
 			showQueue,
 			position,
+			windowHeight,
 		} = this.state;
 
 		const theme = this.context;
 
+		console.log('isOpen:', isOpen)
 		return (
 			<div 
 				style={{zIndex: isOpen || isDragging ? 1 : 0}}
 				className={classes.root}
 			>
+				{ !userAgentIsMobile && 
+					<Backdrop open={isOpen} onBackdropClick={this.handlePlayerToggle} />
+				}
 				<Draggable
 					disabled={!userAgentIsMobile}
 					axis="y"
@@ -148,7 +163,7 @@ export class Player extends Component {
 						<div style={{
 							background: theme.palette.secondary.light,
 							position: 'absolute',
-							height: window.innerHeight - theme.dimensions.player.height,
+							height: windowHeight - theme.dimensions.player.height,
 							width: '100%',
 						}}>
 							{ showQueue ?
@@ -165,6 +180,7 @@ export class Player extends Component {
 								<div style={{display: 'flex'}}>
 									<img 
 										src={player.currentTrack.image.src} 
+										alt={`Album art for ${player.currentTrack.album.title}`}
 										width={theme.dimensions.player.width}
 										height={userAgentIsMobile ? window.innerWidth : theme.dimensions.player.width}
 									/>
@@ -190,7 +206,6 @@ export class Player extends Component {
 									position: 'fixed',
 									width: '100%',
 									bottom: (window.innerHeight - theme.dimensions.player.height) * -1,
-									// zIndex: 1000,
 								}}
 							>
 								<PlayerControls

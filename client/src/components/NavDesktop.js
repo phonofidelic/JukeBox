@@ -36,7 +36,7 @@ class NavDesktop extends Component {
         marginTop: theme.dimensions.navDesktop.marginTop,
         backgroundColor: theme.palette.secondary.light,
         // boxShadow: '0px -1px 10px 1px #ccc',
-        zIndex: 1,
+        // zIndex: 1,
       },
     }
 

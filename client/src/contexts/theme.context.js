@@ -53,7 +53,7 @@ export const theme = {
       navWidth: 80, // TODO: Find usage of this and change to 'width'
       width: 80,
       marginTop: 58,
-      zIndex: 3,
+      // zIndex: 3,
     },
     navMobile: {
       // height: 56,
