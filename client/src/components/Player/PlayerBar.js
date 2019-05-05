@@ -9,10 +9,20 @@ import {
 import CurrentTrack from './CurrentTrack';
 import PlayerControls from './PlayerControls';
 
+import IconButton from '@material-ui/core/IconButton';
+import QueueMusic from '@material-ui/icons/QueueMusic';
+import Album from '@material-ui/icons/Album';
+
 const Container = styled.div`
 	background-color: ${getSecondaryBackgroundColor};
 	display: flex;
 	width: 100%;
+`
+
+const ToggleQueueContainer = styled.div`
+	color: rgba(0, 0, 0, 0.54);
+	margin-top: 8px;
+	margin-left: auto;
 `
 
 class PlayerBar extends Component {
@@ -22,12 +32,14 @@ class PlayerBar extends Component {
 		const {
 			player,
 			playerIsOpen,
+			showQueue,
 			userAgentIsMobile,
 			handlePlayTrack,
 			handlePauseTrack,
 			handlePlayNext,
 			handlePlayPrev,
 			handlePlayerToggle,
+			handleQueueToggle,
 		} = this.props;
 
 		const theme = this.context;
@@ -50,6 +62,14 @@ class PlayerBar extends Component {
 						handlePlayerToggle={handlePlayerToggle}
 					/>
 				}
+				{ playerIsOpen &&
+					<ToggleQueueContainer>
+						<IconButton onClick={() => handleQueueToggle()}>
+							{	showQueue ? <Album /> : <QueueMusic /> }
+						</IconButton>
+					</ToggleQueueContainer>
+				}
+				
 			</Container>
 		);
 	}

@@ -26,6 +26,7 @@ export class Player extends Component {
 		this.state = {
 			isOpen: false,
 			isDragging: false,
+			showQueue: true,
 			position: 0,
 		}
 	}
@@ -87,6 +88,11 @@ export class Player extends Component {
 		console.log('DOWN')
 	}
 
+	handleQueueToggle = () => {
+		console.log('handleQueueToggle')
+		this.setState({showQueue: !this.state.showQueue})
+	}
+
 	render() {
 		const { 
 			player, 
@@ -104,6 +110,7 @@ export class Player extends Component {
 		const {
 			isOpen,
 			isDragging,
+			showQueue,
 			position,
 		} = this.state;
 
@@ -128,6 +135,7 @@ export class Player extends Component {
 						<PlayerBar
 							player={player}
 							playerIsOpen={isOpen}
+							showQueue={showQueue}
 							userAgentIsMobile={userAgentIsMobile}
 							handleStopTrack={handleStopTrack}
 							handlePlayTrack={handlePlayTrack}
@@ -135,16 +143,34 @@ export class Player extends Component {
 							handlePlayNext={handlePlayNext}
 							handlePlayPrev={handlePlayPrev}
 							handlePlayerToggle={this.handlePlayerToggle}
+							handleQueueToggle={this.handleQueueToggle}
 						/>
-						<QueueList 
-							queue={player.queue}
-							playerIsOpen={isOpen}
-							queueIndex={player.queueIndex}
-							currentTrack={player.currentTrack} 
-							handleStopTrack={handleStopTrack}
-							handlePlayTrack={handlePlayTrack}
-							handlePlayFromQueue={handlePlayFromQueue}
-						/>
+						<div style={{
+							background: theme.palette.secondary.light,
+							position: 'absolute',
+							height: window.innerHeight - theme.dimensions.player.height,
+							width: '100%',
+						}}>
+							{ showQueue ?
+								<QueueList 
+									queue={player.queue}
+									playerIsOpen={isOpen}
+									queueIndex={player.queueIndex}
+									currentTrack={player.currentTrack} 
+									handleStopTrack={handleStopTrack}
+									handlePlayTrack={handlePlayTrack}
+									handlePlayFromQueue={handlePlayFromQueue}
+								/>
+								:
+								<div style={{display: 'flex'}}>
+									<img 
+										src={player.currentTrack.image.src} 
+										width={theme.dimensions.player.width}
+										height={userAgentIsMobile ? window.innerWidth : theme.dimensions.player.width}
+									/>
+								</div>
+							}
+						</div>
 						<div style={{
 							backgroundColor: getSecondaryBackgroundColor({theme}), 
 							position: 'fixed',

@@ -56,7 +56,7 @@ class QueueList extends Component {
 		return (
 			<List 
 				className={classes.root} 
-				style={{height: windowHeight - theme.dimensions.player.height}}
+				// style={{height: windowHeight - theme.dimensions.player.height}}
 			>
 				{
 					queue.map((track, i) => (
