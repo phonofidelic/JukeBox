@@ -19,6 +19,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
+const DRAG_TRANSITION = 'all .5s ease 0s';
 
 export class Player extends Component {
 	static contextType = ThemeContext;
@@ -31,6 +32,7 @@ export class Player extends Component {
 			showQueue: true,
 			position: 0,
 			windowHeight: window.innerHeight,
+			dragEndTransition: 'none',
 		}
 	}
 
@@ -48,6 +50,7 @@ export class Player extends Component {
 	
 	handleDragStart = (e) => {
 		console.log('*** drag start', e)
+		this.setState({dragEndTransition: 'none'})
 	}
 
 	handleDrag = (e, data) => {
@@ -65,6 +68,7 @@ export class Player extends Component {
 				isOpen: true,
 				isDragging: false,
 				position: WINDOW_TOP + this.context.dimensions.player.height,
+				dragEndTransition: DRAG_TRANSITION,
 			});
 			return console.log('UP')
 		}
@@ -72,6 +76,7 @@ export class Player extends Component {
 			isOpen: false,
 			isDragging: false,
 			position: 0,
+			dragEndTransition: DRAG_TRANSITION,
 		});
 		console.log('DOWN')
 		// return true;
@@ -99,10 +104,6 @@ export class Player extends Component {
 		this.setState({showQueue: !this.state.showQueue})
 	}
 
-	testFunk = () => {
-		console.log('click')
-	}
-
 	render() {
 		const { 
 			player, 
@@ -123,6 +124,7 @@ export class Player extends Component {
 			showQueue,
 			position,
 			windowHeight,
+			dragEndTransition,
 		} = this.state;
 
 		const theme = this.context;
@@ -137,7 +139,7 @@ export class Player extends Component {
 					<Backdrop open={isOpen} onBackdropClick={this.handlePlayerToggle} />
 				}
 				<Draggable
-					disabled={!userAgentIsMobile}
+					// disabled={!userAgentIsMobile}
 					axis="y"
 					defaultPosition={{x: 0, y: 0}}
 	        position={{x: 0, y: position}}
@@ -146,7 +148,10 @@ export class Player extends Component {
 					onDrag={this.handleDrag}
 					onStop={this.handleDragStop}
 				>
-					<div className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}>
+					<div 
+						style={{transition: dragEndTransition}}
+						className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}
+					>
 						<PlayerBar
 							player={player}
 							playerIsOpen={isOpen}
