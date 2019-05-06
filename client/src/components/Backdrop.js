@@ -13,7 +13,8 @@ const Backdrop = props => {
 		left: 0,
 		width: '100vw',
 		height: open ? '100vw': 0,
-		backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+		backgroundColor: open ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0)', 
+		transition: `all .5s ease 0s`
 	}
 	return (
 		<div 

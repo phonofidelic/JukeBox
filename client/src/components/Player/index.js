@@ -19,7 +19,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
-const DRAG_TRANSITION = 'all .5s ease 0s';
+const DRAG_TRANSITION = 'all .5s ease';
 
 export class Player extends Component {
 	static contextType = ThemeContext;
