@@ -134,34 +134,33 @@ export class LibraryContainer extends Component {
           detailViewData={library.detailViewData}
           handleCloseDetailView={this.handleCloseDetailView.bind(this)}
         /> 
-        { library.loading ? 
-          <Loader /> 
-          : 
-            userAgentIsMobile ?
-      			<LibraryMobile 
-              library={library} 
-              order={order}
-              orderBy={orderBy}
-              queueIsOpen={queueIsOpen}
-              handleUploadTracks={this.handleUploadTracks.bind(this)} 
-              handleOrderBy={this.handleOrderBy.bind(this)}
-              handleCloseDetailView={this.handleCloseDetailView.bind(this)}
-            /> 
-        		:
-            <LibraryDesktop 
-              library={library} 
-              order={order}
-              orderBy={orderBy}
-              anchorEl={anchorEl}
-              userAgentIsMobile={userAgentIsMobile}
-              handleRequestSort={this.handleRequestSort.bind(this)}
-              handleSelectTrack={this.handleSelectTrack.bind(this)}
-              handleOptionsClick={this.handleOptionsClick.bind(this)}
-              handleOptionsClose={this.handleOptionsClose.bind(this)}
-              handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
-              handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
-              handleCloseDetailView={this.handleCloseDetailView.bind(this)}
-            />
+        { library.loading && <Loader /> }
+        { 
+          userAgentIsMobile ?
+    			<LibraryMobile 
+            library={library} 
+            order={order}
+            orderBy={orderBy}
+            queueIsOpen={queueIsOpen}
+            handleUploadTracks={this.handleUploadTracks.bind(this)} 
+            handleOrderBy={this.handleOrderBy.bind(this)}
+            handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+          /> 
+      		:
+          <LibraryDesktop 
+            library={library} 
+            order={order}
+            orderBy={orderBy}
+            anchorEl={anchorEl}
+            userAgentIsMobile={userAgentIsMobile}
+            handleRequestSort={this.handleRequestSort.bind(this)}
+            handleSelectTrack={this.handleSelectTrack.bind(this)}
+            handleOptionsClick={this.handleOptionsClick.bind(this)}
+            handleOptionsClose={this.handleOptionsClose.bind(this)}
+            handleMenuOptionClickEdit={this.handleMenuOptionClickEdit.bind(this)}
+            handleMenuOptionClickDelete={this.handleMenuOptionClickDelete.bind(this)}
+            handleCloseDetailView={this.handleCloseDetailView.bind(this)}
+          />
         }
       </div>
     );
