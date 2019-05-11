@@ -89,12 +89,14 @@ export class Player extends Component {
 			this.setState({
 				isOpen: true,
 				position: WINDOW_TOP + this.context.dimensions.player.height,
+				dragEndTransition: DRAG_TRANSITION,
 			});
 			return console.log('UP')
 		}
 		this.setState({
 			isOpen: false,
 			position: 0,
+			dragEndTransition: DRAG_TRANSITION,
 		});
 		console.log('DOWN')
 	}
@@ -139,7 +141,8 @@ export class Player extends Component {
 					<Backdrop open={isOpen} onBackdropClick={this.handlePlayerToggle} />
 				}
 				<Draggable
-					// disabled={!userAgentIsMobile}
+					handle="#player-handle"
+					disabled={!userAgentIsMobile}
 					axis="y"
 					defaultPosition={{x: 0, y: 0}}
 	        position={{x: 0, y: position}}
@@ -148,7 +151,8 @@ export class Player extends Component {
 					onDrag={this.handleDrag}
 					onStop={this.handleDragStop}
 				>
-					<div 
+					<div
+						id="player-handle" 
 						style={{transition: dragEndTransition}}
 						className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}
 					>

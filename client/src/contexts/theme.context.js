@@ -72,6 +72,9 @@ export const theme = {
     },
     playerProgress: {
       height: 10,
+    },
+    playerProgressOpen: {
+      height: 48,
     }
   },
 }
@@ -85,6 +88,7 @@ export const getSecondaryBackgroundColor = props => props.theme.palette.secondar
 export const getTopNavHeight = props => props.theme.dimensions.topNav.height;
 export const getNavMobileZIndex = props => props.theme.dimensions.navMobile.zIndex;
 export const getPlayerHeight = props => props.theme.dimensions.player.height;
+export const getPlayerProgressOpenHeight = props => props.theme.dimensions.playerProgressOpen.height;
 
 export const ThemeContext = React.createContext(
 	theme
