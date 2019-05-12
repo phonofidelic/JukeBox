@@ -3,7 +3,7 @@ const styles = theme => ({
 	  position: 'fixed',
 	  bottom: 0,
 	  width: '100%',
-	  // zIndex: 2000,
+	  zIndex: 1,
 	},
 	containerMobile: {
 		backgroundColor: theme.palette.secondary.light,
@@ -15,7 +15,6 @@ const styles = theme => ({
 	},
 	containerDesktop: {
 		backgroundColor: theme.palette.secondary.light,
-		width: theme.dimensions.player.width,
 		maxWidth: theme.dimensions.libraryDesktop.maxWidth,
 		margin: '0 auto',
 		boxShadow: '0px -1px 20px 1px #ccc',

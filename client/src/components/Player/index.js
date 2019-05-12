@@ -54,6 +54,7 @@ export class Player extends Component {
 	}
 
 	handleDrag = (e, data) => {
+		console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
 		this.setState({isDragging: true});
 	}
 
@@ -134,7 +135,7 @@ export class Player extends Component {
 		console.log('isOpen:', isOpen)
 		return (
 			<div 
-				style={{zIndex: isOpen || isDragging ? 1 : 0}}
+				//style={{zIndex: isOpen || isDragging ? 1 : 0}}
 				className={classes.root}
 			>
 				{ !userAgentIsMobile && 
