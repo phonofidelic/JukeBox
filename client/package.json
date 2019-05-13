@@ -42,7 +42,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "now-build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --verbose=true",
+    "test": "react-scripts test",
     "coverage": "react-scripts test --env=jsdom --verbose=true --coverage",
     "analyze": "source-map-explorer build/static/js/main.*",
     "eject": "react-scripts eject"
