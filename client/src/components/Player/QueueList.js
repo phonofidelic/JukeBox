@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {
 	ThemeContext,
 	getColorPrimaryMain,
-	getColorPrimaryLight,
+	// getColorPrimaryLight,
 	getSecondaryBackgroundColor,
 	getPlayerHeight,
 	getPlayerProgressOpenHeight,
