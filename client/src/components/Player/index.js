@@ -8,10 +8,10 @@ import {
 
 import Backdrop from '../Backdrop'
 
-import PlayerBar from './PlayerBar';
-import PlayerProgress from './PlayerProgress';
-import PlayerControls from './PlayerControls';
-import QueueList from './QueueList';
+import PlayerBar from 'components/Player/PlayerBar';
+import PlayerProgress from 'components/Player/PlayerProgress';
+import PlayerControls from 'components/Player/PlayerControls';
+import QueueList from 'components/Player/QueueList';
 
 import Draggable from 'react-draggable';
 
@@ -123,7 +123,7 @@ export class Player extends Component {
 
 		const {
 			isOpen,
-			isDragging,
+			// isDragging,
 			showQueue,
 			position,
 			windowHeight,
@@ -207,6 +207,7 @@ export class Player extends Component {
 							<PlayerProgress 
 								player={player}
 								playerIsOpen={isOpen}
+								userAgentIsMobile={userAgentIsMobile}
 								handleSeek={handleSeek}
 							/>
 						</div>
