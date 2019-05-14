@@ -49,12 +49,12 @@ export class Player extends Component {
 	}
 	
 	handleDragStart = (e) => {
-		console.log('*** drag start', e)
+		// console.log('*** drag start', e)
 		this.setState({dragEndTransition: 'none'})
 	}
 
 	handleDrag = (e, data) => {
-		console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
+		// console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
 		this.setState({isDragging: true});
 	}
 
@@ -63,7 +63,7 @@ export class Player extends Component {
 
 		const touchPos = data.y
 
-		console.log('*** drag end', touchPos, WINDOW_TOP)
+		// console.log('*** drag end', touchPos, WINDOW_TOP)
 		if (!isOpen & touchPos < TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE * 2) {
 			this.setState({
 				isOpen: true,
@@ -132,7 +132,7 @@ export class Player extends Component {
 
 		const theme = this.context;
 
-		console.log('isOpen:', isOpen)
+		// console.log('isOpen:', isOpen)
 		return (
 			<div 
 				//style={{zIndex: isOpen || isDragging ? 1 : 0}}
