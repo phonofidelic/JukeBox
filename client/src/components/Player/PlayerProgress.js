@@ -33,7 +33,6 @@ class PlayerProgress extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
 			value: 0,
 		}
 	}
@@ -101,20 +100,18 @@ class PlayerProgress extends Component {
 		const { 
 			player, 
 			playerIsOpen,
+			userAgentIsMobile,
 			classes,
 		} = this.props;
 
-		const { 
-			isMobile,
-			value,
-		} = this.state;
+		const { value } = this.state;
 
 		const theme = this.context;
 
 		const styles = {
 			root: {
 				height: playerIsOpen ? 'inherit' : '4px',
-				width: isMobile ? '100%' : theme.dimensions.libraryDesktop.maxWidth,
+				width: userAgentIsMobile ? '100%' : theme.dimensions.libraryDesktop.maxWidth,
 				background: playerIsOpen ? getSecondaryBackgroundColor({theme}) : 'none',
 			},
 			progress: {
