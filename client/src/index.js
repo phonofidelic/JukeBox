@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Root from 'Root';
 import App from './App';
 import { initialGlobalState } from 'reducers/index';
+import 'index.css';
 
 console.log('initialGlobalState:', initialGlobalState)
 ReactDOM.render(
