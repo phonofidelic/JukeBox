@@ -10,12 +10,11 @@ import Root from 'Root';
 import { mockQueue } from 'utils';
 
 describe('Player container', () => {
-	let wrapper 
+	let wrapper;
 	beforeEach(() => {
 		const initialState = {
 			player: {
 				queue: mockQueue,
-				showQueue: false,
 				playing: false,
 				queueIndex: null,
 				currentTrack: mockQueue[0],
