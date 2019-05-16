@@ -256,12 +256,6 @@ export class Player extends Component {
 							isOpen={isOpen}
 							windowHeight={windowHeight}
 						>
-							{ !isOpen &&
-								<CurrentTrack 
-									player={player}
-									playerIsOpen={isOpen}
-								/>
-							}
 							<PlayerControls
 								player={player}
 								playerIsOpen={isOpen}
