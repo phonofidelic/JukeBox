@@ -18,10 +18,6 @@ const Container = styled.div`
 	height: ${getPlayerHeight}px;
 	justify-content: center;
 	width: 100%;
-
-	// & > button {
-	// 	flex: auto;
-	// }
 `
 
 const Control = styled.div`

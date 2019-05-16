@@ -15,7 +15,7 @@ const CurrentTrackImage = styled.div`
 `
 
 const CurrentTrackInfo = styled.div`
-	width: ${props => props.playerIsOpen? '100%' : '120px'};
+	width: ${props => props.playerIsOpen ? '100%' : '120px'};
 	padding: 8px;
 `
 

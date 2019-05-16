@@ -3,14 +3,13 @@ import { mount, shallow } from 'enzyme';
 
 import PlayerContainer from 'containers/PlayerContainer';
 import Player from 'components/Player';
-import PlayerBar from 'components/Player/PlayerBar';
 import PlayerProgress from 'components/Player/PlayerProgress';
 import PlayerControls from 'components/Player/PlayerControls';
 import QueueList from 'components/Player/QueueList';
 import Root from 'Root';
 import { mockQueue } from 'utils';
 
-describe('Player component', () => {
+describe('Player container', () => {
 	let wrapper 
 	beforeEach(() => {
 		const initialState = {
@@ -28,16 +27,25 @@ describe('Player component', () => {
 		}
 		wrapper = mount(
 			<Root initialState={initialState}>
-				<PlayerContainer>
-					<Player />
-				</PlayerContainer>
+				<PlayerContainer />
 			</Root>
 		);
 
 	});
 
-	it('has a PlayerBar', () => {
-		console.log(wrapper.contains(PlayerBar))
-		expect(wrapper.contains(PlayerBar)).toBe(true);
+	it('has a Player component', () => {
+		expect(wrapper.contains(Player)).toBe(true);
+	});
+
+	it('has a PlayerProgress component', () => {
+		expect(wrapper.contains(PlayerProgress)).toBe(true);
+	});
+
+	it('has a PlayerControls component', () => {
+		expect(wrapper.contains(PlayerControls)).toBe(true);
+	});
+
+	it('has a PlayerControls component', () => {
+		expect(wrapper.contains(PlayerControls)).toBe(true);
 	});
 });
