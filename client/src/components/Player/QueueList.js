@@ -22,6 +22,7 @@ const Container = styled.div`
 	position: fixed;
 	width: inherit;
 	// height: ${getPlayerHeight}px;
+	// height: 100%;
 	top: ${getPlayerHeight}px;
 	bottom: -${(props) => WINDOW_HEIGHT - (getPlayerProgressOpenHeight(props) + (getPlayerHeight(props) * 2))}px;
 	overflow-y: auto;

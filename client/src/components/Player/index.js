@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
 import {
 	ThemeContext,
 	getSecondaryBackgroundColor,
+	getPlayerHeight,
+	getPlayerWidth,
 } from '../../contexts/theme.context';
-
 import Backdrop from '../Backdrop'
 
 import PlayerProgress from 'components/Player/PlayerProgress';
@@ -18,6 +21,51 @@ import Draggable from 'react-draggable';
 const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
 const DRAG_TRANSITION = 'all .5s ease';
+
+const Container = styled.div`
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+`
+
+const LayoutContainer = styled.div`
+	// background-color: ${getSecondaryBackgroundColor};
+	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
+	// *** BUG: transition does not work using styled components ***
+	transition: ${props => {console.log('dragEndTransition', props.dragEndTransition); return props.dragEndTransition}};
+	margin: 0 auto;
+	max-width: ${props=> !props.userAgentIsMobile ? `${getPlayerWidth(props)}px` : '100%'};
+`
+
+const TopPanel = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	display: flex;
+	width: 100%;
+`
+
+const QueueContainer = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	position: absolute;
+	height: ${props => props.windowHeight - getPlayerHeight(props)}px;
+	width: 100%;
+`
+
+const PlayerProgressContainer = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	position: fixed;
+	width: 100%;
+	bottom: ${props => !props.isOpen ? getPlayerHeight(props) : (props.windowHeight - (getPlayerHeight(props) * 2)) * -1}px;
+	z-index: 1000;
+`
+
+const BottomPanel = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	position: fixed;
+	display: flex;
+	width: 100%;
+	bottom: ${props => props.isOpen ? (props.windowHeight - getPlayerHeight(props)) * -1 : 0}px;
+`
 
 export class Player extends Component {
 	static contextType = ThemeContext;
@@ -132,16 +180,7 @@ export class Player extends Component {
 
 		// console.log('isOpen:', isOpen)
 		return (
-			<div 
-				//style={{zIndex: isOpen || isDragging ? 1 : 0}}
-				// className={classes.root}
-				style={{
-					position: 'fixed',
-				  bottom: 0,
-				  width: '100%',
-				  zIndex: 1,
-				}}
-			>
+			<Container>
 				{ !userAgentIsMobile && 
 					<Backdrop 
 						open={isOpen} 
@@ -159,21 +198,14 @@ export class Player extends Component {
 					onDrag={this.handleDrag}
 					onStop={this.handleDragStop}
 				>
-					<div
+					<LayoutContainer
 						id="player-handle" 
-						style={{
-							boxShadow: !isOpen ? '0px -1px 20px 1px #ccc' : 'none',
-							transition: dragEndTransition,
-							margin: '0 auto',
-							maxWidth: !userAgentIsMobile ? theme.dimensions.libraryDesktop.maxWidth : '100%',
-						}}
-						// className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}
+						theme={theme}
+						dragEndTransition={dragEndTransition}
+						userAgentIsMobile={userAgentIsMobile}
+						iOpen={isOpen}
 					>
-						<div style={{
-							backgroundColor: getSecondaryBackgroundColor({theme}),
-							display: 'flex',
-							width: '100%',
-						}}>
+						<TopPanel theme={theme}>
 							<CurrentTrack 
 								player={player}
 								playerIsOpen={isOpen}
@@ -184,13 +216,8 @@ export class Player extends Component {
 									handleQueueToggle={this.handleQueueToggle}
 								/>
 							}
-						</div>
-						<div style={{
-							background: theme.palette.secondary.light,
-							position: 'absolute',
-							height: window.innerHeight - theme.dimensions.player.height,
-							width: '100%',
-						}}>
+						</TopPanel>
+						<QueueContainer theme={theme} windowHeight={windowHeight}>
 							{ showQueue ?
 								<QueueList 
 									queue={player.queue}
@@ -206,33 +233,28 @@ export class Player extends Component {
 									<img 
 										src={player.currentTrack.image.src} 
 										alt={`Album art for ${player.currentTrack.album.title}`}
-										width={userAgentIsMobile ? window.innerWidth : theme.dimensions.player.width}
-										height={userAgentIsMobile ? window.innerWidth : theme.dimensions.player.width}
+										width={userAgentIsMobile ? window.innerWidth : getPlayerWidth({theme})}
+										height={userAgentIsMobile ? window.innerWidth : getPlayerWidth({theme})}
 									/>
 								</div>
 							}
-						</div>
-						<div style={{
-							backgroundColor: getSecondaryBackgroundColor({theme}), 
-							position: 'fixed',
-							width: '100%',
-							bottom: !isOpen ? theme.dimensions.player.height : (windowHeight - (theme.dimensions.player.height * 2)) * -1,
-							zIndex: 1000,
-						}}>
+						</QueueContainer>
+						<PlayerProgressContainer 
+							theme={theme}
+							isOpen={isOpen}
+							windowHeight={windowHeight}
+						>
 							<PlayerProgress 
 								player={player}
 								playerIsOpen={isOpen}
 								userAgentIsMobile={userAgentIsMobile}
 								handleSeek={handleSeek}
 							/>
-						</div>
-						<div style={{
-								backgroundColor: getSecondaryBackgroundColor({theme}), 
-								position: 'fixed',
-								display: 'flex',
-								width: '100%',
-								bottom: isOpen ? (windowHeight - theme.dimensions.player.height) * -1 : 0,
-							}}
+						</PlayerProgressContainer>
+						<BottomPanel 
+							theme={theme}
+							isOpen={isOpen}
+							windowHeight={windowHeight}
 						>
 							{ !isOpen &&
 								<CurrentTrack 
@@ -250,10 +272,10 @@ export class Player extends Component {
 								handlePlayPrev={handlePlayPrev}
 								handlePlayerToggle={this.handlePlayerToggle}
 							/>
-						</div>
-					</div>
+						</BottomPanel>
+					</LayoutContainer>
 				</Draggable>
-			</div>
+			</Container>
 		);
 	}
 }
