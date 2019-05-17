@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/chris/.nvm/versions/node/v11.1.0/bin/node /usr/local/bin/yarn remove material-ui-slider
+  /Users/chris/.nvm/versions/node/v11.1.0/bin/node /usr/local/bin/yarn add @kennethormandy/react-flipcard
 
 PATH: 
   /Users/chris/.nvm/versions/node/v11.1.0/bin:$/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin

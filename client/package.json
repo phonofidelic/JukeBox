@@ -17,6 +17,7 @@
     "popper.js": "^1.14.5",
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
+    "react-card-flip": "^0.7.1",
     "react-dom": "^16.8.6",
     "react-draggable": "^3.3.0",
     "react-dropzone": "^4.2.9",

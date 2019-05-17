@@ -17,6 +17,7 @@ import CurrentTrack from 'components/Player/CurrentTrack';
 import ToggleQueueButton from 'components/Player/ToggleQueueButton';
 
 import Draggable from 'react-draggable';
+import ReactCardFlip from 'react-card-flip';
 
 const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
@@ -216,9 +217,17 @@ export class Player extends Component {
 								/>
 							}
 						</TopPanel>
-						<QueueContainer theme={theme} windowHeight={windowHeight}>
-							{ showQueue ?
+						<QueueContainer 
+							theme={theme} 
+							windowHeight={windowHeight}
+						>
+							<ReactCardFlip 
+								//type="horizontal"
+								isFlipped={!showQueue}
+								//style={{width: '100%'}}
+							>
 								<QueueList 
+									key="front"
 									queue={player.queue}
 									playerIsOpen={isOpen}
 									queueIndex={player.queueIndex}
@@ -227,8 +236,10 @@ export class Player extends Component {
 									handlePlayTrack={handlePlayTrack}
 									handlePlayFromQueue={handlePlayFromQueue}
 								/>
-								:
-								<div style={{display: 'flex'}}>
+								<div 
+									key="back"
+									style={{display: 'flex'}}
+								>
 									<img 
 										src={player.currentTrack.image.src} 
 										alt={`Album art for ${player.currentTrack.album.title}`}
@@ -236,7 +247,7 @@ export class Player extends Component {
 										height={userAgentIsMobile ? window.innerWidth : getPlayerWidth({theme})}
 									/>
 								</div>
-							}
+							</ReactCardFlip>
 						</QueueContainer>
 						<PlayerProgressContainer 
 							theme={theme}
