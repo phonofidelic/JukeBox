@@ -25,13 +25,7 @@ export const checkUserAgent = () => {
 	return dispatch => {
 		dispatch({
 			type: CHECK_USER_AGENT,
-<<<<<<< HEAD
 			userAgentIsMobile: (navigator.maxTouchPoints > 0 || navigator.userAgent.match(/iPhone|iPad|iPod/)) ? true : false,
-||||||| merged common ancestors
-			userAgentIsMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
-=======
-			userAgentIsMobile,
->>>>>>> player
 		});
 	}
 }
