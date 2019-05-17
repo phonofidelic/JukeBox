@@ -20,7 +20,7 @@ const Container = styled.div`
 	width: 100%;
 `
 
-const Control = styled.div`
+export const Control = styled.div`
 	flex: auto;
 	max-width: 80px;
 `
