@@ -4,6 +4,9 @@ import { mount, shallow } from 'enzyme';
 import Player from 'components/Player';
 import CurrentTrack from 'components/Player';
 import ToggleQueueButton from 'components/Player';
+import PlayerProgress from 'components/Player';
+import PlayerControls from 'components/Player';
+import QueueList from 'components/Player';
 import { mockQueue } from 'utils';
 
 const player = {
@@ -43,27 +46,23 @@ describe('Player component desktop view', () => {
 		);
 	});
 
+	afterEach(() => {
+		wrapper.unmount();
+	});
 	
 	it('has one CurrentTrack component', () => {
-		expect(wrapper.find(CurrentTrack).length).toBe(1)
+		expect(wrapper.find(CurrentTrack).length).toBe(1);
 	});
 
-	it('has a ToggleQueueButton', () => {
-		expect(wrapper.find(ToggleQueueButton).length).toBe(1)
+	it('has a PlayerProgress component', () => {
+		expect(wrapper.find(PlayerProgress).length).toBe(1);
+	});	
+
+	it ('has a PlayerControls component', () => {
+		expect(wrapper.find(PlayerControls).length).toBe(1);
 	});
 
-	it('player is initially in compact mode', () => {
-		expect(wrapper.prop(''))
-	})
+	it('has a QueueList component', () => {
+		expect(wrapper.find(QueueList).length).toBe(1);
+	});
 });
-
-// DESKTOP:
-// * player is initially in compact mode
-// * has one CurrentTrack component [moveToCurrentTrack.test(that displays album art and info of currentTrack)] 
-// * has toggle button
-// * toggle button switches the player between full and compact view mode when clicked
-
-// MOBILE:
-// * is draggable on mobile
-// * 
-

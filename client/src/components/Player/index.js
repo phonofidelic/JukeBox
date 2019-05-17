@@ -30,10 +30,9 @@ const Container = styled.div`
 `
 
 const LayoutContainer = styled.div`
-	// background-color: ${getSecondaryBackgroundColor};
+	background-color: ${getSecondaryBackgroundColor};
 	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
-	// *** BUG: transition does not work using styled components ***
-	transition: ${props => {console.log('dragEndTransition', props.dragEndTransition); return props.dragEndTransition}};
+	transition: ${props => props.dragEndTransition};
 	margin: 0 auto;
 	max-width: ${props=> !props.userAgentIsMobile ? `${getPlayerWidth(props)}px` : '100%'};
 `
@@ -256,6 +255,9 @@ export class Player extends Component {
 							isOpen={isOpen}
 							windowHeight={windowHeight}
 						>
+							{(userAgentIsMobile && !isOpen) && 
+								<div style={{ display: 'flex', width: '100%' }}></div>
+							}
 							<PlayerControls
 								player={player}
 								playerIsOpen={isOpen}

@@ -50,7 +50,7 @@ class PlayerControls extends Component {
 		return (
 			<Container
 				theme={theme} 
-			>
+			>				
 				<Control style={{marginLeft: !userAgentIsMobile ? 'auto' : 0}}>
 					<IconButton 
 						disabled={player.queueIndex === 0} 
