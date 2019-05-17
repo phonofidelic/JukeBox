@@ -18,13 +18,9 @@ const Container = styled.div`
 	height: ${getPlayerHeight}px;
 	justify-content: center;
 	width: 100%;
-
-	// & > button {
-	// 	flex: auto;
-	// }
 `
 
-const Control = styled.div`
+export const Control = styled.div`
 	flex: auto;
 	max-width: 80px;
 `
@@ -54,7 +50,7 @@ class PlayerControls extends Component {
 		return (
 			<Container
 				theme={theme} 
-			>
+			>				
 				<Control style={{marginLeft: !userAgentIsMobile ? 'auto' : 0}}>
 					<IconButton 
 						disabled={player.queueIndex === 0} 

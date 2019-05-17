@@ -8,14 +8,15 @@ import Typography from '@material-ui/core/Typography';
 const CurrentTrackContainer = styled.div`
 	display: flex;
 	text-align: left;
-	height: ${getPlayerHeight}
+	height: ${getPlayerHeight}px;
+	z-index: 1;
 `
 const CurrentTrackImage = styled.div`
 
 `
 
 const CurrentTrackInfo = styled.div`
-	width: ${props => props.playerIsOpen? '100%' : '120px'};
+	width: ${props => props.playerIsOpen ? '100%' : '120px'};
 	padding: 8px;
 `
 

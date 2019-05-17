@@ -5,7 +5,7 @@ import {
 	CLEAR_ALERT
 } from '../actiontypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	message: null,
 	messages: [],
 	alert: null,

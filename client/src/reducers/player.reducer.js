@@ -16,7 +16,6 @@ const useMockQueue = false;
 
 export const INITIAL_STATE = {
 	queue: useMockQueue ? mockQueue : [],
-	showQueue: false,
 	playing: false,
 	queueIndex: null,
 	currentTrack: useMockQueue ? mockQueue[4] : null,

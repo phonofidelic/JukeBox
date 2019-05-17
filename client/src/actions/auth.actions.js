@@ -20,10 +20,18 @@ import { history, URLS } from '../config';
 const { AUTH_URL, GDRIVE_URL } = URLS;
 
 export const checkUserAgent = () => {
+	const userAgentIsMobile = (navigator.maxTouchPoints > 0 || navigator.userAgent.match(/iPhone|iPad|iPod/)) ? true : false
+	console.log('checkUserAgent, userAgentIsMobile:', userAgentIsMobile);
 	return dispatch => {
 		dispatch({
 			type: CHECK_USER_AGENT,
+<<<<<<< HEAD
 			userAgentIsMobile: (navigator.maxTouchPoints > 0 || navigator.userAgent.match(/iPhone|iPad|iPod/)) ? true : false,
+||||||| merged common ancestors
+			userAgentIsMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
+=======
+			userAgentIsMobile,
+>>>>>>> player
 		});
 	}
 }

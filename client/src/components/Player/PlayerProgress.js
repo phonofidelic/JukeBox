@@ -5,7 +5,27 @@ import {
 	getSecondaryBackgroundColor,
 } from '../../contexts/theme.context';
 
-import { Slider } from 'material-ui-slider';
+import Slider from '@material-ui/lab/Slider';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+  root: {
+    width: 300,
+  },
+  slider: {
+    padding: '22px 0px',
+  },
+  track: {
+  	backgroundColor: '#e62118',
+  },
+  thumb: {
+  	backgroundColor: '#e62118',	
+  },
+  activated: {
+  	width: '22px',
+  	height: '22px',
+  }
+};
 
 class PlayerProgress extends Component {
 	static contextType = ThemeContext;
@@ -13,9 +33,7 @@ class PlayerProgress extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			timeElapsed: 0,
-			sliderValue: 0,
-			isMobile: navigator.userAgent.indexOf('Mobile') > 0 ? true : false,
+			value: 0,
 		}
 	}
 
@@ -36,15 +54,19 @@ class PlayerProgress extends Component {
 		});
 	}
 
+	componentWillUnmount() {
+		clearInterval(this.intervalID)
+	}
+
 	startTimer() {
 		const { player } = this.props;
 		if (this.intervalID) clearInterval(this.intervalID);
 
 		this.intervalID = setInterval(() => {
 			this.setState({
-				timeElapsed: player.currentTrack.howl.seek() || 0,
+				value: (player.currentTrack.howl.seek() || 0) / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100
 			})
-		}, 1000);
+		}, 100);
 	}
 
 	getSegments() {
@@ -59,12 +81,9 @@ class PlayerProgress extends Component {
 		return segments;
 	}
 
-	handleChange(value) {
-		// console.log('PlayerProgress - handleChange, value:', value)
-		clearInterval(this.intervalID)
-	}
-
-	handleChangeComplete(value) {
+	handleChange = (e, value) => {
+		e.stopPropagation();
+		console.log('value:', value)
 		const { 
 			player, 
 			handleSeek,
@@ -73,38 +92,33 @@ class PlayerProgress extends Component {
 		// Convert 'value' (percentage) to time position
 		const pos = player.currentTrack.format.duration * (value / 100);
 		handleSeek(pos, player.currentTrack);
-
+		this.setState({ value });
 		this.startTimer();
-	}
-
-	componentWillUnmount() {
-		clearInterval(this.intervalID)
 	}
 
 	render() {
 		const { 
 			player, 
 			playerIsOpen,
+			userAgentIsMobile,
+			classes,
 		} = this.props;
 
-		const { 
-			isMobile,
-			timeElapsed,
-		} = this.state;
+		const { value } = this.state;
 
 		const theme = this.context;
 
 		const styles = {
 			root: {
 				height: playerIsOpen ? 'inherit' : '4px',
-				width: isMobile ? '100%' : theme.dimensions.libraryDesktop.maxWidth,
+				width: userAgentIsMobile ? '100%' : theme.dimensions.libraryDesktop.maxWidth,
 				background: playerIsOpen ? getSecondaryBackgroundColor({theme}) : 'none',
 			},
 			progress: {
 				background: theme.palette.secondary.main,
 				height: '100%',
 				width: player.currentTrack 
-					? `${timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}%`
+					? `${value}%`
 					: 0,
 			},
 		}
@@ -113,11 +127,14 @@ class PlayerProgress extends Component {
 			<div style={styles.root}>
 				{ playerIsOpen ?
 					<Slider
-						style={{backgroundColor: getSecondaryBackgroundColor({theme})}}
-						value={timeElapsed / (player.currentTrack.format.duration || player.currentTrack.howl.duration()) * 100}
-						onChange={this.handleChange.bind(this)}
-						onChangeComplete={this.handleChangeComplete.bind(this)}
-						color="#e62118"
+						classes={{
+							container: classes.slider,
+							track: classes.track,
+							thumb: classes.thumb,
+							// activated: classes.activated,
+						}}
+						value={value}
+						onChange={this.handleChange}
 					/>
 					:
 					<div style={styles.progress}></div>
@@ -127,4 +144,4 @@ class PlayerProgress extends Component {
 	}
 }
 
-export default PlayerProgress;
+export default withStyles(styles)(PlayerProgress);

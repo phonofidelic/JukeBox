@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {
 	ThemeContext,
 	getColorPrimaryMain,
-	getColorPrimaryLight,
+	// getColorPrimaryLight,
 	getSecondaryBackgroundColor,
 	getPlayerHeight,
 	getPlayerProgressOpenHeight,
@@ -22,10 +22,12 @@ const Container = styled.div`
 	position: fixed;
 	width: inherit;
 	// height: ${getPlayerHeight}px;
-	top: ${getPlayerHeight}px;
+	// height: 100%;
+	// top: ${getPlayerHeight}px;
+	top: 0; // needed with flip animation
 	bottom: -${(props) => WINDOW_HEIGHT - (getPlayerProgressOpenHeight(props) + (getPlayerHeight(props) * 2))}px;
 	overflow-y: auto;
-	padding: 0
+	padding: 0;
 `
 
 class QueueList extends Component {

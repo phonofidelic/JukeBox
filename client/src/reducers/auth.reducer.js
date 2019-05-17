@@ -12,7 +12,7 @@ import {
 	GET_USER_INFO_FAILURE,
 } from '../actiontypes';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
 	isAuthed: false,
 	userAgentIsMobile: false,
 	loading: false,

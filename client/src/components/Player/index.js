@@ -1,25 +1,72 @@
 import React, { Component } from 'react';
-import styles from './Player.styles';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
 import {
 	ThemeContext,
 	getSecondaryBackgroundColor,
+	getPlayerHeight,
+	getPlayerWidth,
 } from '../../contexts/theme.context';
-
 import Backdrop from '../Backdrop'
 
-import PlayerBar from './PlayerBar';
-import PlayerProgress from './PlayerProgress';
-import PlayerControls from './PlayerControls';
-import QueueList from './QueueList';
+import PlayerProgress from 'components/Player/PlayerProgress';
+import PlayerControls from 'components/Player/PlayerControls';
+import QueueList from 'components/Player/QueueList';
+import CurrentTrack from 'components/Player/CurrentTrack';
+import ToggleQueueButton from 'components/Player/ToggleQueueButton';
 
 import Draggable from 'react-draggable';
-
-import withStyles from '@material-ui/core/styles/withStyles';
+import ReactCardFlip from 'react-card-flip';
 
 const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
 const DRAG_TRANSITION = 'all .5s ease';
+
+const Container = styled.div`
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+`
+
+const LayoutContainer = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
+	transition: ${props => props.dragEndTransition};
+	margin: 0 auto;
+	max-width: ${props=> !props.userAgentIsMobile ? `${getPlayerWidth(props)}px` : '100%'};
+`
+
+const TopPanel = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	display: flex;
+	width: 100%;
+`
+
+const QueueContainer = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	position: absolute;
+	height: ${props => props.windowHeight - getPlayerHeight(props)}px;
+	width: 100%;
+	overflow: hidden;
+`
+
+const PlayerProgressContainer = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	position: fixed;
+	width: 100%;
+	bottom: ${props => !props.isOpen ? getPlayerHeight(props) : (props.windowHeight - (getPlayerHeight(props) * 2)) * -1}px;
+	z-index: 1000;
+`
+
+const BottomPanel = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
+	position: fixed;
+	display: flex;
+	width: 100%;
+	bottom: ${props => props.isOpen ? (props.windowHeight - getPlayerHeight(props)) * -1 : 0}px;
+`
 
 export class Player extends Component {
 	static contextType = ThemeContext;
@@ -49,12 +96,12 @@ export class Player extends Component {
 	}
 	
 	handleDragStart = (e) => {
-		console.log('*** drag start', e)
+		// console.log('*** drag start', e)
 		this.setState({dragEndTransition: 'none'})
 	}
 
 	handleDrag = (e, data) => {
-		console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
+		// console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
 		this.setState({isDragging: true});
 	}
 
@@ -63,7 +110,7 @@ export class Player extends Component {
 
 		const touchPos = data.y
 
-		console.log('*** drag end', touchPos, WINDOW_TOP)
+		// console.log('*** drag end', touchPos, WINDOW_TOP)
 		if (!isOpen & touchPos < TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE * 2) {
 			this.setState({
 				isOpen: true,
@@ -118,12 +165,12 @@ export class Player extends Component {
 			handlePlayPrev,
 			handlePlayFromQueue,
 			handleSeek,
-			classes,
+			// classes,
 		} = this.props;
 
 		const {
 			isOpen,
-			isDragging,
+			// isDragging,
 			showQueue,
 			position,
 			windowHeight,
@@ -132,14 +179,14 @@ export class Player extends Component {
 
 		const theme = this.context;
 
-		console.log('isOpen:', isOpen)
+		// console.log('isOpen:', isOpen)
 		return (
-			<div 
-				//style={{zIndex: isOpen || isDragging ? 1 : 0}}
-				className={classes.root}
-			>
+			<Container>
 				{ !userAgentIsMobile && 
-					<Backdrop open={isOpen} onBackdropClick={this.handlePlayerToggle} />
+					<Backdrop 
+						open={isOpen} 
+						onBackdropClick={this.handlePlayerToggle} 
+					/>
 				}
 				<Draggable
 					handle="#player-handle"
@@ -152,32 +199,36 @@ export class Player extends Component {
 					onDrag={this.handleDrag}
 					onStop={this.handleDragStop}
 				>
-					<div
+					<LayoutContainer
 						id="player-handle" 
-						style={{transition: dragEndTransition}}
-						className={userAgentIsMobile ? classes.containerMobile : classes.containerDesktop}
+						theme={theme}
+						dragEndTransition={dragEndTransition}
+						userAgentIsMobile={userAgentIsMobile}
+						iOpen={isOpen}
 					>
-						<PlayerBar
-							player={player}
-							playerIsOpen={isOpen}
-							showQueue={showQueue}
-							userAgentIsMobile={userAgentIsMobile}
-							handleStopTrack={handleStopTrack}
-							handlePlayTrack={handlePlayTrack}
-							handlePauseTrack={handlePauseTrack}
-							handlePlayNext={handlePlayNext}
-							handlePlayPrev={handlePlayPrev}
-							handlePlayerToggle={this.handlePlayerToggle}
-							handleQueueToggle={this.handleQueueToggle}
-						/>
-						<div style={{
-							background: theme.palette.secondary.light,
-							position: 'absolute',
-							height: windowHeight - theme.dimensions.player.height,
-							width: '100%',
-						}}>
-							{ showQueue ?
+						<TopPanel theme={theme}>
+							<CurrentTrack 
+								player={player}
+								playerIsOpen={isOpen}
+							/>
+							{isOpen &&
+								<ToggleQueueButton 
+									showQueue={showQueue}
+									handleQueueToggle={this.handleQueueToggle}
+								/>
+							}
+						</TopPanel>
+						<QueueContainer 
+							theme={theme} 
+							windowHeight={windowHeight}
+						>
+							<ReactCardFlip 
+								//type="horizontal"
+								isFlipped={!showQueue}
+								//style={{width: '100%'}}
+							>
 								<QueueList 
+									key="front"
 									queue={player.queue}
 									playerIsOpen={isOpen}
 									queueIndex={player.queueIndex}
@@ -186,53 +237,53 @@ export class Player extends Component {
 									handlePlayTrack={handlePlayTrack}
 									handlePlayFromQueue={handlePlayFromQueue}
 								/>
-								:
-								<div style={{display: 'flex'}}>
+								<div 
+									key="back"
+									style={{display: 'flex'}}
+								>
 									<img 
 										src={player.currentTrack.image.src} 
 										alt={`Album art for ${player.currentTrack.album.title}`}
-										width={theme.dimensions.player.width}
-										height={userAgentIsMobile ? window.innerWidth : theme.dimensions.player.width}
+										width={userAgentIsMobile ? window.innerWidth : getPlayerWidth({theme})}
+										height={userAgentIsMobile ? window.innerWidth : getPlayerWidth({theme})}
 									/>
 								</div>
-							}
-						</div>
-						<div style={{
-							backgroundColor: getSecondaryBackgroundColor({theme}), 
-							position: 'fixed',
-							width: '100%',
-							bottom: !isOpen ? theme.dimensions.player.height : (window.innerHeight - (theme.dimensions.player.height * 2)) * -1,
-							zIndex: 1000,
-						}}>
+							</ReactCardFlip>
+						</QueueContainer>
+						<PlayerProgressContainer 
+							theme={theme}
+							isOpen={isOpen}
+							windowHeight={windowHeight}
+						>
 							<PlayerProgress 
 								player={player}
 								playerIsOpen={isOpen}
+								userAgentIsMobile={userAgentIsMobile}
 								handleSeek={handleSeek}
 							/>
-						</div>
-						{ isOpen &&
-							<div style={{
-									backgroundColor: getSecondaryBackgroundColor({theme}), 
-									position: 'fixed',
-									width: '100%',
-									bottom: (window.innerHeight - theme.dimensions.player.height) * -1,
-								}}
-							>
-								<PlayerControls
-									player={player}
-									playerIsOpen={isOpen}
-									userAgentIsMobile={userAgentIsMobile}
-									handlePlayTrack={handlePlayTrack}
-									handlePauseTrack={handlePauseTrack}
-									handlePlayNext={handlePlayNext}
-									handlePlayPrev={handlePlayPrev}
-									handlePlayerToggle={this.handlePlayerToggle}
-								/>
-							</div>
-						}
-					</div>
+						</PlayerProgressContainer>
+						<BottomPanel 
+							theme={theme}
+							isOpen={isOpen}
+							windowHeight={windowHeight}
+						>
+							{(userAgentIsMobile && !isOpen) && 
+								<div style={{ display: 'flex', width: '100%' }}></div>
+							}
+							<PlayerControls
+								player={player}
+								playerIsOpen={isOpen}
+								userAgentIsMobile={userAgentIsMobile}
+								handlePlayTrack={handlePlayTrack}
+								handlePauseTrack={handlePauseTrack}
+								handlePlayNext={handlePlayNext}
+								handlePlayPrev={handlePlayPrev}
+								handlePlayerToggle={this.handlePlayerToggle}
+							/>
+						</BottomPanel>
+					</LayoutContainer>
 				</Draggable>
-			</div>
+			</Container>
 		);
 	}
 }
@@ -249,4 +300,4 @@ Player.propTypes = {
 	handleSeek: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(Player);
+export default Player;
