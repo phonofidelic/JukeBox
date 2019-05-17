@@ -49,6 +49,7 @@ const QueueContainer = styled.div`
 	position: absolute;
 	height: ${props => props.windowHeight - getPlayerHeight(props)}px;
 	width: 100%;
+	overflow: hidden;
 `
 
 const PlayerProgressContainer = styled.div`

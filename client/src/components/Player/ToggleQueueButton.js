@@ -7,7 +7,8 @@ import Album from '@material-ui/icons/Album';
 
 const Container = styled.div`
 	color: rgba(0, 0, 0, 0.54);
-	margin-top: 8px;
+	margin-top: 5px;
+	margin-right: 5px;
 	margin-left: auto;
 `
 
