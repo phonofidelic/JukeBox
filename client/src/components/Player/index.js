@@ -21,7 +21,7 @@ import Draggable from 'react-draggable';
 import ReactCardFlip from 'react-card-flip';
 
 const WINDOW_TOP = window.innerHeight * -1;
-const TRIGGER_DRAG_DISTANCE = window.innerHeight / 3;
+const TRIGGER_DRAG_DISTANCE = window.innerHeight / 4;
 const DRAG_TRANSITION = 'all .5s ease';
 
 const poseConfig = {
@@ -38,7 +38,6 @@ const poseConfig = {
 };
 
 const Container = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
 	position: fixed;
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
 	margin: 0 auto;
@@ -55,8 +54,10 @@ const Container = styled.div`
 const DraggableContainer = posed(Container)(poseConfig)
 
 const LayoutContainer = styled.div`
+background-color: ${getSecondaryBackgroundColor};
 	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
+	z-index: 1;
 	// position: fixed;
 	//bottom: ${props => props.position}px;
 	// transition: ${props => props.dragEndTransition};
@@ -74,8 +75,9 @@ const TopPanel = styled.div`
 const DraggableTopPanel = posed(TopPanel)(poseConfig)
 
 const QueueContainer = styled.div`
+	// display: flex;
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
-	transition: ${DRAG_TRANSITION};
+	//transition: ${DRAG_TRANSITION};
 `
 
 const PlayerProgressContainer = styled.div`
@@ -145,7 +147,7 @@ export class Player extends Component {
 		const touchPos = e.changedTouches[0].pageY
 
 		console.log('*** drag end', touchPos, TRIGGER_DRAG_DISTANCE)
-		if (!isOpen & touchPos < TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE * 2) {
+		if (!isOpen & touchPos < window.innerHeight - TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE) {
 			this.setState({
 				isOpen: true,
 				// position: getPlayerHeight({theme}) * -1,
@@ -266,6 +268,7 @@ export class Player extends Component {
 							id="player_queue-container"
 							theme={theme} 
 							isOpen={isOpen}
+							userAgentIsMobile={userAgentIsMobile}
 							windowHeight={windowHeight}
 						>
 							<ReactCardFlip 
