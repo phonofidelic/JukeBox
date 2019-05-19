@@ -28,13 +28,12 @@ const poseConfig = {
 	draggable: 'y', 
   dragEnd: {
     transition: DRAG_TRANSITION,
+    // Player position snaps back to initial pos if isOpen change is not triggered.
+    // Otherwise, open/closed props below override this setting.
+    y: props => props.isOpen ? 0 : window.innerHeight - getPlayerHeight(props),
   },
   open: { y: 0 },
-  closed: { y: window.innerHeight - 56},
-  // dragBounds: {
-  // 	// bottom: 0,
-  // 	top: (window.innerheight - ),
-  // }
+  closed: { y: props => window.innerHeight - getPlayerHeight(props)},
 };
 
 const Container = styled.div`
@@ -58,9 +57,6 @@ background-color: ${getSecondaryBackgroundColor};
 	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
 	z-index: 1;
-	// position: fixed;
-	//bottom: ${props => props.position}px;
-	// transition: ${props => props.dragEndTransition};
 `
 
 const DraggableLayoutContainer = posed(LayoutContainer)(poseConfig)
@@ -129,8 +125,8 @@ export class Player extends Component {
 	}
 	
 	handleDragStart = (e) => {
-		// console.log('*** drag start', e)
-		// this.setState({dragEndTransition: 'none'})
+		console.log('*** drag start', e)
+		// this.setState({isOpen: null})
 	}
 
 	handleDrag = (e, data) => {
@@ -139,30 +135,47 @@ export class Player extends Component {
 	}
 
 	handleDragStop = (e, data) => {
-		// console.log('ref:', this.ref)
 		if (!e.changedTouches) return;
 		console.log('handleDragStop, e', e.changedTouches[0].pageY)
 		const { isOpen } = this.state;
 		const theme = this.context;
-		const touchPos = e.changedTouches[0].pageY
+		const touchPos = e.changedTouches[0].pageY;
 
 		console.log('*** drag end', touchPos, TRIGGER_DRAG_DISTANCE)
 		if (!isOpen & touchPos < window.innerHeight - TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE) {
 			this.setState({
 				isOpen: true,
-				// position: getPlayerHeight({theme}) * -1,
-				// dragEndTransition: DRAG_TRANSITION,
+				translatePos: 0,
 			});
 			return console.log('UP')
 		}
 		this.setState({
 			isOpen: false,
-			// isDragging: false,
-			// position: 0,
-			// dragEndTransition: DRAG_TRANSITION,
 		});
 		console.log('DOWN')
-		// return true;
+	}
+
+	handleDragStop2 = (e, data) => {
+		if (!e.changedTouches) return;
+		const { isOpen } = this.state;
+		const theme = this.context;
+		const touchPos = e.changedTouches[0].pageY
+
+		// If player is closed and touchPos does not trigger open,
+		// player should snap back to closed state.
+
+
+		//If player is open and touchPos does not trigger open,
+		// player should snap back to open state.
+
+
+		// If player is closed and touchPos triggers open,
+		// player should open.
+
+
+		// If player is open and touchPos triggers close,
+		// player should close.
+
 	}
 
 	handlePlayerToggle = () => {
@@ -223,10 +236,10 @@ export class Player extends Component {
 				isOpen={isOpen}
 				windowHeight={windowHeight}
 				userAgentIsMobile={userAgentIsMobile}
-				dragEndTransition={dragEndTransition}
+				//dragEndTransition={dragEndTransition}
 				//onDragStart={this.handleDragStart}
 				//onDragEnd={this.handleDragStop}
-				position={position}
+				//position={position}
 			>
 				{ !userAgentIsMobile && 
 					<Backdrop 
@@ -238,7 +251,8 @@ export class Player extends Component {
 						id="player_layout-container" 
 						theme={theme}
 						userAgentIsMobile={userAgentIsMobile}
-						onDragStart={this.handleDragStart}
+						isOpen={isOpen}
+						//onDragStart={this.handleDragStart}
 						onDragEnd={this.handleDragStop}
 						//position={position}
 						dragEndTransition={'y'}
