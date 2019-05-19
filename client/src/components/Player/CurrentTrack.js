@@ -29,7 +29,8 @@ const CurrentTrack = props => {
 	const theme = useContext(ThemeContext);
 
 	return (
-		<CurrentTrackContainer 
+		<CurrentTrackContainer
+			id="player_current-track"
 			theme={theme}
 			style={{height: theme.dimensions.player.height}}
 		>

@@ -18,11 +18,11 @@ const WINDOW_HEIGHT = window.innerHeight;
 
 const Container = styled.div`
 	background-color: ${getSecondaryBackgroundColor};
-	// position: absolute;
-	position: fixed;
+	position: absolute;
+	// position: fixed;
 	width: inherit;
 	// height: ${getPlayerHeight}px;
-	// height: 100%;
+	height: ${props => props.windowHeight - (getPlayerHeight(props) * 2)}px;
 	// top: ${getPlayerHeight}px;
 	top: 0; // needed with flip animation
 	bottom: -${(props) => WINDOW_HEIGHT - (getPlayerProgressOpenHeight(props) + (getPlayerHeight(props) * 2))}px;
@@ -56,12 +56,16 @@ class QueueList extends Component {
 		const { 
 			queue, 
 			currentTrack,
+			windowHeight,
 		} = this.props;
 
 		const theme = this.context;
 
 		return (
-			<Container theme={theme}>
+			<Container 
+				theme={theme} 
+				windowHeight={windowHeight}
+			>
 				<List 
 					theme={theme}
 					style={{height: '100%', padding: 0}}

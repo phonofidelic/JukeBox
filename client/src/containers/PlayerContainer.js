@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/player.actions';
-import { getSelectedTrack } from '../selectors';
-import Player from '../components/Player';
+import * as actions from 'actions/player.actions';
+import { getSelectedTrack } from 'selectors';
+import Player from 'components/Player';
 
 // function precisionRound(number, precision) {
 //   var factor = Math.pow(10, precision);

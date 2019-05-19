@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import posed from 'react-pose';
 
 import {
 	ThemeContext,
@@ -20,52 +21,79 @@ import Draggable from 'react-draggable';
 import ReactCardFlip from 'react-card-flip';
 
 const WINDOW_TOP = window.innerHeight * -1;
-const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
+const TRIGGER_DRAG_DISTANCE = window.innerHeight / 3;
 const DRAG_TRANSITION = 'all .5s ease';
 
+const poseConfig = {
+	draggable: 'y', 
+  dragEnd: {
+    transition: DRAG_TRANSITION,
+  },
+  open: { y: 0 },
+  closed: { y: window.innerHeight - 56},
+  // dragBounds: {
+  // 	// bottom: 0,
+  // 	top: (window.innerheight - ),
+  // }
+};
+
 const Container = styled.div`
+	background-color: ${getSecondaryBackgroundColor};
 	position: fixed;
+	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
+	margin: 0 auto;
+	top: 0;
+	left: 0;
+	right: 0;
 	bottom: 0;
-	width: 100%;
+	display: flex;
 	z-index: 1;
+	height: ${props => props.isOpen ? '100%' : getPlayerHeight(props) + 'px'};
+	transition: ${props => props.dragEndTransition};
 `
+
+const DraggableContainer = posed(Container)(poseConfig)
 
 const LayoutContainer = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
 	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
-	transition: ${props => props.dragEndTransition};
-	margin: 0 auto;
-	max-width: ${props=> !props.userAgentIsMobile ? `${getPlayerWidth(props)}px` : '100%'};
+	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
+	// position: fixed;
+	//bottom: ${props => props.position}px;
+	// transition: ${props => props.dragEndTransition};
 `
+
+const DraggableLayoutContainer = posed(LayoutContainer)(poseConfig)
 
 const TopPanel = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
+	background-color: ${getSecondaryBackgroundColor}
 	display: flex;
 	width: 100%;
+	margin: 0 auto;
 `
 
+const DraggableTopPanel = posed(TopPanel)(poseConfig)
+
 const QueueContainer = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
-	position: absolute;
-	height: ${props => props.windowHeight - getPlayerHeight(props)}px;
-	width: 100%;
-	overflow: hidden;
+	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
+	transition: ${DRAG_TRANSITION};
 `
 
 const PlayerProgressContainer = styled.div`
 	background-color: ${getSecondaryBackgroundColor};
 	position: fixed;
-	width: 100%;
-	bottom: ${props => !props.isOpen ? getPlayerHeight(props) : (props.windowHeight - (getPlayerHeight(props) * 2)) * -1}px;
+	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
+	bottom: ${getPlayerHeight}px;
 	z-index: 1000;
+	transition: ${props => props.dragEndTransition};
 `
 
 const BottomPanel = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
+	background-color: ${props => props.isOpen ? getSecondaryBackgroundColor(props) : 'none'};
 	position: fixed;
-	display: flex;
-	width: 100%;
-	bottom: ${props => props.isOpen ? (props.windowHeight - getPlayerHeight(props)) * -1 : 0}px;
+	bottom: 0;
+	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
+	// margin-left: auto;
+	z-index: 2;
 `
 
 export class Player extends Component {
@@ -73,9 +101,10 @@ export class Player extends Component {
 
 	constructor(props) {
 		super(props)
+		this.ref = React.createRef();
 		this.state = {
 			isOpen: false,
-			isDragging: false,
+			// isDragging: false,
 			showQueue: true,
 			position: 0,
 			windowHeight: window.innerHeight,
@@ -84,47 +113,51 @@ export class Player extends Component {
 	}
 
 	componentDidMount() {
-		window.addEventListener('resize', this.handleWindowResize);
+		window.addEventListener('resize', this.handleWindowResize.bind(this));
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('resize', this.handleWindowResize);
 	}
 
-	handleWindowResize = e => {
+	handleWindowResize(e) {
+		const theme = this.context;
+		console.log('QueueContainer height:', (e.target.innerHeight - getPlayerHeight({theme})))
 		this.setState({windowHeight: e.target.innerHeight});
 	}
 	
 	handleDragStart = (e) => {
 		// console.log('*** drag start', e)
-		this.setState({dragEndTransition: 'none'})
+		// this.setState({dragEndTransition: 'none'})
 	}
 
 	handleDrag = (e, data) => {
 		// console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
-		this.setState({isDragging: true});
+		// this.setState({isDragging: true});
 	}
 
 	handleDragStop = (e, data) => {
+		// console.log('ref:', this.ref)
+		if (!e.changedTouches) return;
+		console.log('handleDragStop, e', e.changedTouches[0].pageY)
 		const { isOpen } = this.state;
+		const theme = this.context;
+		const touchPos = e.changedTouches[0].pageY
 
-		const touchPos = data.y
-
-		// console.log('*** drag end', touchPos, WINDOW_TOP)
+		console.log('*** drag end', touchPos, TRIGGER_DRAG_DISTANCE)
 		if (!isOpen & touchPos < TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE * 2) {
 			this.setState({
 				isOpen: true,
-				isDragging: false,
-				position: WINDOW_TOP + this.context.dimensions.player.height,
-				dragEndTransition: DRAG_TRANSITION,
+				// position: getPlayerHeight({theme}) * -1,
+				// dragEndTransition: DRAG_TRANSITION,
 			});
 			return console.log('UP')
 		}
 		this.setState({
 			isOpen: false,
-			isDragging: false,
-			position: 0,
-			dragEndTransition: DRAG_TRANSITION,
+			// isDragging: false,
+			// position: 0,
+			// dragEndTransition: DRAG_TRANSITION,
 		});
 		console.log('DOWN')
 		// return true;
@@ -132,11 +165,12 @@ export class Player extends Component {
 
 	handlePlayerToggle = () => {
 		const { isOpen } = this.state;
+		const theme = this.context;
 
 		if (!isOpen) {
 			this.setState({
 				isOpen: true,
-				position: WINDOW_TOP + this.context.dimensions.player.height,
+				position: getPlayerHeight({theme}) * -1,
 				dragEndTransition: DRAG_TRANSITION,
 			});
 			return console.log('UP')
@@ -144,6 +178,7 @@ export class Player extends Component {
 		this.setState({
 			isOpen: false,
 			position: 0,
+			// position: getPlayerHeight({theme}),
 			dragEndTransition: DRAG_TRANSITION,
 		});
 		console.log('DOWN')
@@ -181,45 +216,56 @@ export class Player extends Component {
 
 		// console.log('isOpen:', isOpen)
 		return (
-			<Container>
+			<Container 
+				theme={theme} 
+				isOpen={isOpen}
+				windowHeight={windowHeight}
+				userAgentIsMobile={userAgentIsMobile}
+				dragEndTransition={dragEndTransition}
+				//onDragStart={this.handleDragStart}
+				//onDragEnd={this.handleDragStop}
+				position={position}
+			>
 				{ !userAgentIsMobile && 
 					<Backdrop 
 						open={isOpen} 
 						onBackdropClick={this.handlePlayerToggle} 
 					/>
 				}
-				<Draggable
-					handle="#player-handle"
-					disabled={!userAgentIsMobile}
-					axis="y"
-					defaultPosition={{x: 0, y: 0}}
-	        position={{x: 0, y: position}}
-	        scale={1}
-					onStart={this.handleDragStart}
-					onDrag={this.handleDrag}
-					onStop={this.handleDragStop}
-				>
-					<LayoutContainer
-						id="player-handle" 
+					<DraggableLayoutContainer
+						id="player_layout-container" 
 						theme={theme}
-						dragEndTransition={dragEndTransition}
 						userAgentIsMobile={userAgentIsMobile}
-						iOpen={isOpen}
+						onDragStart={this.handleDragStart}
+						onDragEnd={this.handleDragStop}
+						//position={position}
+						dragEndTransition={'y'}
+						dragBounds={{
+							top: 0,
+							bottom: window.innerHeight - getPlayerHeight({theme}),
+						}}
+						pose={isOpen ? 'open' : 'closed'}
 					>
-						<TopPanel theme={theme}>
+						<TopPanel 
+							id="player_top-panel" 
+							theme={theme}
+							isOpen={isOpen}
+						>
 							<CurrentTrack 
 								player={player}
 								playerIsOpen={isOpen}
 							/>
 							{isOpen &&
-								<ToggleQueueButton 
+								<ToggleQueueButton
 									showQueue={showQueue}
 									handleQueueToggle={this.handleQueueToggle}
 								/>
 							}
 						</TopPanel>
-						<QueueContainer 
+						<QueueContainer
+							id="player_queue-container"
 							theme={theme} 
+							isOpen={isOpen}
 							windowHeight={windowHeight}
 						>
 							<ReactCardFlip 
@@ -231,6 +277,7 @@ export class Player extends Component {
 									key="front"
 									queue={player.queue}
 									playerIsOpen={isOpen}
+									windowHeight={windowHeight}
 									queueIndex={player.queueIndex}
 									currentTrack={player.currentTrack} 
 									handleStopTrack={handleStopTrack}
@@ -250,10 +297,12 @@ export class Player extends Component {
 								</div>
 							</ReactCardFlip>
 						</QueueContainer>
-						<PlayerProgressContainer 
+						<PlayerProgressContainer
+							id="player_progress-container" 
 							theme={theme}
 							isOpen={isOpen}
 							windowHeight={windowHeight}
+							dragEndTransition={dragEndTransition}
 						>
 							<PlayerProgress 
 								player={player}
@@ -263,9 +312,11 @@ export class Player extends Component {
 							/>
 						</PlayerProgressContainer>
 						<BottomPanel 
+							id="player_bottom-panel"
 							theme={theme}
 							isOpen={isOpen}
 							windowHeight={windowHeight}
+							userAgentIsMobile={userAgentIsMobile}
 						>
 							{(userAgentIsMobile && !isOpen) && 
 								<div style={{ display: 'flex', width: '100%' }}></div>
@@ -281,8 +332,7 @@ export class Player extends Component {
 								handlePlayerToggle={this.handlePlayerToggle}
 							/>
 						</BottomPanel>
-					</LayoutContainer>
-				</Draggable>
+					</DraggableLayoutContainer>
 			</Container>
 		);
 	}
