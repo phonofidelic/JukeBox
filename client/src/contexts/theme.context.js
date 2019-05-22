@@ -47,7 +47,8 @@ export const theme = {
       height: 32,
     },
     nav: {
-      navHeight: 56,
+      height: 56,
+      zIndex: 3,
     },
     navDesktop: {
       navWidth: 80, // TODO: Find usage of this and change to 'width'
@@ -56,14 +57,9 @@ export const theme = {
       // zIndex: 3,
     },
     navMobile: {
-      // height: 56,
-      height: 0,
-      zIndex: 3,
-    },
-    topNav: {
-    	height: 56,
-      // height: 30,
+      height: 56,
       // height: 0,
+      zIndex: 3,
     },
     player: {
       width: 900,
@@ -85,7 +81,7 @@ export const getColorPrimaryLight = props => props.theme.palette.primary.light;
 export const getPrimaryHover = props => props.theme.palette.primary.hover;
 export const getPrimarySelected = props => props.theme.palette.primary.selected;
 export const getSecondaryBackgroundColor = props => props.theme.palette.secondary.light;
-export const getTopNavHeight = props => props.theme.dimensions.topNav.height;
+export const getNavMobileHeight = props => props.theme.dimensions.navMobile.height;
 export const getNavMobileZIndex = props => props.theme.dimensions.navMobile.zIndex;
 export const getPlayerHeight = props => props.theme.dimensions.player.height;
 export const getPlayerWidth = props => props.theme.dimensions.player.width;

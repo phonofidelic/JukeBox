@@ -8,6 +8,7 @@ import {
 	getSecondaryBackgroundColor,
 	getPlayerHeight,
 	getPlayerWidth,
+	getNavMobileHeight,
 } from '../../contexts/theme.context';
 import Backdrop from '../Backdrop'
 
@@ -17,49 +18,76 @@ import QueueList from 'components/Player/QueueList';
 import CurrentTrack from 'components/Player/CurrentTrack';
 import ToggleQueueButton from 'components/Player/ToggleQueueButton';
 
-import Draggable from 'react-draggable';
+// import Draggable from 'react-draggable';
 import ReactCardFlip from 'react-card-flip';
 
-const WINDOW_TOP = window.innerHeight * -1;
+// const WINDOW_TOP = window.innerHeight * -1;
 const TRIGGER_DRAG_DISTANCE = window.innerHeight / 4;
 const DRAG_TRANSITION = 'all .5s ease';
 
-const poseConfig = {
-	draggable: 'y', 
-  dragEnd: {
-    transition: DRAG_TRANSITION,
-    // Player position snaps back to initial pos if isOpen change is not triggered.
-    // Otherwise, open/closed props below override this setting.
-    y: props => props.isOpen ? 0 : window.innerHeight - getPlayerHeight(props),
-  },
-  open: { y: 0 },
-  closed: { y: props => window.innerHeight - getPlayerHeight(props)},
-};
+// const poseConfig = {
+// 	draggable: 'y',
+//   dragEnd: {
+//     transition: DRAG_TRANSITION,
+//     // Player position snaps back to initial pos if isOpen change is not triggered.
+//     // Otherwise, open/closed props below override this setting.
+//     y: props => props.isOpen ? 0 : window.innerHeight - getPlayerHeight(props),
+//   },
+//   open: { y: 0 },
+//   closed: { y: props => window.innerHeight - getPlayerHeight(props)},
+// };
 
 const Container = styled.div`
 	position: fixed;
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
 	margin: 0 auto;
-	top: 0;
+	// top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	display: flex;
 	z-index: 1;
-	height: ${props => props.isOpen ? '100%' : getPlayerHeight(props) + 'px'};
+	// height: ${props => props.isOpen ? '100%' : getPlayerHeight(props) + 'px'};
 	transition: ${props => props.dragEndTransition};
 `
 
-const DraggableContainer = posed(Container)(poseConfig)
-
 const LayoutContainer = styled.div`
-background-color: ${getSecondaryBackgroundColor};
+	position: fixed;
+	// top: ${props => props.userAgentIsMobile ? 56 : 0}px; // -56px seems to work initially
+	top: ${props => props.isOpen ? 0 : (props.userAgentIsMobile ? -56 : 0)}px;
+	bottom: ${props => props.userAgentIsMobile ? getNavMobileHeight(props) * 2 : 0}px;
+	background-color: ${getSecondaryBackgroundColor};
 	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
 	z-index: 1;
 `
 
-const DraggableLayoutContainer = posed(LayoutContainer)(poseConfig)
+const DraggableLayoutContainer = posed(LayoutContainer)({
+	draggable: 'y',
+	dragBounds: {
+		top: 0,
+		bottom: (props) => window.innerHeight - getPlayerHeight(props)
+	},
+	dragEnd: {
+    // Player position snaps back to initial pos if isOpen change is not triggered.
+    // Otherwise, open/closed props below override this setting.
+    y: props => props.isOpen ? 0 : window.innerHeight - getPlayerHeight(props),
+    transition: DRAG_TRANSITION,
+  },
+	open: {
+		y: 0,
+		transition: DRAG_TRANSITION,
+	},
+  closed: {
+  	y: props => window.innerHeight - getPlayerHeight(props),
+  	transition: DRAG_TRANSITION,
+  },
+  // closed: { y: 56 },
+  // label: 'layout-container',
+  // pressable: true,
+  // init: { scale: 1 },
+  // press: { scale: 0.8 }
+})
 
 const TopPanel = styled.div`
 	background-color: ${getSecondaryBackgroundColor}
@@ -68,27 +96,56 @@ const TopPanel = styled.div`
 	margin: 0 auto;
 `
 
-const DraggableTopPanel = posed(TopPanel)(poseConfig)
+// const DraggableTopPanel = posed(TopPanel)({
+// 	draggable: 'y',
+// 	dragBounds: {
+// 		top: 0,
+// 		bottom: props => window.innerHeight - getPlayerHeight(props)
+// 	},
+//   dragEnd: {
+//     transition: { type: 'spring' },
+//     // Player position snaps back to initial pos if isOpen change is not triggered.
+//     // Otherwise, open/closed props below override this setting.
+//     y: props => props.isOpen ? 0 : window.innerHeight - getPlayerHeight(props),
+//   },
+//   open: { y: 0 },
+//   closed: { y: props => window.innerHeight - getPlayerHeight(props)},
+// })
 
 const QueueContainer = styled.div`
 	// display: flex;
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
 	//transition: ${DRAG_TRANSITION};
+	// overflow-x: hidden;
 `
+// const PosedQueueContainer = posed(QueueContainer)({
+// 	draggable: 'false',
+// });
 
 const PlayerProgressContainer = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
+	//background-color: ${getSecondaryBackgroundColor};
 	position: fixed;
+	// top: ${(props) => props.isOpen || !props.userAgentIsMobile ? null : 0};
+	top: ${props => props.userAgentIsMobile ? 
+		(props.isOpen ? null : 0)
+		:
+		(props.isOpen ? null : 0)
+	};
+	bottom: ${props => props.userAgentIsMobile ? 
+		(props.isOpen  ? `${getNavMobileHeight(props) * 2}px` : null) 
+		: 
+		(props.isOpen ? `${getNavMobileHeight(props)}px` : null)};
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
-	bottom: ${getPlayerHeight}px;
 	z-index: 1000;
 	transition: ${props => props.dragEndTransition};
 `
 
 const BottomPanel = styled.div`
 	background-color: ${props => props.isOpen ? getSecondaryBackgroundColor(props) : 'none'};
+	display: flex;
 	position: fixed;
-	bottom: 0;
+	top: ${(props) => props.isOpen ? null : 0};
+	bottom: ${props => props.userAgentIsMobile ? getNavMobileHeight(props) : 0}px;
 	width: ${props => props.userAgentIsMobile ? '100%' : `${getPlayerWidth(props)}px`};
 	// margin-left: auto;
 	z-index: 2;
@@ -99,14 +156,14 @@ export class Player extends Component {
 
 	constructor(props) {
 		super(props)
-		this.ref = React.createRef();
 		this.state = {
 			isOpen: false,
-			// isDragging: false,
 			showQueue: true,
-			position: 0,
+			// position: 0,
 			windowHeight: window.innerHeight,
 			dragEndTransition: 'none',
+			// isDraggable: false
+			// isDraggable: true
 		}
 	}
 
@@ -125,27 +182,50 @@ export class Player extends Component {
 	}
 	
 	handleDragStart = (e) => {
-		console.log('*** drag start', e)
-		// this.setState({isOpen: null})
+		// e.preventDefault()
+		if (!e.changedTouches) return;
+
+		const dragStartPos = e.changedTouches[0].pageY;
+		const theme = this.context;
+		const { isOpen } = this.state;
+
+		if ( isOpen & dragStartPos > getPlayerHeight({theme})) {
+			// return this.setState({isDraggable: false});
+		}
+
+		console.log('handleDragStart, e', dragStartPos)
+		this.setState({
+			...this.state,
+			dragStartPos: dragStartPos,
+			// isDraggable: true
+		})
 	}
 
 	handleDrag = (e, data) => {
 		// console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
-		// this.setState({isDragging: true});
 	}
 
-	handleDragStop = (e, data) => {
+	handleDragStop = (e) => {
 		if (!e.changedTouches) return;
 		console.log('handleDragStop, e', e.changedTouches[0].pageY)
 		const { isOpen } = this.state;
 		const theme = this.context;
-		const touchPos = e.changedTouches[0].pageY;
+		const { dragStartPos } = this.state;
+		const dragEndPos = e.changedTouches[0].pageY;
 
-		console.log('*** drag end', touchPos, TRIGGER_DRAG_DISTANCE)
-		if (!isOpen & touchPos < window.innerHeight - TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE) {
+		let touchDelta = dragStartPos - dragEndPos;
+		if (touchDelta < 0) touchDelta = touchDelta * -1;
+		console.log('touchDelta:', touchDelta)
+		if (touchDelta < TRIGGER_DRAG_DISTANCE) return;
+
+		// If player is open and dragStartPos is within the queue list area
+		// if ( isOpen & dragStartPos > getPlayerHeight({theme})) return;
+
+		console.log('*** drag end', dragEndPos, TRIGGER_DRAG_DISTANCE)
+		if (!isOpen & dragEndPos < window.innerHeight - TRIGGER_DRAG_DISTANCE || isOpen & dragEndPos < TRIGGER_DRAG_DISTANCE) {
 			this.setState({
 				isOpen: true,
-				translatePos: 0,
+				// translatePos: 0,
 			});
 			return console.log('UP')
 		}
@@ -153,29 +233,6 @@ export class Player extends Component {
 			isOpen: false,
 		});
 		console.log('DOWN')
-	}
-
-	handleDragStop2 = (e, data) => {
-		if (!e.changedTouches) return;
-		const { isOpen } = this.state;
-		const theme = this.context;
-		const touchPos = e.changedTouches[0].pageY
-
-		// If player is closed and touchPos does not trigger open,
-		// player should snap back to closed state.
-
-
-		//If player is open and touchPos does not trigger open,
-		// player should snap back to open state.
-
-
-		// If player is closed and touchPos triggers open,
-		// player should open.
-
-
-		// If player is open and touchPos triggers close,
-		// player should close.
-
 	}
 
 	handlePlayerToggle = () => {
@@ -220,26 +277,22 @@ export class Player extends Component {
 
 		const {
 			isOpen,
-			// isDragging,
 			showQueue,
-			position,
+			// position,
 			windowHeight,
 			dragEndTransition,
+			// isDraggable,
 		} = this.state;
 
 		const theme = this.context;
 
-		// console.log('isOpen:', isOpen)
+		console.log('isOpen:', this.state.isOpen)
 		return (
 			<Container 
 				theme={theme} 
 				isOpen={isOpen}
 				windowHeight={windowHeight}
 				userAgentIsMobile={userAgentIsMobile}
-				//dragEndTransition={dragEndTransition}
-				//onDragStart={this.handleDragStart}
-				//onDragEnd={this.handleDragStop}
-				//position={position}
 			>
 				{ !userAgentIsMobile && 
 					<Backdrop 
@@ -252,10 +305,9 @@ export class Player extends Component {
 						theme={theme}
 						userAgentIsMobile={userAgentIsMobile}
 						isOpen={isOpen}
-						//onDragStart={this.handleDragStart}
+						onDragStart={this.handleDragStart}
 						onDragEnd={this.handleDragStop}
-						//position={position}
-						dragEndTransition={'y'}
+						//dragEndTransition={'y'}
 						dragBounds={{
 							top: 0,
 							bottom: window.innerHeight - getPlayerHeight({theme}),
@@ -317,6 +369,7 @@ export class Player extends Component {
 						<PlayerProgressContainer
 							id="player_progress-container" 
 							theme={theme}
+							userAgentIsMobile={userAgentIsMobile}
 							isOpen={isOpen}
 							windowHeight={windowHeight}
 							dragEndTransition={dragEndTransition}

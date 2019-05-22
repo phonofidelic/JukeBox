@@ -18,14 +18,14 @@ const WINDOW_HEIGHT = window.innerHeight;
 
 const Container = styled.div`
 	background-color: ${getSecondaryBackgroundColor};
-	position: absolute;
+	// position: absolute;
 	// position: fixed;
 	width: inherit;
 	// height: ${getPlayerHeight}px;
 	height: ${props => props.windowHeight - (getPlayerHeight(props) * 2)}px;
 	// top: ${getPlayerHeight}px;
-	top: 0; // needed with flip animation
-	bottom: -${(props) => WINDOW_HEIGHT - (getPlayerProgressOpenHeight(props) + (getPlayerHeight(props) * 2))}px;
+	//top: 0; // needed with flip animation
+	//bottom: -${(props) => WINDOW_HEIGHT - (getPlayerProgressOpenHeight(props) + (getPlayerHeight(props) * 2))}px;
 	overflow-y: auto;
 	padding: 0;
 `
@@ -43,12 +43,14 @@ class QueueList extends Component {
 	}
 
 	handleTouchStart = e => {
-		e.stopPropagation();
+		// e.preventDefault();
+		// e.stopPropagation();
 		console.log('QueueList, handleTouchStart, e:', e)
 	}
 
 	handleTouchEnd = e => {
-		e.stopPropagation();
+		// e.preventDefault();
+		// e.stopPropagation();
 		console.log('QueueList, handleTouchEnd, e:', e)
 	}
 
