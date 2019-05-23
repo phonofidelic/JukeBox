@@ -4,7 +4,7 @@ import { authActions } from '../actions';
 // import NavMobile from '../components/NavMobile';
 import NavDesktop from '../components/NavDesktop';
 // import TopNav from '../components/TopNav';
-// import NavMobile from '../components/NavMobile';
+import NavMobile from '../components/NavMobile';
 import FabNav from '../components/FabNav';
 
 
@@ -28,8 +28,9 @@ class NavContainer extends Component {
 		} = this.props;
 
 		return userAgentIsMobile ? 
-			<FabNav 
-				locationPathname={locationPathname} 
+			<NavMobile 
+				showNav={true}
+				locationPathname={locationPathname}
 				handleSignOut={this.handleSignOut.bind(this)} 
 			/> 
 			: 
@@ -47,4 +48,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, authActions)(NavContainer);
+export default connect(mapStateToProps, {...authActions})(NavContainer);
