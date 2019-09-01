@@ -35,18 +35,7 @@ export class LibraryMobile extends Component {
 
     const styles = {
       root: {
-        background: theme.palette.secondary.light,
-        borderTop: `1px solid ${theme.palette.primary.main}`,
-        padding: '0px',
-        // paddingTop: theme.dimensions.topNav.height + theme.dimensions.libraryControls.height,
-        paddingTop: theme.dimensions.libraryControls.height,
-        paddingBottom: theme.dimensions.player.height // TODO: link value to Player + Nav height
-        // position: 'fixed',
-        // width: '100%',
-        // top: 0,
-        // bottom: 0,
-        // overflowY: 'scroll',
-        // WebkitOverflowScrolling: 'touch' // BUG: Causes LibraryControls to jerk
+        background: theme.palette.secondary.light
       },
       list: {
         position: 'fixed',
@@ -56,7 +45,7 @@ export class LibraryMobile extends Component {
           ? theme.dimensions.player.height + theme.dimensions.navMobile.height
           : theme.dimensions.player.height,
         overflowY: 'scroll',
-        WebkitOverflowScrolling: 'touch' // BUG: Causes LibraryControls to jerk
+        WebkitOverflowScrolling: 'touch'
       }
     };
 
