@@ -19,12 +19,13 @@ import CurrentTrack from 'components/Player/CurrentTrack';
 import ToggleQueueButton from 'components/Player/ToggleQueueButton';
 
 const Container = styled.div`
-  background-color: ${getSecondaryBackgroundColor};
+  // background-color: ${getSecondaryBackgroundColor};
   position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 1;
-  box-shadow: ${({ theme }) => theme.palette.primary.boxShadow};
+  // box-shadow: ${({ theme }) => theme.palette.primary.boxShadow};
+  box-shadow: 0px 0px 10px rgba(227, 36, 36, .3);
 `;
 
 const QueueContainer = styled.div`
@@ -65,6 +66,13 @@ const CurrentTrackContainer = styled.div`
 
 const PlayerProgressContainer = styled.div`
   // background-color: ${getSecondaryBackgroundColor};
+  position: fixed;
+  width: 100%;
+  bottom: ${({ theme, userAgentIsMobile }) =>
+    userAgentIsMobile
+      ? theme.dimensions.player.height + theme.dimensions.navMobile.height - 6
+      : theme.dimensions.player.height - 6}px;
+  z-index: 2;
 `;
 
 const PlayerPanel = styled.div`

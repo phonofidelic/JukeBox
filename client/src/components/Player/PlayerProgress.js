@@ -5,24 +5,32 @@ import {
   getSecondaryBackgroundColor
 } from '../../contexts/theme.context';
 
-import Slider from '@material-ui/lab/Slider';
+// import Slider from '@material-ui/lab/Slider';
+import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   root: {
     // width: 300
-    height: '10px'
+    // hight: 0
   },
   slider: {
     // padding: '22px 0px'
     // padding: '22px 0px'
   },
+  rail: {
+    bottom: 0,
+    color: '#e62118'
+  },
   track: {
-    backgroundColor: '#e62118'
+    bottom: 0,
+    color: '#e62118'
     // height: '5px'
   },
   thumb: {
-    backgroundColor: '#e62118'
+    bottom: -5,
+    color: '#e62118',
+    zIndex: 2
   },
   activated: {
     width: '22px',
@@ -135,7 +143,7 @@ class PlayerProgress extends Component {
       <Slider
         classes={{
           root: classes.root,
-          container: classes.slider,
+          rail: classes.rail,
           track: classes.track,
           thumb: classes.thumb
           // activated: classes.activated,

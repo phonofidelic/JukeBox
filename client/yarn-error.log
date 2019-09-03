@@ -1,14 +1,14 @@
 Arguments: 
-  /Users/chris/.nvm/versions/node/v11.1.0/bin/node /usr/local/bin/yarn add @kennethormandy/react-flipcard
+  /Users/chris/.nvm/versions/node/v12.7.0/bin/node /usr/local/bin/yarn upgrade @material-ui/core
 
 PATH: 
-  /Users/chris/.nvm/versions/node/v11.1.0/bin:$/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+  /Users/chris/.nvm/versions/node/v12.7.0/bin:$/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 
 Yarn version: 
   0.20.3
 
 Node version: 
-  11.1.0
+  12.7.0
 
 Platform: 
   darwin x64
@@ -33,6 +33,7 @@ npm manifest:
       "popper.js": "^1.14.5",
       "prop-types": "^15.6.2",
       "react": "^16.8.6",
+      "react-card-flip": "^0.7.1",
       "react-dom": "^16.8.6",
       "react-draggable": "^3.3.0",
       "react-dropzone": "^4.2.9",
@@ -2489,7 +2490,7 @@ Lockfile:
       isobject "^3.0.0"
       static-extend "^0.1.1"
   
-  classnames@^2.2.5:
+  classnames@^2.2.0, classnames@^2.2.5:
     version "2.2.6"
     resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   
@@ -6146,15 +6147,6 @@ Lockfile:
     dependencies:
       object-visit "^1.0.0"
   
-  material-ui-slider@^3.0.0:
-    version "3.0.0"
-    resolved "https://registry.yarnpkg.com/material-ui-slider/-/material-ui-slider-3.0.0.tgz#758adebbd6a10b95606d96ab5db80ac229fdfa06"
-    dependencies:
-      classnames "^2.2.5"
-      lodash "^4.17.10"
-      prop-types "^15.6.1"
-      raf "^3.4.0"
-  
   material-ui-upload@^1.2.1:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/material-ui-upload/-/material-ui-upload-1.2.1.tgz#c5a082b07620f42564a193e57d94b0e7a3aa89b8"
@@ -7974,6 +7966,13 @@ Lockfile:
       raf "3.4.1"
       regenerator-runtime "0.13.2"
       whatwg-fetch "3.0.0"
+  
+  react-card-flip@^0.7.1:
+    version "0.7.1"
+    resolved "https://registry.yarnpkg.com/react-card-flip/-/react-card-flip-0.7.1.tgz#92c9b70d8e5c9db9d2e830463149797d32b9023c"
+    dependencies:
+      classnames "^2.2.0"
+      prop-types "^15.6.0"
   
   react-dev-utils@^9.0.1:
     version "9.0.1"
@@ -10242,4 +10241,4 @@ Lockfile:
       fd-slicer "~1.0.1"
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/chris/Projects/Jukebox/client/node_modules/.bin/cypress'
+  Error: EACCES: permission denied, mkdir '/Users/chris/Projects/Jukebox/client/node_modules/react-transition-group/node_modules/@babel'
