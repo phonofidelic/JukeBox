@@ -31,6 +31,7 @@ class NavMobile extends Component {
 
     const styles = {
       root: {
+        borderTop: '1px solid #dcdcdc',
         position: 'fixed',
         bottom: showNav ? '0px' : -getNavMobileHeight({theme}),
         width: '100%',

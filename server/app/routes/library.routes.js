@@ -5,7 +5,7 @@ const authController = require('../controllers/auth.controller');
 const upload = require('../../config/storage_config');
 
 router.get('/', 
-	authController.requireAuth, 
+	// authController.requireAuth, 
 	libraryController.loadLibrary
 );
 
