@@ -70,4 +70,4 @@ export class LibraryMobile extends Component {
   }
 }
 
-export default withTheme()(LibraryMobile);
+export default withTheme(LibraryMobile);

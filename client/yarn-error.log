@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/chris/.nvm/versions/node/v12.7.0/bin/node /usr/local/bin/yarn upgrade @material-ui/core
+  /Users/chris/.nvm/versions/node/v12.7.0/bin/node /usr/local/bin/yarn
 
 PATH: 
   /Users/chris/.nvm/versions/node/v12.7.0/bin:$/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
@@ -19,7 +19,7 @@ npm manifest:
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-      "@material-ui/core": "^3.9.3",
+      "@material-ui/core": "^4.3.0",
       "@material-ui/icons": "^3.0.2",
       "@material-ui/lab": "^3.0.0-alpha.30",
       "axios": "^0.18.0",

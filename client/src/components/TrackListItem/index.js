@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { 
-	ThemeContext,
-	getColorPrimaryLight,
-	getPrimarySelected,
+import {
+  ThemeContext,
+  getColorPrimaryLight,
+  getPrimarySelected
 } from '../../contexts/theme.context';
 
 import EditTrackForm from './EditTrackForm';
@@ -17,166 +17,194 @@ import Grid from '@material-ui/core/Grid';
 import { withTheme } from '@material-ui/core/styles';
 
 const Container = styled(ListItem)`
-	background-color: ${props => props.isSelected ? getPrimarySelected : getColorPrimaryLight}
-`
+  background-color: ${props =>
+    props.isSelected ? getPrimarySelected : getColorPrimaryLight};
+`;
 
 const ItemContentContainer = styled.div`
-	display: flex;
-	width: 100%;
-	justify-content: center;
-`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
 
 const ImageContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	height: 59px;
-	justify-content: center;
-`
+  display: flex;
+  flex-direction: column;
+  height: 59px;
+  justify-content: center;
+`;
 
 const TextContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	max-width: 200px;
-	margin-left: 10px;
-	margin-right: auto;
-`
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin-left: 10px;
+  margin-right: auto;
+`;
 
 const OptionsContainer = styled.div`
-	// margin-left: auto;
-	// width: 50px;
-`
+  // margin-left: auto;
+  // width: 50px;
+`;
 
 class TrackListItem extends Component {
-	static contextType = ThemeContext;
+  static contextType = ThemeContext;
 
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			editMode: false
-		}
-	}
+    this.state = {
+      editMode: false
+    };
+  }
 
-	handleToggleEditMode() {
-		this.setState({
-			...this.state,
-			editMode: !this.state.editMode
-		});
-	}
+  handleToggleEditMode() {
+    this.setState({
+      ...this.state,
+      editMode: !this.state.editMode
+    });
+  }
 
-	handleClick = () => {
-		console.log('click!', this.props.track)
-		this.props.handleSelectTrack(this.props.track)
-	}
+  handleClick = () => {
+    console.log('click!', this.props.track);
+    this.props.handleSelectTrack(this.props.track);
+  };
 
-	render() {
-		const { 
-			track,
-			player,
-			selectedTrack,
-			handleSelectTrack,
-			handleEditTrackData,
-			handleStartNewQueue,
-			handleAddToQueue,
-			handleDeleteTrack,
-			// handleToggleEditMode,
-			handleOpenDetailView,
-		} = this.props;
+  render() {
+    const {
+      track,
+      player,
+      selectedTrack,
+      handleSelectTrack,
+      handleEditTrackData,
+      handleStartNewQueue,
+      handleAddToQueue,
+      handleDeleteTrack,
+      // handleToggleEditMode,
+      handleOpenDetailView
+    } = this.props;
 
-		const theme = this.context;
+    const theme = this.context;
 
-		const { editMode } = this.state;
+    const { editMode } = this.state;
 
-		const isSelected = selectedTrack && track._id === selectedTrack._id;
+    const isSelected = selectedTrack && track._id === selectedTrack._id;
 
-		const styles = {
-			root: {
-				// borderBottom: `1px solid ${theme.palette.primary.main}`,
-				// padding: '10px'
-				// borderLeft: `solid ${theme.palette.primary.light} 5px`,
-			},
-			selected: {
-				background: theme.palette.primary.selected,
-				// // height: '50px',
-				// lineHeight: '50px',
-				// verticalAlign: 'middle,'
-			},
-			defaultImgContainer: {
-				width: '50px', 
-				height: '50px', 
-				display: 'flex',
-				background: theme.palette.primary.main,
-			},
-			defaultImg: {
-				margin: 'auto',
-				color: theme.palette.primary.light,
-			},
-			playing: {
-				// borderLeft: `solid ${theme.palette.secondary.main} 5px`,
-				// background: theme.palette.secondary.main,
-				// backgroundSize: '50px'
-				zIndex: 0,
-				position: 'absolute',
-				backgroundColor: 'rgba(0, 0, 0, .5)',
-			},
-		};
-	
-		return (
-      <Container 
-				onClick={() => handleSelectTrack(track)}
-				divider
-				theme={theme}
-				style={
-					isSelected ? 
-					styles.selected
-					:
-					styles.root	
-				}
-				dense={true}
-			>
-				{
-					editMode ?
-					<Grid container alignItems="center">
-						<EditTrackForm
-							track={track}
-							handleEditTrackData={handleEditTrackData}
-							handleToggleEditMode={this.handleToggleEditMode.bind(this)}
-						/>
-					</Grid>
-					:
-					<ItemContentContainer>
-						<ImageContainer onClick={() => handleStartNewQueue(track, player.currentTrack)}>
-						{
-							(player.playing && player.currentTrack._id === track._id) && 
-							<img src={playingThumb} style={styles.playing} alt="Playing..." width="50" height="50" />
-						}
-							<img src={track.image.src} alt="Album art" width="50" height="50" />
-						</ImageContainer>
+    const styles = {
+      root: {
+        // borderBottom: `1px solid ${theme.palette.primary.main}`,
+        // padding: '10px'
+        // borderLeft: `solid ${theme.palette.primary.light} 5px`,
+      },
+      selected: {
+        background: theme.palette.primary.selected
+        // // height: '50px',
+        // lineHeight: '50px',
+        // verticalAlign: 'middle,'
+      },
+      defaultImgContainer: {
+        width: '50px',
+        height: '50px',
+        display: 'flex',
+        background: theme.palette.primary.main
+      },
+      defaultImg: {
+        margin: 'auto',
+        color: theme.palette.primary.light
+      },
+      playing: {
+        // borderLeft: `solid ${theme.palette.secondary.main} 5px`,
+        // background: theme.palette.secondary.main,
+        // backgroundSize: '50px'
+        zIndex: 0,
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, .5)'
+      }
+    };
 
-						<TextContainer onClick={() => handleStartNewQueue(track, player.currentTrack)}>
-							<div><Typography style={{maxWidth: '250px'}} noWrap>{ track.title }</Typography></div>
-							<div><Typography style={{maxWidth: '250px'}} noWrap variant="caption">{ track.artist.name }</Typography></div>
-							<div><Typography style={{maxWidth: '250px'}} noWrap variant="caption">{ track.album.title }</Typography></div>
-							{/* isSelected && <div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div> */}
-						</TextContainer>
-						
-						<OptionsContainer>
-								<TrackListItemControls 
-									track={track}
-									player={player}
-									handleStartNewQueue={handleStartNewQueue}
-									handleAddToQueue={handleAddToQueue}
-									handleDeleteTrack={handleDeleteTrack}
-									handleToggleEditMode={this.handleToggleEditMode.bind(this)}
-									handleOpenDetailView={handleOpenDetailView}
-								/>
-						</OptionsContainer>
-							
-					</ItemContentContainer>
-				}
-			</Container>
-        );
-	}
+    return (
+      <Container
+        onClick={() => handleSelectTrack(track)}
+        divider
+        theme={theme}
+        style={isSelected ? styles.selected : styles.root}
+        dense={true}
+      >
+        {editMode ? (
+          <Grid container alignItems="center">
+            <EditTrackForm
+              track={track}
+              handleEditTrackData={handleEditTrackData}
+              handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+            />
+          </Grid>
+        ) : (
+          <ItemContentContainer>
+            <ImageContainer
+              onClick={() => handleStartNewQueue(track, player.currentTrack)}
+            >
+              {player.playing && player.currentTrack._id === track._id && (
+                <img
+                  src={playingThumb}
+                  style={styles.playing}
+                  alt="Playing..."
+                  width="50"
+                  height="50"
+                />
+              )}
+              <img
+                src={track.image.src}
+                alt="Album art"
+                width="50"
+                height="50"
+              />
+            </ImageContainer>
+
+            <TextContainer
+              onClick={() => handleStartNewQueue(track, player.currentTrack)}
+            >
+              <div>
+                <Typography style={{ maxWidth: '250px' }} noWrap>
+                  {track.title}
+                </Typography>
+              </div>
+              <div>
+                <Typography
+                  style={{ maxWidth: '250px' }}
+                  noWrap
+                  variant="caption"
+                >
+                  {track.artist.name}
+                </Typography>
+              </div>
+              <div>
+                <Typography
+                  style={{ maxWidth: '250px' }}
+                  noWrap
+                  variant="caption"
+                >
+                  {track.album.title}
+                </Typography>
+              </div>
+              {/* isSelected && <div><Typography noWrap variant="caption">{ track.format.duration || 'no durration' }</Typography></div> */}
+            </TextContainer>
+
+            <OptionsContainer>
+              <TrackListItemControls
+                track={track}
+                player={player}
+                handleStartNewQueue={handleStartNewQueue}
+                handleAddToQueue={handleAddToQueue}
+                handleDeleteTrack={handleDeleteTrack}
+                handleToggleEditMode={this.handleToggleEditMode.bind(this)}
+                handleOpenDetailView={handleOpenDetailView}
+              />
+            </OptionsContainer>
+          </ItemContentContainer>
+        )}
+      </Container>
+    );
+  }
 }
 
-export default withTheme()(TrackListItem);
+export default withTheme(TrackListItem);

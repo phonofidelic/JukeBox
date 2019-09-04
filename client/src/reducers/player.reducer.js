@@ -12,7 +12,7 @@ import {
 } from '../actiontypes';
 import { mockQueue } from '../utils';
 
-const useMockQueue = true;
+const useMockQueue = false;
 
 export const INITIAL_STATE = {
   queue: useMockQueue ? mockQueue : [],

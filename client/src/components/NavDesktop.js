@@ -18,10 +18,7 @@ class NavDesktop extends Component {
   static contextType = ThemeContext;
 
   render() {
-    const { 
-      locationPathname,
-      handleSignOut,
-    } = this.props;
+    const { locationPathname, handleSignOut } = this.props;
 
     const theme = this.context;
 
@@ -34,54 +31,70 @@ class NavDesktop extends Component {
         width: theme.dimensions.navDesktop.navWidth,
         padding: 10,
         marginTop: theme.dimensions.navDesktop.marginTop,
-        backgroundColor: theme.palette.secondary.light,
+        backgroundColor: theme.palette.secondary.light
         // boxShadow: '0px -1px 10px 1px #ccc',
         // zIndex: 1,
-      },
-    }
+      }
+    };
 
-    return(
-      <Grid 
+    return (
+      <Grid
         container
-        component={BottomNavigation} 
+        component={BottomNavigation}
         value={locationPathname}
         alignContent={'flex-start'}
         style={styles.root}
         showLabels
       >
-        <BottomNavigationAction 
-          component={Link} 
-          to="/"
-          label={<Typography color="inherit" variant="caption">Home</Typography>}
-          value="/" 
-          icon={<Home />} 
-        />
-        <BottomNavigationAction 
-          component={Link} 
-          to="/library"
-          label={<Typography color="inherit" variant="caption">Library</Typography>}
-          value="/library" 
-          icon={<Storage />} 
-        />
-        <BottomNavigationAction 
+        <BottomNavigationAction
           component={Link}
-          to="/uploader" 
-          label={<Typography color="inherit" variant="caption">Uploader</Typography>}
-          value="/uploader" 
-          icon={<CloudUpload />} 
+          to="/"
+          label={
+            <Typography color="inherit" variant="caption">
+              Home
+            </Typography>
+          }
+          value="/"
+          icon={<Home />}
         />
-        <BottomNavigationAction 
+        <BottomNavigationAction
+          component={Link}
+          to="/library"
+          label={
+            <Typography color="inherit" variant="caption">
+              Library
+            </Typography>
+          }
+          value="/library"
+          icon={<Storage />}
+        />
+        <BottomNavigationAction
+          component={Link}
+          to="/uploader"
+          label={
+            <Typography color="inherit" variant="caption">
+              Uploader
+            </Typography>
+          }
+          value="/uploader"
+          icon={<CloudUpload />}
+        />
+        <BottomNavigationAction
           onClick={() => handleSignOut()}
-          label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
-          icon={<ExitToApp />} 
+          label={
+            <Typography color="inherit" variant="caption">
+              Sign out
+            </Typography>
+          }
+          icon={<ExitToApp />}
         />
       </Grid>
     );
-  };
+  }
 }
 
 NavDesktop.propTypes = {
   locationPathname: PropTypes.string.isRequired
 };
 
-export default withTheme()(NavDesktop);
+export default withTheme(NavDesktop);
