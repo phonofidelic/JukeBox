@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { ThemeContext } from '../contexts/theme.context';
+import { 
+  ThemeContext,
+  getNavMobileHeight,
+  getNavMobileZIndex,
+} from '../contexts/theme.context';
 
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -18,6 +22,7 @@ class NavMobile extends Component {
 
   render() {
     const { 
+      showNav,
       locationPathname,
       handleSignOut,
     } = this.props;
@@ -26,12 +31,13 @@ class NavMobile extends Component {
 
     const styles = {
       root: {
+        borderTop: '1px solid #dcdcdc',
         position: 'fixed',
-        bottom: '0px',
+        bottom: showNav ? '0px' : -getNavMobileHeight({theme}),
         width: '100%',
-        height: theme.dimensions.navMobile.height,
+        height: getNavMobileHeight({theme}),
         backgroundColor: '#fafafa',
-        zIndex: theme.dimensions.navMobile.zIndex,
+        zIndex: getNavMobileZIndex({theme}),
       }
     }
 

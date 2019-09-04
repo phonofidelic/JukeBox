@@ -1,303 +1,245 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import posed from 'react-pose';
 import {
-	ThemeContext,
-	getSecondaryBackgroundColor,
-	getPlayerHeight,
-	getPlayerWidth,
+  ThemeContext,
+  getSecondaryBackgroundColor,
+  getPlayerHeight,
+  getPlayerWidth,
+  getNavMobileHeight
 } from '../../contexts/theme.context';
-import Backdrop from '../Backdrop'
+import ReactCardFlip from 'react-card-flip';
 
+import Backdrop from '../Backdrop';
 import PlayerProgress from 'components/Player/PlayerProgress';
 import PlayerControls from 'components/Player/PlayerControls';
 import QueueList from 'components/Player/QueueList';
 import CurrentTrack from 'components/Player/CurrentTrack';
 import ToggleQueueButton from 'components/Player/ToggleQueueButton';
 
-import Draggable from 'react-draggable';
-import ReactCardFlip from 'react-card-flip';
-
-const WINDOW_TOP = window.innerHeight * -1;
-const TRIGGER_DRAG_DISTANCE = WINDOW_TOP / 3;
-const DRAG_TRANSITION = 'all .5s ease';
-
 const Container = styled.div`
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	z-index: 1;
-`
-
-const LayoutContainer = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
-	box-shadow: ${props => (!props.userAgentIsMobile && props.isOpen) ? 'none' : '0px -1px 20px 1px #ccc'};
-	transition: ${props => props.dragEndTransition};
-	margin: 0 auto;
-	max-width: ${props=> !props.userAgentIsMobile ? `${getPlayerWidth(props)}px` : '100%'};
-`
-
-const TopPanel = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
-	display: flex;
-	width: 100%;
-`
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  // box-shadow: ${({ theme }) => theme.palette.primary.boxShadow};
+  box-shadow: 0px 0px 10px rgba(227, 36, 36, .3);
+`;
 
 const QueueContainer = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
-	position: absolute;
-	height: ${props => props.windowHeight - getPlayerHeight(props)}px;
-	width: 100%;
-	overflow: hidden;
-`
+  background-color: ${getSecondaryBackgroundColor};
+  justify-content: flex-end;
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  right: ${({ userAgentIsMobile }) => (userAgentIsMobile ? 0 : 10)}px;
+  bottom: ${({ theme, isOpen }) =>
+    isOpen
+      ? theme.dimensions.player.height + 10
+      : -500 - theme.dimensions.player.height}px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: bottom 0.3s ease;
+  z-index: -1;
+  box-shadow: ${({ theme }) => theme.palette.primary.boxShadow};
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
 
 const PlayerProgressContainer = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
-	position: fixed;
-	width: 100%;
-	bottom: ${props => !props.isOpen ? getPlayerHeight(props) : (props.windowHeight - (getPlayerHeight(props) * 2)) * -1}px;
-	z-index: 1000;
-`
+  // background-color: ${getSecondaryBackgroundColor};
+  position: fixed;
+  width: 100%;
+  bottom: ${({ theme, userAgentIsMobile }) =>
+    userAgentIsMobile
+      ? theme.dimensions.player.height + theme.dimensions.navMobile.height - 6
+      : theme.dimensions.player.height - 6}px;
+  z-index: 2;
+`;
 
-const BottomPanel = styled.div`
-	background-color: ${getSecondaryBackgroundColor};
-	position: fixed;
-	display: flex;
-	width: 100%;
-	bottom: ${props => props.isOpen ? (props.windowHeight - getPlayerHeight(props)) * -1 : 0}px;
-`
+const PlayerPanel = styled.div`
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-bottom: ${({ theme, userAgentIsMobile }) =>
+    userAgentIsMobile ? theme.dimensions.navMobile.height : 0}px;
+`;
+
+const CurrentTrackPlayerContainer = styled.div`
+  width: 56px;
+`;
+
+const CurrentTrackQueueContainer = styled.div`
+  background-color: ${getSecondaryBackgroundColor};
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+`;
 
 export class Player extends Component {
-	static contextType = ThemeContext;
+  static contextType = ThemeContext;
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			isOpen: false,
-			isDragging: false,
-			showQueue: true,
-			position: 0,
-			windowHeight: window.innerHeight,
-			dragEndTransition: 'none',
-		}
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+      showQueue: true,
+      windowHeight: window.innerHeight,
+      dragEndTransition: 'none'
+    };
+  }
 
-	componentDidMount() {
-		window.addEventListener('resize', this.handleWindowResize);
-	}
+  handlePlayerToggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.handleWindowResize);
-	}
+  handleToggleQueue = () => {
+    console.log('handleToggleQueue');
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
-	handleWindowResize = e => {
-		this.setState({windowHeight: e.target.innerHeight});
-	}
-	
-	handleDragStart = (e) => {
-		// console.log('*** drag start', e)
-		this.setState({dragEndTransition: 'none'})
-	}
+  render() {
+    const {
+      player,
+      userAgentIsMobile,
+      handleStopTrack,
+      handlePlayTrack,
+      handlePauseTrack,
+      handlePlayNext,
+      handlePlayPrev,
+      handlePlayFromQueue,
+      handleSeek
+      // classes,
+    } = this.props;
 
-	handleDrag = (e, data) => {
-		// console.log('Player, handleDrag, e:', e.changedTouches[0].clientY)
-		this.setState({isDragging: true});
-	}
+    const {
+      isOpen,
+      showQueue,
+      windowHeight,
+      dragEndTransition,
+      isDraggable
+    } = this.state;
 
-	handleDragStop = (e, data) => {
-		const { isOpen } = this.state;
+    const theme = this.context;
 
-		const touchPos = data.y
+    return (
+      <Container
+        id="player"
+        theme={theme}
+        isOpen={isOpen}
+        windowHeight={windowHeight}
+        userAgentIsMobile={userAgentIsMobile}
+      >
+        <QueueContainer
+          id="player_queue-container"
+          theme={theme}
+          isOpen={isOpen}
+          userAgentIsMobile={userAgentIsMobile}
+          windowHeight={windowHeight}
+        >
+          <CurrentTrackQueueContainer theme={theme}>
+            <CurrentTrack
+              theme={theme}
+              currentTrack={player.currentTrack}
+              playerIsOpen={isOpen}
+            />
+          </CurrentTrackQueueContainer>
+          <ReactCardFlip
+            //type="horizontal"
+            isFlipped={!showQueue}
+          >
+            <QueueList
+              key="front"
+              queue={player.queue}
+              // isOpen={isOpen}
+              playerIsOpen={isOpen}
+              windowHeight={windowHeight}
+              queueIndex={player.queueIndex}
+              currentTrack={player.currentTrack}
+              handleStopTrack={handleStopTrack}
+              handlePlayTrack={handlePlayTrack}
+              handlePlayFromQueue={handlePlayFromQueue}
+            />
+            <div key="back" style={{ display: 'flex' }}>
+              <img
+                src={player.currentTrack.image.src}
+                alt={`Album art for ${player.currentTrack.album.title}`}
+                width={
+                  userAgentIsMobile
+                    ? window.innerWidth
+                    : getPlayerWidth({ theme })
+                }
+                height={
+                  userAgentIsMobile
+                    ? window.innerWidth
+                    : getPlayerWidth({ theme })
+                }
+              />
+            </div>
+          </ReactCardFlip>
+        </QueueContainer>
 
-		// console.log('*** drag end', touchPos, WINDOW_TOP)
-		if (!isOpen & touchPos < TRIGGER_DRAG_DISTANCE || isOpen & touchPos < TRIGGER_DRAG_DISTANCE * 2) {
-			this.setState({
-				isOpen: true,
-				isDragging: false,
-				position: WINDOW_TOP + this.context.dimensions.player.height,
-				dragEndTransition: DRAG_TRANSITION,
-			});
-			return console.log('UP')
-		}
-		this.setState({
-			isOpen: false,
-			isDragging: false,
-			position: 0,
-			dragEndTransition: DRAG_TRANSITION,
-		});
-		console.log('DOWN')
-		// return true;
-	}
-
-	handlePlayerToggle = () => {
-		const { isOpen } = this.state;
-
-		if (!isOpen) {
-			this.setState({
-				isOpen: true,
-				position: WINDOW_TOP + this.context.dimensions.player.height,
-				dragEndTransition: DRAG_TRANSITION,
-			});
-			return console.log('UP')
-		}
-		this.setState({
-			isOpen: false,
-			position: 0,
-			dragEndTransition: DRAG_TRANSITION,
-		});
-		console.log('DOWN')
-	}
-
-	handleQueueToggle = () => {
-		console.log('handleQueueToggle')
-		this.setState({showQueue: !this.state.showQueue})
-	}
-
-	render() {
-		const { 
-			player, 
-			userAgentIsMobile,
-			handleStopTrack,
-			handlePlayTrack,
-			handlePauseTrack,
-			handlePlayNext,
-			handlePlayPrev,
-			handlePlayFromQueue,
-			handleSeek,
-			// classes,
-		} = this.props;
-
-		const {
-			isOpen,
-			// isDragging,
-			showQueue,
-			position,
-			windowHeight,
-			dragEndTransition,
-		} = this.state;
-
-		const theme = this.context;
-
-		// console.log('isOpen:', isOpen)
-		return (
-			<Container>
-				{ !userAgentIsMobile && 
-					<Backdrop 
-						open={isOpen} 
-						onBackdropClick={this.handlePlayerToggle} 
-					/>
-				}
-				<Draggable
-					handle="#player-handle"
-					disabled={!userAgentIsMobile}
-					axis="y"
-					defaultPosition={{x: 0, y: 0}}
-	        position={{x: 0, y: position}}
-	        scale={1}
-					onStart={this.handleDragStart}
-					onDrag={this.handleDrag}
-					onStop={this.handleDragStop}
-				>
-					<LayoutContainer
-						id="player-handle" 
-						theme={theme}
-						dragEndTransition={dragEndTransition}
-						userAgentIsMobile={userAgentIsMobile}
-						iOpen={isOpen}
-					>
-						<TopPanel theme={theme}>
-							<CurrentTrack 
-								player={player}
-								playerIsOpen={isOpen}
-							/>
-							{isOpen &&
-								<ToggleQueueButton 
-									showQueue={showQueue}
-									handleQueueToggle={this.handleQueueToggle}
-								/>
-							}
-						</TopPanel>
-						<QueueContainer 
-							theme={theme} 
-							windowHeight={windowHeight}
-						>
-							<ReactCardFlip 
-								//type="horizontal"
-								isFlipped={!showQueue}
-								//style={{width: '100%'}}
-							>
-								<QueueList 
-									key="front"
-									queue={player.queue}
-									playerIsOpen={isOpen}
-									queueIndex={player.queueIndex}
-									currentTrack={player.currentTrack} 
-									handleStopTrack={handleStopTrack}
-									handlePlayTrack={handlePlayTrack}
-									handlePlayFromQueue={handlePlayFromQueue}
-								/>
-								<div 
-									key="back"
-									style={{display: 'flex'}}
-								>
-									<img 
-										src={player.currentTrack.image.src} 
-										alt={`Album art for ${player.currentTrack.album.title}`}
-										width={userAgentIsMobile ? window.innerWidth : getPlayerWidth({theme})}
-										height={userAgentIsMobile ? window.innerWidth : getPlayerWidth({theme})}
-									/>
-								</div>
-							</ReactCardFlip>
-						</QueueContainer>
-						<PlayerProgressContainer 
-							theme={theme}
-							isOpen={isOpen}
-							windowHeight={windowHeight}
-						>
-							<PlayerProgress 
-								player={player}
-								playerIsOpen={isOpen}
-								userAgentIsMobile={userAgentIsMobile}
-								handleSeek={handleSeek}
-							/>
-						</PlayerProgressContainer>
-						<BottomPanel 
-							theme={theme}
-							isOpen={isOpen}
-							windowHeight={windowHeight}
-						>
-							{(userAgentIsMobile && !isOpen) && 
-								<div style={{ display: 'flex', width: '100%' }}></div>
-							}
-							<PlayerControls
-								player={player}
-								playerIsOpen={isOpen}
-								userAgentIsMobile={userAgentIsMobile}
-								handlePlayTrack={handlePlayTrack}
-								handlePauseTrack={handlePauseTrack}
-								handlePlayNext={handlePlayNext}
-								handlePlayPrev={handlePlayPrev}
-								handlePlayerToggle={this.handlePlayerToggle}
-							/>
-						</BottomPanel>
-					</LayoutContainer>
-				</Draggable>
-			</Container>
-		);
-	}
+        <PlayerProgressContainer
+          id="player_progress-container"
+          theme={theme}
+          userAgentIsMobile={userAgentIsMobile}
+          isOpen={isOpen}
+          windowHeight={windowHeight}
+          dragEndTransition={dragEndTransition}
+        >
+          <PlayerProgress
+            theme={theme}
+            player={player}
+            playerIsOpen={isOpen}
+            userAgentIsMobile={userAgentIsMobile}
+            handleSeek={handleSeek}
+          />
+        </PlayerProgressContainer>
+        <PlayerPanel
+          id="player_panel"
+          theme={theme}
+          isOpen={isOpen}
+          windowHeight={windowHeight}
+          userAgentIsMobile={userAgentIsMobile}
+        >
+          <CurrentTrackPlayerContainer>
+            <CurrentTrack
+              currentTrack={player.currentTrack}
+              playerIsOpen={isOpen}
+            />
+          </CurrentTrackPlayerContainer>
+          <PlayerControls
+            player={player}
+            queueIsOpen={isOpen}
+            userAgentIsMobile={userAgentIsMobile}
+            handlePlayTrack={handlePlayTrack}
+            handlePauseTrack={handlePauseTrack}
+            handlePlayNext={handlePlayNext}
+            handlePlayPrev={handlePlayPrev}
+            handleToggleQueue={this.handleToggleQueue}
+          />
+        </PlayerPanel>
+      </Container>
+    );
+  }
 }
 
 Player.propTypes = {
-	player: PropTypes.object.isRequired,
-	userAgentIsMobile: PropTypes.bool.isRequired,
-	handlePlayTrack: PropTypes.func.isRequired,
-	handlePauseTrack: PropTypes.func.isRequired,
-	handleStopTrack: PropTypes.func.isRequired,
-	handlePlayNext: PropTypes.func.isRequired,
-	handlePlayPrev: PropTypes.func.isRequired,
-	handlePlayFromQueue: PropTypes.func.isRequired,
-	handleSeek: PropTypes.func.isRequired,
-}
+  player: PropTypes.object.isRequired,
+  userAgentIsMobile: PropTypes.bool.isRequired,
+  handlePlayTrack: PropTypes.func.isRequired,
+  handlePauseTrack: PropTypes.func.isRequired,
+  handleStopTrack: PropTypes.func.isRequired,
+  handlePlayNext: PropTypes.func.isRequired,
+  handlePlayPrev: PropTypes.func.isRequired,
+  handlePlayFromQueue: PropTypes.func.isRequired,
+  handleSeek: PropTypes.func.isRequired
+};
 
 export default Player;
