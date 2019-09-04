@@ -19,7 +19,7 @@ import CurrentTrack from 'components/Player/CurrentTrack';
 import ToggleQueueButton from 'components/Player/ToggleQueueButton';
 
 const Container = styled.div`
-  // background-color: ${getSecondaryBackgroundColor};
+  background-color: #fff;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -30,8 +30,6 @@ const Container = styled.div`
 
 const QueueContainer = styled.div`
   background-color: ${getSecondaryBackgroundColor};
-  // display: ${({ userAgentIsMobile }) =>
-    userAgentIsMobile ? 'block' : 'flex'};
   justify-content: flex-end;
   width: 500px;
   height: 500px;
@@ -39,11 +37,8 @@ const QueueContainer = styled.div`
   right: ${({ userAgentIsMobile }) => (userAgentIsMobile ? 0 : 10)}px;
   bottom: ${({ theme, isOpen }) =>
     isOpen
-      ? theme.dimensions.playerProgressOpen.height +
-        theme.dimensions.player.height
-      : -500 -
-        (theme.dimensions.playerProgressOpen.height +
-          theme.dimensions.player.height)}px;
+      ? theme.dimensions.player.height + 10
+      : -500 - theme.dimensions.player.height}px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   transition: bottom 0.3s ease;
@@ -53,15 +48,6 @@ const QueueContainer = styled.div`
   @media (max-width: 768px) {
     width: 100%;
   }
-`;
-
-const CurrentTrackContainer = styled.div`
-  background-color: ${getSecondaryBackgroundColor};
-  position: sticky;
-  width: 100%;
-  top: 0;
-  z-index: 1;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 `;
 
 const PlayerProgressContainer = styled.div`
@@ -76,11 +62,24 @@ const PlayerProgressContainer = styled.div`
 `;
 
 const PlayerPanel = styled.div`
-  background: ${getSecondaryBackgroundColor};
+  background-color: #fff;
   display: flex;
   justify-content: center;
-  margin-bottom: ${({ userAgentIsMobile }) =>
-    userAgentIsMobile ? getPlayerHeight : 0}px;
+  margin-bottom: ${({ theme, userAgentIsMobile }) =>
+    userAgentIsMobile ? theme.dimensions.navMobile.height : 0}px;
+`;
+
+const CurrentTrackPlayerContainer = styled.div`
+  width: 56px;
+`;
+
+const CurrentTrackQueueContainer = styled.div`
+  background-color: ${getSecondaryBackgroundColor};
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
 `;
 
 export class Player extends Component {
@@ -144,13 +143,13 @@ export class Player extends Component {
           userAgentIsMobile={userAgentIsMobile}
           windowHeight={windowHeight}
         >
-          <CurrentTrackContainer theme={theme}>
+          <CurrentTrackQueueContainer theme={theme}>
             <CurrentTrack
               theme={theme}
               currentTrack={player.currentTrack}
               playerIsOpen={isOpen}
             />
-          </CurrentTrackContainer>
+          </CurrentTrackQueueContainer>
           <ReactCardFlip
             //type="horizontal"
             isFlipped={!showQueue}
@@ -203,19 +202,18 @@ export class Player extends Component {
           />
         </PlayerProgressContainer>
         <PlayerPanel
-          id="player_bottom-panel"
+          id="player_panel"
           theme={theme}
           isOpen={isOpen}
           windowHeight={windowHeight}
           userAgentIsMobile={userAgentIsMobile}
         >
-          {/* {userAgentIsMobile && !isOpen && (
-            <div style={{ display: 'flex', width: '100%' }}></div>
-          )} */}
-          <CurrentTrack
-            currentTrack={player.currentTrack}
-            playerIsOpen={isOpen}
-          />
+          <CurrentTrackPlayerContainer>
+            <CurrentTrack
+              currentTrack={player.currentTrack}
+              playerIsOpen={isOpen}
+            />
+          </CurrentTrackPlayerContainer>
           <PlayerControls
             player={player}
             queueIsOpen={isOpen}

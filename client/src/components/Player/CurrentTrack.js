@@ -6,7 +6,7 @@ import { ThemeContext, getPlayerHeight } from '../../contexts/theme.context';
 import Typography from '@material-ui/core/Typography';
 
 const CurrentTrackContainer = styled.div`
-  flex: 1;
+  // flex: 1;
   display: flex;
   text-align: left;
   height: ${getPlayerHeight}px;

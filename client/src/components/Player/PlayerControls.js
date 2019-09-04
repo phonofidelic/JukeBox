@@ -12,14 +12,21 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import QueueMusic from '@material-ui/icons/QueueMusic';
 
 const Container = styled.div`
+  // border: 1px solid green;
+  background: ${({ theme, userAgentIsMobile }) =>
+    userAgentIsMobile ? theme.palette.secondary.light : 'none'};
+  flex: 2;
   display: flex;
   height: ${getPlayerHeight}px;
-  justify-content: center;
+  // justify-content: center;
+  align-items: center;
   width: 100%;
 `;
 
 export const Control = styled.div`
-  // flex: auto;
+  // border: 1px solid red;
+  flex: 1;
+  flex-grow: 1;
   max-width: 80px;
 `;
 
@@ -46,7 +53,11 @@ class PlayerControls extends Component {
     const theme = this.context;
 
     return (
-      <Container id="player_controls" theme={theme}>
+      <Container
+        id="player_controls"
+        theme={theme}
+        userAgentIsMobile={userAgentIsMobile}
+      >
         <Control style={{ marginLeft: !userAgentIsMobile ? 'auto' : 0 }}>
           <IconButton
             disabled={player.queueIndex === 0}
