@@ -40,6 +40,7 @@ export class LibraryRow extends Component {
   };
 
   handleContextMenuClose() {
+    console.log('*** handleContextMenuClose');
     this.setState({
       ...this.state,
       contextMenuIsOpen: false,
