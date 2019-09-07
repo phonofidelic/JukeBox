@@ -40,6 +40,7 @@ export class LibraryRow extends Component {
   };
 
   handleContextMenuClose() {
+    console.log('*** handleContextMenuClose');
     this.setState({
       ...this.state,
       contextMenuIsOpen: false,
@@ -93,7 +94,13 @@ export class LibraryRow extends Component {
             height="32"
           />
         )}
-        <img src={track.image.src} alt="Album art" width="32" height="32" />
+        <img
+          style={{ verticalAlign: 'middle' }}
+          src={track.image.src}
+          alt="Album art"
+          width="32"
+          height="32"
+        />
       </div>
     );
   }
