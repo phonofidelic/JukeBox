@@ -52,24 +52,23 @@ module.exports.getStream = async (req, res, next) => {
           },
           { responseType: 'stream' }
         );
+
+        gdRes.data
+          // .on('data', chunk => {
+          //   // console.log(chunk);
+          //   // res.write(chunk)
+          // })
+          .on('end', () => {
+            console.log('*** done');
+            // res.end()
+            res.status(200).json({ message: 'Stream created', src: dest.path });
+            // datauri.encode(dest.path);
+          })
+          .on('error', err => next(err))
+          .pipe(dest);
       } catch (err) {
         next(err);
       }
-
-      // res.writeHead(200, {'Content-Type': 'audio/mpeg'});
-      gdRes.data
-        .on('data', chunk => {
-          // console.log(chunk)
-          // res.write(chunk)
-        })
-        .on('end', () => {
-          console.log('*** done');
-          // res.end()
-          res.status(200).json({ message: 'Stream created', src: dest.path });
-          // datauri.encode(dest.path);
-        })
-        .on('error', err => next(err))
-        .pipe(dest);
     }
   });
 };
