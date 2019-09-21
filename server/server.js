@@ -1,3 +1,4 @@
 const app = require('./app');
+const { PORT } = require('./config/keys');
 
-app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

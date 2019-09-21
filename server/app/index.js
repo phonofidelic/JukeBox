@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const logger = require('morgan');
@@ -10,11 +10,10 @@ const trackRoutes = require('./routes/track.routes');
 const libraryRoutes = require('./routes/library.routes');
 const gdriveRoutes = require('./routes/gdrive.routes');
 const streamRoutes = require('./routes/stream.routes');
+const { DB_CONNECTION } = require('../config/keys');
 
-// const PORT = process.env.PORT;
-// const DB_CONNECTION = process.env.DB_CONNECTION;
 const STRINGS = {
-	default_server_error: 'Something broke!'
+  default_server_error: 'Something broke!'
 };
 
 const app = express();
@@ -23,7 +22,7 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 
 // Configure db
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true });
+mongoose.connect(DB_CONNECTION, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error'));
 db.on('open', () => console.log('DB connection successfull!'));
@@ -39,15 +38,18 @@ app.set('views', './app/views');
 
 // Configure access-control headers
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
   next();
 });
 
 // Bug: this is not working:
 // Remove X-Powered-By express header from all response objects
 app.use((req, res, next) => {
-  res.removeHeader("X-Powered-By");
+  res.removeHeader('X-Powered-By');
   next();
 });
 // or
@@ -64,22 +66,26 @@ app.use('/api/library', libraryRoutes);
 app.use('/api/gdrive', gdriveRoutes);
 app.use('/api/stream', streamRoutes);
 
-// Serve static client files
-app.use(express.static(process.env.CLIENT_DIR));
-app.use('/*', express.static(process.env.CLIENT_DIR));
+/**
+ * Commenting out since api server will not serve client
+ */
+// // Serve static client files
+// app.use(express.static(process.env.CLIENT_DIR));
+// app.use('/*', express.static(process.env.CLIENT_DIR));
 
 // Catch all unhandled routes
 app.use('/*', (req, res) => {
-	res.status(404).json({message: 'Recource not found'});
+  res.status(404).json({ message: 'Recource not found' });
 });
 
 app.use((err, req, res, next) => {
-	console.error('\n### FROM ERROR HANDLER:', err);
-	res.status(500).json({message: err.message || STRINGS.default_server_error});
-})
+  console.error('\n### FROM ERROR HANDLER:', err);
+  res
+    .status(500)
+    .json({ message: err.message || STRINGS.default_server_error });
+});
 
 // app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));
 
 // For testing
 module.exports = app;
-

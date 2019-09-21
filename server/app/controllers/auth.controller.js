@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken');
 const uuidv4 = require('uuid/v4');
 // const TokenGenerator = require('./utils/TokenGenerator');
 // const tokenGenerator = new TokenGenerator(
-// 	process.env.JWT_SECRET,
-// 	process.env.JWT_SECRET,
+// 	JWT_SECRET,
+// 	JWT_SECRET,
 // 	{ expiresIn: '5s'}
 // );
-const tokenGenerator = require('./utils/TokenGenerator');
+const { JWT_SECRET, JWT_EXP, JWT_AUD, JWT_ISS } = require('../../config/keys');
 
 const STRINGS = {
   user_registration_success: 'new user registered',
@@ -17,11 +17,11 @@ const STRINGS = {
 // TODO: Create DB or momory store (Redis?)
 let refreshTokens = {};
 
-const generateToken = user => {
-  return jwt.sign(user, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXP,
-    audience: process.env.JWT_AUD,
-    issuer: process.env.JWT_ISS,
+const generateToken = (user, refreshToken) => {
+  return jwt.sign({ ...user, rt: refreshToken }, JWT_SECRET, {
+    expiresIn: JWT_EXP,
+    audience: JWT_AUD,
+    issuer: JWT_ISS,
     jwtid: uuidv4(),
     subject: String(user._id)
   });
@@ -53,20 +53,23 @@ exports.registerNewUser = (req, res, next) => {
       if (err) return next(err);
 
       let userInfo = setUserInfo(savedUser);
-      const token = generateToken(userInfo);
+
       const refreshToken = uuidv4();
       // TODO: Set refresh token in DB
       refreshTokens[refreshToken] = savedUser._id;
+
+      const token = generateToken(userInfo, refreshToken);
+
       console.log('\n*** refreshTokens:', refreshTokens);
 
       res.cookie('JWT', token, {
         httpOnly: true,
-        secure: process.env.PRODUCTION
+        secure: process.env.NODE_ENV === 'production'
       });
-      res.cookie('RT', refreshToken, {
-        httpOnly: true,
-        secure: process.env.PRODUCTION
-      });
+      // res.cookie('RT', refreshToken, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === 'production'
+      // });
 
       res.json({
         message: STRINGS.user_registration_success,
@@ -79,18 +82,23 @@ exports.registerNewUser = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  const { email, password } = req.body;
   const userInfo = setUserInfo(req.user);
-  const token = generateToken(userInfo);
+
   const refreshToken = uuidv4();
   // TODO: Set refresh token in DB
   refreshTokens[refreshToken] = req.user._id;
+
+  const token = generateToken(userInfo, refreshToken);
+
   console.log('\n*** refreshTokens:', refreshTokens);
 
-  // res.cookie('JWT', token, { httpOnly: true, secure: process.env.PRODUCTION });
+  res.cookie('JWT', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'
+  });
   // res.cookie('RT', refreshToken, {
   //   httpOnly: true,
-  //   secure: process.env.PRODUCTION
+  //   secure: process.env.NODE_ENV === 'production'
   // });
 
   res.json({
@@ -108,9 +116,13 @@ exports.logout = (req, res, next) => {
 };
 
 exports.requireAuth = (req, res, next) => {
-  const { token } = req.headers;
+  // const { token } = req.headers;
+  const token = req.cookies.JWT;
+  console.log('====================================');
+  console.log('token:', token);
+  console.log('====================================');
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
       return err.name === 'TokenExpiredError'
         ? handleExpiredToken(req, res, next)
@@ -127,26 +139,30 @@ const handleExpiredToken = (req, res, next) => {
   console.log('\n*** TOKEN EXPIRED ***');
   // const userId = req.userId;
   const decoded = jwt.decode(req.cookies.JWT);
+  // console.log('====================================');
+  // console.log('decoded token:', decoded);
+  // console.log('====================================');
   const userId = decoded._id;
-  const refreshToken = req.cookies.RT;
+  const refreshToken = decoded.rt;
 
   // Check refresh token store
   if (refreshToken in refreshTokens && refreshTokens[refreshToken] == userId) {
     console.log('\n*** VALID REFRESH ***');
-    const token = generateToken({ _id: userId });
 
     delete refreshTokens[refreshToken];
     const newRefreshToken = uuidv4();
     refreshTokens[newRefreshToken] = userId;
 
+    const token = generateToken({ _id: userId }, newRefreshToken);
+
     res.cookie('JWT', token, {
       httpOnly: true,
-      secure: process.env.PRODUCTION
+      secure: process.env.NODE_ENV === 'production'
     });
-    res.cookie('RT', newRefreshToken, {
-      httpOnly: true,
-      secure: process.env.PRODUCTION
-    });
+    // res.cookie('RT', newRefreshToken, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === 'production'
+    // });
     req.userId = userId;
     return next();
   } else {
