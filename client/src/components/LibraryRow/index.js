@@ -95,7 +95,11 @@ export class LibraryRow extends Component {
           />
         )}
         <img
-          style={{ verticalAlign: 'middle' }}
+          style={{
+            verticalAlign: 'middle',
+            display: 'block',
+            overflow: 'hidden'
+          }}
           src={track.image.src}
           alt="Album art"
           width="32"

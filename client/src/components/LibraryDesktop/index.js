@@ -102,7 +102,7 @@ class LibraryDesktop extends Component {
       <div style={styles.root}>
         <div style={styles.navSpacer}></div>
         <Paper style={styles.tableContainer}>
-          <Table padding="default" size="small">
+          <Table size="small">
             <LibraryTableHead
               order={order}
               orderBy={orderBy}
