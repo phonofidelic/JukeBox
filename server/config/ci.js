@@ -1,3 +1,4 @@
+require('dotenv').config();
 module.exports = {
   PORT: 3000,
   DB_CONNECTION: 'mongodb://127.0.0.1:27017/jukebox_ci',
