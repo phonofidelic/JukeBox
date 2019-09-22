@@ -1,19 +1,22 @@
 language: node_js
 node_js:
-  - '12'
+- '12'
 dist: trusty
 services:
-  - mongodb
+- mongodb
 env:
+  matrix:
   - NODE_ENV=ci PORT=3000
+  - secure: PYPfL3XoKDCnQz7/2d4ArcHy5fYonT0jJ8lyLIzWkA3Yu9o/ZRQVBNAiNRtKREIRRu+FTxPZ1KswToqlnLRPWd8JcGU1x3uoj00VKIInA92J9pxw0kDcoum+GjlSHEKlNA7Mxxx6pGsK1q6ZnsxU9YrnyjjAAYBB8zlZ1ibGS7Vvag9FbHcLScBkYuWvYS8HAPiRbNFthkWimh1yEn4ZTUnF0kNdALIccOe7rALCZ4rh/i4R9AnBNKAM54fbvA/qkDpaMOguD90wFw2gxyZxMxMfBWeGbiUYED+Mx+gRvfE3zAkUrCFDg3/Rwt7X2lAEc/NT80/s3VqS7WB55AoNxN3ZfbWR6oyq3DWwLwNVYu7wWAIWlqykJRx6WUlS7XdWRHHd6woR+6FsjwZs/Dv6j97GTayXisiOfO7YKRDuTlNMbAWs6Zefdgwk+1IDO9apYlS7BEm148VotsfKSb6HRetKmzbq1fbiv0iV1T0wot4//K5xyxGnbpiM6jzx8zSyEq9IN0TI7nh8CVjdWsn+C6JQ3abA3DgGFIDCGcZaA8UGHpf36qVnKceJy8fKWhtA5p90gPnRo1mxZbQuDeIVhWisyDhC4CGlYwAghnEX7qWz7qwTNyjaB0KwaxU04h5Lb1XtiL1YQHhWWtPnDfhbPMjycPfxsEm4brirWCbo530=
+  - secure: MUg9fdv3NEvsSn93Lo7oCO9cruIZR74J44q70HfV5UGfHU0VAKYMbr6vQMQp/7BnqLfpPFIhQudfXVOY9FfGj0KViOrYzZBtvVk1JwmJUwFxVSKrKLLDQVoLOmjH3Rk93d9Jm5QsgQiyPu7bzMcRvmaG+Eb31yq/VEoLhJiHe6S84OcvHfscMLg19XhrwpceiZjbeBZ0dk40ECZGc2IMmVr2NTEqVw1REEtH6P58ML4w2WMd7UPpYt9ZwsyTAKLA1VnN7xLxJc8cSrJ3BXxXaylCEfCh5N39INUKa3ruHSnR5+lciz+3xmWdwinwvsOexyXeQ4zCjko1RgENAe+VzGgkGGkW9uoHJI8JNl8CBkw2pFGQl7hh8AP0cYprTmIsoRPY76vfpmLfU/wI02olJmFbjD2GyozhANPBD2WEEfzIYTYpY7UOsQGQh6DIOIFgozEDAbklKjuO/wTjhHyISpPSgVL+MIhoEjASAGPy9O8Y9glnofDx3o2tqCnqtHjiXJai6ElrvcwJYoQ+h7/VtWGiD0N2OBfazIgfUyIydqG/vmsYSj6uPRDPDVhwUMGPzuuOri/HO5YFBjIIhzqwEa1w74PqGAjt8tzQ3KvBzojC98D09Y1o8RO1107xQ/nPF8BjbGkmkxHeQJON6YLlvtAJGXQ3zlOhyAIclnOnD5g=
 cache:
   directories:
-    - node_modules
-    - client/mode_modules
-    - server/node_modules
+  - node_modules
+  - client/mode_modules
+  - server/node_modules
 install:
-  - npm run prodinstall
+- npm run prodinstall
 script:
-  - nohup npm run prod &
-  - sleep 3
-  - npm run test
+- nohup npm run prod &
+- sleep 3
+- npm run test

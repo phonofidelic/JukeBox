@@ -4,7 +4,7 @@ module.exports = {
   FS_AUDIO: 'uploads/audio',
   FS_IMAGE: 'uploads/images',
   TMP: 'tmp',
-  JWT_SECRET: process.env.JWT_SECRET,
+  JWT_SECRET: 'supersecret',
   JWT_EXP: '15m',
   JWT_AUD: 'jukebox_client',
   JWT_ISS: 'jukebox_api',
