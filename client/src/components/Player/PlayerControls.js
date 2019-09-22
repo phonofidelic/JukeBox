@@ -7,8 +7,6 @@ import Pause from '@material-ui/icons/Pause';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import SkipPrevious from '@material-ui/icons/SkipPrevious';
 import SkipNext from '@material-ui/icons/SkipNext';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ExpandLess from '@material-ui/icons/ExpandLess';
 import QueueMusic from '@material-ui/icons/QueueMusic';
 
 const Container = styled.div`

@@ -5,47 +5,46 @@ import { authActions } from '../actions';
 import NavDesktop from '../components/NavDesktop';
 // import TopNav from '../components/TopNav';
 import NavMobile from '../components/NavMobile';
-import FabNav from '../components/FabNav';
-
 
 class NavContainer extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
     this.props.checkUserAgent();
-	}
-	handleSignOut() {
-		const confirm = window.confirm('Are you sure you want to sign out?');
-		if (confirm === true) {
-			return this.props.logoutUser();
-		}
+  }
+  handleSignOut() {
+    const confirm = window.confirm('Are you sure you want to sign out?');
+    if (confirm === true) {
+      return this.props.logoutUser();
+    }
     return;
-	}
+  }
 
-	render() {
-		const { 
-			userAgentIsMobile, 
-			locationPathname 
-		} = this.props;
+  render() {
+    const { userAgentIsMobile, locationPathname } = this.props;
 
-		return userAgentIsMobile ? 
-			<NavMobile 
-				showNav={true}
-				locationPathname={locationPathname}
-				handleSignOut={this.handleSignOut.bind(this)} 
-			/> 
-			: 
-			<NavDesktop 
-				locationPathname={locationPathname} 
-				handleSignOut={this.handleSignOut.bind(this)} 
-			/>
-	}
+    return userAgentIsMobile ? (
+      <NavMobile
+        showNav={true}
+        locationPathname={locationPathname}
+        handleSignOut={this.handleSignOut.bind(this)}
+      />
+    ) : (
+      <NavDesktop
+        locationPathname={locationPathname}
+        handleSignOut={this.handleSignOut.bind(this)}
+      />
+    );
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		userAgentIsMobile: state.auth.userAgentIsMobile,
-		locationPathname: state.router.location.pathname,
-	}
-}
+  return {
+    userAgentIsMobile: state.auth.userAgentIsMobile,
+    locationPathname: state.router.location.pathname
+  };
+};
 
-export default connect(mapStateToProps, {...authActions})(NavContainer);
+export default connect(
+  mapStateToProps,
+  { ...authActions }
+)(NavContainer);

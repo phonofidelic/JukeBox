@@ -1,22 +1,17 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import posed from 'react-pose';
 import {
   ThemeContext,
   getSecondaryBackgroundColor,
-  getPlayerHeight,
-  getPlayerWidth,
-  getNavMobileHeight
+  getPlayerWidth
 } from '../../contexts/theme.context';
 import ReactCardFlip from 'react-card-flip';
 
-import Backdrop from '../Backdrop';
 import PlayerProgress from 'components/Player/PlayerProgress';
 import PlayerControls from 'components/Player/PlayerControls';
 import QueueList from 'components/Player/QueueList';
 import CurrentTrack from 'components/Player/CurrentTrack';
-import ToggleQueueButton from 'components/Player/ToggleQueueButton';
 
 const Container = styled.div`
   background-color: #fff;
@@ -118,13 +113,7 @@ export class Player extends Component {
       // classes,
     } = this.props;
 
-    const {
-      isOpen,
-      showQueue,
-      windowHeight,
-      dragEndTransition,
-      isDraggable
-    } = this.state;
+    const { isOpen, showQueue, windowHeight, dragEndTransition } = this.state;
 
     const theme = this.context;
 

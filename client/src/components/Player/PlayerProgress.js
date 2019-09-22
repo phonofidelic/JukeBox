@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  ThemeContext,
-  getSecondaryBackgroundColor
-} from '../../contexts/theme.context';
+import { ThemeContext } from '../../contexts/theme.context';
 
 // import Slider from '@material-ui/lab/Slider';
 import Slider from '@material-ui/core/Slider';
@@ -113,31 +110,8 @@ class PlayerProgress extends Component {
   };
 
   render() {
-    const { player, playerIsOpen, userAgentIsMobile, classes } = this.props;
-
+    const { classes } = this.props;
     const { value } = this.state;
-
-    const theme = this.context;
-
-    const styles = {
-      root: {
-        // width: 300
-      },
-      slider: {
-        // padding: '22px 0px'
-        // padding: '22px 0px'
-      },
-      track: {
-        backgroundColor: '#e62118'
-      },
-      thumb: {
-        backgroundColor: '#e62118'
-      },
-      activated: {
-        width: '22px',
-        height: '22px'
-      }
-    };
 
     return (
       <Slider

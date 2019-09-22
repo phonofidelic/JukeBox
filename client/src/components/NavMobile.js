@@ -14,14 +14,13 @@ import Typography from '@material-ui/core/Typography';
 import Home from '@material-ui/icons/Home';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import Storage from '@material-ui/icons/Storage';
-import ExitToApp from '@material-ui/icons/ExitToApp';
 import withTheme from '@material-ui/core/styles/withTheme';
 
 class NavMobile extends Component {
   static contextType = ThemeContext;
 
   render() {
-    const { showNav, locationPathname, handleSignOut } = this.props;
+    const { showNav, locationPathname } = this.props;
 
     const theme = this.context;
 
