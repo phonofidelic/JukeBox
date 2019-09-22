@@ -19,6 +19,7 @@ script:
   - yarn
   - yarn build
   - cd ../server
+  - mkdir uploads
   - mkdir uploads/audio uploads/images uploads/testFiles
   - nohup npm run ci &
   - sleep 3
