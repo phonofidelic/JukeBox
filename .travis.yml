@@ -1,26 +1,36 @@
 language: node_js
 node_js:
-  - '12'
+- '12'
 dist: trusty
 services:
-  - mongodb
+- mongodb
 env:
   matrix:
-    - NODE_ENV=ci PORT=3000
+  - NODE_ENV=ci PORT=3000
 cache:
   directories:
-    - node_modules
-    - client/mode_modules
-    - server/node_modules
+  - node_modules
+  - client/mode_modules
+  - server/node_modules
 install:
-  - npm run prodinstall
+- npm run prodinstall
 script:
-  - cd client
-  - yarn
-  - yarn build
-  - cd ../server
-  - mkdir uploads
-  - mkdir uploads/audio uploads/images uploads/testFiles
-  - nohup npm run ci &
-  - sleep 3
-  - npm run ci-test
+- cd client
+- yarn
+- yarn build
+- cd ../server
+- mkdir uploads
+- mkdir uploads/audio uploads/images uploads/testFiles
+- nohup npm run ci &
+- sleep 3
+- npm run ci-test
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: AKIAQHRIECCBFS6A5IKP
+  secret_access_key:
+    secure: Iw33hDIWBsefcjzLYIIIaz58+IYsWMcyVyTu98f1+POki+Fm00vgLYS1MakY9NRtNvB40ZX0blCMWEKDjVFWSwo8I1yVSkAr1f9Wk0UKO0gB0wi1rOUNOSc1NMcqR9Du2LMp8Ug0J04A5tBuE7NEhfzF1O4gW9HzcRzl3kmIP+yn1TeJgRD8rQzMoMDSuVG44n8XiLhEnvmvj0MXa1uegn/OetLk4cP2JoFleV+aFaIhLwz1xWrIV+ogxhRllkdxM/A7UwSRlMqlzLNmbEE7az7CqtbzBmZ9Xv6yj7U6qilD7S59vs1C5kBTiBkEnSGrycKecfCONMZzMGWYvUM+SNLB3gg6+Bt8IGgWiAiDK/bhaTMIZ+anAlZf8zBoYIxzlRcftYY4nPnw80Y0xrl6DQJORhh4QqphZPWQUI00Q6ijFCCeJLCWsN/yVnNYk8UG8VkZn1orHqYI8bFVfMhPG2ItpvzJI7oauxYCmXKbBO+6e9Z+s6xm4GXQi+9hkp9yKX+JJdM89g1VPvN1cGg4zpXdBd489OC7JsttGIuP+qpni2soaEfK0rE6uOuxEEUsR1+6UwFpJg060iXUymMmcRpyuWye3Wy6gUR7xUYruOoKRgNcis5ycKF4BrAkwDFyr02ryP+uoZ/nEZH5dG2h0j4nV96aQo17xefoOY69KZA=
+  region: us-west-2
+  app: jukebox
+  env: e-zadxf37hpy
+  on:
+    repo: phonofidelic/JukeBox
