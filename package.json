@@ -7,7 +7,7 @@
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && yarn start\"",
     "build": "cd client && yarn build && cp -R build ../server/client_build",
     "dockerBuild": "docker build -t phonofidelic/jukebox .",
-    "test": "concurrently \"cd server && npm run test\" \"cd client && yarn test\"",
+    "test": "server && npm run test",
     "start": "cd server && npm run prod",
     "prodinstall": "cd server && npm install",
     "devinstall": "concurrently \"cd server && npm install\" \"cd client && yarn\""
