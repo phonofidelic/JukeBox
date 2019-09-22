@@ -10,7 +10,7 @@ const trackRoutes = require('./routes/track.routes');
 const libraryRoutes = require('./routes/library.routes');
 const gdriveRoutes = require('./routes/gdrive.routes');
 const streamRoutes = require('./routes/stream.routes');
-const { DB_CONNECTION } = require('../config/keys');
+const { DB_CONNECTION, CLIENT_DIR } = require('../config/keys');
 
 const STRINGS = {
   default_server_error: 'Something broke!'
@@ -70,8 +70,8 @@ app.use('/api/stream', streamRoutes);
  * Commenting out since api server will not serve client
  */
 // // Serve static client files
-app.use(express.static(process.env.CLIENT_DIR));
-app.use('/*', express.static(process.env.CLIENT_DIR));
+app.use(express.static(CLIENT_DIR));
+app.use('/*', express.static(CLIENT_DIR));
 
 // Catch all unhandled routes
 app.use('/*', (req, res) => {
