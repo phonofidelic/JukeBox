@@ -7,7 +7,7 @@
     "dev": "nodemon server.js",
     "test": "DB_CONNECTION=mongodb://localhost:27017/test jest --watchAll",
     "coverage": "DB_CONNECTION=mongodb://localhost:27017/test jest --coverage",
-    "ci-test": "jest",
+    "ci-test": "NODE_ENV=ci jest",
     "prod": "NODE_ENV=production PORT=3000 node server.js",
     "ci": "NODE_ENV=ci PORT=3000 node server.js",
     "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js",
