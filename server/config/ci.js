@@ -1,6 +1,7 @@
 module.exports = {
   PORT: 3000,
   DB_CONNECTION: 'mongodb://127.0.0.1:27017/jukebox_ci',
+  CLIENT_DIR: '../ client / build',
   FS_AUDIO: 'uploads/audio',
   FS_IMAGE: 'uploads/images',
   TMP: 'tmp',
