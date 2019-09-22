@@ -5,7 +5,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../app/models/user.model');
 const jwt = require('jsonwebtoken');
 const CustomStrategy = require('passport-custom');
-const { JWT_SECRET } = require('../config/keys');
+const { JWT_SECRET } = require('./keys');
 
 const localOptions = { usernameField: 'email' };
 const jwtOptions = {
