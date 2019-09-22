@@ -1,13 +1,18 @@
+[![Build Status](https://travis-ci.org/phonofidelic/JukeBox.svg?branch=master)](https://travis-ci.org/phonofidelic/JukeBox)
+
 # What this is:
+
 A web-app for uploading and streaming audio files.
 
 The application connects to the users Google Drive account, using it to store audio files to be streamed to the Jukebox client. Users can upload files through the client and have the option of letting the app use Discogs to add any missing metadata like cover art, artist/album into etc. This data is saved to a MongoDB database and can be edited by the user through the client interface.
 
 ## Instalation and setup:
+
 1. `git clone https://github.com/phonofidelic/JukeBox.git && cd JukeBox && npm install`
 
 2. In `Jukebox/sever` run `npm install`
 3. Create a .env file in the server directory (substitute <...> with appropriate values):
+
 ```
 
 PORT=3001
@@ -26,6 +31,7 @@ G_CLIENT_SECRET=<google client sectret>
 G_REDIRECT_URI=gdrive/authcode
 TMP=tmp
 ```
+
 A tmp folder needs to be created in the server directory.
 
 4. In `JukeBox/client` run `yarn`
@@ -33,7 +39,9 @@ A tmp folder needs to be created in the server directory.
 6. From the root project directory run `npm run dev`
 
 ## Build:
+
 1. Create a Dockerfile in the root directory (substitute <...> with appropriate values):
+
 ```
 FROM node:carbon
 
