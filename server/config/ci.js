@@ -11,7 +11,8 @@ module.exports = {
   JWT_AUD: 'jukebox_client',
   JWT_ISS: 'jukebox_api',
   DISCOGS_TOKEN: process.env.DISCOGS_TOKEN,
-  G_CLIENT_ID: process.env.G_CLIENT_ID,
+  G_CLIENT_ID:
+    '1055271812237-icje6bl0lorut3pseo494avkdn6ohgub.apps.googleusercontent.com',
   G_CLIENT_SECRET: process.env.G_CLIENT_SECRET,
-  G_REDIRECT_URI: process.env.G_REDIRECT_URI
+  G_REDIRECT_URI: 'api/gdrive/authcode'
 };
