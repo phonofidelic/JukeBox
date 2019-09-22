@@ -13,7 +13,7 @@ cache:
     - client/mode_modules
     - server/node_modules
 install:
-  - npm run prodinstall
+  - npm run prodinstall && cd client && yarn && yarn build
 script:
   - nohup npm run ci &
   - sleep 3

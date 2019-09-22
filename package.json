@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && yarn start\"",
-    "build": "cd client && yarn build && cp -R build ../server/client_build",
+    "build": "cd client && yarn build",
     "dockerBuild": "docker build -t phonofidelic/jukebox .",
     "ci-test": "cd server && npm run ci-test",
     "start": "cd server && npm run prod",
