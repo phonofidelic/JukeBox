@@ -23,7 +23,7 @@ const LOGIN_DETAILS = {
  * Requires there to be a folder in the root project directory containing at least
  * one audio file.
  */
-const MOCK_TRACK_SRC = `../mock_assets/${fs.readdirSync('../mock_assets')[0]}`;
+// const MOCK_TRACK_SRC = `../mock_assets/${fs.readdirSync('../mock_assets')[0]}`;
 
 const testUserAgent = request.agent(app);
 
