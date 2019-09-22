@@ -15,6 +15,6 @@ cache:
 install:
   - npm run prodinstall
 script:
-  - nohup npm run start &
+  - nohup npm run ci &
   - sleep 3
   - npm run ci-test

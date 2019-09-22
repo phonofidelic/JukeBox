@@ -9,6 +9,7 @@
     "coverage": "DB_CONNECTION=mongodb://localhost:27017/test jest --coverage",
     "ci-test": "jest",
     "prod": "NODE_ENV=production PORT=3000 node server.js",
+    "ci": "NODE_ENV=ci PORT=3000 node server.js",
     "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js",
     "dropLib": "FS_AUDIO=uploads/audio FS_IMAGE=uploads/images TMP=./tmp DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.dropLib.js"
   },

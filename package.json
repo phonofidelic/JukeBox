@@ -9,6 +9,7 @@
     "dockerBuild": "docker build -t phonofidelic/jukebox .",
     "ci-test": "cd server && npm run ci-test",
     "start": "cd server && npm run prod",
+    "ci": "cd server && npm run ci",
     "prodinstall": "cd server && npm install",
     "devinstall": "concurrently \"cd server && npm install\" \"cd client && yarn\""
   },
