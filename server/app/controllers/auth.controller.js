@@ -93,8 +93,8 @@ exports.login = (req, res, next) => {
   console.log('\n*** refreshTokens:', refreshTokens);
 
   res.cookie('JWT', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production'
+    // httpOnly: true,
+    // secure: process.env.NODE_ENV === 'production'
   });
   // res.cookie('RT', refreshToken, {
   //   httpOnly: true,

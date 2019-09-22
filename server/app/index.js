@@ -70,8 +70,8 @@ app.use('/api/stream', streamRoutes);
  * Commenting out since api server will not serve client
  */
 // // Serve static client files
-// app.use(express.static(process.env.CLIENT_DIR));
-// app.use('/*', express.static(process.env.CLIENT_DIR));
+app.use(express.static(process.env.CLIENT_DIR));
+app.use('/*', express.static(process.env.CLIENT_DIR));
 
 // Catch all unhandled routes
 app.use('/*', (req, res) => {

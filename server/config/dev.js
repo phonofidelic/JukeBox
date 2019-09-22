@@ -1,7 +1,8 @@
 module.exports = {
   API_ROOT: 'http://localhost:3001',
   PORT: 3001,
-  DB_CONNECTION: 'mongodb://localhost:27017/jukeTest',
+  DB_CONNECTION:
+    process.env.DB_CONNECTION || 'mongodb://localhost:27017/jukeTest',
   FS_AUDIO: 'uploads/audio',
   FS_IMAGE: 'uploads/images',
   TMP: 'tmp',
