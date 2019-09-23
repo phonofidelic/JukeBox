@@ -8,7 +8,7 @@
     "test": "DB_CONNECTION=mongodb://localhost:27017/test jest --watchAll",
     "coverage": "DB_CONNECTION=mongodb://localhost:27017/test jest --coverage",
     "ci-test": "NODE_ENV=ci jest --forceExit",
-    "prod": "NODE_ENV=production PORT=3000 node server.js",
+    "prod": "NODE_ENV=production node server.js",
     "ci": "NODE_ENV=ci PORT=3000 node server.js",
     "devDBUpdate": "DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.utils.js",
     "dropLib": "FS_AUDIO=uploads/audio FS_IMAGE=uploads/images TMP=./tmp DB_CONNECTION=mongodb://localhost:27017/jukeTest node db.dropLib.js"
