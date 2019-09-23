@@ -33,5 +33,6 @@ deploy:
   region: us-west-2
   app: jukebox
   env: e-zadxf37hpy
+  bucket_name: elasticbeanstalk-us-west-2-016190279810
   on:
     repo: phonofidelic/JukeBox
