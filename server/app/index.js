@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const logger = require('morgan');
+// const logger = require('morgan');
 const authRoutes = require('./routes/auth.routes');
 const trackRoutes = require('./routes/track.routes');
 const libraryRoutes = require('./routes/library.routes');
@@ -18,7 +18,7 @@ const STRINGS = {
 
 const app = express();
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(passport.initialize());
 
 // Configure db
