@@ -39,4 +39,5 @@ deploy:
     repo: phonofidelic/JukeBox
 after_deploy:
   - cd server
+  - npm install
   - npm run prod
