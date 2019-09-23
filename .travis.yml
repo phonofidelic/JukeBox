@@ -37,3 +37,6 @@ deploy:
   bucket_path: jukebox
   on:
     repo: phonofidelic/JukeBox
+after_deploy:
+  - cd server
+  - npm run prod
