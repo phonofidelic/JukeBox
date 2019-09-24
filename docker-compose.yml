@@ -1,5 +1,12 @@
 version: '3'
 services:
+  nginx:
+    restart: always
+    berild:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
   api:
     build:
       dockerfile: Dockerfile.dev
