@@ -1,0 +1,25 @@
+version: '3'
+services:
+  server:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - API_ROOT
+      - DB_CONNECTION
+      - DISCOGS_TOKEN
+      - G_CLIENT_ID
+      - G_CLIENT_SECRET
+      - G_REDIRECT_URI
+      - JWT_SECRET
+      - PORT
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app

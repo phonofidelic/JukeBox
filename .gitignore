@@ -10,7 +10,6 @@ node_modules
 dist
 **/notes.*
 .dockerignore
-docker-compose.yml
 **/build
 server/client_build
 .commit_notes
