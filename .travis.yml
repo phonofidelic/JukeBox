@@ -59,6 +59,6 @@ after_success:
   - docker build -t phonnofidelic/jukebox-nginx ./nginx
   - docker build -t phonnofidelic/jukebox-server ./server
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push honnofidelic/jukebox-client
-  - docker push honnofidelic/jukebox-nginx
-  - docker push honnofidelic/jukebox-server
+  - docker push phonofidelic/jukebox-client
+  - docker push phonofidelic/jukebox-nginx
+  - docker push phonofidelic/jukebox-server
