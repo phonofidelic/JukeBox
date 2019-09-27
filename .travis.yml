@@ -47,11 +47,11 @@ services:
   - docker
 
 before_install:
-  - docker build -t phonofidelic/jukebox-client-test -f ./client/Dockerfile.dev ./client
+  # - docker build -t phonofidelic/jukebox-client-test -f ./client/Dockerfile.dev ./client
   - docker build -t phonofidelic/jukebox-server-test -f ./server/Dockerfile.dev ./server
 
 script:
-  - docker run phonofidelic/jukebox-client-test npm test -- --coverage
+  # - docker run phonofidelic/jukebox-client-test npm test -- --coverage
   - docker run phonofidelic/jukebox-server-test npm test -- --coverage
 
 after_success:
