@@ -1,6 +1,9 @@
 .DS_Store
 .log
 node_modules
-uploads
+# uploads
+uploads/images/*
+uploads/audio/*
+uploads/testFiles/*
 tmp/*
 notes.txt
