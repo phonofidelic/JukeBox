@@ -47,12 +47,12 @@ services:
   - docker
 
 before_install:
-  # - docker build -t phonofidelic/jukebox-client-test -f ./client/Dockerfile.dev ./client
-  - docker build -t phonofidelic/jukebox-server-test -f ./server/Dockerfile.dev ./server
+  - docker build -t phonofidelic/jukebox-client-test -f ./client/Dockerfile.dev ./client
+  # - docker build -t phonofidelic/jukebox-server-test -f ./server/Dockerfile.dev ./server
 
 script:
-  # - docker run -e CI=true phonofidelic/jukebox-client-test npm test
-  - docker run -e CI=true phonofidelic/jukebox-server-test npm test --forceExit
+  - docker run -e CI=true phonofidelic/jukebox-client-test npm test
+  # - docker run -e CI=true phonofidelic/jukebox-server-test npm test --forceExit
 
 after_success:
   - docker build -t phonnofidelic/jukebox-client ./client
