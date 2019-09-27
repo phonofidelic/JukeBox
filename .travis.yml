@@ -51,8 +51,8 @@ before_install:
   - docker build -t phonofidelic/jukebox-server-test -f ./server/Dockerfile.dev ./server
 
 script:
-  - docker run phonofidelic/jukebox-client-test npm test -- --coverage --forceExit
-  - docker run phonofidelic/jukebox-server-test npm ci-test -- --coverage
+  - docker run -e CI=true phonofidelic/jukebox-client-test npm test
+  - docker run -e CI=true phonofidelic/jukebox-server-test npm ci-test
 
 after_success:
   - docker build -t phonnofidelic/jukebox-client ./client
