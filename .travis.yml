@@ -1,43 +1,64 @@
-language: node_js
-node_js:
-  - '12'
-dist: trusty
+# language: node_js
+# node_js:
+#   - '12'
+# dist: trusty
+# services:
+#   - mongodb
+# env:
+#   matrix:
+#     - NODE_ENV=ci
+# cache:
+#   directories:
+#     - node_modules
+#     - client/mode_modules
+#     - server/node_modules
+# install:
+#   - npm run prodinstall
+# script:
+#   - cd client
+#   - yarn
+#   - yarn build
+#   - cd ../server
+#   - mkdir uploads
+#   - mkdir uploads/audio uploads/images uploads/testFiles
+#   - nohup npm run ci &
+#   - sleep 3
+#   - npm run ci-test
+# deploy:
+#   provider: elasticbeanstalk
+#   access_key_id:
+#     secure: $AWS_ACCESS_KEY_ID
+#   secret_access_key:
+#     secure: $AWS_SECRET_ACCESS_KEY
+#   region: us-west-2
+#   app: jukebox
+#   env: Jukebox-env
+#   bucket_name: elasticbeanstalk-us-west-2-016190279810
+#   bucket_path: jukebox
+#   on:
+#     repo: phonofidelic/JukeBox
+# after_deploy:
+#   - cd server
+#   - npm install
+#   - npm run prod
+
+sudo: required
 services:
-  - mongodb
-env:
-  matrix:
-    - NODE_ENV=ci
-cache:
-  directories:
-    - node_modules
-    - client/mode_modules
-    - server/node_modules
-install:
-  - npm run prodinstall
+  - docker
+
+before_install:
+  - docker build -t phonofidelic/jukebox-client-test -f ./client/Dockerfile.dev ./client
+  - docker build -t phonofidelic/jukebox-server-test -f ./server/Dockerfile.dev ./server
+
 script:
-  - cd client
-  - yarn
-  - yarn build
-  - cd ../server
-  - mkdir uploads
-  - mkdir uploads/audio uploads/images uploads/testFiles
-  - nohup npm run ci &
-  - sleep 3
-  - npm run ci-test
-deploy:
-  provider: elasticbeanstalk
-  access_key_id:
-    secure: $AWS_ACCESS_KEY_ID
-  secret_access_key:
-    secure: $AWS_SECRET_ACCESS_KEY
-  region: us-west-2
-  app: jukebox
-  env: Jukebox-env
-  bucket_name: elasticbeanstalk-us-west-2-016190279810
-  bucket_path: jukebox
-  on:
-    repo: phonofidelic/JukeBox
-after_deploy:
-  - cd server
-  - npm install
-  - npm run prod
+  - docker run phonofidelic/jukebox-client-test npm test -- --coverage
+  - docker run phonofidelic/jukebox-server-test npm test -- --coverage
+
+after_success:
+  - docker build -t phonnofidelic/jukebox-client ./client
+  - docker build -t phonnofidelic/jukebox-nginx ./nginx
+  - docker build -t phonnofidelic/jukebox-server ./server
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push honnofidelic/jukebox-client
+  - docker push honnofidelic/jukebox-nginx
+  - docker push honnofidelic/jukebox-server
