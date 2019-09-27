@@ -55,10 +55,10 @@ script:
   # - docker run -e CI=true phonofidelic/jukebox-server-test npm run ci-test
 
 after_success:
-  - docker build -t phonnofidelic/jukebox-client ./client
-  - docker build -t phonnofidelic/jukebox-nginx ./nginx
-  - docker build -t phonnofidelic/jukebox-server ./server
+  - docker build -t phonnofidelic/jukebox-client:latest ./client
+  - docker build -t phonnofidelic/jukebox-nginx:latest ./nginx
+  - docker build -t phonnofidelic/jukebox-server:latest ./server
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push phonofidelic/jukebox-client
-  - docker push phonofidelic/jukebox-nginx
-  - docker push phonofidelic/jukebox-server
+  - docker push phonofidelic/jukebox-client:latest
+  - docker push phonofidelic/jukebox-nginx:latest
+  - docker push phonofidelic/jukebox-server:latest
