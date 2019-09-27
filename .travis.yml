@@ -4,9 +4,9 @@
 # dist: trusty
 # services:
 #   - mongodb
-# env:
-#   matrix:
-#     - NODE_ENV=ci
+env:
+  matrix:
+    - NODE_ENV=ci
 # cache:
 #   directories:
 #     - node_modules
