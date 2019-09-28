@@ -1,0 +1,30 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "phonofidelic/jukebox-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "api",
+      "image": "phonofidelic/jukebox-api",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "phonofidelic/jukebox-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "poetMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "api"]
+    }
+  ]
+}
