@@ -62,3 +62,17 @@ after_success:
   - docker push phonofidelic/jukebox-client:latest
   - docker push phonofidelic/jukebox-nginx:latest
   - docker push phonofidelic/jukebox-api:latest
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: $AWS_ACCESS_KEY_ID
+  secure_access_key:
+    secure: $AWS_SECRET_ACCESS_KEY
+  region: us-west-2
+  app: jukebox
+  env: Jukebox-env-1
+  bucket_name: elasticbeanstalk-us-west-2-016190279810
+  bucket_path: jukebox
+  on:
+    branch: master
