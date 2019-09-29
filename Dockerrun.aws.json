@@ -20,7 +20,7 @@
       "image": "phonofidelic/jukebox-nginx",
       "hostname": "nginx",
       "essential": true,
-      "poetMappings": [
+      "portMappings": [
         {
           "hostPort": 80,
           "containerPort": 80
