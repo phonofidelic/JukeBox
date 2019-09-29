@@ -1,6 +1,6 @@
 module.exports = {
   API_ROOT: process.env.API_ROOT || 'http://localhost:3000',
-  PORT: process.env.API_ROOT || 3000,
+  PORT: process.env.PORT || 3000,
   DB_CONNECTION: process.env.DB_CONNECTION,
   CLIENT_DIR: '../client/build',
   FS_AUDIO: 'uploads/audio',
