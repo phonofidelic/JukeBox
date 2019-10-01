@@ -10,7 +10,20 @@ const Album = require('../models/album.model');
 const utils = require('./utils');
 const { mapSeries } = require('p-iteration');
 const { google } = require('googleapis');
-const { G_CLIENT_ID, G_CLIENT_SECRET } = require('../../config/keys');
+const AWS = require('aws-sdk');
+const uuidv4 = require('uuid/v4');
+const axios = require('axios');
+const {
+  G_CLIENT_ID,
+  G_CLIENT_SECRET,
+  S3_ACCESS_KEY_ID,
+  S3_SECRET_ACCESS_KEY
+} = require('../../config/keys');
+
+const s3 = new AWS.S3({
+  accessKeyId: S3_ACCESS_KEY_ID,
+  secretAccessKey: S3_SECRET_ACCESS_KEY
+});
 
 const inspectConfig = { colors: true, depth: null };
 
@@ -19,6 +32,26 @@ const STRINGS = {
   user_login_success: 'Login successfull',
   user_data_querry_success: 'User info retrieved',
   tracks_post_success: 'Tracks saved'
+};
+
+module.exports.getSignedUrl = async (req, res, next) => {
+  const { userId } = req;
+  const key = `${userId}/${uuidv4()}.mp3`;
+  s3.getSignedUrl(
+    'putObject',
+    {
+      Bucket: 'jukebox-storage',
+      ContentType: 'audio/mp3',
+      Key: key
+    },
+    (err, url) => {
+      if (err) return next(err);
+      console.log('====================================');
+      console.log('s3 signed url:', { key, url });
+      console.log('====================================');
+      res.send({ key, url });
+    }
+  );
 };
 
 module.exports.handlePostTracks = async (req, res, next) => {
@@ -95,6 +128,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
     // TODO: Abstract to a "storage" module/interface.
     // 			 Storage interface should be able to handle multiple storage solutions
     // 			 and abstract away their differences from the perspectiv of the track controller
+    // try {
     const gdUploadRes = await drive.files.create({
       requestBody: {
         name: file.filename,
@@ -107,7 +141,10 @@ module.exports.handlePostTracks = async (req, res, next) => {
         body: fs.createReadStream(file.path)
       }
     });
-    console.log('\ngdUpload.data:', gdUploadRes.data);
+    console.log('\ngdUploadRes.data:', gdUploadRes.data);
+    // } catch (err) {
+    //   return next(err);
+    // }
 
     /***
      *	Check DB for existing Artist and Album doc
