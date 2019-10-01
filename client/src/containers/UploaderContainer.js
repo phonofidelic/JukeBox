@@ -4,6 +4,10 @@ import * as actions from '../actions/uploader.actions';
 import Uploader from '../components/Uploader';
 import Loader from '../components/Loader';
 import ErrorMessageContainer from './ErrorMessageContainer';
+import axios from 'axios';
+import { URLS } from '../config';
+
+const TRACKS_URL = URLS.TRACK_URL;
 
 const DISCOGS_IMPORT_DEFAULT = true;
 
@@ -13,8 +17,8 @@ export class UploaderContainer extends Component {
 
     this.state = {
       droppedFiles: [],
-      allDiscogsImport: DISCOGS_IMPORT_DEFAULT,
-    }
+      allDiscogsImport: DISCOGS_IMPORT_DEFAULT
+    };
   }
 
   handleOnDrop(files) {
@@ -51,8 +55,8 @@ export class UploaderContainer extends Component {
 
     this.setState({
       droppedFiles: updatedFileList,
-      allDiscogsImport: !this.state.allDiscogsImport,
-    })
+      allDiscogsImport: !this.state.allDiscogsImport
+    });
   }
 
   handleSelectDiscogsImport(index) {
@@ -61,67 +65,83 @@ export class UploaderContainer extends Component {
         file.importDiscogsData = !file.importDiscogsData;
         return file;
       }
-      return file
+      return file;
     });
 
-    console.log('file', updatedFileList[index])
+    console.log('file', updatedFileList[index]);
 
     this.setState({
       droppedFiles: updatedFileList
     });
   }
 
-	handleUploadTracks() {
-    console.log('handleUploadTracks, droppedFiles:', this.state.droppedFiles)
+  handleUploadTracks() {
+    console.log('handleUploadTracks, droppedFiles:', this.state.droppedFiles);
     let formData = new FormData();
 
     if (!this.state.droppedFiles) return console.log('* no input data *');
 
-    // Remove preview for all files to prevent memory leaks:
-    // https://github.com/react-dropzone/react-dropzone#word-of-caution-when-working-with-previews
-    this.state.droppedFiles.forEach(file => {
-    	window.URL.revokeObjectURL(file.preview);
+    this.state.droppedFiles.forEach(async file => {
+      // Remove preview for all files to prevent memory leaks:
+      // https://github.com/react-dropzone/react-dropzone#word-of-caution-when-working-with-previews
+      window.URL.revokeObjectURL(file.preview);
       file.preview = 'preview removed';
-      console.log('file:', file)
-    	formData.append('audioFiles', file);
+
+      // // Get s3 signed url
+      // const uploadConfig = await axios.get(`${TRACKS_URL}/upload`);
+      // file.url = uploadConfig.data.url;
+      // await axios.put(uploadConfig.data.url, file, {
+      //   headers: {
+      //     'Content-Type': file.type
+      //   }
+      // });
+
+      console.log('file:', file);
+      formData.append('audioFiles', file);
       // formData.append(file.name, JSON.stringify({discogsImport: file.importDiscogsData}));
       formData.append(file.name, file.importDiscogsData);
-    })
+    });
 
     // Dispatch POST action:
     this.props.uploadTracks(formData);
   }
 
-	render() {
+  render() {
     const { library } = this.props;
 
-		return (
+    return (
       <div>
-      <ErrorMessageContainer />
-      {
-        library.loading ?
+        <ErrorMessageContainer />
+        {library.loading ? (
           <Loader />
-          :
-    			<Uploader 
+        ) : (
+          <Uploader
             allDiscogsImport={this.state.allDiscogsImport}
             droppedFiles={this.state.droppedFiles}
             handleUploadTracks={this.handleUploadTracks.bind(this)}
-            handleOnDrop={this.handleOnDrop.bind(this)} 
+            handleOnDrop={this.handleOnDrop.bind(this)}
             handleRemoveTrack={this.handleRemoveTrack.bind(this)}
             cleaeDroppedFiles={this.cleaeDroppedFiles.bind(this)}
-            handleSelectDiscogsImport={this.handleSelectDiscogsImport.bind(this)}
-            handleSelectAllDiscogsImport={this.handleSelectAllDiscogsImport.bind(this)}
+            handleSelectDiscogsImport={this.handleSelectDiscogsImport.bind(
+              this
+            )}
+            handleSelectAllDiscogsImport={this.handleSelectAllDiscogsImport.bind(
+              this
+            )}
           />
-      }
+        )}
       </div>
-		);
-	}
+    );
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		library: state.library,
-	}
-}
+  return {
+    library: state.library
+  };
+};
 
-export default connect(mapStateToProps, actions)(UploaderContainer);
+export default connect(
+  mapStateToProps,
+  actions
+)(UploaderContainer);

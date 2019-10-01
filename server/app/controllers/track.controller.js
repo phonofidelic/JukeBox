@@ -25,6 +25,8 @@ const s3 = new AWS.S3({
   secretAccessKey: S3_SECRET_ACCESS_KEY
 });
 
+const STORAGE_BASE_URL = 'https://jukebox-storage.s3-us-west-2.amazonaws.com'; // TODO: move to config keys
+
 const inspectConfig = { colors: true, depth: null };
 
 const STRINGS = {
@@ -52,6 +54,20 @@ module.exports.getSignedUrl = async (req, res, next) => {
       res.send({ key, url });
     }
   );
+};
+
+const putS3Object = (fileBuffer, storageKey) => {
+  const params = {
+    Body: fileBuffer,
+    Bucket: 'jukebox-storage',
+    Key: storageKey
+  };
+
+  s3.putObject(params, (err, data) => {
+    if (err) throw err;
+    console.log('*** s3 data:', data);
+    return data;
+  });
 };
 
 module.exports.handlePostTracks = async (req, res, next) => {
@@ -146,6 +162,12 @@ module.exports.handlePostTracks = async (req, res, next) => {
     //   return next(err);
     // }
 
+    const fileBuffer = fs.readFileSync(file.path);
+    const storageKey = `${userId}/${uuidv4()}.mp3`;
+    await putS3Object(fileBuffer, storageKey);
+    console.log('====================================');
+    console.log('file.buffer.length:', fileBuffer.length);
+    console.log('====================================');
     /***
      *	Check DB for existing Artist and Album doc
      */
@@ -178,7 +200,8 @@ module.exports.handlePostTracks = async (req, res, next) => {
       order: metadata.common.track,
       disk: metadata.common.disk,
       genre: albumData.genre,
-      year: albumData.year
+      year: albumData.year,
+      url: `${STORAGE_BASE_URL}/${storageKey}`
     }).save();
     console.log('\nnewTrack:', util.inspect(newTrack, inspectConfig));
 

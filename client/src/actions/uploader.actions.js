@@ -11,14 +11,30 @@ import { URLS } from '../config';
 const TRACKS_URL = URLS.TRACK_URL;
 
 export const uploadTracks = formData => {
-  console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
+  // console.log('@uploadTracks, formData:', formData.getAll('audioFiles'));
   return async dispatch => {
+    const audioFiles = formData.getAll('audioFiles');
+    console.log('====================================');
+    console.log('audioFiles:', audioFiles);
+    console.log('====================================');
+
+    // audioFiles.forEach(async file => {
+    //   // Get s3 signed url
+    //   const uploadConfig = await axios.get(`${TRACKS_URL}/upload`);
+    //   // console.log('uploadConfig:', uploadConfig);
+    //   await axios.put(uploadConfig.data.url, file, {
+    //     headers: {
+    //       'Content-Type': file.type
+    //     }
+    //   });
+    // });
+
     dispatch({
       type: UPLOAD_TRACKS
     });
-    let response;
+
     try {
-      response = await axios.post(TRACKS_URL, formData, {
+      const response = await axios.post(TRACKS_URL, formData, {
         headers: {
           token: localStorage.getItem('JWT')
         }

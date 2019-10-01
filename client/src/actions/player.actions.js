@@ -65,9 +65,8 @@ export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
         queueId: queueId,
         howl: new Howl({
           src: [
-            // track.file.path
-            data.src
-            // stream.data
+            // data.src
+            track.url
           ],
           // format: ['stream'],
           autoplay: true,
@@ -90,7 +89,7 @@ export const addToQueue = track => {
   const message = { text: `"${track.title}" added to queue`, context: 'info' };
 
   return async dispatch => {
-    const stream = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
+    const { data } = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
       headers: {
         token: localStorage.getItem('JWT'),
         mimetype: track.file.mimetype,
@@ -103,10 +102,7 @@ export const addToQueue = track => {
         ...track,
         queueId: queueId,
         howl: new Howl({
-          src: [
-            // track.file.path,
-            stream.data.src
-          ],
+          src: [data.src],
           // autoplay: true,
           onplay: () => howlOnPlay(track),
           onpause: () => howlOnPause(track),
