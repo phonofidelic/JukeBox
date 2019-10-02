@@ -15,5 +15,7 @@ module.exports = {
   G_CLIENT_ID:
     '1055271812237-icje6bl0lorut3pseo494avkdn6ohgub.apps.googleusercontent.com',
   G_CLIENT_SECRET: process.env.G_CLIENT_SECRET,
-  G_REDIRECT_URI: 'api/gdrive/authcode'
+  G_REDIRECT_URI: 'api/gdrive/authcode',
+  S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
+  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY
 };
