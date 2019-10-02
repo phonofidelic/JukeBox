@@ -8,7 +8,8 @@ const {
   FS_IMAGE,
   DISCOGS_TOKEN,
   S3_ACCESS_KEY_ID,
-  S3_SECRET_ACCESS_KEY
+  S3_SECRET_ACCESS_KEY,
+  STORAGE_BASE_URL
 } = require('../../../config/keys');
 const inspectConfig = { colors: true, depth: null };
 
@@ -75,31 +76,40 @@ const getDiscogsImgFormat = imgUrl => {
   return imgUrl.substring(openParenIndex + 1, closeParenIndex);
 };
 
-const getArtistImage = async discogsData => {
+const getArtistImage = async (discogsData, userId) => {
   if (!discogsData) return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL };
   const format = getDiscogsImgFormat(discogsData.cover_image);
   const imgPath = `${FS_IMAGE}/${uuidv4()}.${format}`;
-  let response;
+  const storageKey = `${userId}/${uuidv4()}.${format}`;
+
   try {
-    response = await axios({
+    const response = await axios({
       method: 'GET',
-      responseType: 'stream',
+      responseType: 'arraybuffer',
       url: discogsData.cover_image
     });
+
+    console.log('====================================');
+    console.log('getArtistImage, response.data.length:', response.data.length);
+    console.log('====================================');
+
+    await putS3Object(response.data, storageKey);
+    return { format, src: `${STORAGE_BASE_URL}/${storageKey}.${format}` };
   } catch (err) {
-    console.error('\ngetArtistImage, Discogs request error:', err.message);
+    console.error('\n*** getArtistImage, Discogs request error:', err.message);
     return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL };
   }
-  response.data.pipe(fs.createWriteStream(imgPath));
-  return await new Promise((resolve, reject) => {
-    response.data.on('end', () => {
-      // console.log('*** new image saved ***');
-      resolve({ format: format, src: imgPath });
-    });
-    response.data.on('error', () => {
-      reject(new Error('Could not save new Artist image file'));
-    });
-  });
+
+  // response.data.pipe(fs.createWriteStream(imgPath));
+  // return await new Promise((resolve, reject) => {
+  //   response.data.on('end', () => {
+  //     // console.log('*** new image saved ***');
+  //     resolve({ format: format, src: imgPath });
+  //   });
+  //   response.data.on('error', () => {
+  //     reject(new Error('Could not save new Artist image file'));
+  //   });
+  // });
 };
 
 const getAlbumImage = async (embededImages, discogsData) => {
@@ -189,9 +199,9 @@ module.exports.checkArtist = async (
     }
 
     return await new Artist({
-      userId: userId,
+      userId,
       name: metadata.common.artist,
-      artwork: await getArtistImage(discogsData)
+      artwork: await getArtistImage(discogsData, userId)
     }).save();
   } catch (err) {
     return next(err);
