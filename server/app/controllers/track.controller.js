@@ -144,20 +144,19 @@ module.exports.handlePostTracks = async (req, res, next) => {
     // TODO: Abstract to a "storage" module/interface.
     // 			 Storage interface should be able to handle multiple storage solutions
     // 			 and abstract away their differences from the perspectiv of the track controller
-    // try {
-    const gdUploadRes = await drive.files.create({
-      requestBody: {
-        name: file.filename,
-        mimeType: file.mimetype,
-        parents: [gdUser.gDrive.gdFolder.id],
-        writersCanShare: true
-      },
-      media: {
-        mimeType: file.mimetype,
-        body: fs.createReadStream(file.path)
-      }
-    });
-    console.log('\ngdUploadRes.data:', gdUploadRes.data);
+    // const gdUploadRes = await drive.files.create({
+    //   requestBody: {
+    //     name: file.filename,
+    //     mimeType: file.mimetype,
+    //     parents: [gdUser.gDrive.gdFolder.id],
+    //     writersCanShare: true
+    //   },
+    //   media: {
+    //     mimeType: file.mimetype,
+    //     body: fs.createReadStream(file.path)
+    //   }
+    // });
+    // console.log('\ngdUploadRes.data:', gdUploadRes.data);
 
     const fileBuffer = fs.readFileSync(file.path);
     const storageKey = `${userId}/${uuidv4()}.mp3`;

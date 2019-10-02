@@ -6,4 +6,5 @@ uploads/images/*
 uploads/audio/*
 uploads/testFiles/*
 tmp/*
+!tmp/.gitkeep
 notes.txt
