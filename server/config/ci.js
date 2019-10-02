@@ -17,5 +17,6 @@ module.exports = {
   G_CLIENT_SECRET: process.env.G_CLIENT_SECRET,
   G_REDIRECT_URI: 'api/gdrive/authcode',
   S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
-  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY
+  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
+  STORAGE_BASE_URL: process.env.STORAGE_BASE_URL
 };

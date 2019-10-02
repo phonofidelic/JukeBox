@@ -3,12 +3,38 @@ const util = require('util');
 const uuidv4 = require('uuid/v4');
 const mm = require('music-metadata');
 const axios = require('axios');
-const { FS_IMAGE, DISCOGS_TOKEN } = require('../../../config/keys');
+const AWS = require('aws-sdk');
+const {
+  FS_IMAGE,
+  DISCOGS_TOKEN,
+  S3_ACCESS_KEY_ID,
+  S3_SECRET_ACCESS_KEY
+} = require('../../../config/keys');
 const inspectConfig = { colors: true, depth: null };
 
 const DEFAULT_ALBUM_IMAGE_URL = `${FS_IMAGE}/default_album_img.svg`;
 const DEFAULT_ARTIST_IMAGE_URL = `${FS_IMAGE}/default_artist_img.svg`;
 const DISCOGS_BASE_URL = 'https://api.discogs.com/';
+
+const s3 = new AWS.S3({
+  accessKeyId: S3_ACCESS_KEY_ID,
+  secretAccessKey: S3_SECRET_ACCESS_KEY
+});
+
+const putS3Object = (fileBuffer, storageKey) => {
+  const params = {
+    Body: fileBuffer,
+    Bucket: 'jukebox-storage',
+    Key: storageKey
+  };
+
+  s3.putObject(params, (err, data) => {
+    if (err) throw err;
+    console.log('*** s3 data:', data);
+    return data;
+  });
+};
+module.exports.putS3Object = putS3Object;
 
 // TODO: Handle image sizes and save multiple images for sm/md/lg
 const saveImage = image =>

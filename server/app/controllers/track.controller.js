@@ -17,15 +17,14 @@ const {
   G_CLIENT_ID,
   G_CLIENT_SECRET,
   S3_ACCESS_KEY_ID,
-  S3_SECRET_ACCESS_KEY
+  S3_SECRET_ACCESS_KEY,
+  STORAGE_BASE_URL
 } = require('../../config/keys');
 
 const s3 = new AWS.S3({
   accessKeyId: S3_ACCESS_KEY_ID,
   secretAccessKey: S3_SECRET_ACCESS_KEY
 });
-
-const STORAGE_BASE_URL = 'https://jukebox-storage.s3-us-west-2.amazonaws.com'; // TODO: move to config keys
 
 const inspectConfig = { colors: true, depth: null };
 
@@ -160,7 +159,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
 
     const fileBuffer = fs.readFileSync(file.path);
     const storageKey = `${userId}/${uuidv4()}.mp3`;
-    await putS3Object(fileBuffer, storageKey);
+    await utils.putS3Object(fileBuffer, storageKey);
     console.log('====================================');
     console.log('file.buffer.length:', fileBuffer.length);
     console.log('====================================');
