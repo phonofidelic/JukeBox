@@ -94,7 +94,7 @@ const getArtistImage = async (discogsData, userId) => {
     console.log('====================================');
 
     await putS3Object(response.data, storageKey);
-    return { format, src: `${STORAGE_BASE_URL}/${storageKey}.${format}` };
+    return { format, src: `${STORAGE_BASE_URL}/${storageKey}` };
   } catch (err) {
     console.error('\n*** getArtistImage, Discogs request error:', err.message);
     return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL };
