@@ -50,24 +50,21 @@ export const sendToQueueAndPlay = (track, currentTrack, sameQueue) => {
   // and adding a queueId and howl prop.
   const queueId = Math.trunc(Math.random() * Date.now());
   return async dispatch => {
-    const { data } = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
-      headers: {
-        token: localStorage.getItem('JWT'),
-        mimetype: track.file.mimetype,
-        ext: getExt(track.file.originalname)
-      }
-    });
-    console.log('sendToQueueAndPlay, data:', data);
+    // const { data } = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
+    //   headers: {
+    //     token: localStorage.getItem('JWT'),
+    //     mimetype: track.file.mimetype,
+    //     ext: getExt(track.file.originalname)
+    //   }
+    // });
+    // console.log('sendToQueueAndPlay, data:', data);
     dispatch({
       type: sameQueue ? UNSHIFT_TO_QUEUE : START_NEW_QUEUE,
       track: {
         ...track,
-        queueId: queueId,
+        queueId,
         howl: new Howl({
-          src: [
-            // data.src
-            track.url
-          ],
+          src: [track.url],
           // format: ['stream'],
           autoplay: true,
           onload: () => console.log('Howl onload'),
@@ -89,32 +86,31 @@ export const addToQueue = track => {
   const message = { text: `"${track.title}" added to queue`, context: 'info' };
 
   return async dispatch => {
-    const { data } = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
-      headers: {
-        token: localStorage.getItem('JWT'),
-        mimetype: track.file.mimetype,
-        ext: getExt(track.file.originalname)
-      }
-    });
+    // const { data } = await axios.get(`${STREAM_URL}/${track.file.gdId}`, {
+    //   headers: {
+    //     token: localStorage.getItem('JWT'),
+    //     mimetype: track.file.mimetype,
+    //     ext: getExt(track.file.originalname)
+    //   }
+    // });
     dispatch({
       type: ADD_TRACK_TO_QUEUE,
       track: {
         ...track,
         queueId: queueId,
         howl: new Howl({
-          src: [data.src],
-          // autoplay: true,
+          src: [track.url],
           onplay: () => howlOnPlay(track),
           onpause: () => howlOnPause(track),
           onend: () => howlOnEnd(track)
         })
       },
-      message: message
+      message
     });
     // !!! Is this an anti-pattern?
     dispatch({
       type: SET_MESSAGE,
-      message: message
+      message
     });
   };
 };

@@ -14,6 +14,4 @@ const storage = multer.diskStorage({
   }
 });
 
-// const storage = multer.memoryStorage();
-
 module.exports = multer({ storage });

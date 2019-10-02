@@ -28,8 +28,8 @@ const TrackSchema = new Schema({
     path: { type: String, required: true },
     originalname: String,
     mimetype: String,
-    size: Number,
-    gdId: String
+    size: Number
+    // gdId: String
   },
   url: {
     type: String,

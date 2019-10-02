@@ -158,9 +158,6 @@ module.exports.handlePostTracks = async (req, res, next) => {
       }
     });
     console.log('\ngdUploadRes.data:', gdUploadRes.data);
-    // } catch (err) {
-    //   return next(err);
-    // }
 
     const fileBuffer = fs.readFileSync(file.path);
     const storageKey = `${userId}/${uuidv4()}.mp3`;
@@ -168,6 +165,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
     console.log('====================================');
     console.log('file.buffer.length:', fileBuffer.length);
     console.log('====================================');
+
     /***
      *	Check DB for existing Artist and Album doc
      */
@@ -196,7 +194,8 @@ module.exports.handlePostTracks = async (req, res, next) => {
       // image: albumData.artwork[0],
       userId: userId,
       format: metadata.format,
-      file: { ...file, gdId: gdUploadRes.data.id }, // TODO: change to generic name (fileId)
+      // file: { ...file, gdId: gdUploadRes.data.id }, // TODO: change to generic name (fileId)
+      file,
       order: metadata.common.track,
       disk: metadata.common.disk,
       genre: albumData.genre,
