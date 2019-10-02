@@ -79,7 +79,6 @@ const getDiscogsImgFormat = imgUrl => {
 const getArtistImage = async (discogsData, userId) => {
   if (!discogsData) return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL };
   const format = getDiscogsImgFormat(discogsData.cover_image);
-  const imgPath = `${FS_IMAGE}/${uuidv4()}.${format}`;
   const storageKey = `${userId}/${uuidv4()}.${format}`;
 
   try {
@@ -89,68 +88,73 @@ const getArtistImage = async (discogsData, userId) => {
       url: discogsData.cover_image
     });
 
-    console.log('====================================');
-    console.log('getArtistImage, response.data.length:', response.data.length);
-    console.log('====================================');
-
     await putS3Object(response.data, storageKey);
     return { format, src: `${STORAGE_BASE_URL}/${storageKey}` };
   } catch (err) {
     console.error('\n*** getArtistImage, Discogs request error:', err.message);
     return { format: 'png', src: DEFAULT_ARTIST_IMAGE_URL };
   }
-
-  // response.data.pipe(fs.createWriteStream(imgPath));
-  // return await new Promise((resolve, reject) => {
-  //   response.data.on('end', () => {
-  //     // console.log('*** new image saved ***');
-  //     resolve({ format: format, src: imgPath });
-  //   });
-  //   response.data.on('error', () => {
-  //     reject(new Error('Could not save new Artist image file'));
-  //   });
-  // });
 };
 
-const getAlbumImage = async (embededImages, discogsData) => {
+const getAlbumImage = async (embededImages, discogsData, userId) => {
   let artwork = [];
-  if (!embededImages && !discogsData)
-    return { format: 'png', src: DEFAULT_ALBUM_IMAGE_URL };
+  if (!embededImages && !discogsData) {
+    artwork.push({ format: 'png', src: DEFAULT_ALBUM_IMAGE_URL });
+    return artwork;
+  }
+
   if (discogsData) {
     const format = getDiscogsImgFormat(discogsData.cover_image);
-    const imgPath = `${FS_IMAGE}/${uuidv4()}.${format}`;
-    const response = await axios({
-      method: 'GET',
-      responseType: 'stream',
-      url: discogsData.cover_image
-    });
-    // console.log('\n*** getAlbumImage Discogs response:', util.inspect(response, inspectConfig))
-    response.data.pipe(fs.createWriteStream(imgPath));
-    await new Promise((resolve, reject) => {
-      response.data.on('end', () => {
-        // console.log('*** new Album image saved ***');
-        resolve({ format: format, src: imgPath });
+    // const imgPath = `${FS_IMAGE}/${uuidv4()}.${format}`;
+    const storageKey = `${userId}/${uuidv4()}.${format}`;
+
+    try {
+      const response = await axios({
+        method: 'GET',
+        responseType: 'arraybuffer',
+        url: discogsData.cover_image
       });
-      response.data.on('end', () => {
-        reject(new Error('Could not save new Album image file'));
-      });
-    })
-      .then(image => {
-        artwork.push(image); // TODO: create Image model and use it here
-      })
-      .catch(err => console.log(err));
+
+      await putS3Object(response.data, storageKey);
+      artwork.push({ format, src: `${STORAGE_BASE_URL}/${storageKey}` });
+    } catch (err) {
+      console.error('\n*** getAlbumImage, Discogs request error:', err.message);
+    }
+
+    // response.data.pipe(fs.createWriteStream(imgPath));
+    // await new Promise((resolve, reject) => {
+    //   response.data.on('end', () => {
+    //     // console.log('*** new Album image saved ***');
+    //     resolve({ format: format, src: imgPath });
+    //   });
+    //   response.data.on('end', () => {
+    //     reject(new Error('Could not save new Album image file'));
+    //   });
+    // })
+    //   .then(image => {
+    //     artwork.push(image); // TODO: create Image model and use it here
+    //   })
+    //   .catch(err => console.log(err));
   }
+
   if (embededImages) {
     console.log('*** embededImages:', embededImages);
     for (let i = 0; i < embededImages.length; i++) {
-      const imgPath = `${FS_IMAGE}/${uuidv4()}.${embededImages[i].format}`;
-      fs.writeFile(imgPath, embededImages[i].data, err => {
-        if (err) {
-          console.error('writeFile error:', err);
-          return new Error('Could not save new Album image file');
-        }
-      });
-      artwork.push({ format: embededImages[i].format, src: imgPath });
+      const format = embededImages[i].format;
+      const storageKey = `${userId}/${uuidv4()}.${format}`;
+      // const imgPath = `${FS_IMAGE}/${uuidv4()}.${embededImages[i].format}`;
+
+      await putS3Object(embededImages[i].data, storageKey);
+
+      artwork.push({ format, src: `${STORAGE_BASE_URL}/${storageKey}` });
+
+      // fs.writeFile(imgPath, embededImages[i].data, err => {
+      //   if (err) {
+      //     console.error('writeFile error:', err);
+      //     return new Error('Could not save new Album image file');
+      //   }
+      // });
+      // artwork.push({ format: embededImages[i].format, src: imgPath });
     }
   }
   console.log('\n*** getAlbumImage, artwork:', artwork);
@@ -240,11 +244,11 @@ module.exports.checkAlbum = async (
     }
 
     return await new Album({
-      userId: userId,
+      userId,
       title: metadata.common.album,
       genre: genre,
       year: year,
-      artwork: await getAlbumImage(metadata.common.picture, discogsData)
+      artwork: await getAlbumImage(metadata.common.picture, discogsData, userId)
     }).save();
   } catch (err) {
     return next(err);
