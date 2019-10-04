@@ -63,9 +63,7 @@ export const loadLibrary = () => {
     // or last update was made from another device, fetch tracks from network.
     // This because, if tracks were added from another device, they will not show
     // up on the current device until a new nerwork request is made.
-    // if (!tracks || tracks.length < 1) {
-    if (true) {
-      // TEMP: Always fetch library
+    if (!tracks || tracks.length < 1) {
       fetchLibrary(dispatch);
     } else {
       // Otherwise load data retrieved from IndexedDB
