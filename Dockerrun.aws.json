@@ -22,7 +22,7 @@
       "essential": true,
       "portMappings": [
         {
-          "hostPort": 443,
+          "hostPort": 80,
           "containerPort": 80
         }
       ],
