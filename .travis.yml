@@ -1,47 +1,3 @@
-# language: node_js
-# node_js:
-#   - '12'
-# dist: trusty
-# services:
-#   - mongodb
-# env:
-#   matrix:
-#     - NODE_ENV=ci
-# cache:
-#   directories:
-#     - node_modules
-#     - client/mode_modules
-#     - server/node_modules
-# install:
-#   - npm run prodinstall
-# script:
-#   - cd client
-#   - yarn
-#   - yarn build
-#   - cd ../server
-#   - mkdir uploads
-#   - mkdir uploads/audio uploads/images uploads/testFiles
-#   - nohup npm run ci &
-#   - sleep 3
-#   - npm run ci-test
-# deploy:
-#   provider: elasticbeanstalk
-#   access_key_id:
-#     secure: $AWS_ACCESS_KEY_ID
-#   secret_access_key:
-#     secure: $AWS_SECRET_ACCESS_KEY
-#   region: us-west-2
-#   app: jukebox
-#   env: Jukebox-env
-#   bucket_name: elasticbeanstalk-us-west-2-016190279810
-#   bucket_path: jukebox
-#   on:
-#     repo: phonofidelic/JukeBox
-# after_deploy:
-#   - cd server
-#   - npm install
-#   - npm run prod
-
 sudo: required
 services:
   - docker
@@ -71,7 +27,8 @@ deploy:
     secure: $AWS_SECRET_ACCESS_KEY
   region: us-west-2
   app: jukebox
-  env: Jukebox-env-1
+  # env: Jukebox-env-1
+  env: Jukebox-env-lb
   bucket_name: elasticbeanstalk-us-west-2-016190279810
   bucket_path: jukebox
   on:
