@@ -9,6 +9,7 @@ const {
   DISCOGS_TOKEN,
   S3_ACCESS_KEY_ID,
   S3_SECRET_ACCESS_KEY,
+  S3_BUCKET_NAME,
   STORAGE_BASE_URL
 } = require('../../../config/keys');
 const inspectConfig = { colors: true, depth: null };
@@ -25,7 +26,7 @@ const s3 = new AWS.S3({
 const putS3Object = (fileBuffer, storageKey) => {
   const params = {
     Body: fileBuffer,
-    Bucket: 'jukebox-storage',
+    Bucket: S3_BUCKET_NAME,
     Key: storageKey
   };
 
