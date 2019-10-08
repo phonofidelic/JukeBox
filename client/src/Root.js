@@ -7,35 +7,29 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import reducer from 'reducers/index';
 import { history, THEME } from 'config';
-import { ThemeProvider } from 'contexts/theme.context';
+import { ThemeProvider, theme } from 'contexts/theme.context';
 
 export default ({ children, initialState = {} }) => {
-	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-	
-	const enhancer = composeEnhancers(
-		applyMiddleware(
-	    reduxThunk, 
-	    routerMiddleware(history)
-	  )
-	);
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-	const store = createStore(
-		reducer,
-		initialState,
-		enhancer
-	);
+  const enhancer = composeEnhancers(
+    applyMiddleware(reduxThunk, routerMiddleware(history))
+  );
 
-	const theme = createMuiTheme(THEME);
+  const store = createStore(reducer, initialState, enhancer);
 
-	return (
-		<Provider store={store}>
-	    <ConnectedRouter history={history}>
-	      <ThemeProvider>
-	    		<MuiThemeProvider theme={theme}>
-	          { children }
-	    		</MuiThemeProvider>
-	      </ThemeProvider>
-	    </ConnectedRouter>
-		</Provider>
-	);
-}
+  const materialUITheme = createMuiTheme(theme);
+
+  return (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <ThemeProvider>
+          <MuiThemeProvider theme={materialUITheme}>
+            {children}
+          </MuiThemeProvider>
+        </ThemeProvider>
+      </ConnectedRouter>
+    </Provider>
+  );
+};

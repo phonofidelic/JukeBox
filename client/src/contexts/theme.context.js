@@ -4,9 +4,7 @@ export const theme = {
   typography: {
     useNextVariants: true,
     // Use the system font over Roboto.
-    fontFamily:
-      '-apple-system,system-ui,BlinkMacSystemFont,' +
-      '"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
+    fontFamily: ['Roboto', 'sans-serif'],
     fontWeightMedium: 500,
     body1: {
       fontWeight: 500
