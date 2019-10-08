@@ -21,11 +21,11 @@ const Dashboard = props => {
   return (
     <Container theme={theme}>
       <Typography>email: {user && user.email}</Typography>
-      <ButtonContainer>
+      {/* <ButtonContainer>
         <Button variant="outlined" onClick={() => handleGDriveConnect()}>
           Connect Google Drive
         </Button>
-      </ButtonContainer>
+      </ButtonContainer> */}
       <ButtonContainer>
         <Button variant="outlined" onClick={() => handleSignOut()}>
           Sign out
