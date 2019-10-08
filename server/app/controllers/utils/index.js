@@ -265,9 +265,9 @@ module.exports.loadTracks = (Track, userId) =>
       .sort({ title: 1 })
       .exec((err, tracks) => {
         if (err) reject(err);
-        console.log('====================================');
-        console.log('loadTracks, tracks:', tracks);
-        console.log('====================================');
+        // console.log('====================================');
+        // console.log('loadTracks, tracks:', tracks);
+        // console.log('====================================');
         resolve(tracks);
       });
   });

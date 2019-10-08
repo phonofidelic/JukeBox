@@ -1,6 +1,8 @@
 const User = require('../models/user.model');
+const Track = require('../models/track.model');
 const jwt = require('jsonwebtoken');
 const uuidv4 = require('uuid/v4');
+const utils = require('./utils');
 // const TokenGenerator = require('./utils/TokenGenerator');
 // const tokenGenerator = new TokenGenerator(
 // 	JWT_SECRET,
@@ -185,9 +187,41 @@ exports.getUserInfo = async (req, res, next) => {
   console.log('*** getUserInfo, userId:', userId);
   let user;
   try {
-    user = await User.findById(userId, 'email');
+    user = await User.findById(userId, 'email storageUsage');
   } catch (err) {
     return next(err);
+  }
+
+  console.log('====================================');
+  console.log('user.storageUsage:', user.storageUsage);
+  console.log('====================================');
+  if (user.storageUsage === undefined || user.storageUsage < 1) {
+    console.log('====================================');
+    console.log('NO STORAGE USAGE DATA');
+    console.log('====================================');
+    let calculatedStorageUsage = 0;
+
+    const tracks = await utils.loadTracks(Track, userId);
+
+    tracks.forEach(track => {
+      console.log('track size:', track.file.size);
+      calculatedStorageUsage += track.file.size;
+    });
+
+    console.log('====================================');
+    console.log('CALCULATED STORAGE USAGE:', calculatedStorageUsage);
+    console.log('====================================');
+
+    const userRes = await User.update(
+      { _id: userId },
+      {
+        storageUsage: calculatedStorageUsage
+      }
+    );
+    userRes.n;
+    console.log('====================================');
+    console.log('UPDATED USER WITH STORAGE DATA:', userRes.nModified);
+    console.log('====================================');
   }
 
   res.json({

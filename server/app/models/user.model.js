@@ -33,7 +33,8 @@ const UserSchema = new Schema({
       token_type: String,
       expiry_date: Number
     }
-  }
+  },
+  storageUsage: { type: Number, default: 0 }
 });
 
 // Encrypt password before saving to DB
