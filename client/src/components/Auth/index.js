@@ -5,6 +5,8 @@ import posed from 'react-pose';
 import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
 
 const STRINGS = {
@@ -15,13 +17,13 @@ const STRINGS = {
 };
 
 const Container = styled.div`
-  display: flex
-	justify-content: space-evenly
-	width: 100%
+  // display: flex
+  // justify-content: space-evenly
+  // width: 100%
 
-	@media (max-width: 560px) {
-    flex-direction: column;
-  }
+  // @media (max-width: 560px) {
+  //   flex-direction: column;
+  // }
 `;
 
 const Reveal = posed.div({
@@ -39,8 +41,8 @@ const Reveal = posed.div({
 
 class Auth extends Component {
   state = {
-    showLogin: true,
-    showRegistration: true
+    showLogin: false,
+    showRegistration: false
   };
 
   componentDidCatch(err, info) {
@@ -105,23 +107,38 @@ class Auth extends Component {
   render() {
     const { auth, from } = this.props;
 
+    // return (
+    //   <Container>
+    //     <LoginForm
+    //       auth={auth}
+    //       from={from}
+    //       handleLogin={this.handleLogin.bind(this)}
+    //     />
+    //     <Typography
+    //       style={{
+    //         marginTop: '50px',
+    //         marginBottom: '50px',
+    //         fontStyle: 'italic'
+    //       }}
+    //     >
+    //       - or -
+    //     </Typography>
+    //     <RegistrationForm
+    //       auth={auth}
+    //       handleNewRegistration={this.handleNewRegistration.bind(this)}
+    //     />
+    //   </Container>
+    // );
+
     return (
       <Container>
-        <Reveal pose={this.state.showLogin ? 'visible' : 'hidden'}>
-          <LoginForm
-            auth={auth}
-            from={from}
-            handleLogin={this.handleLogin.bind(this)}
-          />
-        </Reveal>
-        {!this.state.showLogin && (
-          <Button
-            onClick={() => this.handleSignInReveal()}
-            data-cy="signin-reveal"
-          >
-            Sign in
-          </Button>
-        )}
+        <Button
+          variant="outlined"
+          onClick={() => this.setState({ showLogin: true })}
+        >
+          Sign in
+        </Button>
+
         <Typography
           style={{
             marginTop: '50px',
@@ -131,20 +148,40 @@ class Auth extends Component {
         >
           - or -
         </Typography>
-        <Reveal pose={this.state.showRegistration ? 'visible' : 'hidden'}>
-          <RegistrationForm
-            auth={auth}
-            handleNewRegistration={this.handleNewRegistration.bind(this)}
-          />
-        </Reveal>
-        {!this.state.showRegistration && (
-          <Button
-            onClick={() => this.handleRegistrationReveal()}
-            data-cy="registration-reveal"
-          >
-            Regeister
-          </Button>
-        )}
+
+        <Button
+          variant="outlined"
+          onClick={() => this.setState({ showRegistration: true })}
+        >
+          Create a new account
+        </Button>
+
+        <Dialog
+          open={this.state.showLogin}
+          onClose={() => this.setState({ showLogin: false })}
+          fullWidth
+        >
+          <DialogContent style={{ textAlign: 'center' }}>
+            <LoginForm
+              auth={auth}
+              from={from}
+              handleLogin={this.handleLogin.bind(this)}
+            />
+          </DialogContent>
+        </Dialog>
+
+        <Dialog
+          open={this.state.showRegistration}
+          onClose={() => this.setState({ showRegistration: false })}
+          fullWidth
+        >
+          <DialogContent style={{ textAlign: 'center' }}>
+            <RegistrationForm
+              auth={auth}
+              handleNewRegistration={this.handleNewRegistration.bind(this)}
+            />
+          </DialogContent>
+        </Dialog>
       </Container>
     );
   }
