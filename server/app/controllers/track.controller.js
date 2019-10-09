@@ -210,6 +210,13 @@ module.exports.handlePostTracks = async (req, res, next) => {
     });
     await Album.findOneAndUpdate(albumData._id, { artist: artistData._id });
 
+    /**
+     * Update users storage usage with track file size
+     */
+    await User.findByIdAndUpdate(userId, {
+      $inc: { storageUsage: newTrack.file.size }
+    });
+
     return newTrack;
   });
 
