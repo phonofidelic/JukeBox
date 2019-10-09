@@ -104,6 +104,7 @@ export const logoutUser = () => {
   return dispatch => {
     localStorage.removeItem('JWT');
     localStorage.removeItem('userId');
+    localStorage.removeItem('acceptedCookies');
     // idbTrack.clear();
     history.push('/');
     dispatch({

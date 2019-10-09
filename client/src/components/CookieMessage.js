@@ -14,6 +14,11 @@ const CookieMessage = () => {
   const [open, setOpen] = useState(true);
   const classes = useStyles();
 
+  const handleAccept = () => {
+    setOpen(false);
+    localStorage.setItem('acceptedCookies', true);
+  };
+
   return (
     <Snackbar
       className={classes.root}
@@ -21,7 +26,7 @@ const CookieMessage = () => {
       open={open}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       action={
-        <Button color="secondary" onClick={() => setOpen(false)}>
+        <Button color="secondary" onClick={handleAccept}>
           Ok
         </Button>
       }

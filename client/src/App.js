@@ -76,7 +76,7 @@ class App extends Component {
         {/*</ConnectedRouter>*/}
         <PlayerContainer />
         {localStorage.getItem('JWT') && <NavContainer />}
-        <CookieMessage />
+        {!localStorage.getItem('acceptedCookies') && <CookieMessage />}
       </div>
     );
   }
