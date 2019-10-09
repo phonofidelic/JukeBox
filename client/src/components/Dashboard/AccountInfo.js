@@ -5,6 +5,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ByteConverter from 'byte-converter-react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +28,13 @@ const AccountInfo = ({ user }) => {
         <ListItem>Email: {user.email}</ListItem>
       </ListItemText>
       <ListItemText>
-        <ListItem>Storage usage: {user.storageUsage}</ListItem>
+        <ListItem>
+          Storage usage:{' '}
+          <ByteConverter useSI inUnit="B" outUnit="MB">
+            {user.storageUsage}
+          </ByteConverter>{' '}
+          MB
+        </ListItem>
       </ListItemText>
     </List>
   );
