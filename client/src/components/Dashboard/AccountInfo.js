@@ -6,13 +6,14 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
 
 const STORAGE_MAX = 16106127360;
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    // maxWidth: 360,
     textAlign: 'left'
   }
 }));
@@ -38,13 +39,16 @@ const AccountInfo = ({ user }) => {
       className={classes.root}
       subheader={<ListSubheader>Account Info</ListSubheader>}
     >
-      <ListItemText>
-        <ListItem>Email: {user.email}</ListItem>
-      </ListItemText>
+      <ListItem divider>
+        <ListItemText>
+          <Typography variant="overline">Email:</Typography> {user.email}
+        </ListItemText>
+      </ListItem>
       <ListItem>
         <div>
           <ListItemText>
-            Storage usage: {formatBytes(user.storageUsage)}
+            <Typography variant="overline">Storage usage:</Typography>{' '}
+            {formatBytes(user.storageUsage)} of 15 GB
           </ListItemText>
           <LinearProgress
             variant="determinate"
