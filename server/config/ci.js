@@ -1,6 +1,6 @@
 require('dotenv').config();
 module.exports = {
-  API_ROOT: 'http://localhost:3000',
+  // API_ROOT: 'http://localhost:3000',
   PORT: 3000,
   DB_CONNECTION: 'mongodb://127.0.0.1:27017/jukebox_ci',
   CLIENT_DIR: '../client/build',
@@ -20,4 +20,5 @@ module.exports = {
   S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
   S3_BUCKET_NAME: 'jukebox-ci-storage',
   STORAGE_BASE_URL: process.env.STORAGE_BASE_URL
+  STORAGE_MAX: 16106127360
 };

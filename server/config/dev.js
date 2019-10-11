@@ -1,5 +1,5 @@
 module.exports = {
-  API_ROOT: 'http://localhost:3001',
+  // API_ROOT: 'http://localhost:3001',
   PORT: 3001,
   DB_CONNECTION: 'mongodb://localhost:27017/jukeTest',
   CLIENT_DIR: '../client/build',
@@ -17,5 +17,6 @@ module.exports = {
   S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
   S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
   S3_BUCKET_NAME: 'jukebox-dev-storage',
-  STORAGE_BASE_URL: process.env.STORAGE_BASE_URL
+  STORAGE_BASE_URL: process.env.STORAGE_BASE_URL,
+  STORAGE_MAX: 16106127360
 };
