@@ -6,6 +6,8 @@ Jukebox is a web application for storing and streaming audio files in the cloud.
 
 Files are stored on the Amazon S3 storage system while metadata and user info is maintained in a MongoDB database hosted on mLab. Continuous integration and deployment is maintained using Travis CI to test and deploy a multi-container Docker environment to Amazon’s Elastic Beanstalk.
 
+## [Demo](https://www.phonostream.com)
+
 ## Instalation and setup:
 
 1. `git clone https://github.com/phonofidelic/JukeBox.git && cd JukeBox && npm install`
