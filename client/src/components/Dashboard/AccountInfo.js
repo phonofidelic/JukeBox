@@ -5,7 +5,9 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ByteConverter from 'byte-converter-react';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+const STORAGE_MAX = 16106127360;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,6 +21,18 @@ const AccountInfo = ({ user }) => {
   const theme = useContext(ThemeContext);
   const classes = useStyles(theme);
 
+  /**
+   * Byte converter from Stackoverflow: https://stackoverflow.com/a/18650828
+   */
+  const formatBytes = (a, b) => {
+    if (0 == a) return '0 Bytes';
+    var c = 1024,
+      d = b || 2,
+      e = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+      f = Math.floor(Math.log(a) / Math.log(c));
+    return parseFloat((a / Math.pow(c, f)).toFixed(d)) + ' ' + e[f];
+  };
+
   return (
     <List
       className={classes.root}
@@ -27,15 +41,18 @@ const AccountInfo = ({ user }) => {
       <ListItemText>
         <ListItem>Email: {user.email}</ListItem>
       </ListItemText>
-      <ListItemText>
-        <ListItem>
-          Storage usage:{' '}
-          <ByteConverter useSI inUnit="B" outUnit="MB">
-            {user.storageUsage}
-          </ByteConverter>{' '}
-          MB
-        </ListItem>
-      </ListItemText>
+      <ListItem>
+        <div>
+          <ListItemText>
+            Storage usage: {formatBytes(user.storageUsage)}
+          </ListItemText>
+          <LinearProgress
+            variant="determinate"
+            value={user.storageUsage / STORAGE_MAX}
+            color="secondary"
+          />
+        </div>
+      </ListItem>
     </List>
   );
 };
