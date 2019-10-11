@@ -18,7 +18,8 @@ const {
   G_CLIENT_SECRET,
   S3_ACCESS_KEY_ID,
   S3_SECRET_ACCESS_KEY,
-  STORAGE_BASE_URL
+  STORAGE_BASE_URL,
+  STORAGE_MAX
 } = require('../../config/keys');
 
 const s3 = new AWS.S3({
@@ -29,10 +30,11 @@ const s3 = new AWS.S3({
 const inspectConfig = { colors: true, depth: null };
 
 const STRINGS = {
-  user_registration_success: 'new user registered',
+  user_registration_success: 'New user registered',
   user_login_success: 'Login successfull',
   user_data_querry_success: 'User info retrieved',
-  tracks_post_success: 'Tracks saved'
+  tracks_post_success: 'Tracks saved',
+  storage_usage_exeeded: 'Storage usage exeeded'
 };
 
 module.exports.getSignedUrl = async (req, res, next) => {
@@ -77,15 +79,25 @@ module.exports.handlePostTracks = async (req, res, next) => {
     duration: true
   };
 
-  // Configure Google Drive
-  const gdUser = await User.findById(userId, 'gDrive');
-  console.log('\nuser gDrive.gdTokenData:', gdUser);
-  const oauth2Client = new google.auth.OAuth2(G_CLIENT_ID, G_CLIENT_SECRET);
-  oauth2Client.setCredentials(gdUser.gDrive.gdTokenData);
-  const drive = google.drive({
-    version: 'v3',
-    auth: oauth2Client
-  });
+  /**
+   * Check that the user has space left to store new tracks
+   */
+  const user = await User.findOne({ _id: userId });
+  if (user.storageUsage >= STORAGE_MAX) {
+    console.log('====================================');
+    console.log('USERS STORAGE LIMIT EXEEDED');
+    console.log('====================================');
+    return res.status(452).json({ message: STRINGS.storage_usage_exeeded });
+  }
+  // // Configure Google Drive
+  // const gdUser = await User.findById(userId, 'gDrive');
+  // console.log('\nuser gDrive.gdTokenData:', gdUser);
+  // const oauth2Client = new google.auth.OAuth2(G_CLIENT_ID, G_CLIENT_SECRET);
+  // oauth2Client.setCredentials(gdUser.gDrive.gdTokenData);
+  // const drive = google.drive({
+  //   version: 'v3',
+  //   auth: oauth2Client
+  // });
 
   /***
    *	Using p-iteration library's mapSeries to execute map callback consecutively
@@ -119,7 +131,7 @@ module.exports.handlePostTracks = async (req, res, next) => {
      *	Check if track is already in DB by matching original file name
      */
     const matchParams = {
-      userId: userId,
+      userId,
       'file.originalname': file.originalname
     };
     const matchedTrack = await Track.findOne(matchParams)

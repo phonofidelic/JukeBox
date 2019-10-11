@@ -41,7 +41,7 @@ exports.registerNewUser = (req, res, next) => {
   const { email, password } = req.body;
   // TODO: Validate registration data before writing to DB
 
-  User.findOne({ email: email }, (err, existingUser) => {
+  User.findOne({ email }, (err, existingUser) => {
     if (err) return next(err);
     if (existingUser)
       return res.status(422).json({ message: STRINGS.user_email_conflict });
