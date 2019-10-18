@@ -40,7 +40,7 @@ class NavMobile extends Component {
       <BottomNavigation value={locationPathname} style={styles.root} showLabels>
         <BottomNavigationAction
           component={Link}
-          to="/"
+          to="/home"
           label={
             <Typography color="inherit" variant="caption">
               Home
