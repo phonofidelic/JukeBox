@@ -15,7 +15,8 @@ export default ChildComponent => {
       // console.log('this.props.auth.isAuthed:', this.props.auth.isAuthed);
       // console.log('====================================');
       setTimeout(() => {
-        if (!this.props.auth.isAuthed) {
+        // if (!this.props.auth.isAuthed) {
+        if (!localStorage.getItem('token')) {
           // this.props.history.push('/');
           this.props.logoutUser();
         }
