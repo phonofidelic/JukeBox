@@ -1,6 +1,5 @@
 import React from 'react';
 import AuthContainer from '../containers/AuthContainer';
-import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import MusicNote from '@material-ui/icons/MusicNote';
 import ArrowForward from '@material-ui/icons/ArrowForward';
@@ -60,4 +59,4 @@ const LandingView = props => {
   );
 };
 
-export default withTheme(LandingView);
+export default LandingView;

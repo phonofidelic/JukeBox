@@ -22,6 +22,7 @@ let refreshTokens = {};
 const generateToken = (user, refreshToken) => {
   return jwt.sign({ ...user, rt: refreshToken }, JWT_SECRET, {
     expiresIn: JWT_EXP,
+    // expiresIn: '2s',
     audience: JWT_AUD,
     issuer: JWT_ISS,
     jwtid: uuidv4(),
@@ -68,10 +69,6 @@ exports.registerNewUser = (req, res, next) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production'
       });
-      // res.cookie('RT', refreshToken, {
-      //   httpOnly: true,
-      //   secure: process.env.NODE_ENV === 'production'
-      // });
 
       res.json({
         message: STRINGS.user_registration_success,
@@ -95,13 +92,9 @@ exports.login = (req, res, next) => {
   console.log('\n*** refreshTokens:', refreshTokens);
 
   res.cookie('JWT', token, {
-    // httpOnly: true
-    // secure: process.env.NODE_ENV === 'production'
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'
   });
-  // res.cookie('RT', refreshToken, {
-  //   httpOnly: true,
-  //   secure: process.env.NODE_ENV === 'production'
-  // });
 
   res.json({
     message: 'Login successfull',
@@ -114,6 +107,7 @@ exports.login = (req, res, next) => {
 // TODO: create logout method that removes the users refresh token from token store
 exports.logout = (req, res, next) => {
   delete refreshTokens[req.cookies.RT];
+  res.clearCookie('JWT');
   res.status(200).json({ message: 'You are now signed out' });
 };
 
@@ -161,10 +155,7 @@ const handleExpiredToken = (req, res, next) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production'
     });
-    // res.cookie('RT', newRefreshToken, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === 'production'
-    // });
+
     req.userId = userId;
     return next();
   } else {
@@ -226,7 +217,8 @@ exports.getUserInfo = async (req, res, next) => {
 
   res.json({
     message: 'User info retrieved',
-    user
+    user,
+    isAuthed: true
   });
 };
 

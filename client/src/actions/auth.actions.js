@@ -47,9 +47,11 @@ export const postRegistration = data => {
     axios
       .post(`${AUTH_URL}/register`, data)
       .then(response => {
-        localStorage.setItem('JWT', response.data.token);
+        localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user._id);
-        history.push('/'); // TODO: push referrer instead of static 'home'
+
+        history.push('/home'); // TODO: push referrer instead of static 'home'
+
         dispatch({
           type: REGISTRATION_SUCCESS,
           user: response.data.user,
@@ -78,10 +80,15 @@ export const login = data => {
     axios
       .post(`${AUTH_URL}/login`, data)
       .then(response => {
-        localStorage.setItem('JWT', response.data.token);
-        localStorage.setItem('RF', response.data.refreshToken);
+        localStorage.setItem('token', response.data.token);
         localStorage.setItem('userId', response.data.user._id);
-        history.push('/'); // TODO: push referrer instead of static 'home'
+
+        history.push('/home'); // TODO: push referrer instead of static 'home'
+
+        console.log('====================================');
+        console.log('history:', history);
+        console.log('====================================');
+
         dispatch({
           type: LOGIN_SUCCESS,
           user: response.data.user,
@@ -90,54 +97,77 @@ export const login = data => {
         });
       })
       .catch(err => {
+        console.log('====================================');
+        console.log('LOGIN_FAILURE, err:', err);
+        console.log('====================================');
         dispatch({
-          type: LOGIN_FAILURE,
-          data: err.response.data,
-          status: err.response.status,
-          message: err.response.message || err.response.data
+          type: LOGIN_FAILURE
+          // data: err.response.data,
+          // status: err.response.status,
+          // message: err.response.message || err.response.data
         });
       });
   };
 };
 
 export const logoutUser = () => {
-  return dispatch => {
-    localStorage.removeItem('JWT');
+  return async dispatch => {
+    localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('acceptedCookies');
     // idbTrack.clear();
     history.push('/');
-    dispatch({
-      type: UNAUTH_USER
-    });
+
+    try {
+      const response = await axios.post(`${AUTH_URL}/logout`);
+
+      console.log('====================================');
+      console.log('logout response:', response);
+      console.log('====================================');
+
+      dispatch({
+        type: UNAUTH_USER
+      });
+    } catch (err) {
+      console.error('### logout error:', err);
+    }
   };
 };
 
 export const getUserInfo = () => {
-  return dispatch => {
+  return async dispatch => {
     dispatch({
       type: GET_USER_INFO
     });
     axios
-      .get(`${AUTH_URL}/user`, {
-        // headers: {
-        //   token: localStorage.getItem('JWT'),
-        //   userId: localStorage.getItem('userId')
-        // }
-      })
+      .get(`${AUTH_URL}/user`)
       .then(response => {
         dispatch({
           type: GET_USER_INFO_SUCCESS,
           user: response.data.user,
+          isAuthed: response.data.isAuthed,
           message: response.data.message
         });
       })
       .catch(err => {
+        // if (err.response.status === 401) {
+        //   console.log('====================================');
+        //   console.log('RECIEVED', err.response.status);
+        //   console.log('====================================');
+        //   localStorage.removeItem('JWT');
+        //   localStorage.removeItem('userId');
+        //   localStorage.removeItem('acceptedCookies');
+        //   // idbTrack.clear();
+        //   history.push('/');
+        //   dispatch({
+        //     type: UNAUTH_USER
+        //   });
+        // }
         dispatch({
-          type: GET_USER_INFO_FAILURE,
-          data: err.response.data,
-          status: err.response.status,
-          message: err.response.data.message || err.response.data
+          type: GET_USER_INFO_FAILURE
+          // data: err.response.data,
+          // status: err.response.status,
+          // message: err.response.data.message || err.response.data
         });
       });
   };

@@ -26,7 +26,7 @@ const AccountInfo = ({ user }) => {
    * Byte converter from Stackoverflow: https://stackoverflow.com/a/18650828
    */
   const formatBytes = (a, b) => {
-    if (0 == a) return '0 Bytes';
+    if (!Boolean(a)) return '0 Bytes';
     var c = 1024,
       d = b || 2,
       e = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],

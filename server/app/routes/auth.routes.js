@@ -6,18 +6,12 @@ const jwt = require('jsonwebtoken');
 
 const requireLogin = passport.authenticate('local', { session: false });
 
-router.post('/register', 
-	authController.registerNewUser
-);
+router.post('/register', authController.registerNewUser);
 
-router.post('/login', 
-	requireLogin, 
-	authController.login
-);
+router.post('/login', requireLogin, authController.login);
 
-router.get('/user', 
-	authController.requireAuth,
-	authController.getUserInfo
-);
+router.get('/user', authController.requireAuth, authController.getUserInfo);
+
+router.post('/logout', authController.requireAuth, authController.logout);
 
 module.exports = router;

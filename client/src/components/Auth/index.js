@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
-import posed from 'react-pose';
 import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
@@ -25,19 +24,6 @@ const Container = styled.div`
   //   flex-direction: column;
   // }
 `;
-
-const Reveal = posed.div({
-  visible: {
-    height: '100%',
-    opacity: 1
-    // visibility: 'visible'
-  },
-  hidden: {
-    height: '0px',
-    opacity: 0
-    // visibility: 'hidden'
-  }
-});
 
 class Auth extends Component {
   state = {
@@ -106,29 +92,6 @@ class Auth extends Component {
   }
   render() {
     const { auth, from } = this.props;
-
-    // return (
-    //   <Container>
-    //     <LoginForm
-    //       auth={auth}
-    //       from={from}
-    //       handleLogin={this.handleLogin.bind(this)}
-    //     />
-    //     <Typography
-    //       style={{
-    //         marginTop: '50px',
-    //         marginBottom: '50px',
-    //         fontStyle: 'italic'
-    //       }}
-    //     >
-    //       - or -
-    //     </Typography>
-    //     <RegistrationForm
-    //       auth={auth}
-    //       handleNewRegistration={this.handleNewRegistration.bind(this)}
-    //     />
-    //   </Container>
-    // );
 
     return (
       <Container>

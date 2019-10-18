@@ -91,6 +91,7 @@ const auth = (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         user: action.user,
+        isAuthed: action.isAuthed,
         message: action.message
       };
 

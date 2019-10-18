@@ -17,9 +17,21 @@ import withTheme from '@material-ui/core/styles/withTheme';
 class NavDesktop extends Component {
   static contextType = ThemeContext;
 
+  // state = {
+  //   currentPath: '/'
+  // }
+
+  // handleChange(e, value) {
+  //   console.log('### NAV CHANGE, value:', value)
+  //   this.setState({currentPath: value})
+  // }
+
   render() {
     const { locationPathname, handleSignOut } = this.props;
 
+    console.log('====================================');
+    console.log('locationPathname:', locationPathname);
+    console.log('====================================');
     const theme = this.context;
 
     const styles = {
@@ -45,10 +57,11 @@ class NavDesktop extends Component {
         alignContent={'flex-start'}
         style={styles.root}
         showLabels
+        // onChange={this.handleChange}
       >
         <BottomNavigationAction
           component={Link}
-          to="/"
+          to="/home"
           label={
             <Typography color="inherit" variant="caption">
               Home
