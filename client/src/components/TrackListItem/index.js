@@ -10,6 +10,7 @@ import {
 import EditTrackForm from './EditTrackForm';
 import TrackListItemControls from './TrackListItemControls';
 import playingThumb from '../assets/playing_thumb.svg';
+import defaultAlbumThumb from '../assets/default_album_img.svg';
 
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
@@ -153,7 +154,11 @@ class TrackListItem extends Component {
                 />
               )}
               <img
-                src={track.image.src}
+                src={
+                  track.image.src.match(/default/)
+                    ? defaultAlbumThumb
+                    : track.image.src
+                }
                 alt="Album art"
                 width="50"
                 height="50"
