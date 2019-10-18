@@ -34,6 +34,10 @@ const AccountInfo = ({ user }) => {
     return parseFloat((a / Math.pow(c, f)).toFixed(d)) + ' ' + e[f];
   };
 
+  // console.log('====================================');
+  // console.log('storage:', (user.storageUsage / STORAGE_MAX) * 100);
+  // console.log('====================================');
+
   return (
     <List
       className={classes.root}
@@ -52,7 +56,7 @@ const AccountInfo = ({ user }) => {
           </ListItemText>
           <LinearProgress
             variant="determinate"
-            value={user.storageUsage / STORAGE_MAX}
+            value={(user.storageUsage / STORAGE_MAX) * 100}
             color="secondary"
           />
         </div>
