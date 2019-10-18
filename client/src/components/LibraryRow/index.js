@@ -5,6 +5,7 @@ import { ThemeContext } from '../../contexts/theme.context';
 
 import LibraryContextMenu from './LibraryContextMenu';
 import playingThumb from '../assets/playing_thumb.svg';
+import defaultAlbumThumb from '../assets/default_album_img.svg';
 
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -100,7 +101,11 @@ export class LibraryRow extends Component {
             display: 'block',
             overflow: 'hidden'
           }}
-          src={track.image.src}
+          src={
+            track.image.src.match(/default/)
+              ? defaultAlbumThumb
+              : track.image.src
+          }
           alt="Album art"
           width="32"
           height="32"
