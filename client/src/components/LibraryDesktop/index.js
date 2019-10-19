@@ -85,7 +85,7 @@ class LibraryDesktop extends Component {
         display: 'flex'
       },
       navSpacer: {
-        minWidth: `${theme.dimensions.navDesktop.width + 2}px`
+        minWidth: `${theme.dimensions.navDesktop.width + 2 + 10}px`
       },
       tableContainer: {
         width: '100%',
