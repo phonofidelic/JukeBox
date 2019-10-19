@@ -92,7 +92,7 @@ class NavDesktop extends Component {
           value="/uploader"
           icon={<CloudUpload />}
         />
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           onClick={() => handleSignOut()}
           label={
             <Typography color="inherit" variant="caption">
@@ -100,7 +100,7 @@ class NavDesktop extends Component {
             </Typography>
           }
           icon={<ExitToApp />}
-        />
+        /> */}
       </Grid>
     );
   }
