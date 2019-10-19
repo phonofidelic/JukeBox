@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ThemeContext } from '../../contexts/theme.context';
+import { ThemeContext, theme } from '../../contexts/theme.context';
 
 // import Slider from '@material-ui/lab/Slider';
 import Slider from '@material-ui/core/Slider';
@@ -17,16 +17,16 @@ const styles = {
   },
   rail: {
     bottom: 0,
-    color: '#e62118'
+    color: theme.palette.secondary.main
   },
   track: {
     bottom: 0,
-    color: '#e62118'
+    color: theme.palette.secondary.main
     // height: '5px'
   },
   thumb: {
     bottom: -5,
-    color: '#e62118',
+    color: theme.palette.secondary.main,
     zIndex: 2
   },
   activated: {

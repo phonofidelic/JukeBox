@@ -27,7 +27,8 @@ export const theme = {
       boxShadow: '0px 0px 10px rgba(0, 0, 0, .3)'
     },
     secondary: {
-      main: '#e91e00', // accent
+      // main: '#e91e00', // accent
+      main: '#fe9154', // accent
       light: '#fafafa', // background
       dark: '#ba000d'
     },
