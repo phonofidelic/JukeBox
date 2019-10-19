@@ -16,31 +16,32 @@ import LandingView from './views/Landing.view';
 import NotFound from './views/NotFound.view';
 import CookieMessage from './components/CookieMessage';
 
-class App extends Component {
-  render() {
-    const styles = {
-      root: {
-        textAlign: 'center'
-      }
-    };
+const App = () => {
+  const styles = {
+    root: {
+      textAlign: 'center'
+    }
+  };
 
-    // TODO: Create Router component and insert it here
-    return (
-      <div style={styles.root}>
-        <MessageContainer />
-        <Switch>
-          <Route exact path="/" component={LandingView} />
-          <Route path="/home" component={HomeView} />
-          <Route path="/library" component={LibraryView} />
-          <Route path="/uploader" component={UploaderView} />
-          <Route path="/*" component={NotFound} />
-        </Switch>
-        <PlayerContainer />
-        {localStorage.getItem('token') && <NavContainer />}
-        {!localStorage.getItem('acceptedCookies') && <CookieMessage />}
-      </div>
-    );
-  }
-}
+  const hasToken = Boolean(localStorage.getItem('token'));
+  const acceptedCookies = localStorage.getItem('acceptedCookies');
+
+  // TODO: Create Router component and insert it here
+  return (
+    <div style={styles.root}>
+      <MessageContainer />
+      <Switch>
+        <Route exact path="/" component={LandingView} />
+        <Route path="/home" component={HomeView} />
+        <Route path="/library" component={LibraryView} />
+        <Route path="/uploader" component={UploaderView} />
+        <Route path="/*" component={NotFound} />
+      </Switch>
+      {hasToken && <PlayerContainer />}
+      {hasToken && <NavContainer />}
+      {!acceptedCookies && <CookieMessage />}
+    </div>
+  );
+};
 
 export default App;

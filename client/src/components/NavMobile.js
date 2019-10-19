@@ -60,7 +60,7 @@ class NavMobile extends Component {
           value="/library"
           icon={<Storage />}
         />
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           component={Link}
           to="/uploader"
           label={
@@ -70,7 +70,7 @@ class NavMobile extends Component {
           }
           value="/uploader"
           icon={<CloudUpload />}
-        />
+        /> */}
         {/*<BottomNavigationAction 
           onClick={() => handleSignOut()}
           label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
