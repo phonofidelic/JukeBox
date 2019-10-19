@@ -87,7 +87,7 @@ class DetailCard extends Component {
             </DialogContent>
           )}
           <DialogActions>
-            <Button>More info</Button>
+            {/* <Button>More info</Button> */}
             <Button onClick={() => this.handleClose()}>Close</Button>
           </DialogActions>
         </Dialog>
