@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-
+import { Link, NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 import {
+  theme,
   ThemeContext,
   getNavMobileHeight,
   getNavMobileZIndex
@@ -15,31 +16,55 @@ import Home from '@material-ui/icons/Home';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import Storage from '@material-ui/icons/Storage';
 import withTheme from '@material-ui/core/styles/withTheme';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+  selected: theme.palette.secondary.main
+};
+
+const Container = styled(BottomNavigation)`
+  border-top: 1px solid #dcdcdc;
+  position: fixed;
+  bottom: ${({ theme, showNav }) =>
+    showNav ? 0 : -getNavMobileHeight({ theme })};
+  width: 100%;
+  height: ${({ theme }) => getNavMobileHeight({ theme })};
+  background-color: #fafafa;
+  z-index: ${({ theme }) => getNavMobileZIndex({ theme })};
+`;
 
 class NavMobile extends Component {
   static contextType = ThemeContext;
 
   render() {
-    const { showNav, locationPathname } = this.props;
-
     const theme = this.context;
+    const { showNav, locationPathname } = this.props;
+    const { classes } = this.props;
 
-    const styles = {
-      root: {
-        borderTop: '1px solid #dcdcdc',
-        position: 'fixed',
-        bottom: showNav ? '0px' : -getNavMobileHeight({ theme }),
-        width: '100%',
-        height: getNavMobileHeight({ theme }),
-        backgroundColor: '#fafafa',
-        zIndex: getNavMobileZIndex({ theme })
-      }
-    };
+    // const styles = {
+    //   root: {
+    //     borderTop: '1px solid #dcdcdc',
+    //     position: 'fixed',
+    //     bottom: showNav ? '0px' : -getNavMobileHeight({ theme }),
+    //     width: '100%',
+    //     height: getNavMobileHeight({ theme }),
+    //     backgroundColor: '#fafafa',
+    //     zIndex: getNavMobileZIndex({ theme })
+    //   }
+    // };
 
     return (
-      <BottomNavigation value={locationPathname} style={styles.root} showLabels>
+      <Container
+        value={locationPathname}
+        classes={classes.root}
+        showLabels
+        showNav={showNav}
+        theme={theme}
+      >
         <BottomNavigationAction
-          component={Link}
+          component={React.forwardRef((props, ref) => (
+            <NavLink {...props} />
+          ))}
           to="/home"
           label={
             <Typography color="inherit" variant="caption">
@@ -48,9 +73,13 @@ class NavMobile extends Component {
           }
           value="/"
           icon={<Home />}
+          classes={{ selected: classes.selected }}
+          activeStyle={{ color: theme.palette.secondary.main }}
         />
         <BottomNavigationAction
-          component={Link}
+          component={React.forwardRef((props, ref) => (
+            <NavLink {...props} />
+          ))}
           to="/library"
           label={
             <Typography color="inherit" variant="caption">
@@ -59,24 +88,10 @@ class NavMobile extends Component {
           }
           value="/library"
           icon={<Storage />}
+          classes={{ selected: classes.selected }}
+          activeStyle={{ color: theme.palette.secondary.main }}
         />
-        {/* <BottomNavigationAction
-          component={Link}
-          to="/uploader"
-          label={
-            <Typography color="inherit" variant="caption">
-              Uploader
-            </Typography>
-          }
-          value="/uploader"
-          icon={<CloudUpload />}
-        /> */}
-        {/*<BottomNavigationAction 
-          onClick={() => handleSignOut()}
-          label={<Typography color="inherit" variant="caption">Sign out</Typography>} 
-          icon={<ExitToApp />} 
-        />*/}
-      </BottomNavigation>
+      </Container>
     );
   }
 }
@@ -85,4 +100,4 @@ NavMobile.propTypes = {
   locationPathname: PropTypes.string.isRequired
 };
 
-export default withTheme(NavMobile);
+export default withStyles(styles)(NavMobile);

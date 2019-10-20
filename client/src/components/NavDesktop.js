@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { ThemeContext } from '../contexts/theme.context';
 
@@ -60,7 +60,9 @@ class NavDesktop extends Component {
         // onChange={this.handleChange}
       >
         <BottomNavigationAction
-          component={Link}
+          component={React.forwardRef((props, ref) => (
+            <NavLink {...props} />
+          ))}
           to="/home"
           label={
             <Typography color="inherit" variant="caption">
@@ -69,9 +71,12 @@ class NavDesktop extends Component {
           }
           value="/"
           icon={<Home />}
+          activeStyle={{ color: theme.palette.secondary.main }}
         />
         <BottomNavigationAction
-          component={Link}
+          component={React.forwardRef((props, ref) => (
+            <NavLink {...props} />
+          ))}
           to="/library"
           label={
             <Typography color="inherit" variant="caption">
@@ -80,9 +85,12 @@ class NavDesktop extends Component {
           }
           value="/library"
           icon={<Storage />}
+          activeStyle={{ color: theme.palette.secondary.main }}
         />
         <BottomNavigationAction
-          component={Link}
+          component={React.forwardRef((props, ref) => (
+            <NavLink {...props} />
+          ))}
           to="/uploader"
           label={
             <Typography color="inherit" variant="caption">
@@ -91,16 +99,8 @@ class NavDesktop extends Component {
           }
           value="/uploader"
           icon={<CloudUpload />}
+          activeStyle={{ color: theme.palette.secondary.main }}
         />
-        {/* <BottomNavigationAction
-          onClick={() => handleSignOut()}
-          label={
-            <Typography color="inherit" variant="caption">
-              Sign out
-            </Typography>
-          }
-          icon={<ExitToApp />}
-        /> */}
       </Grid>
     );
   }

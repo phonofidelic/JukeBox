@@ -19,12 +19,13 @@ export const theme = {
   },
   palette: {
     primary: {
-      main: '#d2d8d8', // accent
-      light: '#fff', // background
+      main: '#fafafa', // background
+      light: '#fff', // highlight
       dark: '#222',
       hover: '#ededed',
       selected: '#dbdbdb',
-      boxShadow: '0px 0px 10px rgba(0, 0, 0, .3)'
+      boxShadow: '0px 0px 10px rgba(0, 0, 0, .3)',
+      border: '#e0e0e0'
     },
     secondary: {
       // main: '#e91e00', // accent
