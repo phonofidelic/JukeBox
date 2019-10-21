@@ -15,7 +15,7 @@ import HomeView from './views/Home.view';
 import LandingView from './views/Landing.view';
 import NotFound from './views/NotFound.view';
 import CookieMessage from './components/CookieMessage';
-import Header from './components/Header';
+import HeaderContainer from './containers/HeaderContainer';
 
 const App = () => {
   const styles = {
@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div style={styles.root}>
       <MessageContainer />
-      {hasToken && <Header />}
+      {hasToken && <HeaderContainer />}
       <Switch>
         <Route exact path="/" component={LandingView} />
         <Route path="/home" component={HomeView} />

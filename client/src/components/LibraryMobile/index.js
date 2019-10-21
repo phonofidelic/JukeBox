@@ -35,17 +35,19 @@ export class LibraryMobile extends Component {
 
     const styles = {
       root: {
-        background: theme.palette.secondary.light
+        background: theme.palette.primary.main
       },
       list: {
-        position: 'fixed',
+        // position: 'fixed',
         width: '100%',
-        top: theme.dimensions.libraryControls.height,
-        bottom: queueHasTracks
-          ? theme.dimensions.player.height + theme.dimensions.navMobile.height
-          : theme.dimensions.player.height,
-        overflowY: 'scroll',
-        WebkitOverflowScrolling: 'touch'
+        // top: theme.dimensions.libraryControls.height,
+        // paddingTop: theme.dimensions.libraryControls.height,
+        padding: 0
+        // bottom: queueHasTracks
+        //   ? theme.dimensions.player.height + theme.dimensions.navMobile.height
+        //   : theme.dimensions.player.height,
+        // overflowY: 'scroll',
+        // WebkitOverflowScrolling: 'touch'
       }
     };
 

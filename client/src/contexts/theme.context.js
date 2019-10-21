@@ -47,6 +47,9 @@ export const theme = {
     libraryControls: {
       height: 32
     },
+    header: {
+      height: 56
+    },
     nav: {
       height: 56,
       zIndex: 3
