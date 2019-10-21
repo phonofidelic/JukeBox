@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div style={styles.root}>
       <MessageContainer />
-      {hasToken && <HeaderContainer />}
+      {/* {hasToken && <HeaderContainer />} */}
       <Switch>
         <Route exact path="/" component={LandingView} />
         <Route path="/home" component={HomeView} />

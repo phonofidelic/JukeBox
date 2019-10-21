@@ -9,7 +9,7 @@ class HeaderContainer extends Component {
     console.log('====================================');
     console.log('HeaderContainer, location:', location.pathname);
     console.log('====================================');
-    return userAgentIsMobile ? (
+    return true ? (
       <HeaderMobile pathname={location.pathname} />
     ) : (
       <HeaderDesktop pathname={location.pathname} />
