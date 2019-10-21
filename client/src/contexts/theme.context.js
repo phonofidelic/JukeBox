@@ -1,6 +1,13 @@
 import React from 'react';
 
 export const theme = {
+  overrides: {
+    MuiBottomNavigation: {
+      root: {
+        backgroundColor: '#fafafa'
+      }
+    }
+  },
   typography: {
     useNextVariants: true,
     // Use the system font over Roboto.

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './LibraryControls.styles';
+import { ThemeContext } from '../../contexts/theme.context';
 
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
@@ -23,6 +24,8 @@ const orderMenu = [
 ];
 
 class LibraryControls extends Component {
+  static contextType = ThemeContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -52,6 +55,8 @@ class LibraryControls extends Component {
 
     const { open } = this.state;
 
+    const theme = this.context;
+
     return (
       <div className={classes.root}>
         <Button
@@ -75,8 +80,21 @@ class LibraryControls extends Component {
             ))}
           </MenuList>
         </Drawer>
-        <Button onClick={() => this.handleOrder()}>
-          <IconButton size="small" style={{ padding: 0 }}>
+        <Button
+          onClick={() => this.handleOrder()}
+          style={{
+            borderLeft: `1px solid ${theme.palette.primary.border}`,
+            borderRight: `1px solid ${theme.palette.primary.border}`,
+            borderRadius: 0,
+            flex: 1
+          }}
+        >
+          <IconButton
+            size="small"
+            style={{
+              padding: 0
+            }}
+          >
             {order ? <ArrowDown /> : <ArrowUp />}
           </IconButton>
         </Button>
