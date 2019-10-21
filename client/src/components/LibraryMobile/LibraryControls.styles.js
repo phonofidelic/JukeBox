@@ -3,8 +3,8 @@ const styles = theme => ({
     position: 'sticky',
     width: '100vw',
     height: theme.dimensions.libraryControls.height,
-    // top: theme.dimensions.header.height,
-    top: 0,
+    top: theme.dimensions.header.height,
+    // top: 0,
     zIndex: 1,
     background: theme.palette.secondary.light,
     borderBottom: `1px solid #ccc`

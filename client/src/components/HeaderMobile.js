@@ -11,8 +11,8 @@ const Container = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.palette.primary.border};
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  width: 100%;
+  // justify-content: flex-end;
+  // width: 100vw;
   height: ${({ theme }) => theme.dimensions.header.height}px;
   position: sticky;
   top: 0;
@@ -20,7 +20,7 @@ const Container = styled.div`
 `;
 
 const Brand = styled.div`
-  margin-right: ${({ theme }) => theme.dimensions.navDesktop.navWidth}px;
+  margin-left: 1em;
 `;
 
 const HeaderMobile = props => {
