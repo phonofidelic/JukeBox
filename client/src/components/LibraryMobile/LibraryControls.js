@@ -3,80 +3,86 @@ import styles from './LibraryControls.styles';
 
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowDown from '@material-ui/icons/ExpandMore';
+import ArrowUp from '@material-ui/icons/ExpandLess';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const ORDER_TYPES = {
-	TITLE: 'title',
-	ARTIST: 'artist',
-	ALBUM: 'album'
+  TITLE: 'title',
+  ARTIST: 'artist',
+  ALBUM: 'album'
 };
 
 const orderMenu = [
-	{ type: ORDER_TYPES.TITLE, label: 'Title'},
-	{ type: ORDER_TYPES.ARTIST, label: 'Artist'},
-	{ type: ORDER_TYPES.ALBUM, label: 'Album' }	
-]
+  { type: ORDER_TYPES.TITLE, label: 'Title' },
+  { type: ORDER_TYPES.ARTIST, label: 'Artist' },
+  { type: ORDER_TYPES.ALBUM, label: 'Album' }
+];
 
 class LibraryControls extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			open: false,
-			orderBy: ORDER_TYPES.TITLE,
-			top: false,
-		}
-	};
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+      // orderBy: ORDER_TYPES.TITLE,
+      // top: false
+    };
+  }
 
-	handleToggle = () => {
-		this.setState(state => ({ open: !state.open }));
-	};
+  handleToggle = () => {
+    this.setState(state => ({ open: !state.open }));
+  };
 
-	handleSelection = value => {
-		console.log('handleSelection, value', value);
-		this.props.setOrder(value);
-		this.props.handleOrderBy(value);
-		this.handleToggle();
-	};
+  handleOrderBy = value => {
+    console.log('handleSelection, value', value);
+    this.props.setOrderBy(value);
+    this.handleToggle();
+  };
 
-	render() {
-		const { 
-			orderBy, 
-			classes
-		} = this.props;
+  handleOrder = () => {
+    this.props.setOrder();
+    // this.handleToggle();
+  };
 
-		const { open } = this.state;
+  render() {
+    const { orderBy, order, classes } = this.props;
 
-		return (
-			<div className={classes.root}>
-				<Button
-					fullWidth
-					className={classes.orderByButton}
-		      onClick={this.handleToggle}
-		    >Order by: {orderBy}
-		    </Button>
-		    <Drawer 
-		    	anchor="top"
-		    	open={open}
-					onClose={this.handleToggle}
-				>
-					<MenuList className={classes.menuList}>
-						{orderMenu.map((orderItem, i) => (
-							<MenuItem 
-								key={i}
-								className={classes.menuItem} 
-								value={orderItem.type}
-								onClick={() => this.handleSelection(orderItem.type)}
-							>
-								{orderItem.label}
-							</MenuItem>
-						))}
-					</MenuList>
-				</Drawer>
-			</div>
-		);
-	};
+    const { open } = this.state;
+
+    return (
+      <div className={classes.root}>
+        <Button
+          // fullWidth
+          className={classes.orderByButton}
+          onClick={this.handleToggle}
+        >
+          {orderBy}
+        </Button>
+        <Drawer anchor="top" open={open} onClose={this.handleToggle}>
+          <MenuList className={classes.menuList}>
+            {orderMenu.map((orderItem, i) => (
+              <MenuItem
+                key={i}
+                className={classes.menuItem}
+                value={orderItem.type}
+                onClick={() => this.handleOrderBy(orderItem.type)}
+              >
+                {orderItem.label}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Drawer>
+        <Button onClick={() => this.handleOrder()}>
+          <IconButton size="small" style={{ padding: 0 }}>
+            {order ? <ArrowDown /> : <ArrowUp />}
+          </IconButton>
+        </Button>
+      </div>
+    );
+  }
 }
 
 export default withStyles(styles)(LibraryControls);

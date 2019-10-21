@@ -60,6 +60,10 @@ export class LibraryContainer extends Component {
 
   handleOrderBy(fieldName, order) {
     if (!order) order = 'desc';
+    console.log('====================================');
+    console.log('fieldName:', fieldName);
+    console.log('order:', order);
+    console.log('====================================');
     this.props.orderTracksByFieldValue(fieldName, order);
   }
 

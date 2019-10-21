@@ -7,8 +7,10 @@ const styles = theme => ({
     // top: 0,
     zIndex: 1,
     background: theme.palette.secondary.light,
-    borderBottom: `1px solid #ccc`
+    borderBottom: `1px solid #ccc`,
     // boxShadow: '0px 0px 5px 1px #ccc'
+    display: 'flex',
+    justifyContent: 'flex-end'
   },
   orderByButton: {
     // height: theme.dimensions.libraryControls.height,
