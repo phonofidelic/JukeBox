@@ -48,8 +48,7 @@ const SearchButton = styled(Button)`
 function SearchBar(props) {
   const theme = useContext(ThemeContext);
   const inputEl = useRef(null);
-  const [text, setText] = useState('');
-  const [debouncedCallback] = useDebouncedCallback(
+  const [debouncedSearch] = useDebouncedCallback(
     term => props.searchLibrary(term),
     500
   );
@@ -67,7 +66,7 @@ function SearchBar(props) {
         <SearchField
           type="text"
           inputRef={inputEl}
-          onChange={e => debouncedCallback(e.target.value)}
+          onChange={e => debouncedSearch(e.target.value)}
         />
       </SearchFieldContainer>
       <SearchButton

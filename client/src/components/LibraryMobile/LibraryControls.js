@@ -18,11 +18,11 @@ const orderMenu = [
 ];
 
 const Container = styled.div`
-  position: sticky,
-  width: 100vw,
+  position: sticky;
+  width: 100vw;
   height: ${({ theme }) => theme.dimensions.libraryControls.height}px;
   top: ${({ theme }) => theme.dimensions.header.height}px;
-  z-index: 1;
+  // z-index: 1;
   background-color: ${({ theme }) => theme.palette.primary.background};
   border-bottom: 1px solid ${({ theme }) => theme.palette.primary.border};
   display: flex;
@@ -38,7 +38,7 @@ const StyledMenuItem = styled(MenuItem)`
   text-align: left;
 `;
 
-const OrderButton = styled(Button)`
+const FieldButton = styled(Button)`
   && {
     flex: 5;
     padding-left: 16px;
@@ -56,7 +56,7 @@ const ToggleButton = styled(Button)`
 `;
 
 function LibraryControls(props) {
-  const { orderBy, order, setOrderBy, setOrder } = props;
+  const { selectedField, order, setOrderBy, setOrder } = props;
   const [menuState, setMenuState] = useState(false);
   const theme = useContext(ThemeContext);
 
@@ -68,9 +68,9 @@ function LibraryControls(props) {
 
   return (
     <Container theme={theme}>
-      <OrderButton theme={theme} onClick={() => setMenuState(!menuState)}>
-        {orderBy}
-      </OrderButton>
+      <FieldButton theme={theme} onClick={() => setMenuState(!menuState)}>
+        {selectedField}
+      </FieldButton>
       <ToggleButton theme={theme} onClick={() => setOrder()}>
         {order ? <ArrowDown /> : <ArrowUp />}
       </ToggleButton>

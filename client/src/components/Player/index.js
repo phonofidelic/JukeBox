@@ -18,7 +18,7 @@ const Container = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 3;
   // box-shadow: ${({ theme }) => theme.palette.primary.boxShadow};
   box-shadow: 0px 0px 10px rgba(227, 36, 36, .3);
 `;

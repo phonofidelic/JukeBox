@@ -16,13 +16,13 @@ export class LibraryMobile extends Component {
   static contextType = ThemeContext;
 
   state = {
-    orderBy: ORDER_TYPES.TITLE,
+    selectedField: ORDER_TYPES.TITLE,
     order: ASCE,
     desc: true
   };
 
   setOrderBy(type, order) {
-    this.setState({ orderBy: type }, () =>
+    this.setState({ selectedField: type }, () =>
       this.props.handleOrderBy(type, this.state.desc ? DESC : ASCE)
     );
   }
@@ -30,7 +30,7 @@ export class LibraryMobile extends Component {
   setOrder() {
     this.setState({ desc: !this.state.desc }, () =>
       this.props.handleOrderBy(
-        this.state.orderBy,
+        this.state.selectedField,
         this.state.desc ? DESC : ASCE
       )
     );
@@ -46,26 +46,29 @@ export class LibraryMobile extends Component {
         background: theme.palette.primary.main
       },
       list: {
-        position: 'fixed',
+        // position: 'fixed',
         width: '100%',
-        top:
-          theme.dimensions.libraryControls.height +
-          theme.dimensions.header.height +
-          1,
-        paddingTop: theme.dimensions.libraryControls.height,
+        // top:
+        //   theme.dimensions.libraryControls.height +
+        //   theme.dimensions.header.height +
+        //   1,
+        // paddingTop: theme.dimensions.libraryControls.height,
         padding: 0,
-        bottom: queueHasTracks
-          ? theme.dimensions.player.height + theme.dimensions.navMobile.height
-          : theme.dimensions.player.height,
-        overflowY: 'scroll',
-        WebkitOverflowScrolling: 'touch'
+        // bottom: queueHasTracks
+        //   ? theme.dimensions.player.height + theme.dimensions.navMobile.height
+        //   : theme.dimensions.player.height,
+        // overflowY: 'scroll',
+        // WebkitOverflowScrolling: 'touch'
+        paddingBottom:
+          theme.dimensions.navMobile.height +
+          (queueHasTracks ? theme.dimensions.player.height : 0)
       }
     };
 
     return (
       <div style={styles.root}>
         <LibraryControls
-          orderBy={this.state.orderBy}
+          selectedField={this.state.selectedField}
           order={this.state.desc}
           setOrderBy={this.setOrderBy.bind(this)}
           setOrder={this.setOrder.bind(this)}

@@ -20,6 +20,9 @@ import { withTheme } from '@material-ui/core/styles';
 const Container = styled(ListItem)`
   background-color: ${props =>
     props.isSelected ? getPrimarySelected : getColorPrimaryLight};
+  && {
+    padding-right: 7px;
+  }
 `;
 
 const ItemContentContainer = styled.div`

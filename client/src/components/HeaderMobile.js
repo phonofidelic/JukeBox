@@ -19,7 +19,7 @@ const Container = styled.div`
   height: ${({ theme }) => theme.dimensions.header.height}px;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const Brand = styled.div`

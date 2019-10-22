@@ -32,7 +32,8 @@ export const theme = {
       hover: '#ededed',
       selected: '#dbdbdb',
       boxShadow: '0px 0px 10px rgba(0, 0, 0, .3)',
-      border: '#e0e0e0'
+      border: '#e0e0e0',
+      background: '#fafafa'
     },
     secondary: {
       // main: '#e91e00', // accent
