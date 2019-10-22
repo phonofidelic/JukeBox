@@ -73,9 +73,15 @@ export class LibraryMobile extends Component {
         />
         <List style={styles.list}>
           {library.tracks.length > 0 ? (
-            library.tracks.map(track => (
-              <TrackListItemContainer key={track._id} track={track} />
-            ))
+            library.searchIsOpen ? (
+              library.searchResults.map(track => (
+                <TrackListItemContainer key={track._id} track={track} />
+              ))
+            ) : (
+              library.tracks.map(track => (
+                <TrackListItemContainer key={track._id} track={track} />
+              ))
+            )
           ) : (
             <Typography>No tracks in Library</Typography>
           )}

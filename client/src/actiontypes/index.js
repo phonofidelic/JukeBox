@@ -25,6 +25,8 @@ export const // uploaderActionTypes
   FETCH_DETAIL_VIEW_SUCCESS = 'fetch_detail_view_success',
   CLOSE_DETAIL_VIEW = 'close_detail_view',
   DISMISS_LIBRARY_ERR = 'dismiss_library_err',
+  TOGGLE_SEARCH = 'toggle_search',
+  SEARCH_LIBRARY = 'search_library',
   // playerActiontypes
   PLAY_TRACK = 'play_track',
   PAUSE_TRACK = 'pause_track',

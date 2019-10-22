@@ -17,7 +17,9 @@ import {
   FETCH_DETAIL_VIEW_SUCCESS,
   FETCH_DETAIL_VIEW_FAILURE,
   CLOSE_DETAIL_VIEW,
-  DISMISS_LIBRARY_ERR
+  DISMISS_LIBRARY_ERR,
+  TOGGLE_SEARCH,
+  SEARCH_LIBRARY
 } from '../actiontypes';
 import { idbTrack } from '../utils/idbUtils';
 import axios from 'axios';
@@ -239,6 +241,23 @@ export const dismissLibraryError = () => {
   return dispatch => {
     dispatch({
       type: DISMISS_LIBRARY_ERR
+    });
+  };
+};
+
+export const toggleSearch = () => {
+  return dispatch => {
+    dispatch({
+      type: TOGGLE_SEARCH
+    });
+  };
+};
+
+export const searchLibrary = term => {
+  return dispatch => {
+    dispatch({
+      type: SEARCH_LIBRARY,
+      term
     });
   };
 };

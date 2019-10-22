@@ -110,13 +110,27 @@ class LibraryDesktop extends Component {
             />
             <TableBody>
               {library.tracks.length > 0 ? (
-                this.sortByField(library.tracks, order, orderBy).map(track => (
-                  <LibraryRowContainer
-                    key={track._id}
-                    track={track}
-                    selectedTrack={library.selectedTrack}
-                  />
-                ))
+                library.searchIsOpen ? (
+                  this.sortByField(library.searchResults, order, orderBy).map(
+                    track => (
+                      <LibraryRowContainer
+                        key={track._id}
+                        track={track}
+                        selectedTrack={library.selectedTrack}
+                      />
+                    )
+                  )
+                ) : (
+                  this.sortByField(library.tracks, order, orderBy).map(
+                    track => (
+                      <LibraryRowContainer
+                        key={track._id}
+                        track={track}
+                        selectedTrack={library.selectedTrack}
+                      />
+                    )
+                  )
+                )
               ) : (
                 <TableRow>
                   <TableCell>No tracks in Library</TableCell>
