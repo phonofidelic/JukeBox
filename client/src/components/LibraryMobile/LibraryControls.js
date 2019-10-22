@@ -4,7 +4,6 @@ import { ThemeContext } from '../../contexts/theme.context';
 
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
 import ArrowDown from '@material-ui/icons/ExpandMore';
 import ArrowUp from '@material-ui/icons/ExpandLess';
 import MenuList from '@material-ui/core/MenuList';
@@ -89,14 +88,7 @@ class LibraryControls extends Component {
             flex: 1
           }}
         >
-          <IconButton
-            size="small"
-            style={{
-              padding: 0
-            }}
-          >
-            {order ? <ArrowDown /> : <ArrowUp />}
-          </IconButton>
+          {order ? <ArrowDown /> : <ArrowUp />}
         </Button>
       </div>
     );

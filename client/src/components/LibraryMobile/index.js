@@ -28,16 +28,12 @@ export class LibraryMobile extends Component {
   };
 
   setOrderBy(type, order) {
-    this.setState(
-      {
-        orderBy: type
-      },
+    this.setState({ orderBy: type }, () =>
       this.props.handleOrderBy(type, this.state.desc ? DESC : ASCE)
     );
   }
 
   setOrder() {
-    // this.setState({ order: this.state.order === DESC ? ASCE : DESC });
     this.setState({ desc: !this.state.desc }, () =>
       this.props.handleOrderBy(
         this.state.orderBy,
