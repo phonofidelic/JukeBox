@@ -10,6 +10,7 @@ class SearchContainer extends Component {
         toggleSearch={this.props.toggleSearch}
         searchLibrary={this.props.searchLibrary}
         searchIsOpen={this.props.library.searchIsOpen}
+        userAgentIsMobile={this.props.userAgentIsMobile}
       />
     );
   }
@@ -17,7 +18,8 @@ class SearchContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    library: state.library
+    library: state.library,
+    userAgentIsMobile: state.auth.userAgentIsMobile
   };
 };
 

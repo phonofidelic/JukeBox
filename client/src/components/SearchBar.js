@@ -10,6 +10,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 
 const Container = styled.div`
+  margin: 0
+    ${({ theme, userAgentIsMobile }) =>
+      userAgentIsMobile ? 0 : theme.dimensions.navDesktop.width + 12}px;
   display: flex;
   width: 100%;
   flex: auto;
@@ -25,7 +28,6 @@ const SearchFieldContainer = styled.div`
 
 const SearchField = styled(TextField)`
   && {
-    // flex: 5;
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -34,8 +36,10 @@ const SearchField = styled(TextField)`
 const SearchButton = styled(Button)`
   height: 56px;
   && {
-    // flex: 1;
     border-left: 1px solid ${({ theme }) => theme.palette.primary.border};
+    border-right: 1px solid
+      ${({ theme, userAgentIsMobile }) =>
+        userAgentIsMobile ? 'none' : theme.palette.primary.border};
     border-radius: 0;
     width: 56px;
   }
@@ -58,7 +62,7 @@ function SearchBar(props) {
   };
 
   return (
-    <Container>
+    <Container theme={theme} userAgentIsMobile={props.userAgentIsMobile}>
       <SearchFieldContainer searchIsOpen={props.searchIsOpen}>
         <SearchField
           type="text"
@@ -66,7 +70,11 @@ function SearchBar(props) {
           onChange={e => debouncedCallback(e.target.value)}
         />
       </SearchFieldContainer>
-      <SearchButton theme={theme} onClick={handleSearchClick}>
+      <SearchButton
+        theme={theme}
+        userAgentIsMobile={props.userAgentIsMobile}
+        onClick={handleSearchClick}
+      >
         {props.searchIsOpen ? <CloseIcon /> : <SearchIcon />}
       </SearchButton>
     </Container>
