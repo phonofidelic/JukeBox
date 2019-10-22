@@ -98,7 +98,6 @@ class UploaderFullscreen extends Component {
         bottom: 0,
         paddingBottom: theme.dimensions.player.height,
         textAlign: 'center',
-        background: '#fff',
         width: '100%'
       },
       controlls: {
