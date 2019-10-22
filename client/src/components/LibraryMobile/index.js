@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-
 import { ThemeContext } from '../../contexts/theme.context';
 
 import TrackListItemContainer from '../../containers/TrackListItemContainer';
 import LibraryControls from './LibraryControls';
+import { ORDER_TYPES } from './constants';
 
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import withTheme from '@material-ui/core/styles/withTheme';
-
-const ORDER_TYPES = {
-  TITLE: 'title',
-  ARTIST: 'artist',
-  ALBUM: 'album'
-};
 
 const DESC = 'desc';
 const ASCE = 'asce';
@@ -52,16 +46,19 @@ export class LibraryMobile extends Component {
         background: theme.palette.primary.main
       },
       list: {
-        // position: 'fixed',
+        position: 'fixed',
         width: '100%',
-        // top: theme.dimensions.libraryControls.height,
-        // paddingTop: theme.dimensions.libraryControls.height,
-        padding: 0
-        // bottom: queueHasTracks
-        //   ? theme.dimensions.player.height + theme.dimensions.navMobile.height
-        //   : theme.dimensions.player.height,
-        // overflowY: 'scroll',
-        // WebkitOverflowScrolling: 'touch'
+        top:
+          theme.dimensions.libraryControls.height +
+          theme.dimensions.header.height +
+          1,
+        paddingTop: theme.dimensions.libraryControls.height,
+        padding: 0,
+        bottom: queueHasTracks
+          ? theme.dimensions.player.height + theme.dimensions.navMobile.height
+          : theme.dimensions.player.height,
+        overflowY: 'scroll',
+        WebkitOverflowScrolling: 'touch'
       }
     };
 

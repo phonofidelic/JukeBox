@@ -52,7 +52,7 @@ export const theme = {
       maxWidth: 900
     },
     libraryControls: {
-      height: 32
+      height: 37
     },
     header: {
       height: 56
