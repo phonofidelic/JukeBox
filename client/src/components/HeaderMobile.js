@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../contexts/theme.context';
 import LibraryControls from './LibraryMobile/LibraryControls';
+import SearchContainer from '../containers/SearchContainer';
 
 import Typography from '@material-ui/core/Typography';
+import SearchIcon from '@material-ui/icons/Search';
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.primary.main};
@@ -11,6 +13,7 @@ const Container = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.palette.primary.border};
   display: flex;
   align-items: center;
+  text-align: left;
   // justify-content: flex-end;
   // width: 100vw;
   height: ${({ theme }) => theme.dimensions.header.height}px;
@@ -21,6 +24,7 @@ const Container = styled.div`
 
 const Brand = styled.div`
   margin-left: 1em;
+  // flex: 5;
 `;
 
 const HeaderMobile = props => {
@@ -31,8 +35,8 @@ const HeaderMobile = props => {
       // case '/home':
       //   return 'Home';
 
-      // case '/library':
-      //   return 'Library';
+      case '/library':
+        return <SearchContainer />;
 
       default:
         return null;
@@ -41,10 +45,10 @@ const HeaderMobile = props => {
 
   return (
     <Container theme={theme}>
-      <div>{renderHeaderContent()}</div>
-      <Brand theme={theme}>
+      {/* <Brand theme={theme}>
         <Typography>jukebox</Typography>
-      </Brand>
+      </Brand> */}
+      {renderHeaderContent()}
     </Container>
   );
 };

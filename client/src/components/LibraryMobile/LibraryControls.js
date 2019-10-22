@@ -49,9 +49,9 @@ const OrderButton = styled(Button)`
 const ToggleButton = styled(Button)`
   && {
     border-left: 1px solid ${({ theme }) => theme.palette.primary.border};
-    // border-right: 1px solid ${({ theme }) => theme.palette.primary.border};
     border-radius: 0;
-    flex: 1;
+    // flex: 1;
+    width: 56px;
   }
 `;
 
