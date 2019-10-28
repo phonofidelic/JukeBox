@@ -22,7 +22,7 @@ const Container = styled.div`
   width: 100vw;
   height: ${({ theme }) => theme.dimensions.libraryControls.height}px;
   top: ${({ theme }) => theme.dimensions.header.height}px;
-  // z-index: 1;
+  z-index: 1;
   background-color: ${({ theme }) => theme.palette.primary.background};
   border-bottom: 1px solid ${({ theme }) => theme.palette.primary.border};
   display: flex;
