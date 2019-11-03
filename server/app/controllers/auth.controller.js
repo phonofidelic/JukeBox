@@ -122,7 +122,8 @@ exports.requireAuth = (req, res, next) => {
     if (err) {
       return err.name === 'TokenExpiredError'
         ? handleExpiredToken(req, res, next)
-        : next(err);
+        : // : next(err);
+          res.status(401).json('new login required');
     }
     // Token is valid, get user ID and attach it to the request object
     console.log('*** TOKEN IS VALID ***\n decoded:\n', decoded);

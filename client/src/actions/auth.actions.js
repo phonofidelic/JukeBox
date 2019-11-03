@@ -150,19 +150,19 @@ export const getUserInfo = () => {
         });
       })
       .catch(err => {
-        // if (err.response.status === 401) {
-        //   console.log('====================================');
-        //   console.log('RECIEVED', err.response.status);
-        //   console.log('====================================');
-        //   localStorage.removeItem('JWT');
-        //   localStorage.removeItem('userId');
-        //   localStorage.removeItem('acceptedCookies');
-        //   // idbTrack.clear();
-        //   history.push('/');
-        //   dispatch({
-        //     type: UNAUTH_USER
-        //   });
-        // }
+        if (err.response.status === 401) {
+          console.log('====================================');
+          console.log('RECIEVED', err.response.status);
+          console.log('====================================');
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('acceptedCookies');
+          // idbTrack.clear();
+          history.push('/');
+          dispatch({
+            type: UNAUTH_USER
+          });
+        }
         dispatch({
           type: GET_USER_INFO_FAILURE
           // data: err.response.data,
