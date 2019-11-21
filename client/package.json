@@ -77,5 +77,5 @@
     "not op_mini all"
   ],
   "proxy": "http://localhost:3001",
-  "homepage": "."
+  "homepage": "/"
 }
