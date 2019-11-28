@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import styled from "styled-components";
 
-import { ThemeContext, getPlayerHeight } from '../../contexts/theme.context';
+import { ThemeContext, getPlayerHeight } from "../../contexts/theme.context";
+import defaultAlbumThumb from "../assets/default_album_img.svg";
 
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 
 const CurrentTrackContainer = styled.div`
   // flex: 1;
@@ -15,7 +16,7 @@ const CurrentTrackContainer = styled.div`
 const CurrentTrackImage = styled.div``;
 
 const CurrentTrackInfo = styled.div`
-	// width: ${props => (props.playerIsOpen ? '100%' : '120px')};
+	// width: ${props => (props.playerIsOpen ? "100%" : "120px")};
 	padding: 8px;
 `;
 
@@ -32,7 +33,11 @@ const CurrentTrack = props => {
     >
       <CurrentTrackImage theme={theme}>
         <img
-          src={currentTrack.image.src}
+          src={
+            currentTrack.image.src.match(/default/)
+              ? defaultAlbumThumb
+              : currentTrack.image.src
+          }
           alt="Album art"
           width={theme.dimensions.player.height}
           height={theme.dimensions.player.height}
