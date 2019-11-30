@@ -3,6 +3,9 @@ const mm = require('music-metadata');
 const isFile = require('is-file');
 const path = require('path');
 const util = require('util');
+const readdir = util.promisify(fs.readdir);
+const unlink = util.promisify(fs.unlink);
+
 const User = require('../models/user.model');
 const Track = require('../models/track.model');
 const Artist = require('../models/artist.model');
@@ -19,7 +22,8 @@ const {
   S3_ACCESS_KEY_ID,
   S3_SECRET_ACCESS_KEY,
   STORAGE_BASE_URL,
-  STORAGE_MAX
+  STORAGE_MAX,
+  TMP
 } = require('../../config/keys');
 
 const s3 = new AWS.S3({
@@ -57,19 +61,19 @@ module.exports.getSignedUrl = async (req, res, next) => {
   );
 };
 
-const putS3Object = (fileBuffer, storageKey) => {
-  const params = {
-    Body: fileBuffer,
-    Bucket: 'jukebox-storage',
-    Key: storageKey
-  };
+// const putS3Object = (fileBuffer, storageKey) => {
+//   const params = {
+//     Body: fileBuffer,
+//     Bucket: 'jukebox-storage',
+//     Key: storageKey
+//   };
 
-  s3.putObject(params, (err, data) => {
-    if (err) throw err;
-    console.log('*** s3 data:', data);
-    return data;
-  });
-};
+//   s3.putObject(params, (err, data) => {
+//     if (err) throw err;
+//     console.log('*** s3 data:', data);
+//     return data;
+//   });
+// };
 
 module.exports.handlePostTracks = async (req, res, next) => {
   console.log('*** handlePostTracks ***');
@@ -229,6 +233,27 @@ module.exports.handlePostTracks = async (req, res, next) => {
       $inc: { storageUsage: newTrack.file.size }
     });
 
+    /**
+     * Clean up tmp directory
+     */
+    let tmp;
+    try {
+      tmp = await readdir(TMP);
+      console.log('====================================');
+      console.log('tmp before cleanup:', tmp);
+      console.log('====================================');
+      tmp.forEach(async file => {
+        if (file !== '.gitkeep') {
+          await unlink(path.resolve(TMP, file));
+        }
+      });
+    } catch (err) {
+      return next(err);
+    }
+    console.log('====================================');
+    console.log('tmp after cleanup:', tmp);
+    console.log('====================================');
+
     return newTrack;
   });
 
@@ -258,14 +283,19 @@ module.exports.editTrack = (req, res, next) => {
 // Delete a track
 // DELETE /tracks/:trackId
 module.exports.removeTrack = (req, res, next) => {
+  const { userId } = req;
   const trackId = req.params.trackId;
   Track.findByIdAndRemove(trackId, (err, deletedTrack) => {
     if (err) return next(err);
-    // Delete audio file in uploads/audio
-    fs.unlink(deletedTrack.file.path, err => {
-      if (err) return next(err);
-      console.log(`\n### Deleted audio file ${deletedTrack.file.path}`);
-    });
+
+    /**
+     * Delete s3 object (audio file)
+     */
+    const storageKey = deletedTrack.url.replace(STORAGE_BASE_URL + '/', '');
+    console.log('====================================');
+    console.log('DELETE, storageKey:', storageKey);
+    console.log('====================================');
+    utils.deleteS3Object(storageKey);
 
     // If an image file exists, delete it from uploads/images
     // if (deletedTrack.image.src && deletedTrack.image.src !== 'defaultImage') {

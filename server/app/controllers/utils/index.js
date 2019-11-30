@@ -32,11 +32,25 @@ const putS3Object = (fileBuffer, storageKey) => {
 
   s3.putObject(params, (err, data) => {
     if (err) throw err;
-    console.log('*** s3 data:', data);
+    console.log('*** s3 put, data:', data);
     return data;
   });
 };
 module.exports.putS3Object = putS3Object;
+
+const deleteS3Object = storageKey => {
+  const params = {
+    Bucket: S3_BUCKET_NAME,
+    Key: storageKey
+  };
+
+  s3.deleteObject(params, (err, data) => {
+    if (err) throw err;
+    console.log('*** s3 delete, data:', data);
+    return data;
+  });
+};
+module.exports.deleteS3Object = deleteS3Object;
 
 // TODO: Handle image sizes and save multiple images for sm/md/lg
 const saveImage = image =>
